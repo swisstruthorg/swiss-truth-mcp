@@ -1,0 +1,152 @@
+[
+  {
+    "text": "Die Schweizer Bundesverfassung von 1999 ist die rechtliche Grundlage der Schweizerischen Eidgenossenschaft. Sie garantiert Grundrechte wie Meinungsfreiheit, Religionsfreiheit und das Recht auf persönliche Freiheit und ist gegenüber allen anderen Gesetzen vorrangig.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1999/404/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Zivilgesetzbuch (ZGB) von 1907 regelt das Privatrecht in der Schweiz. Es umfasst Personen-, Familien-, Erbrecht und das Sachenrecht. Das Obligationenrecht (OR) ist als fünfter Teil des ZGB angegliedert.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz ist ein Bundesstaat mit 26 Kantonen. Die Kompetenzverteilung zwischen Bund und Kantonen folgt dem Subsidiaritätsprinzip: Kantone sind zuständig, soweit die Bundesverfassung ihre Zuständigkeit nicht einschränkt (Art. 3 BV).",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1999/404/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die direkte Demokratie ist ein Kernmerkmal des Schweizer Politiksystems. Bürgerinnen und Bürger können per Volksinitiative (100.000 Unterschriften) Verfassungsänderungen vorschlagen oder per Referendum (50.000 Unterschriften) gegen Bundesgesetze vorgehen.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.ch.ch/de/demokratie/volksrechte/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Strafgesetzbuch (StGB) von 1937 unterscheidet zwischen Verbrechen (Freiheitsstrafe über 3 Jahre), Vergehen (Freiheitsstrafe bis 3 Jahre oder Geldstrafe) und Übertretungen (Busse). Die Verjährungsfristen variieren je nach Schwere der Tat.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Bundesgericht in Lausanne ist das oberste Gericht der Schweiz. Es überprüft Entscheide kantonaler Gerichte und des Bundesverwaltungsgerichts. Die ordentlichen Rechtsmittel sind die Beschwerde in Zivilsachen, Strafsachen und öffentlichrechtlichen Angelegenheiten.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.bger.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das neue Schweizer Datenschutzgesetz (nDSG) trat am 1. September 2023 in Kraft. Es stärkt den Schutz personenbezogener Daten und orientiert sich stark an der europäischen DSGVO. Unternehmen müssen Datenschutzverletzungen dem EDÖB melden.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/2022/491/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Im Schweizer Arbeitsrecht beträgt die maximale gesetzliche Arbeitszeit 45 Stunden pro Woche (industrielle und Dienstleistungsbetriebe) bzw. 50 Stunden (andere Betriebe). Es gibt in der Schweiz keinen gesetzlichen Mindestlohn auf Bundesebene — Mindestlöhne werden kantonal oder per Gesamtarbeitsvertrag (GAV) geregelt.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1966/57_57_57/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Aktiengesellschaft (AG) in der Schweiz erfordert ein Mindestkapital von 100.000 CHF, wovon mindestens 50.000 CHF oder 20% einzuzahlen sind. Die GmbH erfordert ein Stammkapital von mindestens 20.000 CHF, das vollständig einzuzahlen ist.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Mietrecht schützt Mieterinnen und Mieter stark: Mietzinserhöhungen müssen auf einem amtlichen Formular mitgeteilt werden, Kündigungen können beim Schlichtungsamt angefochten werden, und missbräuchliche Mietzinse können gerichtlich überprüft werden.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Erbrecht sieht Pflichtteile vor: Nachkommen haben Anspruch auf 50% ihres gesetzlichen Erbteils, der Ehepartner auf 50%. Das revidierte Erbrecht (in Kraft seit 2023) hat die Pflichtteile für Eltern abgeschafft und gibt Erblassern mehr Gestaltungsfreiheit.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Öffentlichkeitsprinzip (BGÖ) gilt seit 2006 in der Schweiz: Verwaltungsdokumente des Bundes sind grundsätzlich öffentlich zugänglich, sofern kein Ausnahmegrund vorliegt. Dies ist ein Paradigmenwechsel vom früheren Geheimhaltungsprinzip.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/2006/355/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz kennt vier Landessprachen: Deutsch (63%), Französisch (23%), Italienisch (8%) und Rätoromanisch (0.5%). Bundesgesetze werden in Deutsch, Französisch und Italienisch veröffentlicht, alle drei Fassungen sind gleichwertig.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/sprachen-religionen/sprachen.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Kartellgesetz (KG) verbietet in der Schweiz Wettbewerbsabreden, die den Wettbewerb erheblich beeinträchtigen, sowie den Missbrauch einer marktbeherrschenden Stellung. Die Wettbewerbskommission (WEKO) ist die zuständige Aufsichtsbehörde.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1996/546_546_546/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz besteht Schulpflicht für alle Kinder von ca. 4 bis 15 Jahre. Die Bildung ist Kantonssache — das Konkordat HarmoS koordiniert die Grundzüge. Die öffentliche Schule ist kostenlos, die Kantone finanzieren sie über Steuergelder.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.edk.ch/de/bildungssystem/obligatorische-schule"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Geldwäschereigesetz (GwG) verpflichtet Schweizer Finanzintermediäre zur Identifikation ihrer Kunden (KYC), zur Meldung von Verdachtsfällen an die MROS und zur Dokumentation von Transaktionen. Die Schweiz ist Mitglied der FATF.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1998/892_892_892/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Ausländer- und Integrationsgesetz (AIG) regelt Einreise, Aufenthalt und Erwerbstätigkeit von Ausländerinnen und Ausländern. EU/EFTA-Bürger profitieren vom Personenfreizügigkeitsabkommen (FZA) und haben erleichterten Zugang zum Schweizer Arbeitsmarkt.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/2007/758/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Urheberrecht (URG) in der Schweiz schützt Werke der Literatur, Wissenschaft und Kunst automatisch ab Entstehung — ohne Registrierung. Die Schutzfrist beträgt 70 Jahre nach dem Tod des Urhebers. Das revidierte URG (2020) stärkt den Schutz im digitalen Bereich.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1993/1798_1798_1798/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz gilt das Konsensprinzip bei Vertragsschlüssen: Ein Vertrag kommt zustande, wenn sich die Parteien über die wesentlichen Punkte geeinigt haben (Art. 1 OR). Verträge sind grundsätzlich formfrei — Ausnahmen (z.B. Grundstückkauf: öffentliche Beurkundung) sind gesetzlich geregelt.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Steuerpflicht richtet sich nach Wohnsitz (unbeschränkte Steuerpflicht) oder Einkommensquelle (beschränkte Steuerpflicht). Das Steuersystem ist dreistufig: Bund, Kanton und Gemeinde erheben je eigene Steuern. Die Steuerbelastung variiert erheblich je nach Kanton.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.estv.admin.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Bundesgesetz über die Krankenversicherung (KVG) ist seit 1996 in Kraft und regelt die obligatorische Grundversicherung. Prämien sind einkommensunabhängig (Kopfprämien), die Kantone gewähren Prämienverbilligungen für einkommensschwache Personen.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/1995/1328_1328_1328/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Eherecht sieht seit 2013 die eingetragene Partnerschaft für gleichgeschlechtliche Paare vor. Seit dem 1. Juli 2022 ist die Ehe für alle legal: Gleichgeschlechtliche Paare können heiraten und haben damit dieselben Rechte wie heterosexuelle Ehepaare, inklusive Adoptionsrecht.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Betreibungsrecht (SchKG) regelt die Zwangsvollstreckung von Forderungen. Gläubiger können eine Betreibung einleiten, der Schuldner hat 20 Tage Rechtsvorschlag. Bei anerkannten Forderungen folgt Pfändung oder Konkurs. Das SchKG gilt als eines der modernsten Vollstreckungsrechte der Welt.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/11/529_548_549/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Bundesverwaltungsgericht in St. Gallen beurteilt Beschwerden gegen Verfügungen von Bundesbehörden (z.B. SECO, BAFU, FINMA). Es ist die erste Beschwerdeinstanz im Bundesverwaltungsrecht und wurde 2007 als Teil der Justizreform gegründet.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.bvger.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz kennt kein einheitliches Handelsregister auf Bundesebene, sondern 26 kantonale Handelsregisterämter. Eintragungspflichtig sind u.a. AG, GmbH, Kollektivgesellschaft und Einzelunternehmen ab 100.000 CHF Jahresumsatz. Das zentrale Abrufportal ist zefix.ch.",
+    "domain_id": "swiss-law", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.zefix.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  }
+]

@@ -1,0 +1,106 @@
+{
+  "name": "Swiss Truth — Fact-Check Pipeline",
+  "nodes": [
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "parameters": {
+        "path": "fact-check",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "swiss-truth-fact-check"
+    },
+    {
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "name": "Swiss Truth Fact-Check",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [480, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://perigeal-impressionably-paulita.ngrok-free.dev/n8n/fact-check",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ text: $json.body.text, domain_id: $json.body.domain_id || 'ai-ml', min_confidence: $json.body.min_confidence || 0.85, top_k: $json.body.top_k || 3 }) }}"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "name": "Verified?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [720, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-001",
+              "leftValue": "={{ $json.verified }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equal" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "name": "Respond: Verified",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [960, 200],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ verified: true, trust_score: $json.trust_score, verdict: $json.verdict, sources: $json.supporting_claims.map(c => ({ text: c.text.substring(0, 100), confidence: c.confidence_score, hash: c.hash_sha256 })) }) }}"
+      }
+    },
+    {
+      "id": "a1b2c3d4-0005-4000-8000-000000000005",
+      "name": "Respond: Not Verified",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [960, 420],
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 200,
+        "responseBody": "={{ JSON.stringify({ verified: false, trust_score: $json.trust_score, verdict: $json.verdict, message: 'Kein zertifizierter Claim gefunden, der diese Aussage stützt.', closest_matches: $json.supporting_claims.length }) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{ "node": "Swiss Truth Fact-Check", "type": "main", "index": 0 }]]
+    },
+    "Swiss Truth Fact-Check": {
+      "main": [[{ "node": "Verified?", "type": "main", "index": 0 }]]
+    },
+    "Verified?": {
+      "main": [
+        [{ "node": "Respond: Verified", "type": "main", "index": 0 }],
+        [{ "node": "Respond: Not Verified", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "a1b2c3d4-face-4000-8000-000000000001",
+  "meta": {
+    "instanceId": "",
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [{ "name": "swiss-truth" }, { "name": "fact-check" }],
+  "pinData": {}
+}

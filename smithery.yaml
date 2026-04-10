@@ -1,0 +1,13 @@
+# Swiss Truth MCP — Smithery Configuration
+# https://smithery.ai/docs/config
+#
+# Self-hosted StreamableHTTP server — no Smithery deployment needed.
+# Connect directly: https://swisstruth.org/mcp
+
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties: {}
+    description: "No configuration required. Swiss Truth MCP is fully public — no API key needed."
+  exampleConfig: {}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Swiss Truth{% endblock %} — Expert Review</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
+
+    header { background: #fff; border-bottom: 1px solid #d2d2d7; padding: 0 24px; height: 52px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; }
+    header .logo { font-weight: 700; font-size: 15px; color: #1d1d1f; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    header .logo span { display: inline-block; width: 22px; height: 22px; background: #d00; border-radius: 6px; position: relative; }
+    header .logo span::before { content: ''; position: absolute; background: #fff; width: 12px; height: 4px; top: 9px; left: 5px; }
+    header .logo span::after  { content: ''; position: absolute; background: #fff; width: 4px; height: 12px; top: 5px; left: 9px; }
+    header nav { margin-left: auto; display: flex; gap: 4px; }
+    header nav a { font-size: 13px; color: #6e6e73; text-decoration: none; padding: 6px 12px; border-radius: 8px; }
+    header nav a:hover, header nav a.active { background: #f5f5f7; color: #1d1d1f; }
+
+    main { max-width: 860px; margin: 32px auto; padding: 0 24px 64px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .subtitle { color: #6e6e73; font-size: 14px; margin-bottom: 28px; }
+
+    .card { background: #fff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 20px 24px; margin-bottom: 12px; }
+    .card:hover { border-color: #a1a1a6; }
+    .card a { text-decoration: none; color: inherit; display: block; }
+
+    .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+    .badge-review { background: #fff3cd; color: #7d5c00; }
+    .badge-certified { background: #d4edda; color: #1a5e2a; }
+    .badge-draft { background: #f8d7da; color: #7b1d22; }
+
+    .claim-text { font-size: 15px; line-height: 1.55; margin: 10px 0 14px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #6e6e73; }
+    .meta strong { color: #1d1d1f; }
+
+    .confidence-bar { height: 5px; background: #e5e5ea; border-radius: 3px; overflow: hidden; margin: 6px 0 14px; }
+    .confidence-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #34c759, #007aff); }
+
+    form.review-form { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+    label { font-size: 13px; font-weight: 600; color: #1d1d1f; display: block; margin-bottom: 4px; }
+    input[type=text], input[type=number], textarea, select {
+      width: 100%; padding: 9px 12px; border: 1px solid #d2d2d7; border-radius: 9px;
+      font-size: 14px; font-family: inherit; background: #fff; color: #1d1d1f;
+    }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: #007aff; box-shadow: 0 0 0 3px rgba(0,122,255,0.15); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; }
+    .btn-approve { background: #34c759; color: #fff; }
+    .btn-approve:hover { background: #2db14d; }
+    .btn-reject { background: #ff3b30; color: #fff; }
+    .btn-reject:hover { background: #e0352a; }
+    .btn-secondary { background: #f5f5f7; color: #1d1d1f; border: 1px solid #d2d2d7; }
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .sources { margin-top: 16px; }
+    .sources a { display: block; font-size: 12px; color: #007aff; word-break: break-all; margin-top: 4px; }
+
+    .hash-box { font-family: "SF Mono", monospace; font-size: 11px; color: #6e6e73; background: #f5f5f7; padding: 8px 12px; border-radius: 8px; word-break: break-all; margin-top: 12px; }
+
+    .empty { text-align: center; padding: 60px 0; color: #6e6e73; }
+    .empty .icon { font-size: 40px; margin-bottom: 12px; }
+
+    .flash { padding: 12px 18px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; font-weight: 500; }
+    .flash-ok { background: #d4edda; color: #1a5e2a; }
+    .flash-err { background: #f8d7da; color: #7b1d22; }
+
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .count-chip { font-size: 12px; font-weight: 600; background: #e5e5ea; color: #1d1d1f; padding: 3px 10px; border-radius: 20px; }
+  </style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/review">
+    <span></span>Swiss Truth
+  </a>
+  <nav>
+    <a href="/dashboard" {% if active == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
+    <a href="/review" {% if active == 'review' %}class="active"{% endif %}>Review Queue</a>
+    <a href="/review/renewal" {% if active == 'renewal' %}class="active"{% endif %}>
+      Renewal{% if renewal_count %} <span style="background:#f97316;color:#fff;border-radius:99px;font-size:0.65rem;padding:1px 6px;font-weight:700;vertical-align:middle;">{{ renewal_count }}</span>{% endif %}
+    </a>
+    <a href="/review/certified" {% if active == 'certified' %}class="active"{% endif %}>Zertifiziert</a>
+    <a href="/coverage" {% if active == 'coverage' %}class="active"{% endif %}>Coverage</a>
+    <a href="/analytics" {% if active == 'analytics' %}class="active"{% endif %}>Analytics</a>
+    {% if current_user and current_user.role == 'admin' %}
+    <a href="/users" {% if active == 'users' %}class="active"{% endif %}>Nutzer</a>
+    <a href="/admin/generate" {% if active == 'generate' %}class="active"{% endif %}>Generieren</a>
+    {% endif %}
+    <a href="/docs" target="_blank">API</a>
+  </nav>
+  {% if current_user %}
+  <div style="display:flex;align-items:center;gap:8px;margin-left:12px;padding-left:12px;border-left:1px solid #d2d2d7;">
+    <div style="width:28px;height:28px;border-radius:50%;
+      background:{{ '#007aff' if current_user.role == 'admin' else '#34c759' }};
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:11px;color:#fff;">
+      {{ current_user.username[0]|upper }}
+    </div>
+    <span style="font-size:12px;color:#6e6e73;">{{ current_user.username }}</span>
+    <a href="/logout" style="font-size:12px;color:#ff3b30;text-decoration:none;padding:4px 8px;border-radius:6px;" title="Abmelden">↩</a>
+  </div>
+  {% endif %}
+</header>
+<main>
+  {% if flash %}
+    <div class="flash flash-{{ flash.type }}">{{ flash.msg }}</div>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

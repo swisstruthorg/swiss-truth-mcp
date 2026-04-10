@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Claim-Generierung{% endblock %}
+
+{% block content %}
+<h1>Claim-Generierung</h1>
+<p class="subtitle">Neue Claims via Claude API generieren und direkt importieren.</p>
+
+<div class="card" style="margin-bottom:20px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr 120px;gap:16px;align-items:end;">
+
+    <div>
+      <label>Domain</label>
+      <select id="domain-select">
+        <option value="">Alle Domains ({{ domains|length }})</option>
+        {% for domain_id, domain in domains.items() %}
+        <option value="{{ domain_id }}">{{ domain_id }} — {{ domain.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label>Claims pro Domain</label>
+      <input type="number" id="count-input" value="25" min="5" max="100">
+    </div>
+
+    <button class="btn btn-approve" id="gen-btn" onclick="startGeneration()" style="height:40px;">
+      Generieren
+    </button>
+  </div>
+
+  <div id="status" style="margin-top:16px;font-size:13px;color:#6e6e73;display:none;">
+    ⏳ Claude generiert Claims — bitte warten...
+  </div>
+</div>
+
+<div id="results"></div>
+
+<style>
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; padding:8px 12px; background:#f5f5f7; font-weight:600; color:#6e6e73; border-bottom:1px solid #d2d2d7; }
+  td { padding:10px 12px; border-bottom:1px solid #f0f0f0; }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .ok   { color:#1a5e2a; font-weight:600; }
+  .warn { color:#7d5c00; font-weight:600; }
+  .total-row td { font-weight:700; background:#f5f5f7; border-top:2px solid #d2d2d7; }
+</style>
+
+<script>
+async function startGeneration() {
+  const btn = document.getElementById('gen-btn');
+  const status = document.getElementById('status');
+  const results = document.getElementById('results');
+  const domainId = document.getElementById('domain-select').value;
+  const count = parseInt(document.getElementById('count-input').value) || 25;
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Lädt...';
+  status.style.display = 'block';
+  results.innerHTML = '';
+
+  try {
+    const body = { count };
+    if (domainId) body.domain_id = domainId;
+
+    const resp = await fetch('/admin/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    const data = await resp.json();
+    status.style.display = 'none';
+
+    if (!resp.ok || !data.ok) {
+      results.innerHTML = `<div class="flash flash-err">Fehler: ${data.detail || JSON.stringify(data)}</div>`;
+      return;
+    }
+
+    const t = data.total;
+    let rows = '';
+    for (const r of data.results) {
+      if (r.error) {
+        rows += `<tr><td>${r.domain_id}</td><td colspan="4" style="color:#ff3b30;">${r.error}</td></tr>`;
+      } else {
+        rows += `<tr>
+          <td>${r.domain_id}</td>
+          <td class="num">${r.generated}</td>
+          <td class="num ok">${r.certified}</td>
+          <td class="num warn">${r.peer_review}</td>
+          <td class="num" style="color:#6e6e73;">${r.skipped}</td>
+        </tr>`;
+      }
+    }
+
+    results.innerHTML = `
+      <div class="card">
+        <div class="section-header">
+          <h2 style="font-size:16px;">Ergebnis — ${data.domains_processed} Domain(s)</h2>
+          <span class="count-chip">+${t.certified} zertifiziert</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th class="num">Generiert</th>
+              <th class="num">Zertifiziert</th>
+              <th class="num">Review</th>
+              <th class="num">Übersprungen</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+            <tr class="total-row">
+              <td>Total</td>
+              <td class="num">${t.generated}</td>
+              <td class="num ok">${t.certified}</td>
+              <td class="num warn">${t.peer_review}</td>
+              <td class="num">${t.skipped}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:16px;font-size:13px;color:#6e6e73;">
+          Review-Queue: <a href="/review">swisstruth.org/review</a>
+        </p>
+      </div>`;
+  } catch (e) {
+    status.style.display = 'none';
+    results.innerHTML = `<div class="flash flash-err">Netzwerkfehler: ${e.message}</div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Generieren';
+  }
+}
+</script>
+{% endblock %}

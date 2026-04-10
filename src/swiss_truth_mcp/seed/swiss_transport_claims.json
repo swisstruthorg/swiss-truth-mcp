@@ -1,0 +1,752 @@
+[
+  {
+    "text": "Der Gotthard-Basistunnel ist mit 57,1 Kilometern der längste Eisenbahntunnel der Welt und wurde am 1. Juni 2016 offiziell eröffnet.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Bundesbahnen SBB betreiben das grösste Eisenbahnunternehmen der Schweiz mit einem Streckennetz von rund 3'200 Kilometern.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbb.ch/de/ueber-die-sbb/medien/medienstelle.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Autobahnvignette für Motorfahrzeuge bis 3,5 Tonnen kostet in der Schweiz seit 2024 40 Franken pro Jahr.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen/vignette.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Flughafen Zürich ist mit über 31 Millionen Passagieren pro Jahr der grösste Flughafen der Schweiz.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/luftfahrt.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die leistungsabhängige Schwerverkehrsabgabe LSVA gilt in der Schweiz für alle in- und ausländischen Lastwagen und Sattelschlepper ab 3,5 Tonnen Gesamtgewicht.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bazg.admin.ch/bazg/de/home/information-private/steuern-und-abgaben/einfuhr-in-die-schweiz/schwerverkehrsabgabe.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Generalabonnement GA der SBB ermöglicht unbeschränkte Fahrten auf dem gesamten Netz des öffentlichen Verkehrs in der Schweiz.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.sbb.ch/de/abos-billette/abonnemente/ga.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die SBB verzeichnen eine durchschnittliche Pünktlichkeit von über 92 Prozent, gemessen an Zügen, die mit weniger als 3 Minuten Verspätung am Zielbahnhof ankommen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sbb.ch/de/ueber-die-sbb/zahlen-und-fakten.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Nationalstrassennetz umfasst rund 1'850 Kilometer Autobahnen und Autostrassen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Ceneri-Basistunnel als letzter Teilabschnitt der NEAT wurde im September 2020 eröffnet und ist 15,4 Kilometer lang.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz sind über 3,5 Millionen Halbtax-Abonnemente im Umlauf, womit Inhaberinnen und Inhaber 50 Prozent Rabatt auf Fahrpreise erhalten.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sbb.ch/de/abos-billette/abonnemente/halbtax.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über ein Velowegnetz von insgesamt rund 12'000 Kilometern ausgeschilderten Radwegen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/langsamverkehr/veloverkehr.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Pro Tag nutzen durchschnittlich 1,35 Millionen Personen die Züge der SBB für ihre Reisen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbb.ch/de/ueber-die-sbb/zahlen-und-fakten.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Lötschberg-Basistunnel ist 34,6 Kilometer lang und verbindet seit 2007 das Berner Oberland mit dem Wallis.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz sind rund 64 Prozent der Erwerbstätigen Pendler, die für den Arbeitsweg ihre Wohngemeinde verlassen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/pendlermobilitaet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Mobility Genossenschaft betreibt in der Schweiz die grösste Carsharing-Flotte mit über 3'000 Fahrzeugen an rund 1'500 Standorten.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.mobility.ch/de/ueber-mobility"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Eisenbahnnetz umfasst insgesamt rund 5'300 Kilometer Gleis und ist eines der dichtesten Bahnnetze weltweit.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/schiene.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Flughafen Basel-Mulhouse ist ein binationaler Flughafen auf französischem Boden und der drittgrösste Flughafen der Schweiz.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/luftfahrt.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die durchschnittliche Staustundenzahl auf Schweizer Autobahnen beträgt jährlich über 25'000 Stunden.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.94,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/dokumentation/medienmitteilungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Seit 2001 gilt in der Schweiz die elektronische Autobahnvignette als Alternative zur Klebevignette.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen/vignette.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der öffentliche Verkehr in der Schweiz befördert jährlich über 2,8 Milliarden Passagiere.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/leistungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Fahrleistung auf Schweizer Strassen beträgt jährlich rund 68 Milliarden Fahrzeugkilometer.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/fahrzeuge.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz gibt es über 1'800 Bahnhöfe und Haltestellen im öffentlichen Schienenverkehr.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/schiene.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Zimmerberg-Basistunnel II wurde 2002 eröffnet und ermöglicht eine direkte S-Bahn-Verbindung zwischen Zürich und Zug.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/grossprojekte-bahn.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "PostAuto betreibt als grösstes Busunternehmen der Schweiz über 900 Linien in allen Landesteilen mit einer jährlichen Transportleistung von über 160 Millionen Passagieren.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.postauto.ch/de/ueber-uns"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Verlagerungspolitik der Schweiz hat zum Ziel, den alpenquerenden Güterverkehr von der Strasse auf die Schiene zu verlagern, wobei die NEAT als Kernstück dieser Politik gilt.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrspolitik/gueterverkehr/verlagerungspolitik.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Gotthard-Basistunnel ist mit 57 Kilometern Länge der längste Eisenbahntunnel der Welt und wurde am 1. Juni 2016 offiziell eröffnet.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/grossprojekte/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die SBB beförderten im Jahr 2019 rund 1,35 Millionen Fahrgäste pro Tag im Personenverkehr.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbb.ch/de/ueber-die-sbb/medien/medienstelle.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Autobahnvignette kostet seit 2024 CHF 40 und ist jeweils vom 1. Dezember des Vorjahres bis zum 31. Januar des Folgejahres gültig.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bazg.admin.ch/bazg/de/home/information-private/reisen-und-einkaufen--freimengen-und-wertfreigrenze/strassenbenützung/vignette.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Flughafen Zürich ist mit über 31 Millionen Passagieren im Jahr 2019 der grösste Flughafen der Schweiz.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.flughafen-zuerich.ch/unternehmen/statistiken"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Generalabonnement (GA) berechtigt zur unbegrenzten Nutzung fast aller öffentlichen Verkehrsmittel in der Schweiz und kostet in der 2. Klasse aktuell CHF 3'995 pro Jahr.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbb.ch/de/abos-billette/abonnemente/ga.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die leistungsabhängige Schwerverkehrsabgabe (LSVA) wird in der Schweiz seit 2001 erhoben und besteuert den Güterverkehr auf der Strasse nach gefahrenen Kilometern und Gesamtgewicht.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bazg.admin.ch/bazg/de/home/information-firmen/abgaben/schwerverkehrsabgabe.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Eisenbahnnetz umfasst rund 5'300 Kilometer Schienen und ist eines der dichtesten Bahnnetze der Welt.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/infrastruktur-fahrzeuge.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Pünktlichkeit der SBB lag 2022 bei 92,5 Prozent, wobei ein Zug als pünktlich gilt, wenn er mit weniger als drei Minuten Verspätung am Zielbahnhof ankommt.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sbb.ch/de/ueber-die-sbb/medien/medienstelle.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Ceneri-Basistunnel wurde im September 2020 eröffnet und ist mit 15,4 Kilometern der drittlängste Tunnel der NEAT nach Gotthard und Lötschberg.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/grossprojekte/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz sind rund 60 Prozent der Erwerbstätigen Pendler, die zwischen Wohn- und Arbeitsort täglich unterwegs sind.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/pendlermobilitaet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Nationalstrassennetz umfasst rund 1'850 Kilometer Autobahnen und Autostrassen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Halbtax-Abonnement der SBB ermöglicht eine 50-prozentige Ermässigung auf die meisten öffentlichen Verkehrsmittel in der Schweiz und kostet aktuell CHF 185 pro Jahr.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbb.ch/de/abos-billette/abonnemente/halbtax.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über rund 12'000 Kilometer ausgeschilderte Velowege im Rahmen des nationalen Velowegnetzes SchweizMobil.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.schweizmobil.ch/de/veloland-schweiz.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Lötschberg-Basistunnel wurde 2007 eröffnet und verbindet das Berner Oberland mit dem Wallis auf einer Länge von 34,6 Kilometern.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/grossprojekte/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Mobility Carsharing betreibt in der Schweiz rund 3'000 Fahrzeuge an über 1'500 Standorten und ist Marktführer im Carsharing-Bereich.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.mobility.ch/de/ueber-mobility"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Modal Split im Personenverkehr der Schweiz zeigt, dass rund 21 Prozent aller Wege mit dem öffentlichen Verkehr zurückgelegt werden.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die A1 ist mit rund 410 Kilometern die längste Nationalstrasse der Schweiz und verbindet Genf mit St. Gallen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Durchschnittsstau auf Schweizer Autobahnen dauerte 2022 rund 24'500 Stunden, wobei die meisten Staus auf der A1 zwischen Bern und Zürich auftreten.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.94,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen/verkehrsmanagement.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Flughafen Genf ist mit rund 17 Millionen Passagieren pro Jahr (Stand 2019) der zweitgrösste Flughafen der Schweiz.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.gva.ch/de/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Bundesbahnen SBB wurden 1902 durch die Verstaatlichung von fünf privaten Bahngesellschaften gegründet.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbb.ch/de/ueber-die-sbb/unternehmen/geschichte.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Gotthard-Strassentunnel ist mit 16,9 Kilometern der drittlängste Strassentunnel der Welt und wurde 1980 eröffnet.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.astra.admin.ch/astra/de/home/themen/nationalstrassen/tunnelsicherheit.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz beträgt die durchschnittliche Pendeldistanz rund 14,8 Kilometer pro Weg.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/pendlermobilitaet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Neat-Projekt (Neue Eisenbahn-Alpentransversale) kostete insgesamt rund 23 Milliarden Schweizer Franken und umfasst die Achsen Gotthard und Lötschberg.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home/verkehrsmittel/eisenbahn/grossprojekte/neat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das öV-Gütesiegel bescheinigt Gemeinden und Regionen in der Schweiz eine besonders gute Erschliessung durch den öffentlichen Verkehr, derzeit tragen über 300 Gemeinden dieses Label.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": [
+      "https://www.bav.admin.ch/bav/de/home.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "PubliBike betreibt in mehreren Schweizer Städten ein Bike-Sharing-System mit über 5'000 konventionellen Velos und E-Bikes an mehr als 500 Stationen.",
+    "domain_id": "swiss-transport",
+    "language": "de",
+    "confidence_score": 0.94,
+    "source_urls": [
+      "https://www.publibike.ch/de/ueber-publibike"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

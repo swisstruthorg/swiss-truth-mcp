@@ -1,0 +1,21 @@
+# Secrets — niemals committen
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Tests
+.pytest_cache/
+.coverage
+
+# Docker
+*.tar.gz
+
+# macOS
+.DS_Store

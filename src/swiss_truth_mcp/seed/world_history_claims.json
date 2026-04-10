@@ -1,0 +1,802 @@
+[
+  {
+    "text": "Die Französische Revolution begann am 14. Juli 1789 mit dem Sturm auf die Bastille in Paris.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/French-Revolution",
+      "https://www.history.com/topics/france/french-revolution"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Erklärung der Menschen- und Bürgerrechte wurde von der französischen Nationalversammlung am 26. August 1789 verabschiedet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/topic/Declaration-of-the-Rights-of-Man-and-of-the-Citizen",
+      "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/declaration-des-droits-de-l-homme-et-du-citoyen-de-1789"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Industrielle Revolution nahm ihren Anfang in Großbritannien in der zweiten Hälfte des 18. Jahrhunderts.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/event/Industrial-Revolution",
+      "https://www.history.com/topics/industrial-revolution/industrial-revolution"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "James Watt verbesserte die Dampfmaschine im Jahr 1769 entscheidend, was die industrielle Massenproduktion ermöglichte.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/biography/James-Watt",
+      "https://www.sciencemuseum.org.uk/objects-and-stories/james-watt-and-our-world"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Erste Weltkrieg dauerte vom 28. Juli 1914 bis zum 11. November 1918.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/World-War-I",
+      "https://encyclopedia.1914-1918-online.net/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Versailler Vertrag wurde am 28. Juni 1919 unterzeichnet und beendete offiziell den Ersten Weltkrieg mit Deutschland.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/Treaty-of-Versailles-1919",
+      "https://www.history.com/topics/world-war-i/treaty-of-versailles-1"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Zweite Weltkrieg begann am 1. September 1939 mit dem deutschen Überfall auf Polen und endete am 2. September 1945.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/World-War-II",
+      "https://encyclopedia.ushmm.org/content/en/article/world-war-ii-in-europe"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Landung der Alliierten in der Normandie fand am 6. Juni 1944 statt und markierte den Beginn der Befreiung Westeuropas.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/Normandy-Invasion",
+      "https://www.nationalww2museum.org/war/articles/d-day-june-6-1944"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Kalte Krieg bezeichnet die politisch-ideologische Konfrontation zwischen den USA und der Sowjetunion von 1947 bis 1991.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/event/Cold-War",
+      "https://history.state.gov/milestones/1945-1952/cold-war"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Berliner Mauer wurde am 13. August 1961 errichtet und am 9. November 1989 geöffnet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/topic/Berlin-Wall",
+      "https://www.berliner-mauer-gedenkstaette.de/en/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Römische Reich erreichte unter Kaiser Trajan zwischen 98 und 117 n. Chr. seine größte territoriale Ausdehnung.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/place/Roman-Empire",
+      "https://www.worldhistory.org/Roman_Empire/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Weströmische Reich ging im Jahr 476 n. Chr. mit der Absetzung des letzten Kaisers Romulus Augustulus unter.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/place/ancient-Rome",
+      "https://www.worldhistory.org/Fall_of_the_Western_Roman_Empire/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Christoph Kolumbus erreichte am 12. Oktober 1492 die Bahamas und leitete damit das Zeitalter der europäischen Entdeckungen in Amerika ein.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/biography/Christopher-Columbus",
+      "https://www.history.com/topics/exploration/christopher-columbus"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Vasco da Gama erreichte 1498 als erster Europäer auf dem Seeweg Indien und eröffnete damit die direkte Handelsroute zwischen Europa und Asien.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/biography/Vasco-da-Gama",
+      "https://www.worldhistory.org/Vasco_da_Gama/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Ferdinand Magellan startete 1519 die erste Weltumsegelung, die nach seinem Tod 1522 von Juan Sebastián Elcano vollendet wurde.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/biography/Ferdinand-Magellan",
+      "https://www.history.com/topics/exploration/ferdinand-magellan"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Aufklärung war eine philosophische Bewegung des 17. und 18. Jahrhunderts, die Vernunft, Wissenschaft und individuelle Rechte betonte.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/event/Enlightenment-European-history",
+      "https://plato.stanford.edu/entries/enlightenment/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Immanuel Kant definierte 1784 Aufklärung als den Ausgang des Menschen aus seiner selbstverschuldeten Unmündigkeit.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/biography/Immanuel-Kant",
+      "https://plato.stanford.edu/entries/kant/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Dekolonisierung Afrikas beschleunigte sich nach dem Zweiten Weltkrieg, wobei Ghana 1957 als erstes subsaharisches Land die Unabhängigkeit erlangte.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/topic/decolonization",
+      "https://www.un.org/en/observances/decolonization-week/history"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Indien erlangte am 15. August 1947 seine Unabhängigkeit von Großbritannien nach jahrzehntelangem Freiheitskampf unter Führung von Mahatma Gandhi.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/place/India/Independence",
+      "https://www.history.com/this-day-in-history/india-gains-independence"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Vereinten Nationen wurden am 24. Oktober 1945 mit der Ratifizierung der UN-Charta durch die fünf ständigen Mitglieder des Sicherheitsrats und die Mehrheit der Gründungsmitglieder offiziell gegründet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.un.org/en/about-us/history-of-the-un",
+      "https://www.britannica.com/topic/United-Nations"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die UN-Charta wurde am 26. Juni 1945 von 50 Staaten in San Francisco unterzeichnet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.un.org/en/about-us/un-charter/full-text",
+      "https://www.britannica.com/topic/United-Nations-Charter"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Allgemeine Erklärung der Menschenrechte wurde am 10. Dezember 1948 von der Generalversammlung der Vereinten Nationen verabschiedet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+      "https://www.ohchr.org/en/human-rights/universal-declaration/translations/german"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Tim Berners-Lee erfand 1989 am CERN in Genf das World Wide Web und legte damit den Grundstein für die Digitale Revolution.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://home.cern/science/computing/birth-web",
+      "https://www.britannica.com/biography/Tim-Berners-Lee"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der erste kommerzielle Webbrowser Netscape Navigator wurde 1994 veröffentlicht und machte das Internet für die breite Öffentlichkeit zugänglich.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/topic/Netscape-Navigator",
+      "https://www.computerhistory.org/timeline/software-languages/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Sowjetunion löste sich am 26. Dezember 1991 offiziell auf und markierte damit das Ende des Kalten Krieges.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/place/Soviet-Union",
+      "https://history.state.gov/milestones/1989-1992/collapse-soviet-union"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Französische Revolution begann am 14. Juli 1789 mit dem Sturm auf die Bastille in Paris.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/French-Revolution",
+      "https://www.histoire-pour-tous.fr/histoire-de-france/3525-14-juillet-1789-la-prise-de-la-bastille.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Erklärung der Menschen- und Bürgerrechte (Déclaration des Droits de l'Homme et du Citoyen) wurde am 26. August 1789 von der französischen Nationalversammlung verabschiedet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/declaration-des-droits-de-l-homme-et-du-citoyen-de-1789",
+      "https://www.britannica.com/topic/Declaration-of-the-Rights-of-Man-and-of-the-Citizen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die erste Dampflokomotive für den öffentlichen Eisenbahnverkehr wurde 1825 von George Stephenson auf der Strecke zwischen Stockton und Darlington in England eingesetzt.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sciencemuseum.org.uk/objects-and-stories/george-stephenson-and-invention-railway",
+      "https://www.britannica.com/biography/George-Stephenson"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "James Watt erhielt 1769 das Patent für seine verbesserte Dampfmaschine mit separatem Kondensator, die als Schlüsseltechnologie der Industriellen Revolution gilt.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sciencemuseum.org.uk/objects-and-stories/james-watt-and-invention-steam-engine",
+      "https://www.britannica.com/biography/James-Watt"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Erste Weltkrieg begann am 28. Juli 1914 mit der Kriegserklärung Österreich-Ungarns an Serbien und endete am 11. November 1918 mit dem Waffenstillstand von Compiègne.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/World-War-I",
+      "https://encyclopedia.1914-1918-online.net/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Versailler Vertrag wurde am 28. Juni 1919 unterzeichnet und beendete formell den Kriegszustand zwischen Deutschland und den Alliierten des Ersten Weltkriegs.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/Treaty-of-Versailles-1919",
+      "https://www.cvce.eu/en/education/unit-content/-/unit/d1cfaf4d-8b5c-4334-a081-e5a1cbbf3d98"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Zweite Weltkrieg in Europa begann am 1. September 1939 mit dem deutschen Überfall auf Polen und endete am 8. Mai 1945 mit der bedingungslosen Kapitulation Deutschlands.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/World-War-II",
+      "https://encyclopedia.ushmm.org/content/en/article/world-war-ii-key-dates"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Atombombenabwürfe auf Hiroshima am 6. August 1945 und Nagasaki am 9. August 1945 führten zur Kapitulation Japans am 15. August 1945 und zum Ende des Zweiten Weltkriegs.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/atomic-bombings-of-Hiroshima-and-Nagasaki",
+      "https://www.atomicarchive.com/resources/documents/med/med_chp10.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Berliner Mauer wurde in der Nacht vom 12. auf den 13. August 1961 errichtet und trennte bis zum 9. November 1989 West-Berlin von Ost-Berlin und der DDR.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/topic/Berlin-Wall",
+      "https://www.berliner-mauer-gedenkstaette.de/en/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Kubakrise im Oktober 1962 brachte die USA und die Sowjetunion an den Rand eines nuklearen Konflikts, wurde jedoch durch Verhandlungen zwischen Präsident Kennedy und Generalsekretär Chruschtschow friedlich beigelegt.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/event/Cuban-missile-crisis",
+      "https://www.jfklibrary.org/learn/about-jfk/jfk-in-history/cuban-missile-crisis"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Warschauer Pakt wurde am 14. Mai 1955 als militärisches Bündnis sozialistischer Staaten unter Führung der Sowjetunion gegründet und am 1. Juli 1991 offiziell aufgelöst.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/event/Warsaw-Pact",
+      "https://www.nato.int/cps/en/natohq/declassified_138256.htm"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Römische Reich erreichte unter Kaiser Trajan zwischen 98 und 117 n. Chr. seine größte territoriale Ausdehnung von Britannien bis Mesopotamien.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/biography/Trajan",
+      "https://www.ancient.eu/Trajan/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Weströmische Reich endete am 4. September 476 n. Chr. mit der Absetzung des letzten römischen Kaisers Romulus Augustulus durch den germanischen Heerführer Odoaker.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/biography/Romulus-Augustulus",
+      "https://www.ancient.eu/article/1011/the-fall-of-rome/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Christoph Kolumbus erreichte am 12. Oktober 1492 mit seinen drei Schiffen Santa María, Pinta und Niña die Bahamas und leitete damit das Zeitalter der europäischen Entdeckungen in Amerika ein.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/biography/Christopher-Columbus",
+      "https://www.loc.gov/collections/columbus-and-the-taino/articles-and-essays/columbus-and-discovery-of-america/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Vasco da Gama vollendete 1498 als erster Europäer die Seeroute von Europa nach Indien um das Kap der Guten Hoffnung und erreichte am 20. Mai 1498 Calicut an der indischen Malabarküste.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/biography/Vasco-da-Gama",
+      "https://www.mariner.org/exploration/index.php?type=explorer&id=19"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Ferdinand Magellan startete 1519 die erste erfolgreiche Weltumsegelung, die nach seinem Tod 1521 von Juan Sebastián Elcano vollendet wurde und am 6. September 1522 mit einem verbliebenen Schiff endete.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/biography/Ferdinand-Magellan",
+      "https://www.rmg.co.uk/stories/topics/magellans-voyage-round-world"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Immanuel Kant veröffentlichte 1781 sein Hauptwerk 'Kritik der reinen Vernunft', das als eines der einflussreichsten Werke der Aufklärungsphilosophie gilt.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/topic/Critique-of-Pure-Reason",
+      "https://plato.stanford.edu/entries/kant/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Encyclopédie von Denis Diderot und Jean le Rond d'Alembert wurde zwischen 1751 und 1772 in 28 Bänden veröffentlicht und gilt als Manifest der französischen Aufklärung.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.britannica.com/topic/Encyclopedie",
+      "https://plato.stanford.edu/entries/diderot/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Indien erlangte am 15. August 1947 seine Unabhängigkeit vom Britischen Empire, was als Wendepunkt der globalen Dekolonisierungsbewegung gilt.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.britannica.com/event/Partition-of-India",
+      "https://www.parliament.uk/about/living-heritage/evolutionofparliament/legislativescrutiny/parliament-and-empire/collections1/the-empire/india/indian-independence-act/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 1960, dem sogenannten 'Jahr Afrikas', erlangten 17 afrikanische Staaten ihre Unabhängigkeit von europäischen Kolonialmächten.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.un.org/africarenewal/magazine/december-2010/1960-year-africa",
+      "https://www.britannica.com/topic/Year-of-Africa"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Algerien erlangte am 5. Juli 1962 nach einem achtjährigen Unabhängigkeitskrieg seine Unabhängigkeit von Frankreich, die durch das Abkommen von Évian ermöglicht wurde.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.britannica.com/place/Algeria/War-of-Independence",
+      "https://www.france24.com/en/20120318-france-algeria-war-independence-50-years"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Vereinten Nationen wurden am 24. Oktober 1945 mit der Ratifizierung der UN-Charta durch die fünf ständigen Mitglieder des Sicherheitsrates und die Mehrheit der Gründungsmitglieder offiziell gegründet.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.un.org/en/about-us/history-of-the-un",
+      "https://www.britannica.com/topic/United-Nations"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der erste Mikroprozessor Intel 4004 wurde am 15. November 1971 vorgestellt und markiert den Beginn der Mikrocomputerrevolution.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.intel.com/content/www/us/en/history/museum-story-of-intel-4004.html",
+      "https://www.computerhistory.org/collections/catalog/102658210"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der erste Personal Computer IBM PC wurde am 12. August 1981 vorgestellt und etablierte den Standard für die PC-Architektur, die bis heute dominiert.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ibm.com/ibm/history/exhibits/pc25/pc25_birth.html",
+      "https://www.computerhistory.org/revolution/personal-computers/17/297"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das erste iPhone wurde am 9. Januar 2007 von Steve Jobs vorgestellt und am 29. Juni 2007 in den USA verkauft, was die Smartphone-Revolution auslöste.",
+    "domain_id": "world-history",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.apple.com/newsroom/2007/01/09Apple-Reinvents-the-Phone-with-iPhone/",
+      "https://www.britannica.com/topic/iPhone"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

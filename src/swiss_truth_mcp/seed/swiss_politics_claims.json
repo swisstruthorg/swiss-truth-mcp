@@ -1,0 +1,752 @@
+[
+  {
+    "text": "Der Schweizer Bundesrat besteht aus sieben gleichberechtigten Mitgliedern, die gemeinsam die Exekutive der Schweiz bilden.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Kollegialitätsprinzip verpflichtet die Bundesratsmitglieder, Entscheidungen gemeinsam zu treffen und nach aussen geschlossen zu vertreten.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/aufgaben-organisation.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Vereinigte Bundesversammlung wählt die sieben Bundesratsmitglieder jeweils für eine Amtsperiode von vier Jahren.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/bundesversammlung"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Nationalrat umfasst 200 Mitglieder, die nach dem Proporzwahlrecht aus den Kantonen gewählt werden.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/nationalrat"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Ständerat besteht aus 46 Mitgliedern, wobei jeder Vollkanton zwei und jeder Halbkanton einen Sitz erhält.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/staenderat"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Eine Volksinitiative auf Totalrevision oder Teilrevision der Bundesverfassung erfordert 100'000 gültige Unterschriften von Stimmberechtigten innerhalb von 18 Monaten.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/volksinitiative.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das fakultative Referendum ermöglicht es 50'000 Stimmberechtigten oder acht Kantonen, ein vom Parlament beschlossenes Gesetz der Volksabstimmung zu unterbreiten.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ch.ch/de/demokratie/politische-rechte/referendum/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Konkordanzdemokratie zeichnet sich durch die Einbindung aller grossen Parteien in die Regierung aus, im Gegensatz zu klassischen Mehrheitsdemokratien.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.ch.ch/de/demokratie/so-funktioniert-die-schweiz/konkordanz/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die sogenannte Zauberformel regelte von 1959 bis 2003 die Sitzverteilung im Bundesrat nach dem Muster 2:2:2:1 für die vier grössten Parteien.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/geschichte-des-bundesrates.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bundesversammlung besteht aus zwei gleichberechtigten Kammern: dem Nationalrat und dem Ständerat.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/bundesversammlung"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Verfassungsänderungen in der Schweiz benötigen für die Annahme sowohl die Mehrheit der Stimmenden als auch die Mehrheit der Kantone (Ständemehr).",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/abstimmungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Proporzwahlrecht für den Nationalrat wurde 1919 in der Schweiz eingeführt und löste das bis dahin geltende Majorzwahlrecht ab.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die SVP ist seit den Nationalratswahlen 2003 die wählerstärkste Partei der Schweiz.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen/nationalratswahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz finden auf Bundesebene in der Regel vier Abstimmungstermine pro Jahr statt, jeweils im Februar, Mai, September und November.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/abstimmungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bundesgericht in Lausanne ist die höchste richterliche Instanz der Schweiz und fungiert als oberstes Gericht für Zivil-, Straf- und öffentlich-rechtliche Angelegenheiten.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bger.ch/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die 26 Kantone der Schweiz verfügen über eigene Verfassungen, Parlamente und Regierungen und besitzen weitreichende Autonomie in ihrer Gesetzgebung.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ch.ch/de/demokratie/schweizer-foederalismus/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das obligatorische Referendum schreibt vor, dass Verfassungsänderungen und der Beitritt zu bestimmten internationalen Organisationen zwingend dem Volk zur Abstimmung vorgelegt werden müssen.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ch.ch/de/demokratie/politische-rechte/referendum/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Legislaturperiode für National- und Ständerat beträgt vier Jahre.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die durchschnittliche Stimmbeteiligung bei eidgenössischen Abstimmungen in der Schweiz liegt bei etwa 45 bis 50 Prozent.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/abstimmungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bundespräsidium in der Schweiz rotiert jährlich unter den sieben Bundesratsmitgliedern und hat primär repräsentative Funktion.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/aufgaben-organisation.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Sozialdemokratische Partei der Schweiz (SP) und die Freisinnig-Demokratische Partei (FDP) gehören zu den vier traditionellen Bundesratsparteien.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Grünen sind seit den Bundesratswahlen 2023 erstmals mit einem Sitz im Bundesrat vertreten.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bundesversammlung tagt in ordentlichen Sessionen viermal jährlich zu festgelegten Terminen in Bern.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.parlament.ch/de/ratsbetrieb/sessionen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Frauenstimmrecht auf Bundesebene wurde in der Schweiz erst 1971 eingeführt, deutlich später als in den meisten anderen europäischen Ländern.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Mitte-Partei entstand 2021 aus der Fusion von CVP (Christlichdemokratische Volkspartei) und BDP (Bürgerlich-Demokratische Partei).",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Bundesrat besteht aus sieben gleichberechtigten Mitgliedern, die nach dem Kollegialitätsprinzip gemeinsam die Regierung bilden und Entscheide kollegial treffen.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Nationalrat umfasst 200 Sitze, die nach dem Proporzwahlrecht auf die Kantone verteilt werden, wobei die Anzahl Sitze pro Kanton von dessen Bevölkerungszahl abhängt.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/nationalrat"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Ständerat vertritt als Kantonskammer die 26 Kantone mit je zwei Vertretern, wobei die sechs Halbkantone je einen Vertreter entsenden, insgesamt also 46 Sitze.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/staenderat"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Eine Volksinitiative auf Änderung der Bundesverfassung kommt mit 100'000 gültigen Unterschriften innerhalb von 18 Monaten zustande und muss zwingend zur Abstimmung gebracht werden.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/volksinitiative.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das fakultative Referendum ermöglicht es, dass 50'000 Stimmberechtigte oder acht Kantone innerhalb von 100 Tagen nach Veröffentlichung eines Bundesbeschlusses eine Volksabstimmung erzwingen können.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/referendum.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Konkordanzdemokratie in der Schweiz zeichnet sich durch die breite Einbindung aller grossen Parteien in die Regierung aus, im Gegensatz zum Mehrheitsprinzip mit Opposition.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/geschichte-des-bundesrates/zauberformel.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die SVP ist seit den Nationalratswahlen 2023 mit 62 von 200 Sitzen die stärkste Partei im Nationalrat.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen/nationalratswahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Bundesrat wird von der Vereinigten Bundesversammlung für eine Amtszeit von vier Jahren gewählt, wobei eine Wiederwahl üblich ist.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/aufgaben-organisation/wahl-bundesrat.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bundesversammlung besteht aus National- und Ständerat und bildet gemeinsam die Legislative auf Bundesebene mit umfassenden Kompetenzen in Gesetzgebung und Oberaufsicht.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.parlament.ch/de/über-das-parlament/bundesversammlung"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das obligatorische Referendum verlangt bei Verfassungsänderungen und bestimmten Staatsverträgen zwingend die Zustimmung von Volk und Ständemehr für die Annahme.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/abstimmungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die sogenannte Zauberformel regelte von 1959 bis 2003 die Verteilung der Bundesratssitze mit der Formel 2 FDP, 2 CVP, 2 SP und 1 SVP.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/geschichte-des-bundesrates/zauberformel.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bundespräsidentin oder der Bundespräsident wird jährlich wechselnd aus dem Bundesrat gewählt und ist primus inter pares ohne erweiterte Machtbefugnisse.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/bundesrat/aufgaben-organisation/bundespraesidentin.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz finden auf Bundesebene in der Regel vier Abstimmungstermine pro Jahr statt, üblicherweise im Februar, Mai, September und November.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/abstimmungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bundesgericht mit Sitz in Lausanne ist die oberste richterliche Instanz der Schweiz und urteilt über Beschwerden gegen kantonale und bundesrechtliche Entscheide.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bger.ch/home/das-gericht.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Stimmbeteiligung bei eidgenössischen Volksabstimmungen liegt im langjährigen Durchschnitt zwischen 40 und 50 Prozent der Stimmberechtigten.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/abstimmungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die 26 Kantone der Schweiz haben eigene Verfassungen, Parlamente und Regierungen und verfügen über weitreichende Autonomie in Bereichen wie Bildung, Gesundheit und Steuern.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ch.ch/de/demokratie/foederalismus/kantone/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Nationalratswahlen finden alle vier Jahre statt, zuletzt im Oktober 2023, wobei die nächsten regulären Wahlen für 2027 angesetzt sind.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Proporzwahlsystem für den Nationalrat wurde 1919 eingeführt und ermöglicht eine proportionale Vertretung der Parteistärken im Parlament.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.parlament.ch/de/über-das-parlament/geschichte"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Ständerat wird in den meisten Kantonen nach dem Majorzwahlsystem gewählt, wobei die Wahlverfahren kantonal unterschiedlich geregelt sind.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.parlament.ch/de/organe/staenderat/staenderatswahlen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die FDP.Die Liberalen verfügt nach den Wahlen 2023 über 28 Sitze im Nationalrat und ist damit die drittgrösste Fraktion.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen/nationalratswahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Jeder Bundesrat leitet eines der sieben Departemente der Bundesverwaltung, wobei die Departementsverteilung vom Gesamtbundesrat festgelegt wird.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/departemente.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Vernehmlassungsverfahren ermöglicht es Kantonen, Parteien, Verbänden und Interessierten, sich zu geplanten Gesetzesvorhaben des Bundes zu äussern, bevor diese ins Parlament kommen.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/vernehmlassungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Grünliberale Partei (GLP) erzielte bei den Nationalratswahlen 2023 einen Sitzgewinn und verfügt über 9 Mandate im Nationalrat.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/politik/wahlen/nationalratswahlen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bundesversammlung übt die Oberaufsicht über den Bundesrat, die Bundesverwaltung, die eidgenössischen Gerichte und weitere bundesnahe Organisationen aus.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.parlament.ch/de/über-das-parlament/aufgaben"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Bundesrichterinnen und Bundesrichter werden von der Vereinigten Bundesversammlung für eine Amtszeit von sechs Jahren gewählt, wobei eine Wiederwahl möglich ist.",
+    "domain_id": "swiss-politics",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bger.ch/home/das-gericht/richterinnen-und-richter.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

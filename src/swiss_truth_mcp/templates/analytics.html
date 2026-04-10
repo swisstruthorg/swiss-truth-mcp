@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Analytics — Swiss Truth{% endblock %}
+
+{% block content %}
+<style>
+  .an-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .an-panel {
+    background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 14px; padding: 1.3rem 1.5rem;
+  }
+  .an-panel h3 {
+    font-size: 0.78rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: #6b7280; margin: 0 0 1rem;
+  }
+  .summary-bar {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 14px; padding: 1rem 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .summary-item { text-align: center; }
+  .summary-value { font-size: 1.8rem; font-weight: 700; color: #111; line-height: 1; }
+  .summary-label { font-size: 0.72rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+  /* Top-Claims */
+  .claim-row {
+    display: flex; align-items: flex-start; gap: 0.9rem;
+    padding: 0.7rem 0; border-bottom: 1px solid #f3f4f6;
+  }
+  .claim-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .rank {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: #f3f4f6; display: flex; align-items: center;
+    justify-content: center; font-size: 0.75rem; font-weight: 700;
+    color: #6b7280; flex-shrink: 0;
+  }
+  .rank.top3 { background: #fef3c7; color: #92400e; }
+  .claim-body { flex: 1; min-width: 0; }
+  .claim-excerpt {
+    font-size: 0.83rem; color: #374151; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .claim-meta { font-size: 0.72rem; color: #9ca3af; margin-top: 0.2rem; }
+  .query-badge {
+    font-size: 0.8rem; font-weight: 700; color: #6366f1;
+    background: #eef2ff; border-radius: 8px;
+    padding: 0.25rem 0.6rem; flex-shrink: 0; white-space: nowrap;
+  }
+
+  /* Domain-Nutzung */
+  .domain-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.7rem; }
+  .domain-label { font-size: 0.8rem; color: #374151; width: 10rem; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .domain-bar-wrap { flex: 1; height: 16px; background: #f3f4f6; border-radius: 6px; overflow: hidden; }
+  .domain-bar-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 6px; }
+  .domain-count { font-size: 0.78rem; color: #6b7280; width: 3rem; text-align: right; }
+
+  @media (max-width: 700px) { .an-grid { grid-template-columns: 1fr; } }
+</style>
+
+<div style="margin-bottom:1.2rem; display:flex; align-items:baseline; gap:1rem;">
+  <h1 style="font-size:1.4rem;font-weight:700;color:#111;margin:0;letter-spacing:-0.02em;">Query Analytics</h1>
+  <span style="font-size:0.85rem;color:#9ca3af;">MCP-Anfragen von KI-Agenten</span>
+</div>
+
+<div class="summary-bar">
+  <div class="summary-item">
+    <div class="summary-value">{{ a.total_queries }}</div>
+    <div class="summary-label">Gesamt-Queries</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-value">{{ a.top_claims | length }}</div>
+    <div class="summary-label">Aktive Claims</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-value" style="color:#9ca3af;">{{ a.never_queried }}</div>
+    <div class="summary-label">Nie abgefragt</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-value">{{ a.domain_usage | length }}</div>
+    <div class="summary-label">Aktive Domains</div>
+  </div>
+</div>
+
+<div class="an-grid">
+
+  <!-- Top-Claims -->
+  <div class="an-panel">
+    <h3>Meistgefragte Claims</h3>
+    {% if a.top_claims %}
+      {% for c in a.top_claims %}
+      <div class="claim-row">
+        <div class="rank {% if loop.index <= 3 %}top3{% endif %}">{{ loop.index }}</div>
+        <div class="claim-body">
+          <div class="claim-excerpt">{{ c.text }}</div>
+          <div class="claim-meta">
+            {{ c.domain_id }}
+            · Konfidenz {{ c.confidence_score }}
+            {% if c.last_queried_at %}· zuletzt {{ c.last_queried_at[:10] }}{% endif %}
+          </div>
+        </div>
+        <div class="query-badge">{{ c.query_count }}×</div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div style="text-align:center;padding:2rem 0;color:#9ca3af;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">📊</div>
+        <p style="font-size:0.85rem;">Noch keine Queries aufgezeichnet.</p>
+        <p style="font-size:0.78rem;margin-top:0.3rem;">Sobald ein KI-Agent <code>search_knowledge</code> aufruft, erscheinen hier die Daten.</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Domain-Nutzung -->
+  <div class="an-panel">
+    <h3>Domain-Nutzung</h3>
+    {% if a.domain_usage %}
+      {% set max_q = a.domain_usage | map(attribute='total_queries') | max | default(1) %}
+      {% for d in a.domain_usage %}
+      <div class="domain-row">
+        <span class="domain-label" title="{{ d.domain_id }}">{{ d.domain_id }}</span>
+        <div class="domain-bar-wrap">
+          <div class="domain-bar-fill" style="width:{{ (d.total_queries / max_q * 100)|round }}%"></div>
+        </div>
+        <span class="domain-count">{{ d.total_queries }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p style="color:#9ca3af;font-size:0.85rem;text-align:center;padding:1rem 0;">Noch keine Daten.</p>
+    {% endif %}
+
+    {% if a.never_queried > 0 %}
+    <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid #f3f4f6;">
+      <p style="font-size:0.78rem;color:#9ca3af;">
+        <strong style="color:#374151;">{{ a.never_queried }}</strong> zertifizierte Claims wurden noch nie abgefragt —
+        mögliche Kandidaten für Review oder Löschung.
+      </p>
+      <a href="/review/certified" style="font-size:0.78rem;color:#6366f1;text-decoration:none;">
+        → Zertifizierte Claims ansehen
+      </a>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

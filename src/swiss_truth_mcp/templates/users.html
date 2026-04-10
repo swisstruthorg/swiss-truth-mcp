@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Nutzerverwaltung{% endblock %}
+{% block content %}
+
+<div class="section-header">
+  <div>
+    <h1>Nutzerverwaltung</h1>
+    <p class="subtitle">Reviewer und Administratoren verwalten</p>
+  </div>
+</div>
+
+<!-- Neuen Nutzer anlegen -->
+<div class="card" style="margin-bottom:24px;">
+  <h2 style="font-size:16px;font-weight:700;margin-bottom:16px;">Neuen Benutzer anlegen</h2>
+  <form method="post" action="/users/create">
+    <div class="row">
+      <div>
+        <label>Benutzername</label>
+        <input type="text" name="username" required autocomplete="off">
+      </div>
+      <div>
+        <label>E-Mail</label>
+        <input type="text" name="email" autocomplete="off">
+      </div>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <div>
+        <label>Passwort</label>
+        <input type="password" name="password" required autocomplete="new-password" minlength="8">
+      </div>
+      <div>
+        <label>Rolle</label>
+        <select name="role">
+          <option value="reviewer">Reviewer</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <button type="submit" class="btn btn-approve" style="width:auto;padding:10px 24px;">Benutzer anlegen</button>
+    </div>
+  </form>
+</div>
+
+<!-- Benutzerliste -->
+<div class="section-header">
+  <span style="font-size:15px;font-weight:700;">Alle Benutzer</span>
+  <span class="count-chip">{{ users|length }}</span>
+</div>
+
+{% if not users %}
+  <div class="empty"><div class="icon">👤</div>Noch keine Benutzer angelegt.</div>
+{% else %}
+  {% for u in users %}
+  <div class="card" style="padding:16px 20px;">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+
+      <!-- Avatar -->
+      <div style="width:38px;height:38px;border-radius:50%;
+        background:{{ '#007aff' if u.role == 'admin' else '#34c759' }};
+        display:flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:14px;color:#fff;flex-shrink:0;">
+        {{ u.username[0]|upper }}
+      </div>
+
+      <!-- Info -->
+      <div style="flex:1;min-width:120px;">
+        <div style="font-weight:600;font-size:14px;">
+          {{ u.username }}
+          {% if u.id == current_user.id %}
+            <span style="font-size:11px;color:#6e6e73;">(du)</span>
+          {% endif %}
+        </div>
+        <div style="font-size:12px;color:#6e6e73;">{{ u.email or '—' }}</div>
+      </div>
+
+      <!-- Rolle Badge -->
+      <span class="badge {{ 'badge-certified' if u.role == 'admin' else 'badge-review' }}">
+        {{ u.role }}
+      </span>
+
+      <!-- Status -->
+      <span class="badge {{ 'badge-certified' if u.active else 'badge-draft' }}">
+        {{ 'aktiv' if u.active else 'deaktiviert' }}
+      </span>
+
+      <!-- Aktionen (nicht auf sich selbst) -->
+      {% if u.id != current_user.id %}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+
+        <!-- Rolle wechseln -->
+        <form method="post" action="/users/{{ u.id }}/role" style="display:inline;">
+          <input type="hidden" name="role" value="{{ 'reviewer' if u.role == 'admin' else 'admin' }}">
+          <button type="submit" class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">
+            → {{ 'Reviewer' if u.role == 'admin' else 'Admin' }}
+          </button>
+        </form>
+
+        <!-- Aktivieren / Deaktivieren -->
+        <form method="post" action="/users/{{ u.id }}/toggle" style="display:inline;">
+          <button type="submit" class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">
+            {{ 'Deaktivieren' if u.active else 'Aktivieren' }}
+          </button>
+        </form>
+
+        <!-- Löschen -->
+        <form method="post" action="/users/{{ u.id }}/delete" style="display:inline;"
+          onsubmit="return confirm('Benutzer {{ u.username }} wirklich löschen?')">
+          <button type="submit" class="btn btn-reject" style="padding:6px 12px;font-size:12px;">
+            Löschen
+          </button>
+        </form>
+
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+{% endblock %}

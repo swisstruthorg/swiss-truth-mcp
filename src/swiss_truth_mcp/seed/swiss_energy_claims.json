@@ -1,0 +1,752 @@
+[
+  {
+    "text": "In der Schweiz sind per 2024 vier Kernkraftwerke in Betrieb: Beznau 1 und 2, Gösgen und Leibstadt. Diese produzieren rund ein Drittel des Schweizer Stroms.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Kernkraftwerk Beznau ist das älteste noch in Betrieb befindliche Kernkraftwerk der Welt. Block 1 wurde 1969 in Betrieb genommen.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Wasserkraft liefert rund 57% der Schweizer Stromproduktion und ist damit die wichtigste inländische Energiequelle.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/wasserkraft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über mehr als 680 Wasserkraftwerke mit einer installierten Leistung von rund 16'700 Megawatt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/wasserkraft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Energiestrategie 2050 wurde am 21. Mai 2017 in einer Volksabstimmung mit 58,2% Ja-Stimmen angenommen. Sie verbietet den Bau neuer Kernkraftwerke.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/politik/energiestrategie-2050.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Energiestrategie 2050 hat zum Ziel, den Energieverbrauch bis 2035 um 43% gegenüber dem Stand von 2000 zu senken.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/politik/energiestrategie-2050.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die installierte Leistung von Photovoltaikanlagen in der Schweiz hat sich zwischen 2010 und 2023 von 95 MW auf über 5'000 MW verfünfzigfacht.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/sonnenenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Anteil der Solarenergie an der Schweizer Stromproduktion lag 2023 bei rund 6%, mit steigender Tendenz.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/sonnenenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz ist im Winterhalbjahr strukturell von Stromimporten abhängig, während sie im Sommer netto Strom exportiert.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/stromversorgung/stromeinfuhr-und-ausfuhr.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2022 importierte die Schweiz netto rund 5 Terawattstunden Strom, nach jahrelanger Position als Netto-Exporteur.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/stromversorgung/stromeinfuhr-und-ausfuhr.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die CO₂-Abgabe auf Brennstoffe beträgt seit 2022 CHF 120 pro Tonne CO₂. Sie wird auf fossile Brennstoffe wie Heizöl und Erdgas erhoben.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bafu.admin.ch/bafu/de/home/themen/klima/fachinformationen/klimapolitik/co2-abgabe.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Rund zwei Drittel der Einnahmen aus der CO₂-Abgabe werden an die Bevölkerung und Wirtschaft zurückverteilt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bafu.admin.ch/bafu/de/home/themen/klima/fachinformationen/klimapolitik/co2-abgabe.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz werden rund 60% der Wohngebäude mit fossilen Energieträgern (Öl und Gas) beheizt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bau-wohnungswesen/gebaeude/energiebereich.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Anteil erneuerbarer Energien an der Wärmeversorgung liegt in der Schweiz bei etwa 40%, wobei Holz die wichtigste erneuerbare Wärmequelle darstellt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Ende 2023 waren in der Schweiz über 140'000 reine Elektrofahrzeuge zugelassen, was einem Anteil von etwa 3% am gesamten Fahrzeugbestand entspricht.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Anteil vollelektrischer Fahrzeuge bei den Neuzulassungen in der Schweiz erreichte 2023 erstmals über 20%.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der durchschnittliche Energieverbrauch pro Kopf in der Schweiz liegt bei etwa 30'000 Kilowattstunden pro Jahr, was unter dem europäischen Durchschnitt liegt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Swissgrid betreibt als nationale Netzgesellschaft das Schweizer Übertragungsnetz mit rund 6'700 Kilometern Höchstspannungsleitungen.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.swissgrid.ch/de/home/about-us/company.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Stromnetz ist auf den Spannungsebenen 220 und 380 Kilovolt mit den Netzen aller Nachbarländer verbunden.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.swissgrid.ch/de/home/operation/grid-infrastructure.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Kernkraftwerk Mühleberg wurde am 20. Dezember 2019 definitiv abgeschaltet und ist das erste Schweizer AKW, das stillgelegt wurde.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über Pumpspeicherkraftwerke mit einer Speicherkapazität von rund 8'800 Gigawattstunden, was etwa 15% des jährlichen Stromverbrauchs entspricht.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/wasserkraft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Gesamtenergieverbrauch der Schweiz liegt bei rund 850 Petajoule pro Jahr, wobei etwa ein Viertel auf Strom entfällt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Windenergie trägt in der Schweiz weniger als 1% zur Stromproduktion bei, mit etwa 40 grösseren Windenergieanlagen im Betrieb.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/windenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Einspeisevergütung für erneuerbare Energien wurde 2018 durch das Einspeisevergütungssystem (EVS) und die Einmalvergütung ersetzt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/foerderung/erneuerbare-energien.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Kernkraftwerk Gösgen ist mit einer Leistung von 1'060 Megawatt das leistungsstärkste Schweizer Kernkraftwerk.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Kernkraftwerk Leibstadt ist mit einer Nettoleistung von 1'220 Megawatt das leistungsstärkste Kernkraftwerk der Schweiz und produziert jährlich rund 9 Terawattstunden Strom.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Kernkraftwerk Beznau besteht aus zwei Blöcken (Beznau 1 und Beznau 2) und ist das älteste noch in Betrieb befindliche Kernkraftwerk der Schweiz, wobei Block 1 seit 1969 am Netz ist.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Wasserkraft ist die wichtigste einheimische Energiequelle der Schweiz und trägt durchschnittlich rund 57 Prozent zur inländischen Stromproduktion bei.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/wasserkraft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über mehr als 650 Wasserkraftwerke mit einer installierten Gesamtleistung von rund 15'500 Megawatt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/wasserkraft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Energiestrategie 2050 sieht den schrittweisen Ausstieg aus der Kernenergie vor, wobei keine neuen Kernkraftwerke mehr gebaut werden dürfen und bestehende nach ihrer sicherheitstechnischen Betriebsdauer vom Netz gehen.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/politik/energiestrategie-2050.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Energiestrategie 2050 wurde am 21. Mai 2017 in einer Volksabstimmung mit 58,2 Prozent Ja-Stimmen angenommen.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/politik/energiestrategie-2050.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die installierte Photovoltaikleistung in der Schweiz hat sich zwischen 2010 und 2023 von etwa 100 Megawatt auf über 5'000 Megawatt vervielfacht.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/solarenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2022 produzierten Solaranlagen in der Schweiz rund 3,5 Terawattstunden Strom, was etwa 5 Prozent der gesamten Schweizer Stromproduktion entspricht.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz importiert vor allem im Winter Strom und exportiert im Sommer überschüssige Wasserkraftproduktion, wobei sie 2022 netto ein Stromimportland war.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über Stromverbindungen mit allen Nachbarländern Deutschland, Frankreich, Italien und Österreich mit einer Gesamtimportkapazität von etwa 11'000 Megawatt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.swissgrid.ch/de/home/operation/grid-data.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die CO₂-Abgabe auf Brennstoffe beträgt seit 2022 in der Schweiz 120 Franken pro Tonne CO₂ und wird auf fossile Brennstoffe wie Heizöl und Erdgas erhoben.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bafu.admin.ch/bafu/de/home/themen/klima/fachinformationen/klimapolitik/co2-abgabe.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Rund zwei Drittel der Einnahmen aus der CO₂-Abgabe werden an die Bevölkerung und Wirtschaft über die Krankenkassenprämien zurückverteilt, ein Drittel fliesst in das Gebäudeprogramm.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bafu.admin.ch/bafu/de/home/themen/klima/fachinformationen/klimapolitik/co2-abgabe.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2022 wurden in der Schweiz rund 45 Prozent der Wohngebäude mit fossilen Brennstoffen (Heizöl und Gas) beheizt, während etwa 18 Prozent Wärmepumpen nutzten.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bau-wohnungswesen/gebaeude/energiebereich.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Swissgrid AG betreibt das schweizerische Übertragungsnetz mit einer Länge von rund 6'700 Kilometern auf der Höchstspannungsebene.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.swissgrid.ch/de/home/about-us/company.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Anteil von Elektrofahrzeugen bei den Neuzulassungen in der Schweiz stieg von 1,5 Prozent im Jahr 2017 auf über 20 Prozent im Jahr 2022.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/verkehrsstatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Pro-Kopf-Endenergieverbrauch in der Schweiz beträgt etwa 28'000 Kilowattstunden pro Jahr und liegt damit im europäischen Mittelfeld.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die vier schweizerischen Kernkraftwerke Beznau 1 und 2, Gösgen und Leibstadt produzierten 2022 zusammen rund 23 Terawattstunden Strom, was etwa einem Drittel der schweizerischen Stromproduktion entspricht.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/kernenergie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Energiestrategie 2050 sieht vor, den durchschnittlichen Energieverbrauch pro Person bis 2035 gegenüber dem Jahr 2000 um 43 Prozent zu senken.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/politik/energiestrategie-2050.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Fernwärmenetze versorgen in der Schweiz rund 8 Prozent der Gebäude mit Wärme, wobei zunehmend erneuerbare Energiequellen wie Holz, Abwärme und Geothermie genutzt werden.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/fernwaerme.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Stromverbrauch in der Schweiz lag 2022 bei etwa 57 Terawattstunden, wobei rund 30 Prozent auf Haushalte, 30 Prozent auf Industrie und 30 Prozent auf Dienstleistungen entfallen.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Grande Dixence im Wallis ist mit 285 Metern die höchste Gewichtsstaumauer der Welt und ihr Stausee fasst 400 Millionen Kubikmeter Wasser für die Stromproduktion.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/wasserkraft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bundesamt für Energie fördert den Bau von Ladeinfrastruktur für Elektrofahrzeuge, wobei Ende 2022 in der Schweiz über 10'000 öffentlich zugängliche Ladestationen registriert waren.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/verkehrsstatistiken.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz strebt bis 2050 Netto-Null-Treibhausgasemissionen an, wobei der Energiesektor durch den Ausbau erneuerbarer Energien und Effizienzsteigerungen eine zentrale Rolle spielt.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bafu.admin.ch/bafu/de/home/themen/klima/fachinformationen/klimapolitik/netto-null-treibhausgasemissionen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über eine strategische Pflichtlagerung von Erdölprodukten, die den Verbrauch von mindestens 4,5 Monaten decken muss, um die Versorgungssicherheit zu gewährleisten.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bwl.admin.ch/bwl/de/home/themen/pflichtlager.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Biomasse und Abfälle tragen in der Schweiz rund 5 Prozent zur Gesamtstromproduktion bei, wobei vor allem Kehrichtverbrennungsanlagen und Holzkraftwerke zum Einsatz kommen.",
+    "domain_id": "swiss-energy",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/biomasse.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

@@ -1,0 +1,402 @@
+[
+  {
+    "text": "GPT-3 von OpenAI wurde auf einem Trainingsdatensatz von ca. 570 GB Text trainiert, darunter ca. 3 Milliarden Token aus der englischen Wikipedia (ca. 3% des Gesamtkorpus).",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2005.14165"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Retrieval-Augmented Generation (RAG) ist eine Technik, bei der ein Sprachmodell bei der Antwortgenerierung auf externe Wissensquellen zugreift, anstatt ausschliesslich auf sein im Training erlerntes Wissen zu zurückzugreifen.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/2005.11401"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Model Context Protocol (MCP) ist ein offener Standard, der 2024 von Anthropic veröffentlicht wurde, um KI-Agenten eine standardisierte Schnittstelle zum Zugriff auf externe Tools und Datenquellen zu bieten.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://www.anthropic.com/news/model-context-protocol"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Halluzinationen in grossen Sprachmodellen (LLMs) bezeichnet das Phänomen, dass Modelle sachlich falsche, aber plausibel klingende Aussagen mit hoher Konfidenz produzieren.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/2202.03629"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Transformer ist eine 2017 von Vaswani et al. eingeführte neuronale Netzwerkarchitektur, die auf dem Attention-Mechanismus basiert und die Basis für moderne grosse Sprachmodelle bildet.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://arxiv.org/abs/1706.03762"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Reinforcement Learning from Human Feedback (RLHF) ist eine Trainingstechnik, bei der ein Sprachmodell anhand menschlicher Bewertungen seiner Ausgaben durch Reinforcement Learning optimiert wird.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/2203.02155"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Fine-Tuning bezeichnet den Prozess, bei dem ein vortrainiertes Sprachmodell auf einem domänenspezifischen Datensatz weiter trainiert wird, um seine Leistung für spezifische Aufgaben zu verbessern.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/1810.04805"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Ein Large Language Model (LLM) ist ein statistisches Sprachmodell, das auf sehr grossen Textkorpora trainiert wurde und in der Lage ist, kohärenten, aufgabenspezifischen Text zu generieren.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/2303.18223"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Prompt Engineering bezeichnet die systematische Gestaltung von Eingabeaufforderungen (Prompts) für Sprachmodelle, um qualitativ hochwertigere oder zuverlässigere Ausgaben zu erzielen.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": ["https://arxiv.org/abs/2302.11382"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Chain-of-Thought (CoT) Prompting ist eine Technik, bei der ein Sprachmodell dazu veranlasst wird, Zwischenschritte seines Denkprozesses explizit darzustellen, was die Leistung bei komplexen Schlussfolgerungsaufgaben verbessert.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2201.11903"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Ein Embedding ist eine numerische Vektorrepräsentation von Text oder anderen Daten in einem hochdimensionalen Raum, wobei semantisch ähnliche Inhalte durch ähnliche Vektoren repräsentiert werden.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/1301.3666"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Self-Attention-Mechanismus im Transformer erlaubt dem Modell, bei der Verarbeitung eines Tokens alle anderen Tokens im Kontext zu berücksichtigen und deren Relevanz zu gewichten.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": ["https://arxiv.org/abs/1706.03762"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "GPT steht für 'Generative Pre-trained Transformer' — eine Klasse von Sprachmodellen, die auf unüberwachtes Vortraining (Next-Token-Prediction) und anschliessendes Fine-Tuning setzt.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": ["https://openai.com/blog/language-unsupervised"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Kontextlänge (Context Window) eines LLM bezeichnet die maximale Anzahl an Tokens, die das Modell in einer einzigen Inferenz gleichzeitig verarbeiten kann.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/2005.14165"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Ein Token ist die kleinste Einheit, die ein LLM verarbeitet. Für englische Texte entspricht ein Token ungefähr 4 Zeichen oder 0,75 Wörter; bei deutschen Texten ist das Verhältnis aufgrund längerer Wörter tendenziell ungünstiger.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": ["https://platform.openai.com/tokenizer"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Vektordatenbanken (z.B. Pinecone, Weaviate, pgvector) sind speziell auf die effiziente Ähnlichkeitssuche in hochdimensionalen Vektorräumen optimierte Datenbanksysteme.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": ["https://arxiv.org/abs/2308.07107"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der EU AI Act, der 2024 verabschiedet wurde, klassifiziert KI-Systeme nach Risikoklassen (minimal, begrenzt, hoch, unakzeptabel) und stellt unterschiedliche Anforderungen an Transparenz und Qualitätssicherung.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R1689"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Zero-Shot Learning bezeichnet die Fähigkeit eines Modells, Aufgaben zu lösen, für die es während des Trainings keine direkten Beispiele gesehen hat.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2005.14165"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Few-Shot Learning ist eine Methode, bei der einem Sprachmodell wenige Beispiele (typischerweise 1–10) im Prompt mitgegeben werden, um die gewünschte Ausgabeform oder -aufgabe zu demonstrieren.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/2005.14165"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Knowledge Graphs sind strukturierte Wissensrepräsentationen, in denen Entitäten als Knoten und ihre Beziehungen als Kanten eines Graphen gespeichert werden. Sie ermöglichen komplexe Anfragen über semantische Zusammenhänge.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/2003.02320"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Hybrides RAG (Vector + Graph RAG) übertrifft reines Vector-RAG bei strukturierten Wissensanfragen nachweislich um 8–11% in Benchmark-Tests für Open Radio Access Networks.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.88,
+    "source_urls": ["https://arxiv.org/abs/2408.04479"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Quantisierung (Quantization) ist eine Technik zur Reduktion des Speicherbedarfs von LLMs, bei der Modellgewichte von 32-Bit-Fliesskommazahlen auf niedrigere Präzision (z.B. 4-Bit, 8-Bit) komprimiert werden.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2208.07339"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Low-Rank Adaptation (LoRA) ist eine Parameter-effiziente Fine-Tuning-Methode, bei der statt aller Modellgewichte nur kleinere Adaptionsmatrizen trainiert werden, was den Rechenaufwand erheblich reduziert.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/2106.09685"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Multimodale Modelle sind KI-Systeme, die mehrere Eingabetypen (z.B. Text, Bild, Audio) verarbeiten können. GPT-4V und Claude 3 sind Beispiele für multimodale LLMs.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2309.17421"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Ein KI-Agent ist ein autonomes System, das eine Abfolge von Aktionen plant und ausführt, um ein vorgegebenes Ziel zu erreichen. Moderne LLM-basierte Agenten nutzen dazu Tool Use und mehrstufiges Reasoning.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.94,
+    "source_urls": ["https://arxiv.org/abs/2309.07864"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Constitutional AI (CAI) ist eine von Anthropic entwickelte Trainingstechnik, bei der ein Modell anhand explizit formulierter Prinzipien (einer 'Verfassung') sein eigenes Verhalten bewertet und korrigiert.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2212.08073"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Perplexität (Perplexity) ist eine Metrik zur Bewertung von Sprachmodellen, die misst, wie gut ein Modell eine Testmenge vorhersagt. Niedrigere Perplexität bedeutet bessere Vorhersageleistung.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://huggingface.co/docs/transformers/perplexity"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "BERT (Bidirectional Encoder Representations from Transformers) ist ein 2018 von Google eingeführtes Sprachmodell, das im Gegensatz zu GPT bidirektional trainiert wird und besonders für Klassifikationsaufgaben geeignet ist.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": ["https://arxiv.org/abs/1810.04805"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Temperatut (Temperature) in LLMs steuert die Zufälligkeit der Ausgabe: Eine hohe Temperatur (z.B. 1.5) erhöht die Kreativität, eine niedrige (z.B. 0.1) macht die Ausgabe deterministischer und fokussierter.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2202.00666"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Model Distillation (Wissensdestillation) ist eine Technik, bei der ein kleineres 'Schüler'-Modell trainiert wird, das Verhalten eines grösseren 'Lehrer'-Modells nachzuahmen und so ähnliche Leistung bei geringerem Ressourceneinsatz zu erzielen.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/1503.02531"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Sentence Transformers sind auf das Erstellen semantischer Satz-Embeddings optimierte Modelle, die auf Basis von Transformer-Architektur und Siamese-Netzwerken trainiert werden.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/1908.10084"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das paraphrase-multilingual-MiniLM-L12-v2 Modell von SBERT unterstützt semantische Ähnlichkeitssuche in über 50 Sprachen mit 384-dimensionalen Embeddings.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": ["https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Named Entity Recognition (NER) ist eine Teilaufgabe der natürlichen Sprachverarbeitung, bei der Entitäten wie Personen, Orte und Organisationen in Texten identifiziert und klassifiziert werden.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": ["https://arxiv.org/abs/1910.11470"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Turing-Test-Idee von Alan Turing (1950) schlägt vor, eine Maschine als 'intelligent' zu betrachten, wenn sie im Gespräch nicht von einem Menschen unterschieden werden kann.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://doi.org/10.1093/mind/LIX.236.433"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Supervised Learning ist eine Machine-Learning-Methode, bei der ein Modell anhand von beschrifteten Trainingsbeispielen (Input-Output-Paare) trainiert wird, eine Zuordnungsfunktion zu erlernen.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://arxiv.org/abs/1811.12560"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Unsupervised Learning ist eine Machine-Learning-Methode, bei der ein Modell ohne beschriftete Trainingsdaten Strukturen und Muster in den Daten selbstständig erkennt.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://arxiv.org/abs/2304.11326"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Reinforcement Learning (RL) ist ein Machine-Learning-Paradigma, bei dem ein Agent durch Interaktion mit einer Umgebung und dem Empfang von Belohnungs-/Bestrafungssignalen optimale Verhaltensstrategien erlernt.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://www.deepmind.com/blog/reinforcement-learning"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Neuronale Netze (Neural Networks) sind von der Struktur des menschlichen Gehirns inspirierte Rechenmodelle, bestehend aus miteinander verbundenen Knoten (Neuronen), die in Schichten organisiert sind.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://www.deeplearningbook.org/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Convolutional Neural Networks (CNNs) sind speziell für die Verarbeitung gitterförmiger Daten (z.B. Bilder) entwickelte neuronale Netze, die durch Faltungsoperationen lokale Muster erkennen.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://arxiv.org/abs/1512.03385"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Backpropagation ist der Algorithmus, mit dem neuronale Netze trainiert werden: Fehler werden rückwärts durch das Netz propagiert und Gewichte werden per Gradientenabstieg angepasst.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://www.nature.com/articles/323533a0"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Overfitting bezeichnet das Phänomen, bei dem ein Modell die Trainingsdaten so gut lernt, dass es auf neuen, ungesehenen Daten (Testdaten) schlechtere Leistung zeigt.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://www.deeplearningbook.org/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Dropout ist eine Regularisierungstechnik für neuronale Netze, bei der während des Trainings zufällig Neuronen deaktiviert werden, um Overfitting zu reduzieren.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": ["https://jmlr.org/papers/v15/srivastava14a.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Generative Adversarial Networks (GANs) sind ein von Ian Goodfellow 2014 eingeführtes Framework, bei dem ein Generator- und ein Diskriminator-Netz gegeneinander trainieren, um realistische Daten zu erzeugen.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://arxiv.org/abs/1406.2661"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Diffusion Models sind eine Klasse generativer Modelle, die durch schrittweises Hinzufügen und anschliessendes Entfernen von Rauschen lernen, Daten wie Bilder zu generieren. DALL-E 3 und Stable Diffusion basieren darauf.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/2006.11239"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Cosine Similarity ist ein Mass für die Ähnlichkeit zweier Vektoren, das den Kosinus des Winkels zwischen ihnen berechnet. Werte nahe 1 bedeuten hohe Ähnlichkeit, nahe 0 keine Ähnlichkeit.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": ["https://en.wikipedia.org/wiki/Cosine_similarity"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das MMLU (Massive Multitask Language Understanding) Benchmark misst das Allgemeinwissen und Reasoning-Fähigkeiten von LLMs über 57 Fachgebiete und gilt als Standardtest für LLM-Leistungsvergleiche.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": ["https://arxiv.org/abs/2009.03300"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Tokenisierung (Tokenization) ist der Prozess, bei dem Eingabetext in kleinere Einheiten (Tokens) aufgeteilt wird, die das Sprachmodell verarbeiten kann. Byte-Pair Encoding (BPE) ist eine häufig verwendete Tokenisierungsmethode.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://arxiv.org/abs/1508.07909"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Anthropic wurde 2021 von ehemaligen OpenAI-Mitarbeitern (u.a. Dario und Daniela Amodei) mit dem Fokus auf KI-Sicherheitsforschung und die Entwicklung sicherer KI-Systeme gegründet.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": ["https://www.anthropic.com/company"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Semantic Search ist eine Suchmethode, die die Bedeutung einer Anfrage versteht, anstatt nur Schlüsselwörter zu vergleichen. Sie basiert typischerweise auf Embedding-Modellen und Vektordatenbanken.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": ["https://arxiv.org/abs/1908.10084"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "n8n ist eine Open-Source Workflow-Automatisierungsplattform (ähnlich Zapier/Make), die sich durch Self-Hosting und Code-Erweiterbarkeit auszeichnet und für KI-Agenten-Workflows eingesetzt werden kann.",
+    "domain_id": "ai-ml",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": ["https://n8n.io/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  }
+]

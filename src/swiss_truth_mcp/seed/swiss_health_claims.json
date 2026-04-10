@@ -1,0 +1,152 @@
+[
+  {
+    "text": "Die Schweiz verfügt über eines der teuersten, aber auch leistungsfähigsten Gesundheitssysteme der Welt. Im Jahr 2022 beliefen sich die Gesundheitsausgaben auf rund 91,5 Milliarden Franken, was etwa 11,7% des BIP entspricht.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitswesen/kosten-finanzierung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz ist die Krankenversicherung für alle Einwohner obligatorisch. Die Grundversicherung (KVG) deckt ein festgelegtes Leistungspaket ab und wird von zugelassenen Krankenkassen angeboten.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/versicherungen/krankenversicherung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die durchschnittliche Krankenkassenprämie für Erwachsene in der Schweiz beträgt 2024 rund 359 Franken pro Monat (Standardmodell, Franchise 300 CHF). Seit 2010 sind die Prämien um über 70% gestiegen.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/versicherungen/krankenversicherung/krankenversicherung-versicherte-mit-wohnsitz-in-der-schweiz/praemien.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Lebenserwartung in der Schweiz gehört zu den höchsten weltweit: Frauen leben im Durchschnitt 85,4 Jahre, Männer 81,6 Jahre (Stand 2022). Dies entspricht Platz 2–3 im weltweiten Vergleich.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/geburten-todesfaelle/lebenserwartung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz gibt es rund 280 Spitäler (Akutspitäler, Psychiatrie, Rehabilitation). Seit 2012 werden Spitalleistungen durch diagnosebezogene Fallpauschalen (SwissDRG) abgerechnet.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitswesen/spitaeler.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Herzkreislauferkrankungen und Krebs sind in der Schweiz die häufigsten Todesursachen und verursachen zusammen rund 55% aller Todesfälle. Die Krebsneuerkrankungsrate liegt bei ca. 40.000 Fällen pro Jahr.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitszustand/krankheiten-verletzungen/krebs.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz praktizieren rund 37.000 Ärztinnen und Ärzte. Der Anteil ausländischer Ärzte beträgt über 35% und ist einer der höchsten in Europa — ein Zeichen des Fachkräftemangels im Gesundheitsbereich.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.fmh.ch/themen/aerztliche-berufsausuebung/statistiken.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Gesundheitssystem ist dreistufig finanziert: Krankenkassenprämien (ca. 30%), öffentliche Mittel (Kantone und Bund, ca. 20%) und Steuern sowie Selbstbeteiligungen (Franchise + Selbstbehalt, ca. 25%) der Versicherten.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitswesen/kosten-finanzierung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Prämienverbilligung (IPV) entlastet Versicherte mit niedrigem Einkommen. 2022 erhielten rund 2,3 Millionen Personen (27% der Bevölkerung) Beiträge vom Staat zur Verbilligung ihrer Krankenkassenprämie.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/versicherungen/krankenversicherung/krankenversicherung-versicherte-mit-wohnsitz-in-der-schweiz/praemienverbilligung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Psychische Erkrankungen sind in der Schweiz weit verbreitet: Rund 17% der Bevölkerung leiden unter einer psychischen Störung, wobei Depressionen und Angststörungen am häufigsten sind. Der Anteil psychisch bedingter Invalidenrenten beträgt über 40%.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/das-bag/aktuell/medienmitteilungen/medienmitteilungen.msg-id-80699.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz hat im europäischen Vergleich einen der höchsten Antibiotikaverbrauchswerte in der Humanmedizin. Das Nationale Programm zur Bekämpfung von Antibiotikaresistenzen (StAR) läuft seit 2016.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.94,
+    "source_urls": ["https://www.star.admin.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Diabetes Typ 2 betrifft in der Schweiz rund 500.000 Menschen (ca. 5,4% der Erwachsenen). Weitere 20% der Bevölkerung gelten als prä-diabetisch. Die jährlichen Kosten werden auf über 6 Milliarden Franken geschätzt.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.diabetesschweiz.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Bevölkerung altert rasch: Bis 2050 werden über 26% der Einwohner 65 Jahre oder älter sein (2023: ca. 19%). Dies stellt das Gesundheits- und Rentensystem vor grosse Herausforderungen.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/alterung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Impfquote gegen saisonale Grippe liegt in der Schweiz bei ca. 40% der Risikogruppen — deutlich unter der von der WHO empfohlenen Marke von 75%. Die Masern-Durchimpfungsrate bei Kindern beträgt rund 95%.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/krankheiten/krankheiten-im-ueberblick/grippe/grippe-praeventionsmassnahmen/grippeimpfung.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Rauchen verursacht in der Schweiz jährlich über 9.500 Todesfälle — das sind rund 13% aller Todesfälle. Die Tabakprävalenz bei Erwachsenen liegt bei ca. 25%. Das Tabakproduktegesetz (TabPG) trat 2022 in Kraft.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/strategie-und-politik/nationale-gesundheitsstrategien/nationales-programm-tabak.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die elektronische Patientendossier (EPD) ist in der Schweiz seit 2020 gesetzlich verankert. Alle Spitäler, Geburtshäuser und Pflegeheime müssen dem EPD angeschlossen sein. Bis 2025 soll es auf freiwilliger Basis für alle Patienten verfügbar sein.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.patientendossier.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz gibt es rund 1.900 Apotheken. Der Schweizer Arzneimittelmarkt ist streng reguliert: Die Swissmedic ist als Zulassungs- und Kontrollbehörde für die Sicherheit von Medikamenten verantwortlich.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.swissmedic.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Suizidrate in der Schweiz liegt bei ca. 12 pro 100.000 Einwohner pro Jahr (ca. 1.000 Fälle). Männer sind dreimal häufiger betroffen als Frauen. Assistierter Suizid (z.B. durch Dignitas, Exit) ist unter strengen Auflagen legal.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Adipositas (starkes Übergewicht, BMI ≥ 30) betrifft in der Schweiz rund 11% der Erwachsenen. Übergewicht (BMI ≥ 25) weist rund 43% der Bevölkerung auf. Beide Werte sind in den letzten 20 Jahren signifikant gestiegen.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/gesundheit/determinanten/kouml-perpergewicht.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Pflegeheimkosten in der Schweiz belaufen sich auf durchschnittlich 180–250 Franken pro Tag (je nach Pflegestufe und Kanton). Die Finanzierung erfolgt durch KVG (Pflegeleistungen), Ergänzungsleistungen und Eigenleistung.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.94,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/versicherungen/krankenversicherung/krankenversicherung-leistungen-tarife/Pflegeleistungen.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz hat eine der weltweit höchsten Dichten an MRI-Geräten (ca. 17 pro Million Einwohner) und CT-Scannern. Dies trägt zur hohen diagnostischen Qualität, aber auch zu den hohen Gesundheitskosten bei.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.oecd-ilibrary.org/social-issues-migration-health/health-at-a-glance-2023_7a7afb35-en"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz gibt es eine ausgeprägte Zweiklassenmedizin: Allgemein-, Halbprivat- und Privatversicherte erhalten im Spital unterschiedliche Behandlungsstandards und Komfortleistungen, obwohl die medizinische Grundversorgung gleich ist.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.93,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/versicherungen/krankenversicherung/krankenversicherung-versicherte-mit-wohnsitz-in-der-schweiz/zusatzversicherungen.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Säuglingssterblichkeit in der Schweiz beträgt ca. 3,2 Todesfälle pro 1.000 Lebendgeburten (2022) — eine der niedrigsten Raten weltweit. Die Müttersterblichkeit liegt bei ca. 5 pro 100.000 Lebendgeburten.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/geburten-todesfaelle/kindersterblichkeit.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Nationale Strategie zur Prävention nichtübertragbarer Krankheiten (NCD-Strategie 2017–2024) zielt auf die Reduktion von Herz-Kreislauf-Erkrankungen, Krebs, Diabetes und COPD. Diese vier Krankheiten verursachen 80% der vorzeitigen Todesfälle.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bag.admin.ch/bag/de/home/strategie-und-politik/nationale-gesundheitsstrategien/strategie-nicht-uebertragbare-krankheiten.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz arbeiten rund 430.000 Personen im Gesundheitssektor (ca. 10% der Erwerbstätigen). Der Pflegeberuf ist stark feminisiert: Über 80% des Pflegepersonals sind Frauen. Der Fachkräftemangel in der Pflege ist strukturell und wächst.",
+    "domain_id": "swiss-health", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.obsan.admin.ch/de/kennzahlen/beschaftigte-im-gesundheitswesen"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  }
+]

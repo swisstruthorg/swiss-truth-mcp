@@ -1,0 +1,777 @@
+[
+  {
+    "text": "Die spezielle Relativitätstheorie von Albert Einstein, publiziert 1905, besagt, dass die Lichtgeschwindigkeit im Vakuum mit etwa 299.792 Kilometer pro Sekunde für alle Beobachter konstant ist, unabhängig von ihrer Bewegung.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen/eth-news/news/2015/11/einstein-spezielle-relativitaetstheorie.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die allgemeine Relativitätstheorie beschreibt Gravitation als Krümmung der Raumzeit durch Masse und Energie. Diese Theorie wurde 1915 von Albert Einstein veröffentlicht und durch astronomische Beobachtungen bestätigt.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.unige.ch/sciences/physique/recherche/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Heisenbergsche Unschärfeprinzip besagt, dass Ort und Impuls eines Teilchens nicht gleichzeitig beliebig genau bestimmt werden können. Dies ist ein fundamentales Prinzip der Quantenmechanik.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.uzh.ch/cmsssl/physik/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Quantenmechanik kann ein Teilchen gleichzeitig Wellen- und Teilcheneigenschaften aufweisen. Dieses als Welle-Teilchen-Dualismus bezeichnete Phänomen wurde durch das Doppelspaltexperiment nachgewiesen.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.epfl.ch/schools/sb/research/iphys/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Periodensystem der Elemente ordnet die 118 bekannten chemischen Elemente nach steigender Ordnungszahl. Es wurde 1869 von Dmitri Mendelejew entwickelt und zeigt periodisch wiederkehrende chemische Eigenschaften.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.chemie.uzh.ch/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Wasserstoff ist mit der Ordnungszahl 1 das leichteste und häufigste chemische Element im Universum. Es macht etwa 75% der gesamten Masse des Universums aus.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.unibe.ch/universitaet/dienstleistungen/universitaetsbibliothek/index_ger.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Gold hat die Ordnungszahl 79 und das chemische Symbol Au. Es ist ein Edelmetall, das aufgrund seiner geringen Reaktivität unter normalen Bedingungen nicht oxidiert oder korrodiert.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.empa.ch/web/s604"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die DNA (Desoxyribonukleinsäure) ist ein Doppelhelix-Molekül, das die genetische Information aller lebenden Organismen und vieler Viren trägt. Die Struktur wurde 1953 von Watson und Crick beschrieben.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen/eth-news/news/2013/04/60-jahre-dna-struktur.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der menschliche Körper besteht aus etwa 37 Billionen Zellen. Jede Zelle mit Zellkern enthält die vollständige genetische Information, verpackt in 46 Chromosomen.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.unibas.ch/de/Forschung/Uni-Nova.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Gene sind Abschnitte der DNA, die für die Synthese von Proteinen kodieren. Der Mensch besitzt etwa 20.000 bis 25.000 proteinkodierende Gene.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sib.swiss/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Charles Darwin veröffentlichte 1859 sein Werk 'Über die Entstehung der Arten' und begründete damit die Evolutionstheorie durch natürliche Selektion. Diese Theorie erklärt die Entwicklung und Vielfalt des Lebens auf der Erde.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.naturhist.unibe.ch/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Natürliche Selektion bezeichnet den Prozess, bei dem Individuen mit vorteilhaften Eigenschaften eine höhere Überlebens- und Fortpflanzungsrate haben. Dies führt zur Anpassung von Populationen an ihre Umwelt.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.uzh.ch/de/explore/stories.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der erste Hauptsatz der Thermodynamik besagt, dass Energie weder erschaffen noch zerstört werden kann, sondern nur von einer Form in eine andere umgewandelt wird. Die Gesamtenergie eines geschlossenen Systems bleibt konstant.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ethz.ch/de/studium/bachelor/studienangebot/naturwissenschaften-und-mathematik.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der zweite Hauptsatz der Thermodynamik besagt, dass die Entropie in einem abgeschlossenen System niemals abnimmt. Spontane Prozesse verlaufen in Richtung zunehmender Unordnung.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.epfl.ch/education/bachelor/programs/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der absolute Nullpunkt liegt bei -273,15 Grad Celsius oder 0 Kelvin. Dies ist die theoretisch niedrigste mögliche Temperatur, bei der die thermische Bewegung von Atomen minimal wird.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.unige.ch/sciences/physique/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "James Clerk Maxwell formulierte 1865 die Maxwell-Gleichungen, die elektrische und magnetische Felder mathematisch beschreiben. Diese Gleichungen zeigen, dass Licht eine elektromagnetische Welle ist.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.uzh.ch/cmsssl/physik/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Elektromagnetische Wellen breiten sich mit Lichtgeschwindigkeit aus und umfassen ein Spektrum von Radiowellen über sichtbares Licht bis zu Gammastrahlung. Alle diese Wellen unterscheiden sich nur in ihrer Frequenz und Wellenlänge.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen/eth-news.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Isaac Newton formulierte 1687 in seinem Werk 'Philosophiae Naturalis Principia Mathematica' drei Bewegungsgesetze. Das erste Gesetz besagt, dass ein Körper in Ruhe oder gleichförmiger Bewegung verharrt, solange keine Kraft auf ihn wirkt.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.unibe.ch/universitaet/portraet/geschichte/index_ger.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das zweite Newtonsche Gesetz besagt, dass die Beschleunigung eines Körpers proportional zur angreifenden Kraft und umgekehrt proportional zu seiner Masse ist. Mathematisch ausgedrückt: F = m × a.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.epfl.ch/schools/sb/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Gravitationsgesetz von Newton beschreibt, dass sich zwei Massen mit einer Kraft anziehen, die proportional zum Produkt ihrer Massen und umgekehrt proportional zum Quadrat ihres Abstands ist.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.unige.ch/sciences/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Zelle ist die kleinste lebende Einheit aller Organismen. Prokaryotische Zellen haben keinen Zellkern, während eukaryotische Zellen einen membranumschlossenen Kern und weitere Organellen besitzen.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.uzh.ch/de/studies/application/programs.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Mitochondrien sind die Kraftwerke der Zelle und erzeugen durch zelluläre Atmung den Energieträger ATP (Adenosintriphosphat). Sie besitzen eine eigene DNA und vermehren sich unabhängig von der Zellteilung.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen/eth-news/news/2019/03/mitochondrien-forschung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Satz des Pythagoras besagt, dass in einem rechtwinkligen Dreieck die Summe der Quadrate der beiden Katheten gleich dem Quadrat der Hypotenuse ist: a² + b² = c². Dieser Satz ist seit der Antike bekannt.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/studium/bachelor/studienangebot/naturwissenschaften-und-mathematik/mathematik.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Eulersche Zahl e hat einen Wert von ungefähr 2,71828 und ist eine fundamentale mathematische Konstante. Sie ist die Basis des natürlichen Logarithmus und tritt in vielen Bereichen der Mathematik und Naturwissenschaften auf.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.epfl.ch/schools/sb/education/mathematics/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Zahl Pi (π) beschreibt das Verhältnis des Umfangs eines Kreises zu seinem Durchmesser und hat einen Wert von ungefähr 3,14159. Pi ist eine irrationale und transzendente Zahl mit unendlich vielen nicht periodischen Nachkommastellen.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.unige.ch/math/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Albert Einsteins Spezielle Relativitätstheorie von 1905 besagt, dass die Lichtgeschwindigkeit im Vakuum mit etwa 299.792 Kilometer pro Sekunde für alle Beobachter konstant ist, unabhängig von deren Bewegungszustand.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.html",
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Allgemeine Relativitätstheorie von Einstein (1915) beschreibt Gravitation als Krümmung der Raumzeit durch Masse und Energie, nicht als Kraft im klassischen Sinne.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.unige.ch/communication/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Heisenbergsche Unschärfeprinzip besagt, dass Ort und Impuls eines Quantenteilchens nicht gleichzeitig beliebig genau bestimmt werden können.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.unibas.ch/de/Aktuell.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Welle-Teilchen-Dualismus beschreibt, dass Quantenobjekte wie Elektronen und Photonen sowohl Wellen- als auch Teilcheneigenschaften aufweisen können.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://home.cern/de"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Periodensystem der Elemente umfasst derzeit 118 bekannte chemische Elemente, die nach ihrer Ordnungszahl (Anzahl der Protonen) angeordnet sind.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Wasserstoff ist mit der Ordnungszahl 1 das leichteste chemische Element und das häufigste Element im beobachtbaren Universum.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.chemie.ch/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Kohlenstoff mit der Ordnungszahl 6 ist die Grundlage aller bekannten organischen Verbindungen und damit des Lebens auf der Erde.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.uzh.ch/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die DNA (Desoxyribonukleinsäure) besteht aus zwei komplementären Strängen, die eine Doppelhelix bilden, wobei die Basenpaare Adenin mit Thymin und Guanin mit Cytosin verbunden sind.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.unibas.ch/de/Aktuell.html",
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das menschliche Genom enthält schätzungsweise 20.000 bis 25.000 proteincodierende Gene, verteilt auf 23 Chromosomenpaare.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bag.admin.ch/bag/de/home.html",
+      "https://www.uzh.ch/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Charles Darwins Theorie der natürlichen Selektion besagt, dass Individuen mit vorteilhaften Eigenschaften eine höhere Überlebens- und Fortpflanzungswahrscheinlichkeit haben und diese Merkmale an nachfolgende Generationen weitergeben.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.uzh.ch/de.html",
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Fossilienfunde und molekulare Uhren deuten darauf hin, dass der letzte gemeinsame Vorfahre aller heute lebenden Menschen vor etwa 200.000 bis 300.000 Jahren in Afrika lebte.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.uzh.ch/de.html",
+      "https://www.unige.ch/communication/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Erste Hauptsatz der Thermodynamik besagt, dass Energie weder erzeugt noch vernichtet, sondern nur von einer Form in eine andere umgewandelt werden kann.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Zweite Hauptsatz der Thermodynamik besagt, dass in einem abgeschlossenen System die Entropie niemals abnimmt und spontane Prozesse stets in Richtung höherer Unordnung ablaufen.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der absolute Nullpunkt liegt bei minus 273,15 Grad Celsius oder 0 Kelvin und stellt die theoretisch tiefstmögliche Temperatur dar, bei der jegliche thermische Bewegung zum Stillstand kommt.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.metas.ch/metas/de/home.html",
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "James Clerk Maxwells Gleichungen beschreiben die Grundlagen des Elektromagnetismus und zeigen, dass elektrische und magnetische Felder untrennbar miteinander verbunden sind und sich als elektromagnetische Wellen ausbreiten.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das sichtbare Licht ist nur ein kleiner Teil des elektromagnetischen Spektrums mit Wellenlängen zwischen etwa 380 und 750 Nanometern.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.metas.ch/metas/de/home.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Isaac Newtons Zweites Bewegungsgesetz besagt, dass die Kraft gleich dem Produkt aus Masse und Beschleunigung ist, ausgedrückt in der Formel F = m × a.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.unibas.ch/de/Aktuell.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Gravitationsgesetz von Newton besagt, dass zwei Massen sich mit einer Kraft anziehen, die proportional zum Produkt ihrer Massen und umgekehrt proportional zum Quadrat ihres Abstandes ist.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Photosynthese in pflanzlichen Zellen findet in den Chloroplasten statt und wandelt Lichtenergie, Kohlendioxid und Wasser in Glucose und Sauerstoff um.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.uzh.ch/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Zellkern enthält das genetische Material in Form von Chromosomen und steuert die Zellfunktionen durch die Regulation der Genexpression.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.uzh.ch/de.html",
+      "https://www.unibas.ch/de/Aktuell.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Enzyme sind biologische Katalysatoren, die biochemische Reaktionen beschleunigen, ohne selbst dabei verbraucht zu werden.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.uzh.ch/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Fibonacci-Folge ist eine unendliche Zahlenfolge, bei der jede Zahl die Summe der beiden vorhergehenden Zahlen ist, beginnend mit 0 und 1.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Fundamentalsatz der Algebra besagt, dass jedes nichtkonstante Polynom mit komplexen Koeffizienten mindestens eine komplexe Nullstelle besitzt.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.epfl.ch/about/overview/fr/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Primfaktorzerlegung besagt, dass jede natürliche Zahl größer als 1 entweder selbst eine Primzahl ist oder eindeutig als Produkt von Primzahlen dargestellt werden kann.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.uzh.ch/de.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Satz von der Erhaltung der Masse besagt, dass in einem geschlossenen System die Gesamtmasse bei chemischen Reaktionen konstant bleibt, auch wenn Stoffe umgewandelt werden.",
+    "domain_id": "world-science",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.ethz.ch/de/news-und-veranstaltungen.html",
+      "https://www.chemie.ch/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

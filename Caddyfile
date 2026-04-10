@@ -1,0 +1,47 @@
+# Swiss Truth MCP — Caddy Reverse Proxy
+# Ersetzt {DOMAIN} durch deine Domain z.B. swisstruth.org
+
+# API + Dashboard + Review UI + MCP Server
+{$DOMAIN} {
+
+    # MCP Streamable HTTP Endpoint — SSE Streaming, kein Gzip, sofortiger Flush
+    handle /mcp* {
+        reverse_proxy api:8000 {
+            flush_interval -1
+            header_up X-Forwarded-Proto {http.request.scheme}
+        }
+        header {
+            X-Content-Type-Options nosniff
+            Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        }
+    }
+
+    # Alle anderen Requests (Dashboard, API, Review UI)
+    handle {
+        reverse_proxy api:8000
+        encode gzip
+
+        header {
+            X-Content-Type-Options nosniff
+            X-Frame-Options DENY
+            Referrer-Policy strict-origin-when-cross-origin
+            Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        }
+    }
+
+    log {
+        output file /data/logs/swiss-truth-access.log
+        format json
+    }
+}
+
+# n8n Workflow Automation
+n8n.{$DOMAIN} {
+    reverse_proxy n8n:5678
+    encode gzip
+
+    log {
+        output file /data/logs/n8n-access.log
+        format json
+    }
+}

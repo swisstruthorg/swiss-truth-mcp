@@ -1,0 +1,752 @@
+[
+  {
+    "text": "In der Schweiz besteht eine obligatorische Schulpflicht von 11 Jahren, die in der Regel vom 4. bis zum 15. Lebensjahr dauert.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/obligatorische-schule"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die ETH Zürich wurde 1855 gegründet und gehört zu den weltweit führenden technisch-naturwissenschaftlichen Hochschulen mit über 20 Nobelpreisträgern.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://ethz.ch/de/die-eth-zuerich/portraet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Rund zwei Drittel der Schweizer Jugendlichen entscheiden sich nach der obligatorischen Schule für eine berufliche Grundbildung im dualen System mit Lehrbetrieb und Berufsfachschule.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die gymnasiale Maturitätsquote in der Schweiz liegt bei etwa 20-21% eines Jahrgangs, wobei deutliche kantonale Unterschiede bestehen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/bildungsindikatoren.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die EPFL (École polytechnique fédérale de Lausanne) wurde 1969 als zweite eidgenössische technische Hochschule neben der ETH Zürich gegründet und ist die bedeutendste technische Hochschule der französischsprachigen Schweiz.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.epfl.ch/about/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Hochschulsystem umfasst 10 kantonale Universitäten, 2 eidgenössische technische Hochschulen (ETH), 8 Fachhochschulen und rund 20 pädagogische Hochschulen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.swissuniversities.ch/de/hochschulraum"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz gibt etwa 5,3% des Bruttoinlandsprodukts für Bildung aus, was ungefähr dem OECD-Durchschnitt entspricht.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/bildungsfinanzen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Bei den PISA-Studien liegt die Schweiz regelmässig über dem OECD-Durchschnitt, besonders in Mathematik und Naturwissenschaften.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/pisa"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bologna-Reform wurde in der Schweiz ab 2001 umgesetzt und führte zur Einführung des Bachelor-Master-Systems an allen Universitäten und Fachhochschulen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.swissuniversities.ch/de/themen/studium/bologna-reform"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Berufsmaturität ermöglicht Absolventen einer beruflichen Grundbildung den prüfungsfreien Zugang zu Fachhochschulen und wird von etwa 15-16% eines Jahrgangs erworben.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/berufsmaturitaet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bildungssystem in der Schweiz liegt primär in der Verantwortung der 26 Kantone, wodurch erhebliche regionale Unterschiede in Lehrplänen und Strukturen bestehen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Passerelle ermöglicht Inhabern einer Berufsmaturität nach bestandener Ergänzungsprüfung den Zugang zu universitären Hochschulen und ETH.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/passerelle.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Deutschschweiz dauert die Primarschule in den meisten Kantonen 6 Jahre, während sie in der Westschweiz oft 5 Jahre umfasst.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/obligatorische-schule/primarschule"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Staatssekretariat für Bildung, Forschung und Innovation (SBFI) ist die Bundesbehörde für nationale und internationale Bildungs-, Forschungs- und Innovationspolitik.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/das-sbfi/auftrag.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Fachhochschulen wurden in der Schweiz in den 1990er Jahren geschaffen und bieten praxisorientierte Studiengänge mit Schwerpunkt auf angewandter Forschung an.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.swissuniversities.ch/de/hochschulraum/fachhochschulen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die höhere Berufsbildung mit eidgenössischen Berufsprüfungen und höheren Fachprüfungen bildet eine wichtige Säule der Tertiärstufe und wird von rund 28'000 Personen jährlich absolviert.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/hbb.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Lehrplan 21 ist der erste gemeinsame Lehrplan der 21 deutsch- und mehrsprachigen Kantone und wurde zwischen 2017 und 2021 schrittweise eingeführt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.lehrplan21.ch"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Pädagogische Hochschulen sind in der Schweiz für die Ausbildung von Lehrpersonen für Kindergarten, Primar- und Sekundarstufe I zuständig.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.swissuniversities.ch/de/hochschulraum/paedagogische-hochschulen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Tertiärquote in der Schweiz liegt bei über 50%, wobei sowohl universitäre Hochschulen als auch die höhere Berufsbildung eingerechnet werden.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/bildungsabschluesse.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz existieren über 250 anerkannte Lehrberufe mit zwei-, drei- oder vierjähriger Ausbildungsdauer im dualen Berufsbildungssystem.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/grundbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizerische Konferenz der kantonalen Erziehungsdirektoren (EDK) koordiniert die Bildungspolitik zwischen den 26 Kantonen und besteht seit 1897.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.edk.ch/de/edk"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Rund 40% der Erwachsenen in der Schweiz nehmen jährlich an Weiterbildungsaktivitäten teil, was über dem europäischen Durchschnitt liegt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.94,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/weiterbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das eidgenössische Fähigkeitszeugnis (EFZ) wird nach erfolgreicher drei- oder vierjähriger beruflicher Grundbildung erworben und ist schweizweit anerkannt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/grundbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Universität Basel wurde 1460 gegründet und ist die älteste Universität der Schweiz.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.unibas.ch/de/Universitaet/Portraet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Romandie wird das Schuljahr in zwei Semester unterteilt, während in der Deutschschweiz mehrheitlich die Unterteilung in Quartale oder Trimester üblich ist.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.93,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/obligatorische-schule"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz beträgt die Schulpflicht in allen Kantonen elf Jahre, aufgeteilt in zwei Jahre Kindergarten oder Eingangsstufe und neun Jahre obligatorische Schulzeit.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/obligatorische-schule"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Etwa 70% der Jugendlichen in der Schweiz entscheiden sich nach der obligatorischen Schulzeit für eine berufliche Grundbildung, während rund 20% eine gymnasiale Maturität anstreben.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die ETH Zürich belegt im QS World University Ranking 2024 den 7. Platz weltweit und ist damit die bestplatzierte Universität Kontinentaleuropas.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://ethz.ch/de/die-eth-zuerich/portraet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das duale Berufsbildungssystem der Schweiz kombiniert praktische Ausbildung im Betrieb (3-4 Tage pro Woche) mit theoretischem Unterricht an der Berufsfachschule (1-2 Tage pro Woche).",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/duale-berufsbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über zehn kantonale Universitäten sowie zwei Eidgenössische Technische Hochschulen (ETH Zürich und EPFL Lausanne).",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.99,
+    "source_urls": [
+      "https://www.swissuniversities.ch/universitaeten"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im PISA-Test 2022 erreichte die Schweiz in Mathematik 508 Punkte, in Naturwissenschaften 503 Punkte und im Lesen 483 Punkte und liegt damit über dem OECD-Durchschnitt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/evaluation/pisa"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die gymnasiale Maturitätsquote in der Schweiz lag 2022 bei rund 21%, mit erheblichen regionalen Unterschieden zwischen den Kantonen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/bildungsindikatoren/themen/output/maturitaetsquote.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz gab 2021 etwa 5,4% des Bruttoinlandsprodukts für Bildung aus, was im internationalen Vergleich einem mittleren Niveau entspricht.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/bildungsfinanzen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Bologna-Reform wurde in der Schweiz ab 2004 umgesetzt und führte zu einer Studienstruktur mit Bachelor- und Master-Abschlüssen an Hochschulen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/hochschulen/bologna-prozess.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz existieren neun Fachhochschulen (FH), die praxisorientierte Studiengänge in Technik, Wirtschaft, Gesundheit und weiteren Bereichen anbieten.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.swissuniversities.ch/fachhochschulen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Berufsmaturität ermöglicht den prüfungsfreien Zugang zu Fachhochschulen und kann während oder nach der beruflichen Grundbildung erworben werden.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/berufsmaturitaet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die EPFL Lausanne wurde 1969 als eigenständige Institution gegründet und zählt zu den führenden technischen Hochschulen Europas mit Schwerpunkt auf Ingenieurwissenschaften.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.epfl.ch/about/overview/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz sind über 230 berufliche Grundbildungen mit eidgenössischem Fähigkeitszeugnis (EFZ) oder eidgenössischem Berufsattest (EBA) anerkannt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.berufsberatung.ch/dyn/show/2886"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Passerelle ermöglicht Inhabern einer Berufsmaturität den Zugang zu universitären Hochschulen nach bestandener Ergänzungsprüfung in mehreren Fächern.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/maturitaet/passerelle.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Pädagogische Hochschulen (PH) bilden in der Schweiz Lehrpersonen für alle Schulstufen aus und sind in jedem Sprachgebiet vertreten.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.swissuniversities.ch/paedagogische-hochschulen"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Hochschulzugangsquote in der Schweiz betrug 2022 etwa 42%, wobei alle Hochschultypen (Universitäten, Fachhochschulen, Pädagogische Hochschulen) einberechnet sind.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/bildungsindikatoren/themen/zugang/hochschulzugangsquote.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Höhere Fachschulen (HF) bieten in der Schweiz berufsbegleitende Bildungsgänge an, die zu eidgenössisch anerkannten Diplomen in Bereichen wie Pflege, Technik oder Wirtschaft führen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/hoehere-berufsbildung/hoehere-fachschulen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Bildungssystem zeichnet sich durch hohe Durchlässigkeit aus, wobei über verschiedene Wege wie Passerelle oder sur dossier Übergänge zwischen den Bildungsniveaus möglich sind.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/bildungsraum-schweiz/durchlaessigkeit.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Deutschschweiz dauert die Primarschule in den meisten Kantonen sechs Jahre, während sie in der Romandie und im Tessin häufig fünf Jahre umfasst.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/obligatorische-schule/primarschule"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Berufsbildungsforschung wird in der Schweiz massgeblich vom Eidgenössischen Hochschulinstitut für Berufsbildung (EHB) koordiniert und durchgeführt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.ehb.swiss/forschung"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Eidgenössische Berufsprüfungen und höhere Fachprüfungen ermöglichen eine Höherqualifizierung nach abgeschlossener beruflicher Grundbildung und gehören zur höheren Berufsbildung.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/berufsbildung/hoehere-berufsbildung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Bund beteiligt sich an den Bildungsausgaben der Kantone und Gemeinden, wobei die Hauptverantwortung für das Bildungswesen bei den 26 Kantonen liegt.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.sbfi.admin.ch/sbfi/de/home/bildung/bildungsraum-schweiz/bildungszusammenarbeit.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "An Schweizer Hochschulen studierten im Herbstsemester 2022/23 rund 265'000 Personen, davon etwa 153'000 an universitären Hochschulen und 82'000 an Fachhochschulen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/personen-ausbildung/tertiaerstufe-hochschulen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Sekundarstufe I umfasst in der Schweiz drei Jahre und gliedert sich je nach Kanton in verschiedene Niveaus oder Schultypen mit unterschiedlichen Anforderungsprofilen.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.edk.ch/de/bildungssystem/obligatorische-schule/sekundarstufe-i"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2022 wurden in der Schweiz rund 72'000 Berufsbildungsabschlüsse vergeben, wovon etwa 66'000 eidgenössische Fähigkeitszeugnisse (EFZ) waren.",
+    "domain_id": "swiss-education",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/bildung-wissenschaft/abschluesse.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

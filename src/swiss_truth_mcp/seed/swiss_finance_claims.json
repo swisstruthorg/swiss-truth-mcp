@@ -1,0 +1,152 @@
+[
+  {
+    "text": "Die Schweizerische Nationalbank (SNB) ist die Zentralbank der Schweiz. Sie führt die Geld- und Währungspolitik im Gesamtinteresse des Landes, sichert die Preisstabilität und stellt die Versorgung mit Bargeld sicher. Die SNB ist eine spezialgesetzliche Aktiengesellschaft — ihre Aktien sind an der SIX kotiert.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.snb.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die FINMA (Eidgenössische Finanzmarktaufsicht) ist die unabhängige Aufsichtsbehörde für Banken, Versicherungen, Börsen und Effektenhändler in der Schweiz. Sie wurde 2009 gegründet und hat ihren Sitz in Bern.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.finma.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die SIX Swiss Exchange in Zürich ist die grösste Börse der Schweiz und eine der zehn grössten Börsen weltweit nach Marktkapitalisierung. Der Swiss Market Index (SMI) umfasst die 20 grössten und liquidesten Schweizer Blue-Chip-Aktien.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.six-group.com/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz ist einer der wichtigsten Finanzplätze der Welt. Der Schweizer Bankensektor verwaltete 2023 rund 7,9 Billionen CHF an Kundengeldern. Die grössten Banken sind UBS (nach der Übernahme der Credit Suisse 2023) und die Kantonalbanken.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.swissbanking.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Credit Suisse wurde im März 2023 von der UBS für rund 3 Milliarden CHF übernommen — vermittelt durch den Schweizer Bund und die SNB. Die Übernahme verhinderte einen systemischen Kollaps, löste jedoch eine internationale Debatte über Too-Big-to-Fail-Regulierung aus.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.msg-id-94187.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Drei-Säulen-Rentensystem besteht aus: 1. Säule (AHV/IV — staatliche Grundsicherung), 2. Säule (BVG — berufliche Vorsorge, obligatorisch ab einem Jahreslohn von 22.050 CHF) und 3. Säule (private Vorsorge, steuerlich begünstigt). Der maximale 3a-Beitrag beträgt 2024 rund 7.056 CHF.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.bsv.admin.ch/bsv/de/home/sozialversicherungen/ahv.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Schweizer Franken (CHF) ist seit Jahrzehnten eine der stabilsten Währungen der Welt und gilt als sicherer Hafen. Die SNB führte von 2011 bis 2015 einen Mindestkurs von 1.20 CHF/EUR durch. Im Januar 2015 wurde dieser überraschend aufgehoben ('Frankenschock').",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.snb.ch/de/the-snb/mandates-goals/monetary-policy/monetary-policy-strategy"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die SNB führte von 2015 bis 2022 einen Negativzins von -0,75% auf Sichteinlagen ein — eine der tiefsten Leitzinsen weltweit. Im Juni 2022 begann die SNB den Zinserhöhungszyklus und hob den Leitzins schrittweise auf 1,75% an (Stand Ende 2023).",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.snb.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz hält rund 1.040 Tonnen Gold in ihren Nationalbankreserven (Stand 2023) und ist damit einer der grössten Goldhalter weltweit relativ zur Wirtschaftsgrösse. Das Gold ist teils im Inland, teils bei der Bank of England und der Banque de France gelagert.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.snb.ch/de/the-snb/mandates-goals/currency-reserves"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer Bankkundengeheimnis wurde durch internationale Druck stark eingeschränkt. Seit 2017 nimmt die Schweiz am automatischen Informationsaustausch (AIA/AEOI) mit über 100 Ländern teil. Das klassische Bankgeheimnis gegenüber ausländischen Steuerbehörden ist damit faktisch abgeschafft.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.sif.admin.ch/sif/de/home/bilateral/automatischer-informationsaustausch.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Versicherungswirtschaft ist bedeutend: Zurich Insurance, Swiss Re und Swiss Life gehören zu den grössten Versicherungskonzernen Europas. Die Gesamtprämieneinnahmen der Schweizer Versicherer betragen über 200 Milliarden CHF pro Jahr.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.svv.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Swiss Performance Index (SPI) umfasst alle kotierten Schweizer Aktien und gilt als umfassendster Schweizer Aktienindex. Der SMI (Swiss Market Index) enthält nur die 20 grössten Titel und deckt rund 80% der Gesamtmarktkapitalisierung ab.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.six-group.com/de/products-services/the-swiss-stock-exchange/market-data/indices/spi.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Fintech ist ein wachsender Sektor in der Schweiz. Das 'Crypto Valley' Zug ist ein weltweit bekanntes Blockchain- und Krypto-Ökosystem. Die FINMA hat 2018 eine Blockchain-freundliche Regulierung ('Fintech-Lizenz') eingeführt, die Schweiz zu einem der führenden Krypto-Standorte gemacht hat.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.finma.ch/de/bewilligung/fintech/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Schweizer BIP betrug 2023 rund 818 Milliarden CHF (ca. 900 Milliarden USD), was einem BIP pro Kopf von über 95.000 USD entspricht — einem der höchsten weltweit. Die wichtigsten Wirtschaftssektoren sind Pharmaindustrie, Finanzdienstleistungen, Maschinenbau und Uhren.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/volkswirtschaft.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Eidgenössische Steuerverwaltung (ESTV) erhebt auf Bundesebene die direkte Bundessteuer (DBSt), die Mehrwertsteuer (MWST, Normalsatz 8,1%), die Verrechnungssteuer (35% auf Zinsen/Dividenden) und die Stempelabgaben.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.estv.admin.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Too-Big-to-Fail-Regime (TBTF) der Schweiz verpflichtet systemrelevante Banken (UBS, Kantonalbanken) zur Haltung erhöhter Eigenmittel- und Liquiditätspuffer sowie zur Erstellung von Recovery- und Resolution-Plänen. Nach der CS-Krise 2023 wird das Regime grundlegend überarbeitet.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.finma.ch/de/regulierung/themen/too-big-to-fail/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Börsenkapitalisierung beträgt rund 1,7 Billionen CHF (2023). Die drei grössten kotierten Unternehmen nach Marktkapitalisierung sind Nestlé, Novartis und Roche — sie machen zusammen über 40% des SMI aus.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.six-group.com/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Arbeitslosenquote in der Schweiz lag 2023 bei rund 2,1% (saisonbereinigt) — eine der niedrigsten in Europa. Das duale Berufsbildungssystem gilt international als Erfolgsmodell und ist mitverantwortlich für die geringe Jugendarbeitslosigkeit.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.seco.admin.ch/seco/de/home/Arbeit/Arbeitslosenversicherung/arbeitslosenzahlen.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Schweizer Immobilienmarkt ist einer der teuersten weltweit. Die Wohneigentumsquote liegt bei rund 36% — deutlich unter dem europäischen Durchschnitt von ca. 70%. Die meisten Schweizer mieten ihre Wohnung. In Zürich und Genf liegen die Quadratmeterpreise für Eigentumswohnungen bei über 15.000 CHF.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/bau-wohnungswesen.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz ist nicht Mitglied der Europäischen Union, hat aber über 120 bilaterale Verträge mit der EU abgeschlossen. Die Bilateralen I (1999) regeln u.a. Personenfreizügigkeit, Landverkehr und Luftverkehr. Die Beziehungen werden über ein neues institutionelles Abkommen neu geregelt (Stand 2024: Verhandlungen laufen).",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.eda.admin.ch/europa"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Schweizer Franken hat gegenüber dem Euro seit 2000 massiv aufgewertet: Von 1.60 CHF/EUR im Jahr 2000 auf unter 0.95 CHF/EUR im Jahr 2022. Diese Aufwertung belastet Exportindustrie und Tourismus, stärkt aber die Kaufkraft der Bevölkerung.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.snb.ch/de/the-snb/mandates-goals/monetary-policy"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Uhrenindustrie exportierte 2023 Uhren im Wert von rund 26,7 Milliarden CHF — ein Rekord. Die grössten Exportmärkte sind USA, Hongkong und China. Die Branche beschäftigt über 60.000 Personen und umfasst Marken wie Rolex, Patek Philippe, Swatch und Omega.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fhs.swiss/ger/statistics.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz ist der weltgrösste Standort für privates Cross-Border Wealth Management und verwaltet rund 25-30% des globalen grenzüberschreitenden Vermögens. Dieser Anteil ist seit dem Ende des Bankgeheimnisses rückläufig, bleibt aber substanziell.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.swissbanking.ch/de/themen/private-banking"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Inflation in der Schweiz war 2022–2023 mit einem Peak von 3,5% (August 2022) deutlich niedriger als in der Eurozone (>10%). Die SNB-Zielbandbreite liegt bei 0–2%. Strukturelle Faktoren wie starker Franken, niedrige Energieabhängigkeit und Preisstabilisierung halten die Inflation tief.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.bfs.admin.ch/bfs/de/home/statistiken/preise/landesindex-konsumentenpreise.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die AHV (Alters- und Hinterlassenenversicherung) ist die wichtigste Sozialversicherung der Schweiz. Die AHV-Rente beträgt 2024 zwischen 1.225 und 2.450 CHF pro Monat (Einzelperson). Die AHV21-Reform (in Kraft seit 2024) erhöht das Rentenalter der Frauen schrittweise von 64 auf 65 Jahre.",
+    "domain_id": "swiss-finance", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.bsv.admin.ch/bsv/de/home/sozialversicherungen/ahv.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  }
+]

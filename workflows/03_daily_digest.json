@@ -1,0 +1,146 @@
+{
+  "name": "Swiss Truth — Täglicher Digest (Cron)",
+  "nodes": [
+    {
+      "id": "c3d4e5f6-0001-4000-8000-000000000001",
+      "name": "Täglich 08:00 Uhr",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "c3d4e5f6-0002-4000-8000-000000000002",
+      "name": "Datum von gestern berechnen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300],
+      "parameters": {
+        "jsCode": "const yesterday = new Date();\nyesterday.setDate(yesterday.getDate() - 1);\nconst since = yesterday.toISOString().split('T')[0]; // YYYY-MM-DD\nreturn [{ json: { since } }];"
+      }
+    },
+    {
+      "id": "c3d4e5f6-0003-4000-8000-000000000003",
+      "name": "Swiss Truth Digest AI/ML",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [720, 200],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://perigeal-impressionably-paulita.ngrok-free.dev/n8n/digest?since={{ $json.since }}&domain=ai-ml&limit=20",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "c3d4e5f6-0004-4000-8000-000000000004",
+      "name": "Swiss Truth Digest Alle Domains",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [720, 420],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://perigeal-impressionably-paulita.ngrok-free.dev/n8n/digest?since={{ $json.since }}&limit=50",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "c3d4e5f6-0005-4000-8000-000000000005",
+      "name": "Neue Claims vorhanden?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [960, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "cond-003",
+              "leftValue": "={{ $json.count }}",
+              "rightValue": 0,
+              "operator": { "type": "number", "operation": "gt" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "c3d4e5f6-0006-4000-8000-000000000006",
+      "name": "Digest-Zusammenfassung aufbereiten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 200],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst lines = data.claims.map((c, i) =>\n  `${i+1}. [${c.domain_id}] (${(c.confidence_score*100).toFixed(0)}%) ${c.text.substring(0, 120)}…`\n).join('\\n');\n\nreturn [{\n  json: {\n    subject: `Swiss Truth Digest: ${data.count} neue zertifizierte Claims seit ${data.since.split('T')[0]}`,\n    body: `Neu zertifizierte Claims:\\n\\n${lines}\\n\\n→ Review: https://perigeal-impressionably-paulita.ngrok-free.dev/review/certified`,\n    count: data.count,\n    since: data.since,\n    claims: data.claims\n  }\n}];"
+      }
+    },
+    {
+      "id": "c3d4e5f6-0007-4000-8000-000000000007",
+      "name": "Kein Digest nötig",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1200, 420],
+      "parameters": {}
+    },
+    {
+      "id": "c3d4e5f6-0008-4000-8000-000000000008",
+      "name": "Digest verwenden",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1440, 200],
+      "parameters": {},
+      "notes": "Hier Slack-/E-Mail-/Telegram-Node einhängen.\nDaten im Format: { subject, body, count, claims[] }"
+    }
+  ],
+  "connections": {
+    "Täglich 08:00 Uhr": {
+      "main": [[{ "node": "Datum von gestern berechnen", "type": "main", "index": 0 }]]
+    },
+    "Datum von gestern berechnen": {
+      "main": [
+        [{ "node": "Swiss Truth Digest AI/ML", "type": "main", "index": 0 }],
+        [{ "node": "Swiss Truth Digest Alle Domains", "type": "main", "index": 0 }]
+      ]
+    },
+    "Swiss Truth Digest AI/ML": {
+      "main": [[{ "node": "Neue Claims vorhanden?", "type": "main", "index": 0 }]]
+    },
+    "Neue Claims vorhanden?": {
+      "main": [
+        [{ "node": "Digest-Zusammenfassung aufbereiten", "type": "main", "index": 0 }],
+        [{ "node": "Kein Digest nötig", "type": "main", "index": 0 }]
+      ]
+    },
+    "Digest-Zusammenfassung aufbereiten": {
+      "main": [[{ "node": "Digest verwenden", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "c3d4e5f6-face-4000-8000-000000000003",
+  "meta": {
+    "instanceId": "",
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [{ "name": "swiss-truth" }, { "name": "digest" }, { "name": "cron" }],
+  "pinData": {}
+}

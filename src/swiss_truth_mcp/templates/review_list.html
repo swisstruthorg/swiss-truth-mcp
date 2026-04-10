@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Review Queue{% endblock %}
+{% block content %}
+<div class="section-header">
+  <div>
+    <h1>Review Queue</h1>
+    <p class="subtitle">Claims warten auf Expertenvalidierung</p>
+  </div>
+  <span class="count-chip">{{ claims | length }} Claims</span>
+</div>
+
+{% if claims %}
+  {% for c in claims %}
+  <div class="card">
+    <a href="/review/{{ c.id }}">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+        <span class="badge badge-review">peer_review</span>
+        <span style="font-size:12px; color:#6e6e73;">{{ c.domain_id }} · eingereicht {{ c.created_at[:10] }}</span>
+        {% if c.validated_by | length > 0 %}
+          <span style="font-size:12px; color:#6e6e73; margin-left:auto;">{{ c.validated_by | length }} Validierung(en)</span>
+        {% endif %}
+      </div>
+      {% if c.question %}
+      <p style="font-size:13px; color:#6e6e73; font-style:italic; margin-bottom:6px;">❓ {{ c.question }}</p>
+      {% endif %}
+      <p class="claim-text">{{ c.text }}</p>
+      <div class="meta">
+        <span><strong>Konfidenz:</strong> {{ c.confidence_score }}</span>
+        <span style="font-family:monospace; font-size:11px;">{{ c.hash_sha256[:24] }}…</span>
+      </div>
+      {% if c.source_references %}
+      <div class="sources" style="pointer-events:none;">
+        {% for url in c.source_references %}
+        <span style="display:block; font-size:12px; color:#007aff; margin-top:4px; word-break:break-all;">{{ url }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </a>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="empty">
+    <div class="icon">✓</div>
+    <p>Keine Claims in der Review Queue — alles validiert.</p>
+  </div>
+{% endif %}
+{% endblock %}

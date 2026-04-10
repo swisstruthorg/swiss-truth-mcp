@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Zertifizierte Claims{% endblock %}
+{% block content %}
+<div class="section-header">
+  <div>
+    <h1>Zertifizierte Claims</h1>
+    <p class="subtitle">Von Experten validiert und freigegeben — {{ total }} total</p>
+  </div>
+  <span class="count-chip">Seite {{ page }}/{{ total_pages }}</span>
+</div>
+
+{% if total_pages > 1 %}
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+  {% if page > 1 %}
+  <a href="/review/certified?page={{ page - 1 }}" class="btn btn-secondary" style="padding:7px 14px;">← Zurück</a>
+  {% endif %}
+
+  {% for p in range(1, total_pages + 1) %}
+    {% if p == page %}
+    <span style="padding:7px 12px;border-radius:8px;background:#1d1d1f;color:#fff;font-size:13px;font-weight:600;">{{ p }}</span>
+    {% elif p == 1 or p == total_pages or (p >= page - 2 and p <= page + 2) %}
+    <a href="/review/certified?page={{ p }}" style="padding:7px 12px;border-radius:8px;background:#f5f5f7;font-size:13px;color:#1d1d1f;text-decoration:none;">{{ p }}</a>
+    {% elif p == page - 3 or p == page + 3 %}
+    <span style="color:#6e6e73;font-size:13px;">…</span>
+    {% endif %}
+  {% endfor %}
+
+  {% if page < total_pages %}
+  <a href="/review/certified?page={{ page + 1 }}" class="btn btn-secondary" style="padding:7px 14px;">Weiter →</a>
+  {% endif %}
+
+  <span style="font-size:12px;color:#6e6e73;margin-left:8px;">{{ (page-1)*per_page + 1 }}–{{ [page*per_page, total]|min }} von {{ total }}</span>
+</div>
+{% endif %}
+
+{% if claims %}
+  {% for c in claims %}
+  <div class="card" id="{{ c.id }}">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+      <span class="badge badge-certified">certified</span>
+      <span style="font-size:12px; color:#6e6e73;">{{ c.domain_id }}</span>
+      <span style="font-size:12px; color:#6e6e73;">
+        Konfidenz: <strong>{{ c.confidence_score }}</strong>
+        {% if c.effective_confidence < c.confidence_score %}
+          → <strong style="color:{% if c.effective_confidence < 0.7 %}#ff3b30{% elif c.effective_confidence < 0.85 %}#ff9500{% else %}#6e6e73{% endif %};">
+            {{ c.effective_confidence }} effektiv
+          </strong>
+        {% endif %}
+      </span>
+      <span style="font-size:12px; color:#6e6e73; margin-left:auto;">
+        gültig bis {{ c.expires_at[:10] if c.expires_at else '—' }}
+      </span>
+    </div>
+
+    <div class="confidence-bar">
+      <div class="confidence-bar-fill" style="width:{{ (c.confidence_score * 100)|int }}%"></div>
+    </div>
+
+    {% if c.question %}
+    <p style="font-size:13px; color:#6e6e73; font-style:italic; margin-bottom:6px;">❓ {{ c.question }}</p>
+    {% endif %}
+    <p class="claim-text">{{ c.text }}</p>
+
+    <div class="meta">
+      {% for v in c.validated_by %}
+        {% if v.name %}
+        <span>✓ {{ v.name }}{% if v.institution %} · {{ v.institution }}{% endif %}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if c.source_references %}
+    <div class="sources">
+      {% for url in c.source_references %}
+      <a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ url }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="hash-box" style="margin-top:10px; font-size:10px;">{{ c.hash_sha256 }}</div>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="empty">
+    <div class="icon">📋</div>
+    <p>Noch keine zertifizierten Claims. Starte mit dem Review.</p>
+    <a href="/review" class="btn btn-secondary" style="margin-top:16px;">Zur Review Queue</a>
+  </div>
+{% endif %}
+{% endblock %}

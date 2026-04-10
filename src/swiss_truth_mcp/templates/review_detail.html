@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Claim prüfen{% endblock %}
+{% block content %}
+
+<div style="margin-bottom:20px;">
+  <a href="/review" class="btn btn-secondary" style="font-size:13px; padding:7px 14px;">← Zurück zur Queue</a>
+</div>
+
+<div class="card" style="margin-bottom:20px;">
+  <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+    <span class="badge badge-review">peer_review</span>
+    <span style="font-size:12px; color:#6e6e73;">{{ claim.domain_id }} · {{ claim.language }}</span>
+    <span style="font-size:12px; color:#6e6e73; margin-left:auto;">{{ claim.created_at[:10] }}</span>
+  </div>
+
+  {% if claim.question %}
+  <p style="font-size:13px; color:#6e6e73; font-style:italic; margin-bottom:6px;">❓ {{ claim.question }}</p>
+  {% endif %}
+  <p class="claim-text" style="font-size:16px;">{{ claim.text }}</p>
+
+  <div style="margin:16px 0 8px;">
+    <label style="font-size:12px; color:#6e6e73; font-weight:400;">Aktuelle Konfidenz</label>
+    <div class="confidence-bar"><div class="confidence-bar-fill" style="width:{{ (claim.confidence_score * 100)|int }}%"></div></div>
+    <span style="font-size:12px; color:#6e6e73;">{{ claim.confidence_score }}</span>
+  </div>
+
+  {% if claim.source_references %}
+  <div class="sources">
+    <label style="font-size:12px; color:#6e6e73; font-weight:600;">Quellenverweise</label>
+    {% for url in claim.source_references %}
+      <a href="{{ url }}" target="_blank" rel="noopener">{{ url }}</a>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p style="font-size:13px; color:#ff3b30; margin-top:12px;">⚠ Keine Quellenverweise angegeben</p>
+  {% endif %}
+
+  {% if claim.validated_by %}
+  <div style="margin-top:16px;">
+    <label style="font-size:12px; color:#6e6e73; font-weight:600;">Bisherige Validierungen</label>
+    {% for v in claim.validated_by %}
+      <p style="font-size:13px; margin-top:4px;">{{ v.name }}{% if v.institution %} · {{ v.institution }}{% endif %}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if conflicts %}
+  <div style="margin-top:16px; padding:12px 16px; background:#fff3cd; border-radius:10px;">
+    <p style="font-size:13px; font-weight:600; color:#7d5c00;">⚠ Mögliche Konflikte mit bestehenden Claims</p>
+    {% for c in conflicts %}
+      <p style="font-size:12px; margin-top:6px; color:#7d5c00;">
+        Ähnlichkeit {{ "%.0f"|format(c.similarity * 100) }}%:
+        <a href="/review/certified#{{ c.id }}" style="color:#7d5c00;">{{ c.text[:80] }}…</a>
+      </p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="hash-box" style="margin-top:16px;">SHA256: {{ claim.hash_sha256 }}</div>
+</div>
+
+<!-- Review-Formular -->
+<div class="card">
+  <h2 style="font-size:16px; font-weight:700; margin-bottom:18px;">Expertenvalidierung</h2>
+
+  <form method="POST" action="/review/{{ claim.id }}/approve" class="review-form">
+    <div class="row">
+      <div>
+        <label for="expert_name">Dein Name *</label>
+        <input type="text" id="expert_name" name="expert_name" required placeholder="Dr. Anna Meier" value="{{ prefill_name }}">
+      </div>
+      <div>
+        <label for="expert_institution">Institution</label>
+        <input type="text" name="expert_institution" placeholder="ETH Zürich" value="{{ prefill_institution }}">
+      </div>
+    </div>
+
+    <div>
+      <label for="confidence">Konfidenz-Score (0.0 – 1.0) *</label>
+      <input type="number" id="confidence" name="confidence" min="0" max="1" step="0.01"
+             value="{{ claim.confidence_score if claim.confidence_score > 0 else 0.85 }}" required>
+    </div>
+
+    <div>
+      <label for="note">Anmerkung (optional)</label>
+      <textarea name="note" id="note" rows="3" placeholder="Begründung für Konfidenz-Score, Einschränkungen, etc."></textarea>
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-approve">✓ Zertifizieren (approve)</button>
+    </div>
+  </form>
+
+  <form method="POST" action="/review/{{ claim.id }}/reject" style="margin-top:16px; padding-top:16px; border-top:1px solid #f0f0f5;">
+    <input type="hidden" name="expert_name" id="reject_name">
+    <input type="hidden" name="expert_institution" id="reject_inst">
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:10px;">Claim zurück zu <code>draft</code> senden — Einreicher kann ihn überarbeiten und erneut einreichen.</p>
+    <button type="submit" class="btn btn-reject"
+      onclick="document.getElementById('reject_name').value=document.getElementById('expert_name').value;
+               document.getElementById('reject_inst').value=document.querySelector('[name=expert_institution]').value;">
+      ✗ Ablehnen (reject)
+    </button>
+  </form>
+</div>
+
+{% endblock %}

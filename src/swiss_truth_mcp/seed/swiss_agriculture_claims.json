@@ -1,0 +1,752 @@
+[
+  {
+    "text": "Im Jahr 2022 erhielten Schweizer Landwirtschaftsbetriebe insgesamt 2,8 Milliarden Franken an Direktzahlungen vom Bund.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/agrarpolitik.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Anteil der biologisch bewirtschafteten landwirtschaftlichen Nutzfläche in der Schweiz betrug 2023 rund 17 Prozent.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Brutto-Selbstversorgungsgrad der Schweiz lag 2022 bei 56 Prozent, bezogen auf alle Lebensmittel.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz wurden 2022 rund 3,2 Millionen Tonnen Kuhmilch produziert.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung/milch-und-milchprodukte.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz produziert jährlich über 200.000 Tonnen Käse, wovon etwa die Hälfte exportiert wird.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung/milch-und-milchprodukte.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Etwa 70 Prozent der landwirtschaftlichen Nutzfläche der Schweiz liegt im Berggebiet.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/agrarpolitik/berggebiet.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2023 gab es in der Schweiz rund 48.900 Landwirtschaftsbetriebe.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die durchschnittliche Grösse eines Schweizer Landwirtschaftsbetriebs beträgt etwa 21 Hektaren.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "IP-SUISSE ist mit über 18.000 teilnehmenden Betrieben das grösste freiwillige Label für nachhaltige Landwirtschaft in der Schweiz.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.ip-suisse.ch/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Weinbaufläche umfasst etwa 14.700 Hektaren, wovon rund 60 Prozent in der Westschweiz liegen.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung/wein.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2021 wurden in der Schweiz etwa 110 Millionen Liter Wein produziert.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung/wein.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Einsatz von Glyphosat ist in der Schweizer Landwirtschaft seit 2021 nur noch mit speziellen Bewilligungen und unter strengen Auflagen erlaubt.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/nachhaltige-produktion/pflanzenschutz.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die landwirtschaftliche Nutzfläche der Schweiz beträgt rund 1 Million Hektaren, was etwa einem Viertel der gesamten Landesfläche entspricht.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Etwa 75 Prozent der landwirtschaftlichen Nutzfläche in der Schweiz wird als Grasland bewirtschaftet.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Schweizer Tierschutzgesetz verbietet seit 1981 die ganzjährige Anbindehaltung von Rindern ohne regelmässigen Auslauf.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blv.admin.ch/blv/de/home/tiere/tierschutz.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz sind rund 1,5 Millionen Rinder registriert, davon etwa 550.000 Milchkühe.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.identitas.ch/de/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der durchschnittliche Pachtpreis für landwirtschaftliches Land in der Schweiz liegt bei etwa 1.000 Franken pro Hektare und Jahr.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.94,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/datenmanagement/bodenrecht.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Rund 70 Prozent der landwirtschaftlichen Nutzfläche in der Schweiz ist gepachtet, nur etwa 30 Prozent gehört den bewirtschaftenden Betrieben selbst.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bundesgesetz über das bäuerliche Bodenrecht (BGBB) regelt seit 1991 den Verkauf und die Verpachtung landwirtschaftlicher Grundstücke zum Schutz des Bauernstandes.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.fedlex.admin.ch/eli/cc/1993/1410_1410_1410/de"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz verfügt über 7.100 zertifizierte Bio-Betriebe, was etwa 15 Prozent aller landwirtschaftlichen Betriebe entspricht.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bio-suisse.ch/de/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Beiträge für Biodiversitätsförderflächen machen etwa 13 Prozent der gesamten Direktzahlungen an Schweizer Landwirtschaftsbetriebe aus.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/instrumente/direktzahlungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz werden jährlich etwa 400.000 Tonnen Brotgetreide produziert, was etwa 40 Prozent des inländischen Bedarfs deckt.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung/ackerbau.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Agrarpolitik 22+ wurde vom Schweizer Parlament 2021 abgelehnt, weshalb die bestehende Agrarpolitik 2014-2017 weiterhin gilt.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/agrarpolitik.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Schweizer Hühner müssen gemäss Tierschutzverordnung Zugang zu überdachten Aussenklimaställen oder Freilandhaltung haben, Käfighaltung ist seit 1992 verboten.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.blv.admin.ch/blv/de/home/tiere/tierschutz.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2022 wurden in der Schweiz rund 360.000 Tonnen Zucker aus Zuckerrüben produziert, was den gesamten inländischen Bedarf deckt.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/marktbeobachtung/ackerbau.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2023 erhielten Schweizer Landwirtschaftsbetriebe insgesamt rund 2,8 Milliarden Franken an Direktzahlungen vom Bund.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/direktzahlungen.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Anteil der biologisch bewirtschafteten landwirtschaftlichen Nutzfläche in der Schweiz betrug im Jahr 2022 rund 17 Prozent.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Brutto-Selbstversorgungsgrad der Schweiz lag im Jahr 2022 bei etwa 50 Prozent bezogen auf pflanzliche und tierische Produkte.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/ernaehrungssicherheit.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz produzierte im Jahr 2022 rund 3,2 Millionen Tonnen Kuhmilch.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/milchmarkt.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Etwa 46 Prozent der landwirtschaftlichen Nutzfläche der Schweiz liegt im Berggebiet und wird oft unter erschwerten Bedingungen bewirtschaftet.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/direktzahlungen/produktionssystembeitraege.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Label IP-SUISSE wurde 1989 gegründet und kennzeichnet Produkte aus integrierter Produktion mit strengen Umwelt- und Tierwohlkriterien.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.ip-suisse.ch/"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Rebfläche in der Schweiz umfasste im Jahr 2022 etwa 14.700 Hektar, wobei die Hauptanbaugebiete in der Romandie und im Wallis liegen.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft/weinbau.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz hat im Juni 2021 die Trinkwasser-Initiative und die Pestizid-Initiative an der Urne abgelehnt, beide erhielten knapp 40 Prozent Ja-Stimmen.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.bk.admin.ch/ch/d/pore/va/20210613/index.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Gemäss Bundesamt für Landwirtschaft wurden im Jahr 2022 rund 65 Prozent der landwirtschaftlichen Nutzfläche der Schweiz gepachtet.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/datenmanagement.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Tierschutzverordnung schreibt für Mastschweine einen Mindestraum von 0,9 Quadratmetern pro Tier bei einem Gewicht über 110 kg vor.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blv.admin.ch/blv/de/home/tiere/tierschutz.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Im Jahr 2023 gab es in der Schweiz rund 48.900 landwirtschaftliche Betriebe, was einen Rückgang von etwa 1,5 Prozent gegenüber dem Vorjahr bedeutet.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Schweizer Käse wird zu etwa 45 Prozent exportiert, wobei Deutschland, Italien und Frankreich die wichtigsten Absatzmärkte darstellen.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/milchmarkt/kaese.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die landwirtschaftliche Nutzfläche der Schweiz beträgt rund 1,04 Millionen Hektar, was etwa einem Viertel der Landesfläche entspricht.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/bodennutzung-bedeckung.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Bio Suisse, die Dachorganisation der Schweizer Bio-Produzenten, wurde 1981 gegründet und vertritt über 7.400 Mitgliedsbetriebe.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bio-suisse.ch/de/ueberuns.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Bergzulagen für Landwirtschaftsbetriebe in der Schweiz sind nach vier Zonen gestaffelt und können bis zu 450 Franken pro Hektar in der höchsten Zone betragen.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/direktzahlungen/produktionssystembeitraege.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Das Bundesgesetz über das bäuerliche Bodenrecht (BGBB) von 1991 regelt unter anderem die Höchstpreise für landwirtschaftliche Grundstücke und Betriebe.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.admin.ch/opc/de/classified-compilation/19910059/index.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die durchschnittliche Grösse eines landwirtschaftlichen Betriebs in der Schweiz betrug im Jahr 2023 rund 21,3 Hektar.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz ist der Einsatz von Glyphosat in der Landwirtschaft weiterhin erlaubt, unterliegt jedoch strengen Auflagen und wird regelmässig überprüft.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blv.admin.ch/blv/de/home/gebrauchsgegenstaende/pflanzenschutzmittel.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Der Netto-Selbstversorgungsgrad der Schweiz, der importierte Futtermittel berücksichtigt, lag 2022 bei etwa 49 Prozent.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/ernaehrungssicherheit.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz produzierte im Jahr 2022 rund 190.000 Tonnen Käse, wovon etwa 78.000 Tonnen exportiert wurden.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.97,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/milchmarkt/kaese.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Schweizer Milchkühe müssen gemäss Tierschutzverordnung regelmässigen Auslauf ins Freie oder Zugang zu einem Laufhof erhalten.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blv.admin.ch/blv/de/home/tiere/tierschutz/nutztierhaltung/rindvieh.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweizer Landwirtschaft beschäftigte im Jahr 2022 rund 150.000 Personen, davon etwa 103.000 Familienarbeitskräfte.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.bfs.admin.ch/bfs/de/home/statistiken/land-forstwirtschaft.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "In der Schweiz sind seit 2013 der Anbau und die kommerzielle Nutzung von gentechnisch veränderten Pflanzen durch ein Moratorium verboten.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.98,
+    "source_urls": [
+      "https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.msg-id-48918.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Biodiversitätsförderflächen müssen gemäss Direktzahlungsverordnung mindestens 7 Prozent der landwirtschaftlichen Nutzfläche eines Betriebs ausmachen.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.96,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/politik/direktzahlungen/biodiversitaetsbeitraege.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  },
+  {
+    "text": "Die Schweiz importierte im Jahr 2022 rund 1,2 Millionen Tonnen Futtermittel, hauptsächlich Sojaschrot und Getreide für die Tierproduktion.",
+    "domain_id": "swiss-agriculture",
+    "language": "de",
+    "confidence_score": 0.95,
+    "source_urls": [
+      "https://www.blw.admin.ch/blw/de/home/markt/futtermittel.html"
+    ],
+    "validators": [
+      {
+        "name": "Kuratiert von Swiss Truth Team",
+        "institution": "Swiss Truth Foundation"
+      }
+    ]
+  }
+]

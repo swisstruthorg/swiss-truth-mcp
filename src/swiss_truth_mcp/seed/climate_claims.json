@@ -1,0 +1,152 @@
+[
+  {
+    "text": "Der sechste Sachstandsbericht des IPCC (AR6, 2021–2022) stellt fest, dass die globale Oberflächentemperatur seit 1850–1900 um 1,1°C gestiegen ist und der Klimawandel eindeutig durch menschliche Aktivitäten verursacht wird.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://www.ipcc.ch/report/ar6/wg1/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der CO₂-Gehalt in der Atmosphäre hat im Jahr 2023 einen Rekordwert von 421 ppm (Teilen pro Million) überschritten — den höchsten Wert seit mindestens 3 Millionen Jahren.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://gml.noaa.gov/ccgg/trends/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Alpengletscher haben seit 1850 über 60% ihres Volumens verloren. Allein zwischen 2021 und 2022 schrumpften sie um rekordverdächtige 6% ihres verbleibenden Volumens.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.glamos.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Das Pariser Klimaabkommen (2015) verpflichtet die Unterzeichnerstaaten, die globale Erwärmung auf deutlich unter 2°C gegenüber dem vorindustriellen Niveau zu begrenzen und Anstrengungen zu unternehmen, sie auf 1,5°C zu beschränken.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.99,
+    "source_urls": ["https://unfccc.int/process-and-meetings/the-paris-agreement"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz erwärmt sich doppelt so schnell wie der globale Durchschnitt. Seit Messbeginn (1864) ist die Jahresmitteltemperatur in der Schweiz um rund 2,5°C gestiegen.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.meteoschweiz.admin.ch/klima/klimawandel-in-der-schweiz.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Erneuerbare Energien deckten 2023 erstmals global über 30% der Stromerzeugung, angeführt von Wasserkraft (15%), Windkraft (8%) und Solarenergie (5,5%).",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.iea.org/reports/renewables-2023"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Meeresspiegel ist seit 1900 um durchschnittlich 20 cm gestiegen. Die Rate hat sich beschleunigt: Zwischen 2006 und 2018 stieg er dreimal schneller als im 20. Jahrhundert im Durchschnitt.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.ipcc.ch/srocc/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweizer Treibhausgasemissionen betrugen 2022 rund 43,5 Millionen Tonnen CO₂-Äquivalente, was einem Rückgang von ca. 24% gegenüber 1990 entspricht.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.bafu.admin.ch/bafu/de/home/themen/klima/zustand/daten/treibhausgasinventar.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Laut Schweizer CO₂-Gesetz muss die Schweiz ihre Treibhausgasemissionen bis 2030 gegenüber 1990 um 50% senken, wobei mindestens 75% der Reduktion im Inland erfolgen muss.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.fedlex.admin.ch/eli/cc/2012/462/de"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Photovoltaik (Solarstrom) ist heute die günstigste Stromquelle der Geschichte. Die Kosten für Solarmodule sind seit 2010 um über 90% gefallen.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://www.irena.org/publications/2023/Aug/Renewable-Power-Generation-Costs-in-2022"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Permafrost bedeckt etwa 25% der nördlichen Hemisphäre. Sein Auftauen setzt gespeichertes CO₂ und Methan frei — ein potenziell sich selbst verstärkender Rückkopplungseffekt.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://nsidc.org/cryosphere/permafrost"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "In der Schweiz entfallen rund 32% der Treibhausgasemissionen auf den Verkehrssektor, gefolgt von Gebäuden (26%) und der Industrie (22%).",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.bafu.admin.ch/bafu/de/home/themen/klima/zustand/daten/treibhausgasinventar.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Extremwetterereignisse wie Hitzewellen, Starkniederschläge und Überschwemmungen werden durch den Klimawandel häufiger und intensiver. Die Hitzewelle 2021 in Kanada wäre ohne Klimawandel nahezu unmöglich gewesen.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.worldweatherattribution.org/western-north-american-extreme-heat-virtually-impossible-without-human-caused-climate-change/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Carbon Capture and Storage (CCS) bezeichnet Technologien, die CO₂ direkt aus der Atmosphäre oder aus Industrieprozessen abscheiden und dauerhaft speichern. Die weltweite Kapazität lag 2023 bei ca. 45 Millionen Tonnen CO₂ pro Jahr.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.93,
+    "source_urls": ["https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2023"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der Rhonegletscher in der Schweiz hat seit 1900 rund 2,5 km an Länge verloren. Er ist einer der bestdokumentierten Gletscher der Welt mit Messreihen seit 1874.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.glamos.ch/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Wälder absorbieren global ca. 2,6 Milliarden Tonnen CO₂ pro Jahr und sind damit nach den Ozeanen der zweitgrösste natürliche Kohlenstoffsenke der Erde.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.nature.com/articles/s41558-023-01678-x"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Methan (CH₄) ist über einen Zeithorizont von 20 Jahren 80-mal klimawirksamer als CO₂. Die Landwirtschaft ist mit ca. 30% der grösste anthropogene Methan-Emittent.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.ipcc.ch/report/ar6/wg1/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Schweiz produziert rund 57% ihres Stroms aus Wasserkraft und 36% aus Kernkraft, was zu einem der CO₂-ärmsten Strommixe Europas führt.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.bfe.admin.ch/bfe/de/home/versorgung/statistik-und-geodaten/energiestatistiken/elektrizitaetsstatistik.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Ozeanversauerung entsteht, wenn CO₂ vom Meer absorbiert wird und Kohlensäure bildet. Der pH-Wert der Ozeane ist seit der Industrialisierung um 0,1 Einheiten gesunken, was einer 26%igen Erhöhung der Wasserstoffionen entspricht.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://ocean.si.edu/ocean-life/invertebrates/ocean-acidification"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die globalen Investitionen in saubere Energie überstiegen 2023 erstmals 1,7 Billionen US-Dollar — fast doppelt so viel wie die Investitionen in fossile Brennstoffe.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.95,
+    "source_urls": ["https://www.iea.org/reports/world-energy-investment-2023"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Klimamodelle (General Circulation Models, GCMs) sind komplexe mathematische Simulationen der Erde, die Atmosphäre, Ozeane, Landoberflächen und Eis modellieren. Über 100 solcher Modelle wurden für den IPCC AR6 genutzt.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.97,
+    "source_urls": ["https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-1/"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Der European Green Deal zielt darauf ab, Europa bis 2050 klimaneutral zu machen. Das Fit-for-55-Paket soll die EU-Emissionen bis 2030 um mindestens 55% gegenüber 1990 reduzieren.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.98,
+    "source_urls": ["https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/european-green-deal_en"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Hitzewellen in der Schweiz werden laut MeteoSchweiz bis 2060 deutlich häufiger: Statt wie heute alle 5–10 Jahre könnten sie dann jährlich auftreten, wenn keine substanziellen Emissionsreduktionen erfolgen.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.94,
+    "source_urls": ["https://www.meteoschweiz.admin.ch/klima/klimawandel-in-der-schweiz/klimaszenarien-ch2018.html"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Die Arktis erwärmt sich zwei- bis viermal schneller als der globale Durchschnitt ('Arctic Amplification'). Das arktische Meereis im Sommer könnte bereits vor 2050 vollständig verschwinden.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://www.nature.com/articles/s41558-020-0860-7"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  },
+  {
+    "text": "Biodiversitätsverlust und Klimawandel verstärken sich gegenseitig: Bis zu 1 Million Tier- und Pflanzenarten sind laut IPBES durch menschliche Aktivitäten vom Aussterben bedroht.",
+    "domain_id": "climate", "language": "de", "confidence_score": 0.96,
+    "source_urls": ["https://ipbes.net/global-assessment"],
+    "validators": [{"name": "Kuratiert von Swiss Truth Team", "institution": "Swiss Truth Foundation"}]
+  }
+]

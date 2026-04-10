@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "swiss-truth-mcp"
+version = "0.1.0"
+description = "Wikipedia für KI-Agenten — Validierter Ground-Truth MCP Server"
+requires-python = ">=3.9"
+dependencies = [
+    "mcp>=1.0.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "neo4j>=5.26.0",
+    "anthropic>=0.40.0",
+    "sentence-transformers>=3.3.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "python-dotenv>=1.0.0",
+    "httpx>=0.28.0",
+    "bcrypt>=4.0.0",
+    "python-jose[cryptography]>=3.3.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-mock>=3.14.0",
+    "httpx>=0.28.0",
+]
+
+[project.scripts]
+swiss-truth-mcp  = "swiss_truth_mcp.mcp_server.server:main"
+swiss-truth-api  = "swiss_truth_mcp.api.main:main"
+swiss-truth-seed   = "swiss_truth_mcp.seed.loader:main"
+swiss-truth-expire  = "swiss_truth_mcp.seed.expirer:main"
+swiss-truth-adduser  = "swiss_truth_mcp.seed.adduser:main"
+swiss-truth-generate = "swiss_truth_mcp.seed.generator:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/swiss_truth_mcp"]
