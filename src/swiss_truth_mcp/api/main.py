@@ -65,7 +65,7 @@ meta_router = APIRouter(tags=["meta"])
 
 @meta_router.get("/", include_in_schema=False)
 async def root():
-    return RedirectResponse(url="/dashboard")
+    return RedirectResponse(url="/trust")
 
 
 @meta_router.get("/factcheck", response_class=HTMLResponse, include_in_schema=False)
