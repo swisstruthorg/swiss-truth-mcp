@@ -1,3 +1,4 @@
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -25,14 +26,19 @@ class Settings(BaseSettings):
     # Auth — JWT Secret Key (in Produktion unbedingt in .env setzen!)
     secret_key: str = "dev-secret-key-change-in-production-please"
 
-    # Öffentliche Basis-URL (ngrok oder Produktions-Domain)
-    # Wird in check_url / review_url verwendet damit n8n die API erreichen kann
+    # Öffentliche Basis-URL (ngrok lokal ODER PUBLIC_BASE_URL in Produktion)
     ngrok_public_url: str = ""
+    public_base_url_env: str = Field(default="", validation_alias="PUBLIC_BASE_URL")
 
     @property
     def public_base_url(self) -> str:
-        """Gibt die öffentlich erreichbare Basis-URL zurück."""
-        return self.ngrok_public_url.rstrip("/") or "http://127.0.0.1:8001"
+        """Gibt die öffentlich erreichbare Basis-URL zurück.
+        Priorität: NGROK_PUBLIC_URL → PUBLIC_BASE_URL → localhost-Fallback"""
+        return (
+            self.ngrok_public_url.rstrip("/")
+            or self.public_base_url_env.rstrip("/")
+            or "http://127.0.0.1:8001"
+        )
 
 
 settings = Settings()

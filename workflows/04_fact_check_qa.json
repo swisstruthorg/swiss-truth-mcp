@@ -1,0 +1,163 @@
+{
+  "name": "Swiss Truth — Fact-Check Q&A",
+  "nodes": [
+    {
+      "id": "node-001",
+      "name": "Frage empfangen",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "swiss-truth-qa",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "fact-check-qa",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "node-002",
+      "name": "Swiss Truth Suche",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "https://swisstruth.org/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "q",     "value": "={{ $json.body.question }}" },
+            { "name": "limit", "value": "5" },
+            { "name": "min_confidence", "value": "0.80" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node-003",
+      "name": "Ergebnisse vorhanden?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "id": "cond-001",
+              "leftValue": "={{ $json.results.length }}",
+              "rightValue": 0,
+              "operator": { "type": "number", "operation": "gt" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "node-004",
+      "name": "Context aufbereiten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 200],
+      "parameters": {
+        "jsCode": "const question = $('Frage empfangen').first().json.body.question;\nconst results  = $input.first().json.results || [];\n\n// Fakten als nummerierten Context aufbereiten\nconst factsText = results.map((r, i) => {\n  const sources = (r.source_references || []).join(', ');\n  const conf    = Math.round((r.confidence_score || 0) * 100);\n  return `[${i+1}] (${conf}% Konfidenz) ${r.text}\\n    Quellen: ${sources || '–'}`;\n}).join('\\n\\n');\n\nconst systemPrompt = `Du bist ein präziser Factual Assistant. Beantworte die Frage AUSSCHLIESSLICH auf Basis der unten stehenden verifizierten Swiss Truth Claims.\n\nRegeln:\n- Antworte klar und präzise auf Deutsch\n- Zitiere die relevanten Claims mit [N] in deiner Antwort\n- Falls die Claims die Frage nicht vollständig beantworten, sage das explizit\n- Erfinde keine Informationen die nicht in den Claims stehen\n- Am Ende: liste die verwendeten Quellen auf`;\n\nconst userPrompt = `Frage: ${question}\\n\\nVerifizierte Fakten aus der Swiss Truth Wissensbasis:\\n\\n${factsText}`;\n\nreturn [{\n  json: {\n    question,\n    system_prompt: systemPrompt,\n    user_prompt:   userPrompt,\n    claims:        results.map(r => ({\n      id:         r.id,\n      text:       r.text,\n      confidence: r.confidence_score,\n      hash:       r.hash_sha256,\n      sources:    r.source_references || []\n    }))\n  }\n}];"
+      }
+    },
+    {
+      "id": "node-005",
+      "name": "Claude formuliert Antwort",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key",          "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version",   "value": "2023-06-01" },
+            { "name": "Content-Type",        "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 1024,\n  \"system\": {{ JSON.stringify($json.system_prompt) }},\n  \"messages\": [\n    { \"role\": \"user\", \"content\": {{ JSON.stringify($json.user_prompt) }} }\n  ]\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "node-006",
+      "name": "Antwort formatieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 200],
+      "parameters": {
+        "jsCode": "const claudeResp = $input.first().json;\nconst context    = $('Context aufbereiten').first().json;\n\nconst answerText = claudeResp.content?.[0]?.text || 'Keine Antwort erhalten.';\n\n// Alle einzigartigen Quellen aus verwendeten Claims sammeln\nconst allSources = [...new Set(\n  (context.claims || []).flatMap(c => c.sources || [])\n)];\n\nreturn [{\n  json: {\n    question:        context.question,\n    answer:          answerText,\n    sources:         allSources,\n    claims_used:     context.claims.length,\n    claims:          context.claims.map(c => ({\n      text:       c.text.substring(0, 120) + (c.text.length > 120 ? '…' : ''),\n      confidence: c.confidence,\n      hash:       c.hash,\n      sources:    c.sources\n    })),\n    model:           claudeResp.model,\n    powered_by:      'Swiss Truth MCP + Claude',\n    mcp_endpoint:    'https://swisstruth.org/mcp'\n  }\n}];"
+      }
+    },
+    {
+      "id": "node-007",
+      "name": "Respond: Antwort mit Quellen",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 200],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Content-Type", "value": "application/json" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "node-008",
+      "name": "Respond: Keine verifizierten Daten",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 420],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({\n  question: $('Frage empfangen').first().json.body.question,\n  answer: null,\n  message: 'Zu dieser Frage wurden keine verifizierten Claims in der Swiss Truth Wissensbasis gefunden.',\n  claims_used: 0,\n  sources: [],\n  powered_by: 'Swiss Truth MCP',\n  mcp_endpoint: 'https://swisstruth.org/mcp'\n}) }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Frage empfangen": {
+      "main": [[{ "node": "Swiss Truth Suche", "type": "main", "index": 0 }]]
+    },
+    "Swiss Truth Suche": {
+      "main": [[{ "node": "Ergebnisse vorhanden?", "type": "main", "index": 0 }]]
+    },
+    "Ergebnisse vorhanden?": {
+      "main": [
+        [{ "node": "Context aufbereiten",           "type": "main", "index": 0 }],
+        [{ "node": "Respond: Keine verifizierten Daten", "type": "main", "index": 0 }]
+      ]
+    },
+    "Context aufbereiten": {
+      "main": [[{ "node": "Claude formuliert Antwort", "type": "main", "index": 0 }]]
+    },
+    "Claude formuliert Antwort": {
+      "main": [[{ "node": "Antwort formatieren", "type": "main", "index": 0 }]]
+    },
+    "Antwort formatieren": {
+      "main": [[{ "node": "Respond: Antwort mit Quellen", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

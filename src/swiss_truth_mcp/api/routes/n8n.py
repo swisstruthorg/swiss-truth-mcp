@@ -237,6 +237,7 @@ async def submit_claim(
     claim: dict[str, Any] = {
         "id":               claim_id,
         "text":             body.text,
+        "question":         getattr(body, "question", None),
         "domain_id":        body.domain_id,
         "confidence_score": body.confidence_score,
         "status":           "peer_review",
