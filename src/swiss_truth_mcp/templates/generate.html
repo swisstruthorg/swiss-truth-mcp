@@ -11,9 +11,9 @@
     <div>
       <label>Domain</label>
       <select id="domain-select">
-        <option value="">Alle Domains ({{ domains|length }})</option>
+        <option value="" {% if not selected_domain %}selected{% endif %}>Alle Domains ({{ domains|length }})</option>
         {% for domain_id, domain in domains.items() %}
-        <option value="{{ domain_id }}">{{ domain_id }} — {{ domain.name }}</option>
+        <option value="{{ domain_id }}" {% if selected_domain == domain_id %}selected{% endif %}>{{ domain_id }} — {{ domain.name }}</option>
         {% endfor %}
       </select>
     </div>

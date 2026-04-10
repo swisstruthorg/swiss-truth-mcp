@@ -50,10 +50,20 @@ async def _require_admin_or_apikey(request: Request) -> dict:
 # ─── Admin-UI ─────────────────────────────────────────────────────────────────
 
 @router.get("/admin/generate", response_class=HTMLResponse)
-async def generate_page(request: Request, current_user=Depends(require_admin)):
+async def generate_page(
+    request: Request,
+    domain: str = "",
+    current_user=Depends(require_admin),
+):
     return templates.TemplateResponse(
         request, "generate.html",
-        {"request": request, "current_user": current_user, "active": "generate", "domains": DOMAINS},
+        {
+            "request": request,
+            "current_user": current_user,
+            "active": "generate",
+            "domains": DOMAINS,
+            "selected_domain": domain,
+        },
     )
 
 
