@@ -97,7 +97,7 @@ async def mcp_discovery():
         "tools": [
             {
                 "name": "search_knowledge",
-                "description": "Search verified claims by natural language query (DE/EN/FR/IT). Returns confidence score, source references, and SHA256 hash.",
+                "description": "Search verified claims by natural language query. Auto-detects language (DE/EN/FR/IT/ES/ZH/AR and more). Returns confidence score, source references, and SHA256 hash.",
             },
             {
                 "name": "get_claim",
@@ -110,6 +110,10 @@ async def mcp_discovery():
             {
                 "name": "submit_claim",
                 "description": "Submit a new claim for expert review. Triggers AI pre-screening and URL verification.",
+            },
+            {
+                "name": "verify_claim",
+                "description": "Fact-check a statement against the knowledge base. Returns verdict: supported / contradicted / unknown, with confidence score and source evidence.",
             },
             {
                 "name": "get_claim_status",
