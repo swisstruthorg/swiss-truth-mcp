@@ -68,6 +68,12 @@ async def root():
     return RedirectResponse(url="/dashboard")
 
 
+@meta_router.get("/factcheck", response_class=HTMLResponse, include_in_schema=False)
+async def factcheck_page(request: Request):
+    """Öffentliche Fact-Check Q&A Demo-Seite."""
+    return _TEMPLATES.TemplateResponse(request, "factcheck.html", {"request": request})
+
+
 @meta_router.get("/health")
 async def health():
     return {"status": "ok", "version": "0.1.0"}

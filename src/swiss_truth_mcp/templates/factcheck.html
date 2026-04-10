@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}Fact-Check Q&A{% endblock %}
+
+{% block content %}
+<style>
+  .qa-form { display: flex; gap: 10px; margin-bottom: 28px; }
+  .qa-form input {
+    flex: 1; padding: 12px 16px; font-size: 15px;
+    border: 1px solid #d2d2d7; border-radius: 10px;
+    outline: none; background: #fff;
+  }
+  .qa-form input:focus { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
+  .qa-form button {
+    padding: 12px 22px; background: #0071e3; color: #fff;
+    border: none; border-radius: 10px; font-size: 15px;
+    font-weight: 600; cursor: pointer; white-space: nowrap;
+  }
+  .qa-form button:hover { background: #0077ed; }
+  .qa-form button:disabled { background: #a1a1a6; cursor: default; }
+
+  .examples { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .examples button {
+    font-size: 12px; padding: 5px 12px; background: #f5f5f7;
+    border: 1px solid #d2d2d7; border-radius: 20px; cursor: pointer; color: #1d1d1f;
+  }
+  .examples button:hover { background: #e8e8ed; }
+
+  #result { display: none; }
+  .answer-card { background: #fff; border: 1px solid #d2d2d7; border-radius: 14px; padding: 24px; margin-bottom: 16px; }
+  .answer-card h3 { font-size: 13px; font-weight: 600; color: #6e6e73; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 12px; }
+  .answer-text { font-size: 15px; line-height: 1.65; white-space: pre-wrap; }
+  .source-list { list-style: none; margin-top: 8px; }
+  .source-list li { font-size: 13px; padding: 4px 0; border-bottom: 1px solid #f5f5f7; }
+  .source-list li:last-child { border: none; }
+  .source-list a { color: #0071e3; text-decoration: none; word-break: break-all; }
+  .source-list a:hover { text-decoration: underline; }
+
+  .claims-grid { display: grid; gap: 8px; }
+  .claim-row {
+    background: #f9f9fb; border: 1px solid #e5e5ea; border-radius: 10px;
+    padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .conf-badge {
+    flex-shrink: 0; font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 20px;
+    background: #d4edda; color: #1a5e2a;
+  }
+  .claim-text { font-size: 13px; line-height: 1.5; color: #1d1d1f; }
+  .claim-hash { font-size: 11px; color: #a1a1a6; font-family: monospace; margin-top: 4px; }
+
+  .meta-row { display: flex; gap: 16px; align-items: center; font-size: 12px; color: #6e6e73; }
+  .meta-row strong { color: #1d1d1f; }
+
+  #spinner { display: none; text-align: center; padding: 40px 0; color: #6e6e73; font-size: 14px; }
+  #error { display: none; background: #fff2f2; border: 1px solid #ffb3b3; color: #c00; border-radius: 10px; padding: 14px 16px; font-size: 14px; margin-bottom: 16px; }
+  #no-results { display: none; background: #fffbe6; border: 1px solid #ffe066; border-radius: 10px; padding: 14px 16px; font-size: 14px; margin-bottom: 16px; color: #7d5c00; }
+</style>
+
+<h1>Fact-Check Q&amp;A</h1>
+<p class="subtitle">Stell eine Frage — Swiss Truth sucht verifizierte Claims, Claude formuliert die Antwort mit Quellenangabe.</p>
+
+<div class="qa-form">
+  <input type="text" id="question" placeholder="z.B. Ist die Krankenversicherung in der Schweiz obligatorisch?" autofocus />
+  <button id="askBtn" onclick="ask()">Fragen</button>
+</div>
+
+<div class="examples">
+  <span style="font-size:12px;color:#6e6e73;align-self:center;">Beispiele:</span>
+  <button onclick="setQ('Ist die Krankenversicherung in der Schweiz obligatorisch?')">KV obligatorisch?</button>
+  <button onclick="setQ('Wie hoch ist die Franchise in der Schweizer Krankenversicherung?')">KV Franchise</button>
+  <button onclick="setQ('Was ist RAG in der KI?')">Was ist RAG?</button>
+  <button onclick="setQ('Welche Leistungen deckt die Grundversicherung ab?')">Grundversicherung Leistungen</button>
+  <button onclick="setQ('Was ist das Schweizer Drei-Säulen-Prinzip?')">3-Säulen-Prinzip</button>
+</div>
+
+<div id="spinner">⏳ Swiss Truth durchsucht die Wissensbasis…</div>
+<div id="error"></div>
+<div id="no-results">Zu dieser Frage wurden keine verifizierten Claims in der Swiss Truth Wissensbasis gefunden. Bitte generiere zuerst Claims für die entsprechende Domain unter <a href="/coverage">/coverage</a>.</div>
+
+<div id="result">
+  <div class="answer-card">
+    <h3>Antwort</h3>
+    <div class="answer-text" id="answerText"></div>
+  </div>
+
+  <div class="answer-card">
+    <h3>Quellen</h3>
+    <ul class="source-list" id="sourceList"></ul>
+  </div>
+
+  <div class="answer-card">
+    <h3>Verwendete Claims</h3>
+    <div class="claims-grid" id="claimsGrid"></div>
+    <div class="meta-row" style="margin-top:14px;" id="metaRow"></div>
+  </div>
+</div>
+
+<script>
+const N8N_URL = "https://n8n-sj0y.srv1341971.hstgr.cloud/webhook/fact-check-qa";
+
+function setQ(q) {
+  document.getElementById('question').value = q;
+  document.getElementById('question').focus();
+}
+
+document.getElementById('question').addEventListener('keydown', e => {
+  if (e.key === 'Enter') ask();
+});
+
+async function ask() {
+  const q = document.getElementById('question').value.trim();
+  if (!q) return;
+
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('error').style.display = 'none';
+  document.getElementById('no-results').style.display = 'none';
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('askBtn').disabled = true;
+
+  try {
+    const res = await fetch(N8N_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q })
+    });
+    const data = await res.json();
+
+    if (!res.ok || data.code === 404) {
+      throw new Error(data.message || `HTTP ${res.status}`);
+    }
+
+    if (!data.answer) {
+      document.getElementById('no-results').style.display = 'block';
+      return;
+    }
+
+    // Antwort
+    document.getElementById('answerText').textContent = data.answer;
+
+    // Quellen
+    const sl = document.getElementById('sourceList');
+    sl.innerHTML = '';
+    (data.sources || []).forEach(s => {
+      sl.innerHTML += `<li><a href="${s}" target="_blank" rel="noopener">${s}</a></li>`;
+    });
+
+    // Claims
+    const cg = document.getElementById('claimsGrid');
+    cg.innerHTML = '';
+    (data.claims || []).forEach(c => {
+      const pct = Math.round((c.confidence || 0) * 100);
+      cg.innerHTML += `
+        <div class="claim-row">
+          <span class="conf-badge">${pct}%</span>
+          <div>
+            <div class="claim-text">${c.text}</div>
+            <div class="claim-hash">${c.hash || ''}</div>
+          </div>
+        </div>`;
+    });
+
+    // Meta
+    document.getElementById('metaRow').innerHTML =
+      `<span>Claims verwendet: <strong>${data.claims_used}</strong></span>` +
+      `<span>Modell: <strong>${data.model || '—'}</strong></span>` +
+      `<span>Powered by: <strong>${data.powered_by || 'Swiss Truth MCP'}</strong></span>`;
+
+    document.getElementById('result').style.display = 'block';
+
+  } catch (err) {
+    document.getElementById('error').textContent = `Fehler: ${err.message}`;
+    document.getElementById('error').style.display = 'block';
+  } finally {
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('askBtn').disabled = false;
+  }
+}
+</script>
+{% endblock %}

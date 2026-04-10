@@ -88,6 +88,7 @@
     <a href="/users" {% if active == 'users' %}class="active"{% endif %}>Nutzer</a>
     <a href="/admin/generate" {% if active == 'generate' %}class="active"{% endif %}>Generieren</a>
     {% endif %}
+    <a href="/factcheck" {% if active == 'factcheck' %}class="active"{% endif %}>Q&amp;A</a>
     <a href="/docs" target="_blank">API</a>
   </nav>
   {% if current_user %}
