@@ -4,8 +4,24 @@ build-backend = "hatchling.build"
 
 [project]
 name = "swiss-truth-mcp"
-version = "0.1.0"
-description = "Wikipedia für KI-Agenten — Validierter Ground-Truth MCP Server"
+version = "0.1.1"
+description = "Verified knowledge base for AI agents — stop hallucinations with certified, source-backed facts via MCP"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Swiss Truth", email = "hello@swisstruth.org" }]
+keywords = ["mcp", "ai", "agents", "knowledge", "fact-checking", "hallucination", "rag", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+]
 requires-python = ">=3.9"
 dependencies = [
     "mcp>=1.0.0",
@@ -22,6 +38,12 @@ dependencies = [
     "python-jose[cryptography]>=3.3.0",
     "python-multipart>=0.0.9",
 ]
+
+[project.urls]
+Homepage = "https://swisstruth.org"
+Documentation = "https://swisstruth.org/trust"
+Repository = "https://github.com/swisstruthorg/swiss-truth-mcp"
+"Bug Tracker" = "https://github.com/swisstruthorg/swiss-truth-mcp/issues"
 
 [project.optional-dependencies]
 dev = [

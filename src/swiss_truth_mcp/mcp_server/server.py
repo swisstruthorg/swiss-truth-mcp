@@ -19,6 +19,8 @@ from swiss_truth_mcp.mcp_server.tools import (
     submit_claim,
     get_claim_status,
     verify_claim,
+    verify_claims_batch,
+    verify_response,
 )
 
 app = Server("swiss-truth")
@@ -211,6 +213,65 @@ async def handle_list_tools() -> list[types.Tool]:
                 "required": ["claim_id"],
             },
         ),
+        types.Tool(
+            name="verify_claims_batch",
+            description=(
+                "Verify multiple factual claims in parallel against the Swiss Truth knowledge base. "
+                "USE THIS TOOL when you need to fact-check several statements at once — "
+                "e.g. before sending a response that contains multiple factual assertions. "
+                "Much faster than calling verify_claim repeatedly. "
+                "\n\nReturns per claim:"
+                "\n- 'verdict': 'supported' | 'contradicted' | 'unknown'"
+                "\n- 'confidence': 0.0–1.0"
+                "\n- 'evidence': certified claims that support or contradict"
+                "\n\nAlso returns a 'summary' with counts of supported/contradicted/unknown."
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "claims": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "List of factual statements to verify. Max 20 items.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Optional domain filter applied to all claims (e.g. 'swiss-health', 'ai-ml').",
+                    },
+                },
+                "required": ["claims"],
+            },
+        ),
+        types.Tool(
+            name="verify_response",
+            description=(
+                "Check a full AI response paragraph for hallucination risk. "
+                "USE THIS TOOL before sending a multi-sentence response to a user — "
+                "it atomizes the text into individual claims, verifies each against the knowledge base, "
+                "and returns an overall hallucination risk score. "
+                "\n\nReturns:"
+                "\n- 'hallucination_risk': 'low' | 'medium' | 'high'"
+                "\n- 'verified': number of statements backed by certified facts"
+                "\n- 'contradicted': number of statements contradicted by certified facts"
+                "\n- 'unverified': number of statements with no evidence (knowledge gap)"
+                "\n- 'coverage_rate': fraction of statements that are verified (0.0–1.0)"
+                "\n- 'statements': per-statement breakdown with verdict and sources"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "The full response text to check. Can be a paragraph or multiple sentences.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Optional domain filter (e.g. 'swiss-health'). Omit to search all domains.",
+                    },
+                },
+                "required": ["text"],
+            },
+        ),
     ]
 
 
@@ -227,6 +288,8 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[types.T
         "submit_claim": submit_claim,
         "get_claim_status": get_claim_status,
         "verify_claim": verify_claim,
+        "verify_claims_batch": verify_claims_batch,
+        "verify_response": verify_response,
     }
 
     if name not in tool_map:

@@ -5,6 +5,7 @@ Jede Funktion wird als MCP Tool registriert.
 from __future__ import annotations
 
 import asyncio
+import json
 import uuid
 from typing import Any, Optional
 
@@ -314,6 +315,161 @@ async def verify_claim(
         "evidence": evidence,
         "checked_claim": text,
         "detected_language": detected_language,
+    }
+
+
+async def verify_claims_batch(
+    claims: list[str],
+    domain: Optional[str] = None,
+    language: Optional[str] = None,
+) -> dict[str, Any]:
+    """
+    Prüft mehrere Claims parallel gegen die Swiss Truth Wissensbasis.
+
+    Args:
+        claims: Liste von Behauptungen (max 20)
+        domain: Optionaler Domain-Filter für alle Claims
+        language: Optionaler Sprachfilter
+
+    Returns:
+        Dict mit 'results' Liste (ein Eintrag pro Claim, gleiche Reihenfolge)
+    """
+    claims = claims[:20]  # Hard-Limit
+
+    async def _verify_one(text: str, idx: int) -> dict[str, Any]:
+        try:
+            result = await verify_claim(text, domain=domain, language=language)
+            return {"index": idx, "claim": text, **result}
+        except Exception as e:
+            return {
+                "index": idx,
+                "claim": text,
+                "verdict": "unknown",
+                "confidence": 0.0,
+                "explanation": f"Verification error: {e}",
+                "evidence": [],
+            }
+
+    tasks = [_verify_one(c, i) for i, c in enumerate(claims)]
+    results = await asyncio.gather(*tasks)
+    results = sorted(results, key=lambda r: r["index"])
+
+    summary = {
+        "supported": sum(1 for r in results if r["verdict"] == "supported"),
+        "contradicted": sum(1 for r in results if r["verdict"] == "contradicted"),
+        "unknown": sum(1 for r in results if r["verdict"] == "unknown"),
+    }
+
+    return {
+        "results": results,
+        "total": len(results),
+        "summary": summary,
+    }
+
+
+_ATOMIZE_SYSTEM = """You are a fact extraction engine. Extract all atomic, verifiable factual claims from the given text.
+Return ONLY valid JSON — an array of strings, each one a single atomic factual statement.
+Rules:
+- Each claim must be independently verifiable
+- Remove opinions, predictions, and hedged statements ("I think...", "probably...")
+- Split compound sentences into atomic claims
+- Ignore greetings, transitions, and filler phrases
+- Max 15 claims
+
+Example output: ["The Eiffel Tower is 330 meters tall.", "It was built in 1889."]"""
+
+
+async def verify_response(
+    text: str,
+    domain: Optional[str] = None,
+) -> dict[str, Any]:
+    """
+    Prüft einen vollständigen Antwort-Paragraph auf Halluzinationen.
+    Atomisiert den Text, verifiziert jeden Claim parallel, gibt Halluzinations-Score zurück.
+
+    Args:
+        text: Vollständiger Antwort-Text (Paragraph oder mehrere Sätze)
+        domain: Optionaler Domain-Filter
+
+    Returns:
+        Dict mit hallucination_risk (low/medium/high), Statistiken und Details pro Statement
+    """
+    from swiss_truth_mcp.validation.pre_screen import _get_client
+
+    # Schritt 1: Atomisierung via Claude Haiku
+    atomic_claims: list[str] = []
+    try:
+        client = _get_client()
+        msg = await client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=512,
+            system=_ATOMIZE_SYSTEM,
+            messages=[{"role": "user", "content": text}],
+        )
+        raw = msg.content[0].text.strip()
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        atomic_claims = json.loads(raw.strip())
+        if not isinstance(atomic_claims, list):
+            atomic_claims = []
+    except Exception:
+        # Fallback: Sätze nach Punkt splitten
+        import re
+        atomic_claims = [s.strip() for s in re.split(r'(?<=[.!?])\s+', text) if len(s.strip()) > 20][:10]
+
+    if not atomic_claims:
+        return {
+            "hallucination_risk": "unknown",
+            "verified": 0,
+            "unverified": 0,
+            "contradicted": 0,
+            "total_statements": 0,
+            "statements": [],
+            "original_text": text,
+        }
+
+    # Schritt 2: Alle Claims parallel verifizieren
+    batch_result = await verify_claims_batch(atomic_claims, domain=domain)
+    results = batch_result["results"]
+    summary = batch_result["summary"]
+
+    # Schritt 3: Halluzinations-Risiko berechnen
+    total = len(results)
+    contradicted = summary["contradicted"]
+    unknown = summary["unknown"]
+    supported = summary["supported"]
+
+    if contradicted > 0:
+        risk = "high"
+    elif unknown / total > 0.6:
+        risk = "medium"
+    elif supported / total >= 0.5:
+        risk = "low"
+    else:
+        risk = "medium"
+
+    statements = [
+        {
+            "statement": r["claim"],
+            "verdict": r["verdict"],
+            "confidence": r["confidence"],
+            "explanation": r.get("explanation", ""),
+            "sources": [e["source_references"] for e in r.get("evidence", []) if e.get("source_references")],
+        }
+        for r in results
+    ]
+
+    return {
+        "hallucination_risk": risk,
+        "verified": supported,
+        "unverified": unknown,
+        "contradicted": contradicted,
+        "total_statements": total,
+        "coverage_rate": round(supported / total, 2) if total else 0.0,
+        "statements": statements,
+        "original_text": text,
     }
 
 

@@ -149,6 +149,196 @@ async def trust_page(request: Request):
     return _TEMPLATES.TemplateResponse(request, "trust.html", {"request": request, "s": stats})
 
 
+@meta_router.get("/validators", response_class=HTMLResponse, include_in_schema=False)
+async def validators_page(request: Request):
+    """Öffentliches Validator-Leaderboard — keine Authentifizierung erforderlich."""
+    async with get_session() as session:
+        stats = await queries.get_dashboard_stats(session)
+    return _TEMPLATES.TemplateResponse(request, "validators.html", {
+        "request": request,
+        "validators": stats["validators"],
+        "certified": stats["certified"],
+        "total": stats["total"],
+    })
+
+
+@meta_router.get("/stats", response_class=HTMLResponse, include_in_schema=False)
+async def stats_page(request: Request):
+    """Öffentliches Stats-Dashboard — keine Authentifizierung erforderlich."""
+    async with get_session() as session:
+        dash = await queries.get_dashboard_stats(session)
+        analytics = await queries.get_query_analytics(session)
+    return _TEMPLATES.TemplateResponse(request, "stats.html", {
+        "request": request,
+        "s": dash,
+        "a": analytics,
+    })
+
+
+@meta_router.get("/openai-tools.json", include_in_schema=False)
+async def openai_tools():
+    """
+    Swiss Truth Tools im OpenAI function-calling Format.
+    Für Agenten die nicht MCP nutzen (OpenAI API, LangChain, LlamaIndex, etc.).
+    """
+    return [
+        {
+            "type": "function",
+            "function": {
+                "name": "search_knowledge",
+                "description": (
+                    "Search the Swiss Truth verified knowledge base for certified facts. "
+                    "Use this when you need reliable, source-backed information to avoid hallucination — "
+                    "especially for Swiss law, health, finance, politics, education, energy, transport, "
+                    "climate, AI/ML, and world science topics. "
+                    "Call this before answering factual questions where being wrong would matter."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "Natural language query in DE, EN, FR, or IT. Phrase it as a question for best results.",
+                        },
+                        "domain": {
+                            "type": "string",
+                            "description": (
+                                "Optional domain filter. Available: swiss-health, swiss-law, swiss-finance, "
+                                "swiss-education, swiss-energy, swiss-transport, swiss-politics, "
+                                "swiss-agriculture, climate, ai-ml, world-science, world-history. "
+                                "Omit to search across all domains."
+                            ),
+                        },
+                        "min_confidence": {
+                            "type": "number",
+                            "description": "Minimum confidence threshold 0.0–1.0. Default 0.8. Use 0.95+ for critical facts.",
+                        },
+                        "limit": {
+                            "type": "integer",
+                            "description": "Number of results to return (max 20, default 5).",
+                        },
+                    },
+                    "required": ["query"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "verify_claim",
+                "description": (
+                    "Fact-check a statement against the Swiss Truth knowledge base. "
+                    "Returns verdict: supported | contradicted | unknown, "
+                    "with confidence score and source evidence. "
+                    "Use this to verify AI-generated content or ground responses."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "type": "string",
+                            "description": "The factual statement to verify. One clear, atomic claim.",
+                        },
+                        "domain": {
+                            "type": "string",
+                            "description": "Optional domain filter (e.g. swiss-health, ai-ml). Omit to search all domains.",
+                        },
+                    },
+                    "required": ["text"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "get_claim",
+                "description": (
+                    "Retrieve a single verified claim with full provenance by its ID. "
+                    "Returns validator name, institution, review date, SHA256 hash, and effective confidence."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "claim_id": {
+                            "type": "string",
+                            "description": "UUID of the claim, obtained from search_knowledge results.",
+                        },
+                    },
+                    "required": ["claim_id"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "list_domains",
+                "description": (
+                    "List all available knowledge domains with certified claim counts. "
+                    "Use at the start of a session or when unsure which domain to search."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {},
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "submit_claim",
+                "description": (
+                    "Submit a new factual claim for expert review and certification. "
+                    "Use when you identify a knowledge gap. "
+                    "Requirements: one atomic statement, at least one primary source URL (not Wikipedia)."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "claim_text": {
+                            "type": "string",
+                            "description": "The factual statement — one single, clear, verifiable claim. Max 2000 characters.",
+                        },
+                        "domain_id": {
+                            "type": "string",
+                            "description": "Domain ID (e.g. ai-ml, swiss-health, climate). Use list_domains to see all options.",
+                        },
+                        "source_urls": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "Primary source URLs that directly support the claim. No Wikipedia.",
+                        },
+                        "question": {
+                            "type": "string",
+                            "description": "The canonical question this claim answers. Improves retrieval quality.",
+                        },
+                    },
+                    "required": ["claim_text", "domain_id"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "get_claim_status",
+                "description": (
+                    "Check the validation status of a submitted claim: "
+                    "draft → peer_review → certified."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "claim_id": {
+                            "type": "string",
+                            "description": "UUID returned by submit_claim.",
+                        },
+                    },
+                    "required": ["claim_id"],
+                },
+            },
+        },
+    ]
+
+
 @meta_router.get("/domains", response_model=list[DomainResponse])
 async def list_domains():
     async with get_session() as session:
