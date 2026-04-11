@@ -1,25 +1,8 @@
 # Swiss Truth MCP — Smithery Configuration
-# https://smithery.ai/docs/config
-
-name: Swiss Truth MCP
-description: >
-  Verified, source-backed knowledge base for AI agents. Certified facts with
-  confidence scores, SHA256 integrity hashes, and primary source references —
-  covering Swiss law, health, finance, politics, climate, AI/ML, and more.
-  No API key required. Connect in 30 seconds.
-
-category: knowledge
-tags:
-  - knowledge-base
-  - fact-checking
-  - grounding
-  - rag
-  - swiss
-  - multilingual
-  - verification
-  - sources
-  - trust
-  - hallucination-reduction
+# https://smithery.ai/docs/build/publish
+#
+# Metadata (name, description, tags, icon) must be set on smithery.ai directly.
+# This file only controls the technical connection.
 
 startCommand:
   type: http
