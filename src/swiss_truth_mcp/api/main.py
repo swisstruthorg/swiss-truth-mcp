@@ -157,6 +157,9 @@ async def list_domains():
 
 _api_app.include_router(meta_router)
 
+_STATIC_DIR = Path(__file__).parent.parent / "static"
+_api_app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+
 
 # ─── Kombinierter ASGI-Wrapper ────────────────────────────────────────────────
 # Fängt /mcp-Requests VOR FastAPI's Router ab — kein Routing-Konflikt möglich.
