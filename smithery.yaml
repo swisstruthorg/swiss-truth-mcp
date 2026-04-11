@@ -1,13 +1,30 @@
 # Swiss Truth MCP — Smithery Configuration
 # https://smithery.ai/docs/config
-#
-# Self-hosted StreamableHTTP server — no Smithery deployment needed.
-# Connect directly: https://swisstruth.org/mcp
+
+name: Swiss Truth MCP
+description: >
+  Verified, source-backed knowledge base for AI agents. Certified facts with
+  confidence scores, SHA256 integrity hashes, and primary source references —
+  covering Swiss law, health, finance, politics, climate, AI/ML, and more.
+  No API key required. Connect in 30 seconds.
+
+category: knowledge
+tags:
+  - knowledge-base
+  - fact-checking
+  - grounding
+  - rag
+  - swiss
+  - multilingual
+  - verification
+  - sources
+  - trust
+  - hallucination-reduction
 
 startCommand:
   type: http
+  url: https://swisstruth.org/mcp
   configSchema:
     type: object
     properties: {}
-    description: "No configuration required. Swiss Truth MCP is fully public — no API key needed."
   exampleConfig: {}
