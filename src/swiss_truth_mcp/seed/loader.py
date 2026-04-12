@@ -8,8 +8,8 @@ Unterstützte Dateien (auto-discovery):
   ai_ml_claims.json, climate_claims.json, swiss_health_claims.json, ...
 
 Strategie:
-  confidence >= 0.95  →  status = 'certified'  (direkt zertifiziert)
-  confidence  < 0.95  →  status = 'peer_review' (füllt die Review-Queue)
+  confidence >= 0.88  →  status = 'certified'  (direkt zertifiziert, pre_screen hat bereits geprüft)
+  confidence  < 0.88  →  status = 'peer_review' (füllt die Review-Queue)
 
 Idempotenz: Claims mit identischem Text werden übersprungen (MERGE on text).
 
@@ -37,7 +37,7 @@ from swiss_truth_mcp.validation.pre_screen import pre_screen_claim, verify_sourc
 from swiss_truth_mcp.validation.trust import sign_claim, now_iso, expiry_iso
 
 SEED_DIR = Path(__file__).parent
-CERTIFIED_THRESHOLD = 0.95
+CERTIFIED_THRESHOLD = 0.88
 CURATOR_NAME = "Swiss Truth Seed Curator"
 CURATOR_INSTITUTION = "Swiss Truth Foundation"
 

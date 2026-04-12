@@ -14,6 +14,7 @@ CONSTRAINTS = [
     "CREATE CONSTRAINT domain_id   IF NOT EXISTS FOR (d:Domain)              REQUIRE d.id IS UNIQUE",
     "CREATE CONSTRAINT source_id   IF NOT EXISTS FOR (s:Source)              REQUIRE s.id IS UNIQUE",
     "CREATE CONSTRAINT webhook_id  IF NOT EXISTS FOR (w:WebhookSubscription) REQUIRE w.id IS UNIQUE",
+    "CREATE CONSTRAINT anchor_id   IF NOT EXISTS FOR (a:AnchorRecord)        REQUIRE a.id IS UNIQUE",
 ]
 
 FULLTEXT_INDEX = """
@@ -53,6 +54,17 @@ SEED_DOMAINS = [
     {"id": "eu-law",           "name": "EU Law & Regulation",      "description": "European Union legislation, GDPR, AI Act, Digital Markets Act, and EU court rulings", "language": "en"},
     {"id": "eu-health",        "name": "EU & Global Health",        "description": "European Medicines Agency, WHO guidelines, EU health policy, and global epidemiology", "language": "en"},
     {"id": "global-science",   "name": "Global Science",            "description": "Peer-reviewed scientific findings across medicine, biology, physics, and interdisciplinary research", "language": "en"},
+    # ── New AI-Agent-Relevant Domains ────────────────────────────────────────
+    {"id": "quantum-computing",  "name": "Quantum Computing",         "description": "Quantum hardware, algorithms, error correction, and current state of quantum advantage", "language": "en"},
+    {"id": "cybersecurity",      "name": "Cybersecurity",             "description": "CVEs, NIST standards, threat intelligence, cryptography, and security best practices", "language": "en"},
+    {"id": "space-science",      "name": "Space Science",             "description": "Astronomy, space exploration, NASA/ESA missions, exoplanets, and cosmology findings", "language": "en"},
+    {"id": "biotech",            "name": "Biotechnology",             "description": "CRISPR, mRNA technology, gene therapy, synthetic biology, and biotech breakthroughs", "language": "en"},
+    {"id": "ai-safety",          "name": "AI Safety & Alignment",     "description": "AI alignment research, safety frameworks, model evaluation, and governance standards", "language": "en"},
+    {"id": "economics",          "name": "Global Economics",          "description": "IMF/World Bank data, macroeconomics, trade, monetary policy, and economic indicators", "language": "en"},
+    {"id": "international-law",  "name": "International Law",         "description": "UN treaties, ICC rulings, WTO regulations, human rights law, and international norms", "language": "en"},
+    {"id": "renewable-energy",   "name": "Renewable Energy",          "description": "Solar, wind, hydro, IEA statistics, IRENA data, and global energy transition facts", "language": "en"},
+    {"id": "us-law",             "name": "US Law & Regulation",       "description": "US federal law, Supreme Court rulings, FTC/SEC regulations, and constitutional principles", "language": "en"},
+    {"id": "swiss-digital",      "name": "Schweizer Digitalisierung", "description": "E-Government, digitale Identität, Open Data, und Digitalisierungsstrategie der Schweiz", "language": "de"},
 ]
 
 

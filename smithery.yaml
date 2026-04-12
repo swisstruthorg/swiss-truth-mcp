@@ -7,7 +7,15 @@
 startCommand:
   type: http
   url: https://swisstruth.org/mcp
+  # Optional API key — needed only for submit_claim.
+  # Read-only tools (search, verify, list_domains, find_contradictions) work without a key.
   configSchema:
     type: object
-    properties: {}
-  exampleConfig: {}
+    properties:
+      apiKey:
+        type: string
+        description: "Swiss Truth API key — needed for submit_claim. Leave empty for read-only access."
+        default: ""
+    required: []
+  exampleConfig:
+    apiKey: ""

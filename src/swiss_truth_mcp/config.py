@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     neo4j_password: str = "swisstruth2026"
 
     anthropic_api_key: str = ""
+    anthropic_base_url: str = ""   # z.B. https://open-claude.com/v1 (leer = Standard api.anthropic.com)
     swiss_truth_api_key: str = "dev-key-change-in-prod"
 
     embedding_model: str = "paraphrase-multilingual-MiniLM-L12-v2"
@@ -29,6 +30,12 @@ class Settings(BaseSettings):
     # Öffentliche Basis-URL (ngrok lokal ODER PUBLIC_BASE_URL in Produktion)
     ngrok_public_url: str = ""
     public_base_url_env: str = Field(default="", validation_alias="PUBLIC_BASE_URL")
+
+    # Blockchain-Anchoring (Ethereum / Polygon / Base ...)
+    eth_rpc_url: str = ""            # z.B. https://polygon-rpc.com
+    eth_private_key: str = ""        # 0x... Wallet Private Key
+    eth_chain_id: int = 137          # 137=Polygon, 1=Mainnet, 8453=Base
+    eth_chain_name: str = "polygon"  # Anzeigebezeichnung
 
     @property
     def public_base_url(self) -> str:

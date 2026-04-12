@@ -14,7 +14,9 @@ DEPLOY_DIR="/opt/swiss-truth"
 LOCAL_SRC="$(dirname "$0")/../src/swiss_truth_mcp"
 
 NO_RESTART=false
+REBUILD=false
 [[ "${1:-}" == "--no-restart" ]] && NO_RESTART=true
+[[ "${1:-}" == "--rebuild"    ]] && REBUILD=true
 
 echo "🚀  Swiss Truth — Quick Update"
 echo "Server: ${SERVER_USER}@${SERVER_HOST}"
@@ -46,7 +48,38 @@ rsync -az \
   "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_DIR}/deploy/"
 echo "   ✓ Deploy-Scripts synchronisiert"
 
-# ── 4. Pycache löschen + API neu starten ─────────────────────────────────────
+# ── 4. Bei --rebuild: pyproject.toml übertragen + Image neu bauen ────────────
+if [ "$REBUILD" = true ]; then
+  echo ""
+  echo "→ Rebuild: pyproject.toml + Dockerfile + README.md übertragen ..."
+  rsync -az \
+    "$(dirname "$0")/../pyproject.toml" \
+    "$(dirname "$0")/../Dockerfile" \
+    "$(dirname "$0")/../README.md" \
+    "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_DIR}/"
+
+  echo "→ Docker Image neu bauen (das dauert 2–4 Minuten) ..."
+  ssh "${SERVER_USER}@${SERVER_HOST}" \
+    "cd ${DEPLOY_DIR} && sudo docker build -t swiss-truth-api:latest . 2>&1 | tail -5"
+
+  echo "→ Container mit neuem Image neu erstellen ..."
+  ssh "${SERVER_USER}@${SERVER_HOST}" \
+    "cd ${DEPLOY_DIR} && sudo docker compose -f docker-compose.prod.yml up -d --force-recreate api"
+  sleep 12
+
+  HTTP=$(curl -s -o /dev/null -w "%{http_code}" https://swisstruth.org/health 2>/dev/null || echo "000")
+  if [ "$HTTP" = "200" ]; then
+    echo "   ✅  API erreichbar nach Rebuild (HTTP 200)"
+  else
+    echo "   ⚠   HTTP ${HTTP} — Logs: ssh ${SERVER_USER}@${SERVER_HOST} 'sudo docker logs swiss-truth-api --tail 30'"
+  fi
+  echo ""
+  echo "─────────────────────────────────────"
+  echo "✅  Rebuild abgeschlossen"
+  exit 0
+fi
+
+# ── 5. Pycache löschen + API neu starten ─────────────────────────────────────
 if [ "$NO_RESTART" = false ]; then
   echo ""
   echo "→ Pycache löschen ..."

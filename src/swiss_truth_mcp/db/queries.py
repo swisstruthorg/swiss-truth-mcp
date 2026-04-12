@@ -842,3 +842,82 @@ async def count_users(session: AsyncSession) -> int:
     result = await session.run("MATCH (u:User) RETURN count(u) AS n")
     row = await result.single()
     return row["n"] if row else 0
+
+
+# ---------------------------------------------------------------------------
+# Blockchain-Anchoring
+# ---------------------------------------------------------------------------
+
+async def get_all_certified_hashes(session: AsyncSession) -> list[str]:
+    """Alle SHA256-Hashes zertifizierter Claims (für Merkle-Tree)."""
+    result = await session.run(
+        """
+        MATCH (c:Claim {status: 'certified'})
+        WHERE c.hash_sha256 IS NOT NULL AND c.hash_sha256 <> ''
+        RETURN c.hash_sha256 AS h
+        ORDER BY c.hash_sha256
+        """
+    )
+    rows = await result.data()
+    return [row["h"] for row in rows if row["h"]]
+
+
+async def create_anchor_record(session: AsyncSession, record: dict[str, Any]) -> None:
+    """Speichert einen neuen Anchor-Record in Neo4j (unveränderlich)."""
+    await session.run(
+        """
+        CREATE (a:AnchorRecord {
+            id:             $id,
+            merkle_root:    $merkle_root,
+            claim_count:    $claim_count,
+            anchored_at:    $anchored_at,
+            chain:          $chain,
+            chain_id:       $chain_id,
+            tx_hash:        $tx_hash,
+            block_number:   $block_number,
+            explorer_url:   $explorer_url,
+            status:         $status,
+            data_inscribed: $data_inscribed
+        })
+        """,
+        record,
+    )
+
+
+async def list_anchor_records(
+    session: AsyncSession, limit: int = 52
+) -> list[dict[str, Any]]:
+    """Öffentlicher Audit-Trail: alle Anchor-Records, neueste zuerst."""
+    result = await session.run(
+        """
+        MATCH (a:AnchorRecord)
+        RETURN a {
+            .id, .merkle_root, .claim_count, .anchored_at,
+            .chain, .chain_id, .tx_hash, .block_number,
+            .explorer_url, .status, .data_inscribed
+        } AS anchor
+        ORDER BY a.anchored_at DESC
+        LIMIT $limit
+        """,
+        {"limit": limit},
+    )
+    rows = await result.data()
+    return [row["anchor"] for row in rows]
+
+
+async def get_latest_anchor(session: AsyncSession) -> Optional[dict[str, Any]]:
+    """Letzter bestätigter Anchor-Record."""
+    result = await session.run(
+        """
+        MATCH (a:AnchorRecord)
+        WHERE a.status = 'confirmed'
+        RETURN a {
+            .id, .merkle_root, .claim_count, .anchored_at,
+            .chain, .tx_hash, .block_number, .explorer_url, .status
+        } AS anchor
+        ORDER BY a.anchored_at DESC
+        LIMIT 1
+        """
+    )
+    row = await result.single()
+    return row["anchor"] if row else None

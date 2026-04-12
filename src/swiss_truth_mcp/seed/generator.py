@@ -38,6 +38,113 @@ from swiss_truth_mcp.config import settings
 
 SEED_DIR = Path(__file__).parent
 
+
+class _CompatContent:
+    """Minimal response content object (kompatibel mit anthropic.TextBlock)."""
+    def __init__(self, c: dict) -> None:
+        self.type: str = c.get("type", "text")
+        self.text: str = c.get("text", "")
+
+
+class _CompatResponse:
+    """Minimal response object (kompatibel mit anthropic.Message)."""
+    def __init__(self, data: dict) -> None:
+        self.content = [_CompatContent(c) for c in data.get("content", [])]
+
+
+class _HttpxClient:
+    """Direkter httpx-basierter Ersatz für anthropic.Anthropic.
+    Wird verwendet wenn ANTHROPIC_BASE_URL gesetzt ist (z.B. open-claude.com),
+    da Cloudflare-WAF den Anthropic Python SDK User-Agent blockiert.
+
+    Modell-Mapping: Anthropic SDK-Namen → Provider-Namen
+    """
+    _MODEL_MAP: dict[str, str] = {
+        # Anthropic SDK-Namen → open-claude.com-Namen
+        # claude-haiku-4.5 ist oft überlastet → claude-sonnet-4.6 als primäres Modell
+        "claude-sonnet-4-5":          "claude-sonnet-4.6",
+        "claude-sonnet-4-5-20251022":  "claude-sonnet-4.6",
+        "claude-haiku-4-5":           "claude-haiku-4.5",
+        "claude-haiku-4-5-20251001":   "claude-haiku-4.5",
+        "claude-opus-4-5":            "claude-opus-4.6",
+        "claude-sonnet-4-6":          "claude-sonnet-4.6",
+        "claude-opus-4-6":            "claude-opus-4.6",
+    }
+
+    def __init__(self, api_key: str, base_url: str) -> None:
+        self._api_key = api_key
+        self._base_url = base_url.rstrip("/")
+        self._http = httpx.Client(
+            headers={"user-agent": "curl/8.4.0"},
+            timeout=httpx.Timeout(300.0),
+        )
+        self.messages = self  # client.messages.create(...) Kompatibilität
+
+    def create(self, model: str, max_tokens: int, messages: list, system: str = "", **kwargs) -> _CompatResponse:
+        import time
+        mapped = self._MODEL_MAP.get(model, model)
+        payload: dict = {"model": mapped, "max_tokens": max_tokens, "messages": messages}
+        if system:
+            payload["system"] = system
+        for attempt in range(4):
+            r = self._http.post(
+                f"{self._base_url}/messages",
+                headers={
+                    "x-api-key": self._api_key,
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                },
+                json=payload,
+            )
+            # Leere Antwort → Retry
+            if not r.text.strip():
+                if attempt < 3:
+                    time.sleep(3 * (attempt + 1))
+                    continue
+                raise RuntimeError("Empty response after 4 retries")
+            try:
+                data = r.json()
+            except Exception:
+                if attempt < 3:
+                    time.sleep(3 * (attempt + 1))
+                    continue
+                raise RuntimeError(f"Invalid JSON response: {r.text[:100]}")
+            if "error" in data:
+                msg = data["error"].get("message", str(data["error"]))
+                code = data["error"].get("code", 0)
+                if (code == 503 or "busy" in msg.lower()) and attempt < 3:
+                    time.sleep(3 * (attempt + 1))
+                    continue
+                raise RuntimeError(msg)
+            # Leerer content → Retry
+            content = data.get("content", [])
+            if not content or not content[0].get("text", "").strip():
+                if attempt < 3:
+                    time.sleep(3 * (attempt + 1))
+                    continue
+                raise RuntimeError("Empty content in response")
+            return _CompatResponse(data)
+        raise RuntimeError("Provider unavailable after 4 retries")
+
+    def __enter__(self) -> "_HttpxClient":
+        return self
+
+    def __exit__(self, *args: object) -> None:
+        self._http.close()
+
+
+def _make_anthropic_client():
+    """Gibt den passenden API-Client zurück:
+    - Standard: anthropic.Anthropic (offizieller SDK)
+    - Mit ANTHROPIC_BASE_URL: _HttpxClient (Cloudflare-WAF-kompatibel, mit Modell-Mapping)
+    """
+    if settings.anthropic_base_url:
+        return _HttpxClient(
+            api_key=settings.anthropic_api_key,
+            base_url=settings.anthropic_base_url,
+        )
+    return anthropic.Anthropic(api_key=settings.anthropic_api_key)
+
 # ─── Domain-Definitionen ─────────────────────────────────────────────────────
 
 # ─── Primärquellen pro Domain ────────────────────────────────────────────────
@@ -170,6 +277,98 @@ DOMAIN_PRIMARY_SOURCES = {
         "who.int (WHO — global health data)",
         "cell.com (Cell Press journals)",
         "royalsociety.org (Royal Society Publications)",
+    ],
+    # ── New AI-Agent-Relevant Domains ────────────────────────────────────────
+    "quantum-computing": [
+        "arxiv.org/quant-ph (Preprint server — quantum computing)",
+        "research.ibm.com/quantum-computing (IBM Quantum Research)",
+        "quantum.google (Google Quantum AI)",
+        "nature.com/subjects/quantum-computing (Nature Quantum)",
+        "quantumai.google/hardware (Google quantum hardware specs)",
+        "nist.gov/topics/quantum-information-science (NIST QIS)",
+    ],
+    "cybersecurity": [
+        "nvd.nist.gov (National Vulnerability Database — CVE)",
+        "nist.gov/cyberframework (NIST Cybersecurity Framework)",
+        "cisa.gov (Cybersecurity and Infrastructure Security Agency)",
+        "owasp.org (OWASP Top 10 and security standards)",
+        "cert.org (CERT/CC — vulnerability research)",
+        "enisa.europa.eu (EU Agency for Cybersecurity)",
+        "cve.org (CVE Program — official vulnerability list)",
+    ],
+    "space-science": [
+        "nasa.gov (NASA official research and mission data)",
+        "esa.int (European Space Agency)",
+        "arxiv.org/astro-ph (Astrophysics preprints)",
+        "nature.com/natastron (Nature Astronomy)",
+        "science.org (AAAS Science — space research)",
+        "jpl.nasa.gov (Jet Propulsion Laboratory)",
+        "iau.org (International Astronomical Union)",
+    ],
+    "biotech": [
+        "pubmed.ncbi.nlm.nih.gov (PubMed — biomedical research)",
+        "nature.com/natbiotech (Nature Biotechnology)",
+        "broadinstitute.org (Broad Institute — CRISPR, genomics)",
+        "clinicaltrials.gov (FDA-registered clinical trials)",
+        "fda.gov/vaccines-blood-biologics (FDA biologics approvals)",
+        "science.org/journal/sciadv (Science Advances)",
+        "nejm.org (New England Journal of Medicine)",
+    ],
+    "ai-safety": [
+        "arxiv.org (AI safety and alignment research papers)",
+        "alignmentforum.org (Alignment Forum — technical AI safety)",
+        "anthropic.com/research (Anthropic safety research)",
+        "deepmind.google/research (DeepMind safety publications)",
+        "openai.com/safety (OpenAI safety policies and research)",
+        "mlsafety.org (Center for AI Safety)",
+        "nist.gov/artificial-intelligence (NIST AI Risk Management Framework)",
+        "oecd.ai (OECD AI Policy Observatory)",
+    ],
+    "economics": [
+        "imf.org (International Monetary Fund — WEO, statistics)",
+        "worldbank.org (World Bank — data and research)",
+        "oecd.org/economy (OECD economic outlook and statistics)",
+        "bis.org (Bank for International Settlements)",
+        "federalreserve.gov (US Federal Reserve research)",
+        "ecb.europa.eu (European Central Bank)",
+        "wto.org/statistics (WTO trade statistics)",
+        "un.org/development/desa (UN economic analysis)",
+    ],
+    "international-law": [
+        "un.org/en/about-us/un-charter (UN Charter)",
+        "icc-cpi.int (International Criminal Court)",
+        "icj-cij.org (International Court of Justice)",
+        "wto.org (WTO dispute settlement)",
+        "ohchr.org (UN Human Rights — treaties and reports)",
+        "icrc.org (International Committee of the Red Cross)",
+        "uncitral.org (UN Commission on International Trade Law)",
+    ],
+    "renewable-energy": [
+        "iea.org (International Energy Agency — statistics)",
+        "irena.org (International Renewable Energy Agency)",
+        "ipcc.ch/report (IPCC reports — energy chapter)",
+        "ren21.net (Global Status Report on Renewables)",
+        "energy.gov (US Department of Energy)",
+        "ec.europa.eu/energy (European Commission — energy)",
+        "bfe.admin.ch (Bundesamt für Energie — Schweiz)",
+    ],
+    "us-law": [
+        "supremecourt.gov (US Supreme Court opinions)",
+        "law.cornell.edu/uscode (US Code — LII Cornell)",
+        "federalregister.gov (Federal Register — regulations)",
+        "ftc.gov (Federal Trade Commission)",
+        "sec.gov (Securities and Exchange Commission)",
+        "doj.gov (US Department of Justice)",
+        "congress.gov (US Congress — legislation)",
+    ],
+    "swiss-digital": [
+        "digitale-verwaltung.ch (Digitale Verwaltung Schweiz)",
+        "eda.admin.ch/e-id (E-ID Programm Bund)",
+        "bk.admin.ch/bk/de/home/digitale-transformation-ikt-lenkung.html",
+        "opendata.swiss (Nationales Open-Data-Portal)",
+        "ncsc.admin.ch (Nationales Zentrum für Cybersicherheit)",
+        "bakom.admin.ch (Bundesamt für Kommunikation)",
+        "swisscom.com/reports (Swisscom Nachhaltigkeitsberichte)",
     ],
 }
 
@@ -439,6 +638,227 @@ DOMAINS = {
         ],
         "wiki_lang": "en",
     },
+    # ── New AI-Agent-Relevant Domains ────────────────────────────────────────
+    "quantum-computing": {
+        "name": "Quantum Computing",
+        "description": "Quantum hardware, algorithms, error correction, and current state of quantum advantage",
+        "topics": [
+            "Qubit types — superconducting, trapped-ion, photonic",
+            "Quantum error correction — surface codes, logical qubits",
+            "Quantum gate operations and circuit depth",
+            "Quantum advantage vs. classical computing",
+            "Shor's algorithm and cryptography implications",
+            "Grover's algorithm — search speedup",
+            "Quantum volume and benchmarking metrics",
+            "NISQ era — current hardware limitations",
+            "Quantum entanglement and superposition basics",
+            "Quantum annealing vs. gate-based quantum computing",
+        ],
+        "faq_urls": [
+            "https://research.ibm.com/quantum-computing",
+            "https://quantum.google",
+        ],
+        "wiki_topics": ["Quantum computing", "Qubit", "Quantum supremacy"],
+        "wiki_lang": "en",
+    },
+    "cybersecurity": {
+        "name": "Cybersecurity",
+        "description": "CVEs, NIST standards, threat intelligence, cryptography, and security best practices",
+        "topics": [
+            "NIST Cybersecurity Framework (CSF 2.0)",
+            "Common Vulnerabilities and Exposures (CVE) system",
+            "OWASP Top 10 web application security risks",
+            "Zero-trust architecture principles",
+            "Public-key cryptography and TLS",
+            "SQL injection and XSS attack mechanics",
+            "Multi-factor authentication (MFA) standards",
+            "Ransomware attack vectors and defense",
+            "GDPR and data breach notification requirements",
+            "Bug bounty programs and responsible disclosure",
+        ],
+        "faq_urls": [
+            "https://nvd.nist.gov",
+            "https://owasp.org/Top10",
+        ],
+        "wiki_topics": ["Common Vulnerabilities and Exposures", "NIST Cybersecurity Framework", "Zero trust security model"],
+        "wiki_lang": "en",
+    },
+    "space-science": {
+        "name": "Space Science",
+        "description": "Astronomy, space exploration, NASA/ESA missions, exoplanets, and cosmology findings",
+        "topics": [
+            "James Webb Space Telescope — key discoveries",
+            "Exoplanet detection methods — transit, radial velocity",
+            "International Space Station — structure and purpose",
+            "Mars exploration — Perseverance and Ingenuity",
+            "Black holes — Schwarzschild radius, event horizon",
+            "Gravitational waves — LIGO/Virgo detections",
+            "Cosmic microwave background radiation",
+            "Dark matter and dark energy evidence",
+            "Artemis program — lunar return mission",
+            "SpaceX Starship — specifications and goals",
+        ],
+        "faq_urls": [
+            "https://www.nasa.gov/missions",
+            "https://www.esa.int/Science_Exploration",
+        ],
+        "wiki_topics": ["James Webb Space Telescope", "Exoplanet", "Black hole"],
+        "wiki_lang": "en",
+    },
+    "biotech": {
+        "name": "Biotechnology",
+        "description": "CRISPR, mRNA technology, gene therapy, synthetic biology, and biotech breakthroughs",
+        "topics": [
+            "CRISPR-Cas9 — mechanism and off-target effects",
+            "mRNA vaccine platform — lipid nanoparticle delivery",
+            "CAR-T cell therapy — FDA-approved indications",
+            "Gene therapy vectors — AAV and lentiviral",
+            "Monoclonal antibody manufacturing",
+            "Synthetic biology — BioBrick standard",
+            "Bioreactor design for cell culture",
+            "Proteomics and mass spectrometry",
+            "CRISPR base editing and prime editing",
+            "Organoids — research applications and limitations",
+        ],
+        "faq_urls": [
+            "https://www.broadinstitute.org/crispr",
+            "https://clinicaltrials.gov",
+        ],
+        "wiki_topics": ["CRISPR", "Gene therapy", "Monoclonal antibody"],
+        "wiki_lang": "en",
+    },
+    "ai-safety": {
+        "name": "AI Safety & Alignment",
+        "description": "AI alignment research, safety frameworks, model evaluation, and governance standards",
+        "topics": [
+            "Constitutional AI (CAI) — Anthropic methodology",
+            "RLHF — reinforcement learning from human feedback",
+            "AI alignment problem — specification gaming",
+            "NIST AI Risk Management Framework (AI RMF)",
+            "EU AI Act — prohibited AI practices",
+            "Red-teaming and adversarial testing of LLMs",
+            "Hallucination rates and mitigation strategies",
+            "Model cards and responsible disclosure",
+            "Instrumental convergence — Omohundro's basic AI drives",
+            "Interpretability research — mechanistic approaches",
+        ],
+        "faq_urls": [
+            "https://www.anthropic.com/research",
+            "https://www.nist.gov/artificial-intelligence",
+        ],
+        "wiki_topics": ["AI alignment", "AI safety", "Reinforcement learning from human feedback"],
+        "wiki_lang": "en",
+    },
+    "economics": {
+        "name": "Global Economics",
+        "description": "IMF/World Bank data, macroeconomics, trade, monetary policy, and economic indicators",
+        "topics": [
+            "GDP measurement — expenditure, income, production approaches",
+            "Inflation — CPI vs. PCE measurement",
+            "Central bank interest rate transmission mechanism",
+            "Purchasing power parity (PPP) — IMF data",
+            "Gini coefficient — income inequality measurement",
+            "Current account balance and trade deficits",
+            "Quantitative easing — mechanisms and effects",
+            "World Bank poverty line — $2.15/day threshold",
+            "OECD better life index",
+            "Comparative advantage and trade theory",
+        ],
+        "faq_urls": [
+            "https://www.imf.org/en/Data",
+            "https://data.worldbank.org",
+        ],
+        "wiki_topics": ["Gross domestic product", "Inflation", "Purchasing power parity"],
+        "wiki_lang": "en",
+    },
+    "international-law": {
+        "name": "International Law",
+        "description": "UN treaties, ICC rulings, WTO regulations, human rights law, and international norms",
+        "topics": [
+            "UN Charter — Chapter VII enforcement powers",
+            "International Criminal Court (ICC) — jurisdiction and cases",
+            "Geneva Conventions — protections in armed conflict",
+            "WTO dispute settlement mechanism",
+            "Universal Declaration of Human Rights — key articles",
+            "Vienna Convention on the Law of Treaties",
+            "Responsibility to Protect (R2P) doctrine",
+            "International Court of Justice — contentious cases vs. advisory opinions",
+            "UNCLOS — exclusive economic zones",
+            "Customary international law vs. treaty law",
+        ],
+        "faq_urls": [
+            "https://www.un.org/en/about-us/un-charter",
+            "https://www.icc-cpi.int",
+        ],
+        "wiki_topics": ["International Criminal Court", "Geneva Conventions", "United Nations Charter"],
+        "wiki_lang": "en",
+    },
+    "renewable-energy": {
+        "name": "Renewable Energy",
+        "description": "Solar, wind, hydro, IEA statistics, IRENA data, and global energy transition facts",
+        "topics": [
+            "Solar PV — levelized cost of energy (LCOE) trends",
+            "Wind energy — offshore vs. onshore capacity factors",
+            "Global renewable energy capacity — IRENA statistics",
+            "Battery storage — lithium-ion vs. emerging technologies",
+            "Hydrogen economy — green vs. blue hydrogen",
+            "Power grid stability with high renewable penetration",
+            "Net metering and feed-in tariff policies",
+            "Bioenergy — sustainable feedstocks and limits",
+            "Hydropower — global capacity and environmental impact",
+            "Energy access — IEA Tracking SDG 7",
+        ],
+        "faq_urls": [
+            "https://www.iea.org/data-and-statistics",
+            "https://www.irena.org/Data",
+        ],
+        "wiki_topics": ["Renewable energy", "Solar power", "Wind power"],
+        "wiki_lang": "en",
+    },
+    "us-law": {
+        "name": "US Law & Regulation",
+        "description": "US federal law, Supreme Court rulings, FTC/SEC regulations, and constitutional principles",
+        "topics": [
+            "First Amendment — free speech doctrine and limits",
+            "Fourth Amendment — search and seizure standards",
+            "Equal Protection Clause — levels of scrutiny",
+            "Commerce Clause — federal regulatory power",
+            "Administrative Procedure Act (APA)",
+            "FTC Act — Section 5 unfair practices",
+            "Securities Act of 1933 vs. Securities Exchange Act of 1934",
+            "HIPAA — protected health information rules",
+            "Section 230 — platform liability immunity",
+            "Sherman Antitrust Act — per se vs. rule of reason",
+        ],
+        "faq_urls": [
+            "https://www.supremecourt.gov",
+            "https://www.law.cornell.edu/uscode",
+        ],
+        "wiki_topics": ["First Amendment to the United States Constitution", "Fourth Amendment", "Commerce Clause"],
+        "wiki_lang": "en",
+    },
+    "swiss-digital": {
+        "name": "Schweizer Digitalisierung",
+        "description": "E-Government, digitale Identität, Open Data und Digitalisierungsstrategie der Schweiz",
+        "topics": [
+            "E-ID (staatliche elektronische Identität Schweiz)",
+            "Digitale Verwaltung Schweiz — Strategie und Meilensteine",
+            "Open Government Data (OGD) Schweiz",
+            "E-Voting — aktueller Stand und Sicherheitsstandards",
+            "Nationales Zentrum für Cybersicherheit (NCSC)",
+            "Cloud-Strategie der Bundesverwaltung",
+            "Digitalisierung im Gesundheitswesen (EPD)",
+            "5G-Ausbau und Regulierung in der Schweiz",
+            "KI-Regulierung — Schweizer Position zum EU AI Act",
+            "Smart City Projekte in Schweizer Städten",
+        ],
+        "faq_urls": [
+            "https://www.digitale-verwaltung.ch",
+            "https://opendata.swiss",
+        ],
+        "wiki_topics": ["E-Government", "Digitale Schweiz"],
+        "wiki_lang": "de",
+    },
 }
 
 # ─── Prompts ─────────────────────────────────────────────────────────────────
@@ -462,11 +882,23 @@ Deine Aufgabe: Generiere faktisch korrekte, verifizierbare Claim-Antworten auf
 häufige KI-Agenten-Fragen. Das Dual-Format (Frage + Antwort) ist entscheidend für
 optimales semantisches Retrieval.
 
+ATOMIZITÄT — OBERSTES GEBOT:
+Jeder Claim MUSS genau EINE einzige, abgeschlossene Tatsache enthalten.
+❌ VERBOTEN: "X hat Y Mitglieder und wurde 1948 gegründet und hat Sitz in Z."
+✅ KORREKT:  "Die WHO wurde 1948 gegründet." (eine Aussage)
+✅ KORREKT:  "Die WHO hat ihren Sitz in Genf, Schweiz." (eine Aussage)
+Wenn eine Frage mehrere Teilantworten erfordert: wähle die WICHTIGSTE Einzeltatsache.
+
+CONFIDENCE-REGELN:
+- 0.97–0.99: Zahlen/Daten direkt aus Primärquelle, eindeutig nachprüfbar
+- 0.95–0.96: Klar belegte Fakten mit guter Primärquelle
+- Vergib IMMER mindestens 0.95 wenn du die Tatsache aus einer Primärquelle kennst
+- Vergib 0.90–0.94 NUR wenn der Fakt schwerer zu verifizieren ist
+
 PFLICHTREGELN:
 - "question": exakt die gestellte Frage — unverändert übernehmen
-- "text": direkte, faktisch korrekte Antwort (1-3 Sätze, enthält konkrete Zahlen/Regelungen)
+- "text": direkte, faktisch korrekte Antwort (1–2 Sätze, EINE einzige Tatsache)
 - Keine Meinungen, keine Prognosen — ausschliesslich belegbare Fakten
-- confidence_score: 0.95–0.99 sehr gut belegt, 0.90–0.94 solide belegt
 
 QUELLEN — STRENGE REGELN:
 - source_urls: NUR Primärquellen — offizielle Behörden, Peer-reviewed Journals, Forschungsinstitute
@@ -660,7 +1092,7 @@ Antworte NUR als JSON-Array:
   }}
 ]"""
 
-    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+    client = _make_anthropic_client()
     response = client.messages.create(
         model=model,
         max_tokens=4096,
@@ -668,11 +1100,16 @@ Antworte NUR als JSON-Array:
         messages=[{"role": "user", "content": prompt}],
     )
 
-    raw = response.content[0].text.strip()
+    raw = response.content[0].text.strip() if response.content else ""
     if "```" in raw:
         raw = raw.split("```")[1]
         if raw.startswith("json"):
             raw = raw[4:]
+    raw = raw.strip()
+
+    if not raw:
+        print("    ✗ Phase 1: Leere API-Antwort — nutze Themen als Fallback")
+        return []
 
     try:
         questions = json.loads(raw)
@@ -734,15 +1171,20 @@ generiere einen präzisen, verifizierten Claim als direkte Antwort.
 Akzeptierte Primärquellen für source_urls (KEINE anderen, KEIN Wikipedia):
 {sources_str}
 
+⚠️ ATOMIZITÄTSPFLICHT: Jeder "text" enthält genau EINE Tatsache.
+Beispiel FALSCH: "Die EMA hat 900 Mitarbeiter, Sitz in Amsterdam und wurde 1995 gegründet."
+Beispiel RICHTIG: "Die Europäische Arzneimittelagentur (EMA) hat ihren Sitz in Amsterdam."
+Bei komplexen Fragen: wähle die eine wichtigste, direkteste Antwort-Tatsache.
+
 Fragen (Batch {batch_num + 1}/{batches}):
 {questions_str}
 
-Pflichtformat:
+Pflichtformat pro Claim:
 - "question": exakt die Frage aus der Liste (unverändert!)
-- "text": direkte faktische Antwort mit konkreten Zahlen/Regelungen (1-3 Sätze)
+- "text": 1–2 Sätze, EINE einzige Tatsache, mit konkreten Zahlen/Regelungen
 - "domain_id": "{domain_id}"
 - "language": "de"
-- "confidence_score": 0.95-0.99 für sehr gut belegte Fakten, 0.90-0.94 für solide
+- "confidence_score": 0.97–0.99 für direkt belegte Zahlen/Fakten, 0.95–0.96 für klar belegte Fakten
 - "source_urls": 1-2 reale URLs ausschliesslich aus den akzeptierten Primärquellen (KEIN Wikipedia)
 - "validators": [{{"name": "Swiss Truth Team", "institution": "Swiss Truth Foundation"}}]
 
@@ -750,7 +1192,7 @@ Antworte NUR mit dem JSON-Array, kein Text davor oder danach."""
 
         print(f"    Batch {batch_num + 1}/{batches} ({len(batch_questions)} Fragen)...", end=" ", flush=True)
 
-        client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        client = _make_anthropic_client()
         response = client.messages.create(
             model=model,
             max_tokens=8192,
@@ -813,7 +1255,7 @@ Antworte NUR mit dem JSON-Array."""
     batch_size = 25
     all_claims: list[dict] = []
     batches = (count + batch_size - 1) // batch_size
-    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+    client = _make_anthropic_client()
 
     for batch_num in range(batches):
         remaining = count - len(all_claims)

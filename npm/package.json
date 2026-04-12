@@ -1,0 +1,35 @@
+{
+  "name": "swiss-truth-mcp",
+  "version": "0.1.1",
+  "description": "Swiss Truth MCP — certified knowledge for AI agents. Stops hallucinations with source-backed facts.",
+  "keywords": ["mcp", "ai", "agents", "fact-checking", "hallucination", "rag", "llm", "knowledge-base"],
+  "homepage": "https://swisstruth.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swisstruthorg/swiss-truth-mcp"
+  },
+  "license": "MIT",
+  "author": "Swiss Truth <hello@swisstruth.org>",
+  "type": "module",
+  "bin": {
+    "swiss-truth-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

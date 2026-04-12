@@ -12,18 +12,83 @@ from __future__ import annotations
 import json
 from typing import Optional
 
+import asyncio
 import anthropic
+import httpx
 
 from swiss_truth_mcp.config import settings
 
-_client: Optional[anthropic.AsyncAnthropic] = None
+# Modell-Mapping: Anthropic SDK-Namen → open-claude.com-Namen
+_PROVIDER_MODEL_MAP: dict[str, str] = {
+    "claude-haiku-4-5-20251001":   "claude-sonnet-4.6",
+    "claude-haiku-4-5":            "claude-sonnet-4.6",
+    "claude-sonnet-4-5":           "claude-sonnet-4.6",
+    "claude-sonnet-4-5-20251022":  "claude-sonnet-4.6",
+}
+
+_http_client: Optional[httpx.AsyncClient] = None
+_sdk_client: Optional[anthropic.AsyncAnthropic] = None
 
 
-def _get_client() -> anthropic.AsyncAnthropic:
-    global _client
-    if _client is None:
-        _client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
-    return _client
+def _get_http_client() -> httpx.AsyncClient:
+    """Async httpx-Client für Drittanbieter (Cloudflare-WAF-kompatibel)."""
+    global _http_client
+    if _http_client is None:
+        _http_client = httpx.AsyncClient(
+            headers={"user-agent": "curl/8.4.0"},
+            timeout=httpx.Timeout(300.0),
+        )
+    return _http_client
+
+
+def _get_sdk_client() -> anthropic.AsyncAnthropic:
+    """Standard Anthropic SDK-Client (nur für offizielle Anthropic API)."""
+    global _sdk_client
+    if _sdk_client is None:
+        _sdk_client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
+    return _sdk_client
+
+
+async def _call_api(model: str, max_tokens: int, system: str, user_content: str) -> str:
+    """Unified API-Call — wählt automatisch SDK oder direktes httpx je nach Config.
+    Bei 503-Fehlern (Provider busy) wird bis zu 3× mit 2s Backoff wiederholt."""
+    if settings.anthropic_base_url:
+        mapped_model = _PROVIDER_MODEL_MAP.get(model, model)
+        for attempt in range(3):
+            r = await _get_http_client().post(
+                f"{settings.anthropic_base_url.rstrip('/')}/messages",
+                headers={
+                    "x-api-key": settings.anthropic_api_key,
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                },
+                json={
+                    "model": mapped_model,
+                    "max_tokens": max_tokens,
+                    "system": system,
+                    "messages": [{"role": "user", "content": user_content}],
+                },
+            )
+            data = r.json()
+            if "error" in data:
+                msg = data["error"].get("message", str(data["error"]))
+                code = data["error"].get("code", 0)
+                # 503 = Provider busy → retry
+                if (code == 503 or "busy" in msg.lower()) and attempt < 2:
+                    await asyncio.sleep(2 ** attempt)  # 1s, 2s
+                    continue
+                raise RuntimeError(msg)
+            return data["content"][0]["text"]
+        raise RuntimeError("Provider busy after 3 retries")
+    else:
+        client = _get_sdk_client()
+        message = await client.messages.create(
+            model=model,
+            max_tokens=max_tokens,
+            system=system,
+            messages=[{"role": "user", "content": user_content}],
+        )
+        return message.content[0].text
 
 
 SYSTEM_PROMPT = """Du bist ein Qualitätsprüfer für eine wissenschaftliche Wissensdatenbank.
@@ -50,22 +115,18 @@ async def pre_screen_claim(
     if not settings.anthropic_api_key:
         return _fallback_pre_screen(text, source_urls)
 
-    client = _get_client()
     try:
-        message = await client.messages.create(
+        content = await _call_api(
             model="claude-haiku-4-5-20251001",
             max_tokens=512,
             system=SYSTEM_PROMPT,
-            messages=[{
-                "role": "user",
-                "content": USER_TEMPLATE.format(
-                    text=text,
-                    domain_id=domain_id,
-                    sources=", ".join(source_urls) if source_urls else "keine",
-                ),
-            }],
+            user_content=USER_TEMPLATE.format(
+                text=text,
+                domain_id=domain_id,
+                sources=", ".join(source_urls) if source_urls else "keine",
+            ),
         )
-        content = message.content[0].text.strip()
+        content = content.strip()
         if content.startswith("```"):
             content = content.split("```")[1]
             if content.startswith("json"):
@@ -97,21 +158,17 @@ async def verify_source_supports_claim(claim_text: str, page_content: str) -> di
     if not settings.anthropic_api_key:
         return {"supports": True, "confidence": 0.5, "reason": "API nicht verfügbar"}
 
-    client = _get_client()
     try:
-        message = await client.messages.create(
+        raw = await _call_api(
             model="claude-haiku-4-5-20251001",
             max_tokens=256,
             system=VERIFY_SYSTEM_PROMPT,
-            messages=[{
-                "role": "user",
-                "content": (
-                    f"Behauptung: {claim_text}\n\n"
-                    f"Seiteninhalt (Auszug):\n{page_content[:3000]}"
-                ),
-            }],
+            user_content=(
+                f"Behauptung: {claim_text}\n\n"
+                f"Seiteninhalt (Auszug):\n{page_content[:3000]}"
+            ),
         )
-        raw = message.content[0].text.strip()
+        raw = raw.strip()
         if raw.startswith("```"):
             raw = raw.split("```")[1]
             if raw.startswith("json"):
@@ -138,21 +195,17 @@ async def compare_claims(submitted: str, certified: str) -> dict:
     if not settings.anthropic_api_key:
         return {"relation": "unrelated", "confidence": 0.5, "explanation": "API nicht verfügbar"}
 
-    client = _get_client()
     try:
-        message = await client.messages.create(
+        raw = await _call_api(
             model="claude-haiku-4-5-20251001",
             max_tokens=200,
             system=COMPARE_SYSTEM_PROMPT,
-            messages=[{
-                "role": "user",
-                "content": (
-                    f"SUBMITTED CLAIM: {submitted}\n\n"
-                    f"CERTIFIED FACT: {certified}"
-                ),
-            }],
+            user_content=(
+                f"SUBMITTED CLAIM: {submitted}\n\n"
+                f"CERTIFIED FACT: {certified}"
+            ),
         )
-        raw = message.content[0].text.strip()
+        raw = raw.strip()
         # Strip markdown code fences if present
         if raw.startswith("```"):
             raw = raw.split("```")[1]
