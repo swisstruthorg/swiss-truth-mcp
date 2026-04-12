@@ -1,0 +1,17 @@
+{
+  "_comment": "Kopiere den 'swiss-truth' Block in: ~/Library/Application Support/Claude/claude_desktop_config.json (unter 'mcpServers')",
+  "mcpServers": {
+    "swiss-truth": {
+      "command": "/Users/admin/Applications/swiss-truth-mcp/.venv/bin/python3.12",
+      "args": ["-m", "swiss_truth_mcp.mcp_server.server"],
+      "cwd": "/Users/admin/Applications/swiss-truth-mcp",
+      "env": {
+        "NEO4J_URI": "bolt://localhost:7687",
+        "NEO4J_USER": "neo4j",
+        "NEO4J_PASSWORD": "none",
+        "ANTHROPIC_API_KEY": "DEIN_KEY_HIER",
+        "SWISS_TRUTH_API_KEY": "dev-key-change-in-prod"
+      }
+    }
+  }
+}

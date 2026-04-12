@@ -21,6 +21,7 @@ from swiss_truth_mcp.mcp_server.tools import (
     verify_claim,
     verify_claims_batch,
     verify_response,
+    find_contradictions,
 )
 
 app = Server("swiss-truth")
@@ -272,6 +273,34 @@ async def handle_list_tools() -> list[types.Tool]:
                 "required": ["text"],
             },
         ),
+        types.Tool(
+            name="find_contradictions",
+            description=(
+                "Find certified claims in the knowledge base that contradict a given statement. "
+                "USE THIS TOOL as a safety check before publishing facts, or to surface knowledge conflicts. "
+                "Unlike verify_claim (which gives a single verdict), this tool returns ALL contradicting "
+                "certified claims with explanations — useful for understanding why a claim is disputed. "
+                "\n\nReturns:"
+                "\n- 'contradictions': list of certified claims that contradict the input"
+                "\n- 'contradiction_confidence': how strongly each certified claim contradicts"
+                "\n- 'explanation': why the certified claim contradicts"
+                "\n- 'total': number of contradictions found"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "claim_text": {
+                        "type": "string",
+                        "description": "The factual statement to check for contradictions.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Optional domain filter (e.g. 'swiss-law', 'ai-ml').",
+                    },
+                },
+                "required": ["claim_text"],
+            },
+        ),
     ]
 
 
@@ -290,6 +319,7 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[types.T
         "verify_claim": verify_claim,
         "verify_claims_batch": verify_claims_batch,
         "verify_response": verify_response,
+        "find_contradictions": find_contradictions,
     }
 
     if name not in tool_map:

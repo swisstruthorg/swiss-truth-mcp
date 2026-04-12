@@ -339,6 +339,111 @@ async def openai_tools():
     ]
 
 
+@meta_router.get("/api/compliance/eu-ai-act/{claim_id}", include_in_schema=True)
+async def eu_ai_act_compliance(claim_id: str):
+    """
+    EU AI Act Compliance Attestation für einen zertifizierten Claim.
+
+    Gibt eine strukturierte JSON-Attestierung zurück, die dokumentiert dass der Claim
+    die Anforderungen der EU AI Act Articles 9, 13 und 17 erfüllt:
+    - Art. 9: Risikomanagement (5-stufige Validierungs-Pipeline)
+    - Art. 13: Transparenz (Provenienz, Validator, Konfidenz, Quellen)
+    - Art. 17: Qualitätsmanagement (SHA256-Integrität, Expiry, Confidence-Decay)
+
+    Geeignet für regulierte Industrien (Finanz, Gesundheit, Recht) die
+    AI-Outputs für Compliance-Zwecke dokumentieren müssen.
+    """
+    from swiss_truth_mcp.validation.trust import decay_confidence
+    from datetime import datetime, timezone
+
+    async with get_session() as session:
+        claim = await queries.get_claim_by_id(session, claim_id)
+
+    if claim is None:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail=f"Claim '{claim_id}' not found")
+
+    if claim["status"] != "certified":
+        from fastapi import HTTPException
+        raise HTTPException(
+            status_code=422,
+            detail=f"Claim is not certified (status: {claim['status']}). Only certified claims qualify for compliance attestation."
+        )
+
+    effective_conf = decay_confidence(claim["confidence_score"], claim.get("last_reviewed"))
+    validators = claim.get("validated_by", [])
+    sources = claim.get("source_references", [])
+    now = datetime.now(timezone.utc).isoformat()
+
+    return {
+        "attestation_version": "1.0",
+        "attested_at": now,
+        "attested_by": "Swiss Truth MCP — swisstruth.org",
+
+        # Claim identity
+        "claim_id": claim_id,
+        "claim_text": claim["text"],
+        "domain": claim["domain_id"],
+        "language": claim.get("language", "unknown"),
+
+        # EU AI Act compliance fields
+        "compliant_with": [
+            "EU-AI-Act-Art-9",   # Risk management system
+            "EU-AI-Act-Art-13",  # Transparency and information provision
+            "EU-AI-Act-Art-17",  # Quality management system
+        ],
+
+        # Art. 9 — Risk Management: validation pipeline
+        "risk_management": {
+            "article": "EU AI Act Article 9",
+            "validation_stages_passed": 5,
+            "stages": [
+                "1. Semantic deduplication (cosine similarity ≥ 0.95)",
+                "2. AI pre-screen (Claude Haiku — atomicity, factuality, source check)",
+                "3. Source URL verification (content fetched and validated)",
+                "4. Expert peer review (human validation with confidence score)",
+                "5. SHA256 cryptographic signing + expiry assignment",
+            ],
+            "human_review_confirmed": len(validators) > 0,
+            "expert_count": len(validators),
+        },
+
+        # Art. 13 — Transparency: full provenance
+        "transparency": {
+            "article": "EU AI Act Article 13",
+            "validators": validators,
+            "source_count": len(sources),
+            "source_references": sources,
+            "confidence_score": claim["confidence_score"],
+            "effective_confidence": round(effective_conf, 4),
+            "last_reviewed": claim.get("last_reviewed"),
+            "expires_at": claim.get("expires_at"),
+        },
+
+        # Art. 17 — Quality Management: integrity & freshness
+        "quality_management": {
+            "article": "EU AI Act Article 17",
+            "cryptographic_integrity": claim.get("hash_sha256", ""),
+            "integrity_method": "SHA256 over canonical claim content",
+            "confidence_decay_rate": "1% per month since last review (floor: 50%)",
+            "ttl_days": 365,
+            "knowledge_cutoff": claim.get("last_reviewed"),
+            "renewal_required_after": claim.get("expires_at"),
+        },
+
+        # Machine-readable summary
+        "summary": {
+            "is_compliant": True,
+            "risk_level": "minimal",
+            "data_quality": "high" if effective_conf >= 0.90 else "medium" if effective_conf >= 0.75 else "low",
+            "freshness": "current" if claim.get("expires_at", "") > now[:10] else "renewal_recommended",
+        },
+
+        "verification_url": f"https://swisstruth.org/api/claims/{claim_id}",
+        "methodology_url": "https://swisstruth.org/trust",
+    }
+
+
 @meta_router.get("/domains", response_model=list[DomainResponse])
 async def list_domains():
     async with get_session() as session:

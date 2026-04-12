@@ -143,6 +143,34 @@ DOMAIN_PRIMARY_SOURCES = {
         "loc.gov (Library of Congress)",
         "histsoc.org / historicalreview.org (Historische Gesellschaften)",
     ],
+    # ── Europäische / Globale Domains ────────────────────────────────────────
+    "eu-law": [
+        "eur-lex.europa.eu (EU Official Journal & Legislation)",
+        "ec.europa.eu (European Commission — Regulations & Directives)",
+        "gdpr-info.eu / cnil.fr (GDPR resources)",
+        "digital-strategy.ec.europa.eu (EU AI Act, Digital Markets Act)",
+        "europarl.europa.eu (European Parliament)",
+        "curia.europa.eu (Court of Justice of the EU — Rulings)",
+        "edpb.europa.eu (European Data Protection Board)",
+    ],
+    "eu-health": [
+        "ema.europa.eu (European Medicines Agency)",
+        "ecdc.europa.eu (European Centre for Disease Prevention and Control)",
+        "who.int (World Health Organization)",
+        "ec.europa.eu/health (European Commission — Health Policy)",
+        "efsa.europa.eu (European Food Safety Authority)",
+        "eurosurveillance.org (Peer-reviewed EU epidemiology journal)",
+    ],
+    "global-science": [
+        "pubmed.ncbi.nlm.nih.gov (PubMed — biomedical literature)",
+        "arxiv.org (Preprint server — physics, math, bio, CS)",
+        "nature.com / science.org (Top peer-reviewed journals)",
+        "thelancet.com / nejm.org (Medical journals)",
+        "nih.gov (National Institutes of Health)",
+        "who.int (WHO — global health data)",
+        "cell.com (Cell Press journals)",
+        "royalsociety.org (Royal Society Publications)",
+    ],
 }
 
 DOMAINS = {
@@ -341,6 +369,75 @@ DOMAINS = {
             "Zweiter Weltkrieg", "Kalter Krieg",
         ],
         "wiki_lang": "de",
+    },
+    # ── Europäische / Globale Domains ────────────────────────────────────────
+    "eu-law": {
+        "name": "EU Law & Regulation",
+        "description": "European Union legislation, GDPR, AI Act, Digital Markets Act, and EU court rulings",
+        "topics": [
+            "GDPR (General Data Protection Regulation) — key rights and obligations",
+            "EU AI Act — risk categories and compliance requirements",
+            "Digital Markets Act (DMA) — gatekeeper obligations",
+            "Digital Services Act (DSA) — platform liability",
+            "EU competition law and antitrust enforcement",
+            "Court of Justice of the EU (CJEU) — landmark rulings",
+            "EU Charter of Fundamental Rights",
+            "European Arrest Warrant",
+            "EU product liability and consumer protection",
+            "Schengen Area — rules and member states",
+        ],
+        "faq_urls": [
+            "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+            "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679",
+        ],
+        "wiki_topics": ["General Data Protection Regulation", "AI Act"],
+        "wiki_lang": "en",
+    },
+    "eu-health": {
+        "name": "EU & Global Health",
+        "description": "European Medicines Agency, WHO guidelines, EU health policy, and global epidemiology",
+        "topics": [
+            "European Medicines Agency (EMA) — drug approval process",
+            "WHO essential medicines list",
+            "EU vaccination schedules and recommendations",
+            "ECDC disease surveillance — key findings",
+            "Antimicrobial resistance (AMR) — WHO data",
+            "EU health data space regulation",
+            "One Health approach (WHO/EU)",
+            "Global disease burden — WHO statistics",
+            "Pandemic preparedness — EU Health Union",
+            "EFSA food safety standards",
+        ],
+        "faq_urls": [
+            "https://www.ema.europa.eu/en/about-us/what-we-do/authorisation-medicines",
+            "https://www.who.int/news-room/fact-sheets",
+        ],
+        "wiki_topics": ["European Medicines Agency", "World Health Organization"],
+        "wiki_lang": "en",
+    },
+    "global-science": {
+        "name": "Global Science",
+        "description": "Peer-reviewed scientific findings across medicine, biology, physics, and interdisciplinary research",
+        "topics": [
+            "mRNA vaccine technology — mechanism and efficacy",
+            "CRISPR-Cas9 — gene editing applications",
+            "Cancer immunotherapy — checkpoint inhibitors",
+            "Antibiotic resistance mechanisms",
+            "Alzheimer's disease — current understanding",
+            "Quantum computing — current state and limitations",
+            "Microbiome and human health",
+            "Stem cell therapy — approved and experimental",
+            "Drug development pipeline — phases and approval rates",
+            "Global burden of disease — GBD study findings",
+        ],
+        "faq_urls": [
+            "https://www.nih.gov/research-training/research-resources",
+            "https://www.who.int/data/gho",
+        ],
+        "wiki_topics": [
+            "CRISPR", "mRNA vaccine", "Quantum computing",
+        ],
+        "wiki_lang": "en",
     },
 }
 

@@ -318,6 +318,72 @@ async def verify_claim(
     }
 
 
+async def find_contradictions(
+    claim_text: str,
+    domain: Optional[str] = None,
+) -> dict[str, Any]:
+    """
+    Sucht in der Wissensbasis nach zertifizierten Claims die der Behauptung widersprechen.
+    Nützlich zur Qualitätsprüfung und als Safety-Check vor dem Publizieren von Fakten.
+
+    Args:
+        claim_text: Die zu prüfende Behauptung
+        domain: Optionaler Domain-Filter
+
+    Returns:
+        Dict mit 'contradictions' (Liste der widersprechenden Claims) und 'total'
+    """
+    embedding = await embed_text(claim_text)
+
+    async with get_session() as session:
+        # Semantisch ähnliche Claims finden (niedrigerer Threshold = mehr Kandidaten)
+        candidates = await queries.find_conflicting_claims(
+            session, embedding, similarity_threshold=0.70
+        )
+
+    if not candidates:
+        return {
+            "contradictions": [],
+            "total": 0,
+            "checked_claim": claim_text,
+            "message": "No similar claims found in the knowledge base.",
+        }
+
+    # Domain-Filter anwenden
+    if domain:
+        candidates = [c for c in candidates if c.get("domain_id") == domain]
+
+    # Jeden Kandidaten semantisch vergleichen (parallel)
+    async def _check(c: dict) -> Optional[dict]:
+        comparison = await compare_claims(submitted=claim_text, certified=c["text"])
+        if comparison.get("relation") == "contradicts":
+            return {
+                "certified_claim": c["text"],
+                "claim_id": c["id"],
+                "confidence_score": c.get("confidence_score", 0.0),
+                "similarity": round(c.get("similarity", 0.0), 3),
+                "contradiction_confidence": comparison.get("confidence", 0.0),
+                "explanation": comparison.get("explanation", ""),
+            }
+        return None
+
+    results = await asyncio.gather(*[_check(c) for c in candidates])
+    contradictions = [r for r in results if r is not None]
+    contradictions.sort(key=lambda x: x["contradiction_confidence"], reverse=True)
+
+    return {
+        "contradictions": contradictions,
+        "total": len(contradictions),
+        "checked_claim": claim_text,
+        "candidates_checked": len(candidates),
+        "message": (
+            f"Found {len(contradictions)} contradiction(s) among {len(candidates)} similar claims."
+            if contradictions else
+            "No contradictions found. Claim is consistent with the knowledge base."
+        ),
+    }
+
+
 async def verify_claims_batch(
     claims: list[str],
     domain: Optional[str] = None,

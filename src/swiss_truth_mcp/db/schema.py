@@ -50,6 +50,9 @@ SEED_DOMAINS = [
     {"id": "swiss-agriculture","name": "Schweizer Landwirtschaft", "description": "Landwirtschaft, Lebensmittelproduktion und Agrarpolitik der Schweiz", "language": "de"},
     {"id": "world-science",    "name": "Naturwissenschaften",      "description": "Grundlagen der Physik, Chemie, Biologie und Mathematik", "language": "de"},
     {"id": "world-history",    "name": "Weltgeschichte",           "description": "Wichtige historische Ereignisse und Entwicklungen der Weltgeschichte", "language": "de"},
+    {"id": "eu-law",           "name": "EU Law & Regulation",      "description": "European Union legislation, GDPR, AI Act, Digital Markets Act, and EU court rulings", "language": "en"},
+    {"id": "eu-health",        "name": "EU & Global Health",        "description": "European Medicines Agency, WHO guidelines, EU health policy, and global epidemiology", "language": "en"},
+    {"id": "global-science",   "name": "Global Science",            "description": "Peer-reviewed scientific findings across medicine, biology, physics, and interdisciplinary research", "language": "en"},
 ]
 
 
