@@ -25,6 +25,7 @@ from swiss_truth_mcp.api.routes.anchor import router as anchor_router
 from swiss_truth_mcp.db.neo4j_client import close_driver, get_session
 from swiss_truth_mcp.db import queries, schema
 from swiss_truth_mcp.mcp_server.http_server import mcp_session_manager, handle_mcp_request
+from swiss_truth_mcp.middleware.rate_limiter import RateLimitMiddleware
 
 
 @asynccontextmanager
@@ -570,7 +571,8 @@ class _SwissTruthASGI:
 
 
 # `app` ist der uvicorn-Einstiegspunkt ("swiss_truth_mcp.api.main:app")
-app = _SwissTruthASGI()
+# RateLimitMiddleware ist die äusserste Schicht — prüft jeden Request vor MCP und FastAPI.
+app = RateLimitMiddleware(_SwissTruthASGI())
 
 
 def main():
