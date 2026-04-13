@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.swisstruthorg/swiss-truth-mcp",
+  "description": "Verified knowledge base for AI agents — stop hallucinations with certified facts.",
+  "repository": {
+    "url": "https://github.com/swisstruthorg/swiss-truth-mcp",
+    "source": "github",
+    "subfolder": "npm"
+  },
+  "version": "0.1.4",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "swiss-truth-mcp",
+      "version": "0.1.4",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "SWISS_TRUTH_API_KEY",
+          "description": "Optional API key for write operations (submit_claim). Not required for read-only tools.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
