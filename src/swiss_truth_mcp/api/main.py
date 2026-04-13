@@ -127,6 +127,18 @@ async def mcp_discovery():
                 "name": "get_claim_status",
                 "description": "Check the validation status of a submitted claim (draft → peer_review → certified).",
             },
+            {
+                "name": "verify_claims_batch",
+                "description": "Verify multiple claims in parallel. Returns verdict, confidence, and evidence per claim plus a summary.",
+            },
+            {
+                "name": "verify_response",
+                "description": "Check a full AI response paragraph for hallucination risk (low/medium/high). Atomizes text and verifies each statement.",
+            },
+            {
+                "name": "find_contradictions",
+                "description": "Find certified claims that contradict a given statement. Safety check before publishing facts.",
+            },
         ],
         "authentication": {
             "required": False,
@@ -335,6 +347,84 @@ async def openai_tools():
                         },
                     },
                     "required": ["claim_id"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "verify_claims_batch",
+                "description": (
+                    "Verify multiple factual claims in parallel against the Swiss Truth knowledge base. "
+                    "Much faster than calling verify_claim repeatedly. "
+                    "Returns per claim: verdict (supported|contradicted|unknown), confidence, and evidence. "
+                    "Also returns a summary with counts of supported/contradicted/unknown."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "claims": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "List of factual statements to verify. Max 20 items.",
+                        },
+                        "domain": {
+                            "type": "string",
+                            "description": "Optional domain filter applied to all claims (e.g. swiss-health, ai-ml).",
+                        },
+                    },
+                    "required": ["claims"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "verify_response",
+                "description": (
+                    "Check a full AI response paragraph for hallucination risk. "
+                    "Atomizes the text into individual claims, verifies each against the knowledge base, "
+                    "and returns an overall hallucination risk score: low | medium | high. "
+                    "Returns verified/contradicted/unverified counts and per-statement breakdown."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "type": "string",
+                            "description": "The full response text to check. Can be a paragraph or multiple sentences.",
+                        },
+                        "domain": {
+                            "type": "string",
+                            "description": "Optional domain filter (e.g. swiss-health). Omit to search all domains.",
+                        },
+                    },
+                    "required": ["text"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "find_contradictions",
+                "description": (
+                    "Find certified claims in the knowledge base that contradict a given statement. "
+                    "Use as a safety check before publishing facts. "
+                    "Returns all contradicting certified claims with explanations and contradiction confidence."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "claim_text": {
+                            "type": "string",
+                            "description": "The factual statement to check for contradictions.",
+                        },
+                        "domain": {
+                            "type": "string",
+                            "description": "Optional domain filter (e.g. swiss-law, ai-ml).",
+                        },
+                    },
+                    "required": ["claim_text"],
                 },
             },
         },
