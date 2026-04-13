@@ -22,6 +22,7 @@ from swiss_truth_mcp.api.routes.users import router as users_router
 from swiss_truth_mcp.api.routes.generate import router as generate_router
 from swiss_truth_mcp.api.routes.feed import router as feed_router
 from swiss_truth_mcp.api.routes.anchor import router as anchor_router
+from swiss_truth_mcp.api.routes.kanban import router as kanban_router
 from swiss_truth_mcp.db.neo4j_client import close_driver, get_session
 from swiss_truth_mcp.db import queries, schema
 from swiss_truth_mcp.mcp_server.http_server import mcp_session_manager, handle_mcp_request
@@ -58,6 +59,7 @@ _api_app.include_router(users_router)
 _api_app.include_router(generate_router)
 _api_app.include_router(feed_router)
 _api_app.include_router(anchor_router)
+_api_app.include_router(kanban_router)
 
 _TEMPLATES = Jinja2Templates(
     directory=str(Path(__file__).parent.parent / "templates")

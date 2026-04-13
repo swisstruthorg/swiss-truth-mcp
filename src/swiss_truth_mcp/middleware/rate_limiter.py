@@ -154,7 +154,7 @@ def _client_ip(scope: dict) -> str:
 # ---------------------------------------------------------------------------
 
 # Paths exempt from rate limiting (health, static, admin UI)
-_EXEMPT_PREFIXES = ("/static/", "/health", "/login", "/admin/")
+_EXEMPT_PREFIXES = ("/static/", "/health", "/login", "/admin/", "/kanban", "/dashboard", "/review")
 _EXEMPT_EXACT    = {"/health", "/favicon.ico"}
 
 
