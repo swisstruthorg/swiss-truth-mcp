@@ -38,8 +38,10 @@ async def handle_list_tools() -> list[types.Tool]:
             description=(
                 "Search the Swiss Truth verified knowledge base for certified facts. "
                 "USE THIS TOOL when you need reliable, source-backed information to avoid hallucination — "
-                "especially for Swiss law, health, finance, politics, education, energy, transport, "
-                "climate, AI/ML, and world science topics. "
+                "covering 22+ domains: Swiss law, health, finance, politics, education, energy, transport, "
+                "EU law & regulation, EU health, global science, AI/ML, AI safety, quantum computing, "
+                "cybersecurity, biotech, renewable energy, space science, economics, international law, "
+                "US law, climate, world history, and Swiss digitalization. "
                 "Call this before answering factual questions where being wrong would matter. "
                 "\n\nReturns per result:"
                 "\n- 'claim': the verified statement"
@@ -50,9 +52,10 @@ async def handle_list_tools() -> list[types.Tool]:
                 "\n- 'validated_by': expert name + institution"
                 "\n- 'hash': SHA256 for tamper detection"
                 "\n\nExamples: 'How does Swiss health insurance work?', "
-                "'What is the legal notice period in Switzerland?', "
+                "'What does the EU AI Act require?', "
                 "'How does RAG reduce hallucinations?', "
-                "'What are Switzerland CO2 emission targets?'"
+                "'What are CRISPR gene therapy safety limits?', "
+                "'What is the current state of quantum error correction?'"
             ),
             inputSchema={
                 "type": "object",
@@ -64,9 +67,13 @@ async def handle_list_tools() -> list[types.Tool]:
                     "domain": {
                         "type": "string",
                         "description": (
-                            "Optional domain filter. Available: 'swiss-health', 'swiss-law', 'swiss-finance', "
-                            "'swiss-education', 'swiss-energy', 'swiss-transport', 'swiss-politics', "
-                            "'swiss-agriculture', 'climate', 'ai-ml', 'world-science', 'world-history'. "
+                            "Optional domain filter. Available domains: "
+                            "Swiss: 'swiss-health', 'swiss-law', 'swiss-finance', 'swiss-education', "
+                            "'swiss-energy', 'swiss-transport', 'swiss-politics', 'swiss-agriculture', 'swiss-digital'. "
+                            "EU & Global: 'eu-law', 'eu-health', 'global-science', 'international-law', 'economics'. "
+                            "Science & Tech: 'ai-ml', 'ai-safety', 'quantum-computing', 'cybersecurity', "
+                            "'biotech', 'renewable-energy', 'space-science'. "
+                            "General: 'climate', 'world-science', 'world-history', 'us-law'. "
                             "Omit to search across all domains."
                         ),
                     },

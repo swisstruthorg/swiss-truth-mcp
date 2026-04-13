@@ -217,9 +217,13 @@ async def openai_tools():
                         "domain": {
                             "type": "string",
                             "description": (
-                                "Optional domain filter. Available: swiss-health, swiss-law, swiss-finance, "
-                                "swiss-education, swiss-energy, swiss-transport, swiss-politics, "
-                                "swiss-agriculture, climate, ai-ml, world-science, world-history. "
+                                "Optional domain filter. "
+                                "Swiss: swiss-health, swiss-law, swiss-finance, swiss-education, "
+                                "swiss-energy, swiss-transport, swiss-politics, swiss-agriculture, swiss-digital. "
+                                "EU & Global: eu-law, eu-health, global-science, international-law, economics. "
+                                "Science & Tech: ai-ml, ai-safety, quantum-computing, cybersecurity, "
+                                "biotech, renewable-energy, space-science. "
+                                "General: climate, world-science, world-history, us-law. "
                                 "Omit to search across all domains."
                             ),
                         },
