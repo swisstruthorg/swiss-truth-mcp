@@ -19,11 +19,14 @@ import httpx
 from swiss_truth_mcp.config import settings
 
 # Modell-Mapping: Anthropic SDK-Namen → open-claude.com-Namen
+# open-claude.com unterstützt nur claude-haiku-4-5-20251001
 _PROVIDER_MODEL_MAP: dict[str, str] = {
-    "claude-haiku-4-5-20251001":   "claude-sonnet-4.6",
-    "claude-haiku-4-5":            "claude-sonnet-4.6",
-    "claude-sonnet-4-5":           "claude-sonnet-4.6",
-    "claude-sonnet-4-5-20251022":  "claude-sonnet-4.6",
+    "claude-haiku-4-5-20251001":   "claude-haiku-4-5-20251001",
+    "claude-haiku-4-5":            "claude-haiku-4-5-20251001",
+    "claude-sonnet-4-5":           "claude-haiku-4-5-20251001",
+    "claude-sonnet-4-5-20251022":  "claude-haiku-4-5-20251001",
+    "claude-sonnet-4.6":           "claude-haiku-4-5-20251001",
+    "claude-opus-4-6":             "claude-haiku-4-5-20251001",
 }
 
 _http_client: Optional[httpx.AsyncClient] = None

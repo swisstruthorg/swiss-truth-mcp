@@ -61,14 +61,15 @@ class _HttpxClient:
     """
     _MODEL_MAP: dict[str, str] = {
         # Anthropic SDK-Namen → open-claude.com-Namen
-        # claude-haiku-4.5 ist oft überlastet → claude-sonnet-4.6 als primäres Modell
-        "claude-sonnet-4-5":          "claude-sonnet-4.6",
-        "claude-sonnet-4-5-20251022":  "claude-sonnet-4.6",
-        "claude-haiku-4-5":           "claude-haiku-4.5",
-        "claude-haiku-4-5-20251001":   "claude-haiku-4.5",
-        "claude-opus-4-5":            "claude-opus-4.6",
-        "claude-sonnet-4-6":          "claude-sonnet-4.6",
-        "claude-opus-4-6":            "claude-opus-4.6",
+        # open-claude.com unterstützt nur claude-haiku-4-5-20251001
+        "claude-sonnet-4-5":           "claude-haiku-4-5-20251001",
+        "claude-sonnet-4-5-20251022":  "claude-haiku-4-5-20251001",
+        "claude-haiku-4-5":            "claude-haiku-4-5-20251001",
+        "claude-haiku-4-5-20251001":   "claude-haiku-4-5-20251001",
+        "claude-opus-4-5":             "claude-haiku-4-5-20251001",
+        "claude-sonnet-4-6":           "claude-haiku-4-5-20251001",
+        "claude-sonnet-4.6":           "claude-haiku-4-5-20251001",
+        "claude-opus-4-6":             "claude-haiku-4-5-20251001",
     }
 
     def __init__(self, api_key: str, base_url: str) -> None:
