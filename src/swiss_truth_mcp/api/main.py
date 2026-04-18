@@ -23,10 +23,14 @@ from swiss_truth_mcp.api.routes.generate import router as generate_router
 from swiss_truth_mcp.api.routes.feed import router as feed_router
 from swiss_truth_mcp.api.routes.anchor import router as anchor_router
 from swiss_truth_mcp.api.routes.kanban import router as kanban_router
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.triggers.cron import CronTrigger
+
 from swiss_truth_mcp.db.neo4j_client import close_driver, get_session
 from swiss_truth_mcp.db import queries, schema
 from swiss_truth_mcp.mcp_server.http_server import mcp_session_manager, handle_mcp_request
 from swiss_truth_mcp.middleware.rate_limiter import RateLimitMiddleware
+from swiss_truth_mcp.renewal.cost_cap import daily_cap
 
 
 @asynccontextmanager
@@ -34,10 +38,29 @@ async def lifespan(api_app: FastAPI):
     # Schema + Indizes in Neo4j sicherstellen
     async with get_session() as session:
         await schema.setup_schema(session)
+
+    # APScheduler: täglicher Reset des Renewal-Kosten-Caps um Mitternacht UTC (SEC-05)
+    scheduler = AsyncIOScheduler()
+
+    def _reset_daily_cap() -> None:
+        """Setzt den täglichen API-Kosten-Cap zurück. Läuft um 00:00 UTC."""
+        daily_cap.reset()
+
+    scheduler.add_job(
+        _reset_daily_cap,
+        trigger=CronTrigger(hour=0, minute=0, timezone="UTC"),
+        id="daily_cap_reset",
+        replace_existing=True,
+    )
+    scheduler.start()
+
     # MCP Session Manager starten (stateless, SSE streaming)
-    async with mcp_session_manager.run():
-        yield
-    await close_driver()
+    try:
+        async with mcp_session_manager.run():
+            yield
+    finally:
+        scheduler.shutdown(wait=False)
+        await close_driver()
 
 
 # ─── FastAPI (REST API + Dashboard + Review UI) ───────────────────────────────

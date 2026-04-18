@@ -65,6 +65,43 @@ except ModuleNotFoundError:
     _fastapi_stub.HTTPException = _HTTPException
     _fastapi_stub.APIRouter = _PassthroughRouterClass
     _fastapi_stub.Query = lambda *a, **kw: None
+    # FastAPI class stub — returns a minimal object with include_router, mount, add_middleware
+    _fastapi_stub.FastAPI = _MM
     sys.modules.setdefault("fastapi", _fastapi_stub)
     sys.modules.setdefault("fastapi.responses", _MM())
     sys.modules.setdefault("fastapi.routing", _MM())
+    sys.modules.setdefault("fastapi.requests", _MM())
+    sys.modules.setdefault("fastapi.staticfiles", _MM())
+    sys.modules.setdefault("fastapi.templating", _MM())
+    sys.modules.setdefault("starlette.types", _MM())
+
+# ------------------------------------------------------------------
+# uvicorn stub — api/main.py importiert uvicorn für den main()-Einstiegspunkt
+# ------------------------------------------------------------------
+try:
+    import uvicorn  # noqa: F401
+except ModuleNotFoundError:
+    from unittest.mock import MagicMock as _UMM
+    _uvicorn_stub = _UMM()
+    sys.modules.setdefault("uvicorn", _uvicorn_stub)
+
+# ------------------------------------------------------------------
+# api/main.py-Abhängigkeiten stubben damit lifespan-Tests importieren können
+# (api/models.py nutzt float|None Union-Syntax die Python 3.9 nicht versteht)
+# ------------------------------------------------------------------
+from unittest.mock import MagicMock as _RMM
+sys.modules.setdefault("starlette", _RMM())
+sys.modules.setdefault("starlette.types", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.models", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.claims", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.search", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.review", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.n8n", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.dashboard", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.auth", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.users", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.generate", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.anchor", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.api.routes.kanban", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.middleware.rate_limiter", _RMM())
+sys.modules.setdefault("swiss_truth_mcp.mcp_server.http_server", _RMM())
