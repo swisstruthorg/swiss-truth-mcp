@@ -167,3 +167,239 @@ async def test_get_claim_status_expired_returns_not_found():
     assert "error" in result, (
         f"get_claim_status gab Claim-Daten zurück obwohl only_live=True None lieferte: {result}"
     )
+
+
+# ---------------------------------------------------------------------------
+# SEC-03: SSRF Validation (Plan 01-02 Task 1)
+# ---------------------------------------------------------------------------
+
+def test_ssrf_blocks_loopback_v4():
+    """validate_webhook_url muss 127.0.0.1 ablehnen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://127.0.0.1/hook")
+
+
+def test_ssrf_blocks_loopback_hostname(monkeypatch):
+    """validate_webhook_url muss localhost ablehnen (DNS gemockt)."""
+    from swiss_truth_mcp.validation import ssrf
+    monkeypatch.setattr("swiss_truth_mcp.validation.ssrf.socket.gethostbyname",
+                        lambda h: "127.0.0.1")
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://localhost/hook")
+
+
+def test_ssrf_blocks_rfc1918_10():
+    """validate_webhook_url muss 10.x.x.x ablehnen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://10.0.0.1/hook")
+
+
+def test_ssrf_blocks_rfc1918_192():
+    """validate_webhook_url muss 192.168.x.x ablehnen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://192.168.1.100/hook")
+
+
+def test_ssrf_blocks_rfc1918_172():
+    """validate_webhook_url muss 172.16.x.x ablehnen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://172.16.0.1/hook")
+
+
+def test_ssrf_blocks_link_local():
+    """validate_webhook_url muss 169.254.169.254 (AWS-Metadata) ablehnen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://169.254.169.254/meta")
+
+
+def test_ssrf_blocks_ipv6_loopback():
+    """validate_webhook_url muss IPv6 ::1 ablehnen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    with pytest.raises(ValueError):
+        validate_webhook_url("http://[::1]/hook")
+
+
+def test_ssrf_allows_public(monkeypatch):
+    """validate_webhook_url muss öffentliche URLs durchlassen."""
+    monkeypatch.setattr("swiss_truth_mcp.validation.ssrf.socket.gethostbyname",
+                        lambda h: "93.184.216.34")  # example.com
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    validate_webhook_url("https://example.com/hook")  # darf nicht raisen
+
+
+def test_ssrf_allows_public_ip():
+    """validate_webhook_url muss öffentliche IPs durchlassen."""
+    from swiss_truth_mcp.validation.ssrf import validate_webhook_url
+    validate_webhook_url("https://8.8.8.8/hook")  # darf nicht raisen
+
+
+def test_webhook_secret_default():
+    """Settings().webhook_secret leer → effective_webhook_secret gibt secret_key zurück."""
+    from swiss_truth_mcp.config import Settings
+    s = Settings()
+    assert s.effective_webhook_secret == s.secret_key
+
+
+# ---------------------------------------------------------------------------
+# SEC-03 / SEC-04: SSRF in feed.py + HMAC in webhook.py (Plan 01-02 Task 2)
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_subscribe_webhook_rejects_private_ip():
+    """POST /webhooks mit privater IP muss HTTP 422 zurückgeben."""
+    from fastapi.testclient import TestClient
+    from swiss_truth_mcp.api.routes.feed import router
+    from fastapi import FastAPI
+
+    app = FastAPI()
+    app.include_router(router)
+
+    with patch("swiss_truth_mcp.api.routes.feed.validate_webhook_url",
+               side_effect=ValueError("private IP")) as mock_validate:
+        with TestClient(app) as client:
+            resp = client.post("/webhooks", json={"url": "http://10.0.0.1/hook"})
+    assert resp.status_code == 422
+    assert "private" in resp.json().get("detail", "").lower()
+
+
+@pytest.mark.asyncio
+async def test_subscribe_webhook_accepts_public():
+    """POST /webhooks mit öffentlicher URL muss HTTP 201 zurückgeben."""
+    from fastapi.testclient import TestClient
+    from swiss_truth_mcp.api.routes.feed import router
+    from fastapi import FastAPI
+
+    app = FastAPI()
+    app.include_router(router)
+
+    with patch("swiss_truth_mcp.api.routes.feed.validate_webhook_url", return_value=None):
+        with patch("swiss_truth_mcp.api.routes.feed.queries.create_webhook_subscription",
+                   new=AsyncMock(return_value=None)):
+            with TestClient(app) as client:
+                resp = client.post("/webhooks", json={"url": "https://example.com/hook"})
+    assert resp.status_code == 201
+
+
+@pytest.mark.asyncio
+async def test_fire_event_sends_hmac(monkeypatch):
+    """fire_event() muss X-Signature Header mit sha256= Prefix senden."""
+    import swiss_truth_mcp.integrations.webhook as wh
+    monkeypatch.setattr("swiss_truth_mcp.integrations.webhook.settings",
+                        type("S", (), {
+                            "n8n_webhook_url": "https://n8n.example.com/hook",
+                            "effective_webhook_secret": "test-secret",
+                        })())
+
+    captured_headers = {}
+
+    async def fake_post(url, *, content=None, headers=None, **kwargs):
+        captured_headers.update(headers or {})
+        resp = MagicMock()
+        resp.status_code = 200
+        return resp
+
+    mock_client = AsyncMock()
+    mock_client.__aenter__ = AsyncMock(return_value=mock_client)
+    mock_client.__aexit__ = AsyncMock(return_value=None)
+    mock_client.post = fake_post
+
+    with patch("swiss_truth_mcp.integrations.webhook.httpx.AsyncClient",
+               return_value=mock_client):
+        await wh.fire_event("claim.certified", {"claim_id": "abc"})
+
+    assert "X-Signature" in captured_headers, "X-Signature Header fehlt in fire_event"
+    assert captured_headers["X-Signature"].startswith("sha256="), \
+        f"X-Signature hat falsches Format: {captured_headers['X-Signature']}"
+
+
+@pytest.mark.asyncio
+async def test_fire_subscribers_sends_hmac(monkeypatch):
+    """fire_subscribers() muss X-Signature Header auf Subscriber-POSTs senden."""
+    import swiss_truth_mcp.integrations.webhook as wh
+    monkeypatch.setattr("swiss_truth_mcp.integrations.webhook.settings",
+                        type("S", (), {
+                            "n8n_webhook_url": "",
+                            "effective_webhook_secret": "test-secret",
+                        })())
+
+    captured_headers = {}
+
+    async def fake_post(url, *, content=None, headers=None, **kwargs):
+        captured_headers.update(headers or {})
+        resp = MagicMock()
+        resp.status_code = 200
+        return resp
+
+    mock_client = AsyncMock()
+    mock_client.__aenter__ = AsyncMock(return_value=mock_client)
+    mock_client.__aexit__ = AsyncMock(return_value=None)
+    mock_client.post = fake_post
+
+    mock_subs = [{"url": "https://receiver.example.com/hook", "label": "test",
+                  "domain_filter": None}]
+
+    with patch("swiss_truth_mcp.integrations.webhook.httpx.AsyncClient",
+               return_value=mock_client):
+        with patch("swiss_truth_mcp.integrations.webhook.queries.list_webhook_subscriptions",
+                   new=AsyncMock(return_value=mock_subs)):
+            session_mock = AsyncMock()
+            session_mock.__aenter__ = AsyncMock(return_value=session_mock)
+            session_mock.__aexit__ = AsyncMock(return_value=None)
+            with patch("swiss_truth_mcp.integrations.webhook.get_session",
+                       return_value=session_mock):
+                await wh.fire_subscribers("claim.certified", {"domain_id": "ai-ml"})
+
+    assert "X-Signature" in captured_headers, "X-Signature Header fehlt in fire_subscribers"
+    assert captured_headers["X-Signature"].startswith("sha256="), \
+        f"X-Signature hat falsches Format: {captured_headers['X-Signature']}"
+
+
+@pytest.mark.asyncio
+async def test_hmac_signature_verifiable(monkeypatch):
+    """HMAC-Signatur muss mit dem webhook_secret verifizierbar sein."""
+    import hashlib
+    import hmac as hmac_lib
+    import json as json_lib
+    import swiss_truth_mcp.integrations.webhook as wh
+
+    test_secret = "my-test-webhook-secret"
+    monkeypatch.setattr("swiss_truth_mcp.integrations.webhook.settings",
+                        type("S", (), {
+                            "n8n_webhook_url": "https://n8n.example.com/hook",
+                            "effective_webhook_secret": test_secret,
+                        })())
+
+    captured = {}
+
+    async def fake_post(url, *, content=None, headers=None, **kwargs):
+        captured["body"] = content
+        captured["headers"] = headers or {}
+        resp = MagicMock()
+        resp.status_code = 200
+        return resp
+
+    mock_client = AsyncMock()
+    mock_client.__aenter__ = AsyncMock(return_value=mock_client)
+    mock_client.__aexit__ = AsyncMock(return_value=None)
+    mock_client.post = fake_post
+
+    with patch("swiss_truth_mcp.integrations.webhook.httpx.AsyncClient",
+               return_value=mock_client):
+        await wh.fire_event("claim.certified", {"claim_id": "test-123"})
+
+    body_bytes = captured["body"]
+    sig_header = captured["headers"].get("X-Signature", "")
+    assert sig_header.startswith("sha256=")
+    received_hex = sig_header[7:]
+
+    expected_hex = hmac_lib.new(
+        test_secret.encode("utf-8"), body_bytes, hashlib.sha256
+    ).hexdigest()
+    assert hmac_lib.compare_digest(expected_hex, received_hex), \
+        f"Signatur nicht verifizierbar. Erwartet: {expected_hex}, Erhalten: {received_hex}"
