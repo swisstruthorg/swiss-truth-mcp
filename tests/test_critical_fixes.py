@@ -32,14 +32,19 @@ def test_get_sdk_client_uses_timeout():
     # Reset singleton so factory runs fresh
     ps._sdk_client = None
 
-    with patch.object(anthropic, "AsyncAnthropic") as mock_cls:
+    with patch("anthropic.AsyncAnthropic") as mock_cls:
         mock_cls.return_value = MagicMock()
         ps._get_sdk_client()
         mock_cls.assert_called_once()
-        kwargs = mock_cls.call_args.kwargs
-        assert "timeout" in kwargs, "AsyncAnthropic wurde ohne timeout-Parameter aufgerufen"
-        # Wert muss dem settings-Default entsprechen (30)
-        assert kwargs["timeout"] == 30
+        call_kwargs = mock_cls.call_args[1] if mock_cls.call_args[1] else {}
+        call_args = mock_cls.call_args[0] if mock_cls.call_args[0] else ()
+        # timeout kann als positional oder keyword arg übergeben werden
+        all_kwargs = dict(zip(["api_key", "timeout"], call_args))
+        all_kwargs.update(call_kwargs)
+        assert "timeout" in all_kwargs, (
+            f"AsyncAnthropic wurde ohne timeout-Parameter aufgerufen. Calls: {mock_cls.call_args}"
+        )
+        assert all_kwargs["timeout"] == 30
 
 
 # ---------------------------------------------------------------------------

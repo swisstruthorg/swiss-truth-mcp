@@ -24,6 +24,9 @@ class Settings(BaseSettings):
     # n8n webhook — wenn gesetzt, wird bei Claim-Zertifizierung ein Event gesendet
     n8n_webhook_url: str = ""
 
+    # Anthropic API Timeout in Sekunden (verhindert Hänger bei API-Outage)
+    anthropic_timeout_seconds: int = 30
+
     # Auth — JWT Secret Key (in Produktion unbedingt in .env setzen!)
     secret_key: str = "dev-secret-key-change-in-production-please"
 

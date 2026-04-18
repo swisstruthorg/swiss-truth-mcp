@@ -48,7 +48,10 @@ def _get_sdk_client() -> anthropic.AsyncAnthropic:
     """Standard Anthropic SDK-Client (nur für offizielle Anthropic API)."""
     global _sdk_client
     if _sdk_client is None:
-        _sdk_client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
+        _sdk_client = anthropic.AsyncAnthropic(
+            api_key=settings.anthropic_api_key,
+            timeout=settings.anthropic_timeout_seconds,
+        )
     return _sdk_client
 
 
