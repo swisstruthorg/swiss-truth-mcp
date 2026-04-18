@@ -20,6 +20,7 @@ from pydantic import BaseModel, HttpUrl
 from swiss_truth_mcp.db.neo4j_client import get_session
 from swiss_truth_mcp.db import queries
 from swiss_truth_mcp.validation.trust import now_iso
+from swiss_truth_mcp.validation.ssrf import validate_webhook_url
 
 router = APIRouter(tags=["feed"])
 
@@ -134,6 +135,12 @@ async def subscribe_webhook(body: WebhookSubscribeRequest):
       "mcp_endpoint": "https://swisstruth.org/mcp"
     }
     """
+    # SSRF-Schutz: URL gegen private IP-Ranges prüfen (SEC-03)
+    try:
+        validate_webhook_url(str(body.url))
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+
     sub_id = str(uuid.uuid4())
     token  = str(uuid.uuid4())
     sub = {

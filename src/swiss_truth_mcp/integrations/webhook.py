@@ -11,6 +11,9 @@ Events:
 """
 from __future__ import annotations
 
+import hashlib
+import hmac
+import json
 import logging
 from typing import Any
 
@@ -28,11 +31,22 @@ EVENTS = {
 }
 
 
+def _sign_body(body_bytes: bytes) -> str:
+    """Berechnet HMAC-SHA256 Signatur für einen Webhook-Body.
+
+    Returns: 'sha256=<hex>' — passt zum X-Signature Header-Format (GitHub-Konvention).
+    """
+    secret = settings.effective_webhook_secret.encode("utf-8")
+    sig = hmac.new(secret, body_bytes, hashlib.sha256).hexdigest()
+    return f"sha256={sig}"
+
+
 async def fire_event(event: str, payload: dict[str, Any]) -> None:
     """
     Sendet ein Webhook-Event an die konfigurierte N8N_WEBHOOK_URL.
     Fehler werden geloggt, aber nie nach oben weitergegeben
     (fire-and-forget, non-blocking für den Caller).
+    Jeder Request wird mit HMAC-SHA256 signiert (SEC-04).
     """
     url = settings.n8n_webhook_url.strip()
     if not url:
@@ -45,9 +59,20 @@ async def fire_event(event: str, payload: dict[str, Any]) -> None:
         **payload,
     }
 
+    # Deterministische Serialisierung für HMAC-Signatur (SEC-04)
+    body_bytes = json.dumps(body, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    signature = _sign_body(body_bytes)
+
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
-            resp = await client.post(url, json=body)
+            resp = await client.post(
+                url,
+                content=body_bytes,
+                headers={
+                    "Content-Type": "application/json",
+                    "X-Signature": signature,
+                },
+            )
             if resp.status_code >= 400:
                 logger.warning("Webhook %s → HTTP %d: %s", url, resp.status_code, resp.text[:200])
             else:
@@ -96,10 +121,21 @@ async def fire_subscribers(event: str, claim: dict[str, Any]) -> None:
         "feed_url":     "https://swisstruth.org/feed.rss",
     }
 
+    # Deterministische Serialisierung für HMAC-Signatur (SEC-04)
+    body_bytes = json.dumps(body, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    signature = _sign_body(body_bytes)
+
     async with httpx.AsyncClient(timeout=8.0) as client:
         for sub in subs:
             try:
-                resp = await client.post(sub["url"], json=body)
+                resp = await client.post(
+                    sub["url"],
+                    content=body_bytes,
+                    headers={
+                        "Content-Type": "application/json",
+                        "X-Signature": signature,
+                    },
+                )
                 logger.info("Subscriber [%s] %s → %d", sub.get("label", "?"), sub["url"][:60], resp.status_code)
             except httpx.RequestError as exc:
                 logger.warning("Subscriber delivery failed [%s]: %s", sub.get("label", "?"), exc)

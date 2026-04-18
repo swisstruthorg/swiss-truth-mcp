@@ -252,38 +252,43 @@ def test_webhook_secret_default():
 
 @pytest.mark.asyncio
 async def test_subscribe_webhook_rejects_private_ip():
-    """POST /webhooks mit privater IP muss HTTP 422 zurückgeben."""
-    from fastapi.testclient import TestClient
-    from swiss_truth_mcp.api.routes.feed import router
-    from fastapi import FastAPI
+    """subscribe_webhook muss bei privater IP eine HTTPException(422) raisen."""
+    # Direkte Unit-Test ohne FastAPI TestClient (fastapi nicht im Test-env installiert)
+    from swiss_truth_mcp.api.routes.feed import subscribe_webhook, WebhookSubscribeRequest
+    from pydantic import HttpUrl
 
-    app = FastAPI()
-    app.include_router(router)
+    body = WebhookSubscribeRequest(url=HttpUrl("http://10.0.0.1/hook"))
 
     with patch("swiss_truth_mcp.api.routes.feed.validate_webhook_url",
-               side_effect=ValueError("private IP")) as mock_validate:
-        with TestClient(app) as client:
-            resp = client.post("/webhooks", json={"url": "http://10.0.0.1/hook"})
-    assert resp.status_code == 422
-    assert "private" in resp.json().get("detail", "").lower()
+               side_effect=ValueError("private IP")):
+        try:
+            await subscribe_webhook(body)
+            assert False, "HTTPException wurde nicht geraist"
+        except Exception as exc:
+            # Prüfe status_code + detail (funktioniert mit echter HTTPException und dem Stub)
+            assert hasattr(exc, "status_code"), f"Exception hat kein status_code-Attribut: {type(exc)}"
+            assert exc.status_code == 422, f"Falscher status_code: {exc.status_code}"
+            assert "private" in str(exc.detail).lower(), f"detail enthält nicht 'private': {exc.detail}"
 
 
 @pytest.mark.asyncio
 async def test_subscribe_webhook_accepts_public():
-    """POST /webhooks mit öffentlicher URL muss HTTP 201 zurückgeben."""
-    from fastapi.testclient import TestClient
-    from swiss_truth_mcp.api.routes.feed import router
-    from fastapi import FastAPI
+    """subscribe_webhook muss öffentliche URLs akzeptieren (kein Fehler)."""
+    from swiss_truth_mcp.api.routes.feed import subscribe_webhook, WebhookSubscribeRequest
+    from pydantic import HttpUrl
 
-    app = FastAPI()
-    app.include_router(router)
+    body = WebhookSubscribeRequest(url=HttpUrl("https://example.com/hook"))
 
     with patch("swiss_truth_mcp.api.routes.feed.validate_webhook_url", return_value=None):
-        with patch("swiss_truth_mcp.api.routes.feed.queries.create_webhook_subscription",
-                   new=AsyncMock(return_value=None)):
-            with TestClient(app) as client:
-                resp = client.post("/webhooks", json={"url": "https://example.com/hook"})
-    assert resp.status_code == 201
+        session_mock = AsyncMock()
+        session_mock.__aenter__ = AsyncMock(return_value=session_mock)
+        session_mock.__aexit__ = AsyncMock(return_value=None)
+        with patch("swiss_truth_mcp.api.routes.feed.get_session", return_value=session_mock):
+            with patch("swiss_truth_mcp.api.routes.feed.queries.create_webhook_subscription",
+                       new=AsyncMock(return_value=None)):
+                result = await subscribe_webhook(body)
+    assert "id" in result
+    assert result["subscribed_to"] == "https://example.com/hook"
 
 
 @pytest.mark.asyncio
@@ -344,14 +349,16 @@ async def test_fire_subscribers_sends_hmac(monkeypatch):
     mock_subs = [{"url": "https://receiver.example.com/hook", "label": "test",
                   "domain_filter": None}]
 
+    session_mock = AsyncMock()
+    session_mock.__aenter__ = AsyncMock(return_value=session_mock)
+    session_mock.__aexit__ = AsyncMock(return_value=None)
+
     with patch("swiss_truth_mcp.integrations.webhook.httpx.AsyncClient",
                return_value=mock_client):
-        with patch("swiss_truth_mcp.integrations.webhook.queries.list_webhook_subscriptions",
+        # queries ist ein lazy import in fire_subscribers — patch am Quellmodul
+        with patch("swiss_truth_mcp.db.queries.list_webhook_subscriptions",
                    new=AsyncMock(return_value=mock_subs)):
-            session_mock = AsyncMock()
-            session_mock.__aenter__ = AsyncMock(return_value=session_mock)
-            session_mock.__aexit__ = AsyncMock(return_value=None)
-            with patch("swiss_truth_mcp.integrations.webhook.get_session",
+            with patch("swiss_truth_mcp.db.neo4j_client.get_session",
                        return_value=session_mock):
                 await wh.fire_subscribers("claim.certified", {"domain_id": "ai-ml"})
 
