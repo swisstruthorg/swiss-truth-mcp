@@ -42,6 +42,7 @@ async def search_claims(
     YIELD node AS c, score AS vector_score
     WHERE c.status = 'certified'
       AND c.confidence_score >= $min_confidence
+      AND (c.expires_at IS NULL OR c.expires_at > datetime())
       {domain_filter}
       {language_filter}
     OPTIONAL MATCH (e:Expert)-[v:VALIDATES]->(c)
@@ -81,7 +82,11 @@ async def search_claims(
 # Get single claim
 # ---------------------------------------------------------------------------
 
-async def get_claim_by_id(session: AsyncSession, claim_id: str) -> Optional[dict[str, Any]]:
+async def get_claim_by_id(
+    session: AsyncSession,
+    claim_id: str,
+    only_live: bool = False,
+) -> Optional[dict[str, Any]]:
     result = await session.run(
         """
         MATCH (c:Claim {id: $id})
@@ -100,7 +105,13 @@ async def get_claim_by_id(session: AsyncSession, claim_id: str) -> Optional[dict
     row = await result.single()
     if row is None:
         return None
-    return _with_decay({**row["claim"], "validated_by": row["validators"], "source_references": row["sources"]})
+    claim = _with_decay({**row["claim"], "validated_by": row["validators"], "source_references": row["sources"]})
+    if only_live:
+        from swiss_truth_mcp.validation.trust import now_iso
+        expires_at = claim.get("expires_at")
+        if expires_at and expires_at < now_iso():
+            return None
+    return claim
 
 
 # ---------------------------------------------------------------------------

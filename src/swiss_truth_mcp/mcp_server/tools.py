@@ -139,7 +139,7 @@ async def get_claim(claim_id: str) -> dict[str, Any]:
         Vollständiger Claim mit Validierungs-Metadaten und Hash
     """
     async with get_session() as session:
-        claim = await queries.get_claim_by_id(session, claim_id)
+        claim = await queries.get_claim_by_id(session, claim_id, only_live=True)
 
     if claim is None:
         return {"error": f"Claim '{claim_id}' nicht gefunden"}
@@ -550,7 +550,7 @@ async def get_claim_status(claim_id: str) -> dict[str, Any]:
         Status, Konfidenz und nächste Schritte
     """
     async with get_session() as session:
-        claim = await queries.get_claim_by_id(session, claim_id)
+        claim = await queries.get_claim_by_id(session, claim_id, only_live=True)
 
     if claim is None:
         return {"error": f"Claim '{claim_id}' nicht gefunden"}
