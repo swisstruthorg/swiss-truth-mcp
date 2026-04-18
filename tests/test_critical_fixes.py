@@ -367,6 +367,154 @@ async def test_fire_subscribers_sends_hmac(monkeypatch):
         f"X-Signature hat falsches Format: {captured_headers['X-Signature']}"
 
 
+# ---------------------------------------------------------------------------
+# SEC-05: Renewal Cost Cap (Plan 01-03)
+# ---------------------------------------------------------------------------
+
+def test_cost_cap_starts_at_zero():
+    """DailySpendCap.current_spend muss beim Start 0.0 sein."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    cap = DailySpendCap()
+    assert cap.current_spend == 0.0
+
+
+def test_cost_cap_record_spend():
+    """record_spend() muss den Betrag kumulativ addieren."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    cap = DailySpendCap()
+    cap.record_spend(3.0)
+    cap.record_spend(2.5)
+    assert cap.current_spend == 5.5
+
+
+def test_cost_cap_not_reached():
+    """is_cap_reached() muss False zurückgeben wenn Verbrauch unter dem Cap liegt."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    from swiss_truth_mcp.config import Settings
+    cap = DailySpendCap()
+    cap.record_spend(5.0)
+    # Default cap = 10.0
+    assert not cap.is_cap_reached()
+
+
+def test_cost_cap_reached():
+    """is_cap_reached() muss True zurückgeben wenn Verbrauch >= MAX_RENEWAL_SPEND_USD."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    cap = DailySpendCap()
+    cap.record_spend(10.01)
+    assert cap.is_cap_reached()
+
+
+def test_cost_cap_check_raises():
+    """check_cap_or_raise() muss CapExceededError werfen wenn Cap überschritten."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap, CapExceededError
+    cap = DailySpendCap()
+    cap.record_spend(10.01)
+    with pytest.raises(CapExceededError):
+        cap.check_cap_or_raise()
+
+
+def test_cost_cap_check_passes():
+    """check_cap_or_raise() darf keine Exception werfen wenn Cap nicht erreicht."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    cap = DailySpendCap()
+    cap.record_spend(5.0)
+    cap.check_cap_or_raise()  # darf nicht raisen
+
+
+def test_cost_cap_reset():
+    """reset() muss den Tagesverbrauch auf 0.0 zurücksetzen."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    cap = DailySpendCap()
+    cap.record_spend(15.0)
+    cap.reset()
+    assert cap.current_spend == 0.0
+    assert not cap.is_cap_reached()
+
+
+def test_max_renewal_spend_config():
+    """Settings().max_renewal_spend_usd muss den Standardwert 10.0 haben."""
+    from swiss_truth_mcp.config import Settings
+    assert Settings().max_renewal_spend_usd == 10.0
+
+
+# ---------------------------------------------------------------------------
+# SEC-05: APScheduler in lifespan (Plan 01-03 Task 2)
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_daily_cap_reset_fn():
+    """reset() nach record_spend() muss current_spend auf 0.0 setzen."""
+    from swiss_truth_mcp.renewal.cost_cap import DailySpendCap
+    cap = DailySpendCap()
+    cap.record_spend(5.0)
+    cap.reset()
+    assert cap.current_spend == 0.0
+
+
+@pytest.mark.asyncio
+async def test_scheduler_starts_and_stops():
+    """lifespan muss AsyncIOScheduler starten und bei Exit herunterfahren."""
+    from unittest.mock import patch, MagicMock, AsyncMock
+    from fastapi import FastAPI
+
+    mock_scheduler = MagicMock()
+    mock_schema = AsyncMock()
+    mock_session_cm = MagicMock()
+    mock_session_cm.__aenter__ = AsyncMock(return_value=MagicMock())
+    mock_session_cm.__aexit__ = AsyncMock(return_value=None)
+
+    mock_mcp_cm = MagicMock()
+    mock_mcp_cm.__aenter__ = AsyncMock(return_value=None)
+    mock_mcp_cm.__aexit__ = AsyncMock(return_value=None)
+
+    with patch("swiss_truth_mcp.api.main.AsyncIOScheduler", return_value=mock_scheduler):
+        with patch("swiss_truth_mcp.api.main.get_session", return_value=mock_session_cm):
+            with patch("swiss_truth_mcp.api.main.schema.setup_schema", new=AsyncMock()):
+                with patch("swiss_truth_mcp.api.main.mcp_session_manager.run", return_value=mock_mcp_cm):
+                    with patch("swiss_truth_mcp.api.main.close_driver", new=AsyncMock()):
+                        from swiss_truth_mcp.api.main import lifespan
+                        dummy_app = FastAPI()
+                        async with lifespan(dummy_app):
+                            pass
+
+    mock_scheduler.start.assert_called_once()
+    mock_scheduler.shutdown.assert_called_once_with(wait=False)
+
+
+@pytest.mark.asyncio
+async def test_scheduler_reset_job_registered():
+    """lifespan muss einen Job mit id='daily_cap_reset' registrieren."""
+    from unittest.mock import patch, MagicMock, AsyncMock, call
+    from fastapi import FastAPI
+
+    mock_scheduler = MagicMock()
+    mock_session_cm = MagicMock()
+    mock_session_cm.__aenter__ = AsyncMock(return_value=MagicMock())
+    mock_session_cm.__aexit__ = AsyncMock(return_value=None)
+
+    mock_mcp_cm = MagicMock()
+    mock_mcp_cm.__aenter__ = AsyncMock(return_value=None)
+    mock_mcp_cm.__aexit__ = AsyncMock(return_value=None)
+
+    with patch("swiss_truth_mcp.api.main.AsyncIOScheduler", return_value=mock_scheduler):
+        with patch("swiss_truth_mcp.api.main.get_session", return_value=mock_session_cm):
+            with patch("swiss_truth_mcp.api.main.schema.setup_schema", new=AsyncMock()):
+                with patch("swiss_truth_mcp.api.main.mcp_session_manager.run", return_value=mock_mcp_cm):
+                    with patch("swiss_truth_mcp.api.main.close_driver", new=AsyncMock()):
+                        from swiss_truth_mcp.api.main import lifespan
+                        dummy_app = FastAPI()
+                        async with lifespan(dummy_app):
+                            pass
+
+    # Verify add_job was called with id="daily_cap_reset"
+    mock_scheduler.add_job.assert_called_once()
+    _, kwargs = mock_scheduler.add_job.call_args
+    assert kwargs.get("id") == "daily_cap_reset", (
+        f"add_job wurde ohne id='daily_cap_reset' aufgerufen: {kwargs}"
+    )
+
+
 @pytest.mark.asyncio
 async def test_hmac_signature_verifiable(monkeypatch):
     """HMAC-Signatur muss mit dem webhook_secret verifizierbar sein."""
