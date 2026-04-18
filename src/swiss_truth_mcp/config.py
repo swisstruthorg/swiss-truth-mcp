@@ -34,6 +34,9 @@ class Settings(BaseSettings):
     # Standard: leer → fällt auf secret_key zurück (zero-config für bestehende Deployments)
     webhook_secret: str = ""
 
+    # Tägliches API-Kosten-Limit für Renewal Loop (CHF/USD — default 10.0)
+    max_renewal_spend_usd: float = 10.0
+
     @property
     def effective_webhook_secret(self) -> str:
         """Gibt webhook_secret zurück, oder secret_key als Fallback."""
