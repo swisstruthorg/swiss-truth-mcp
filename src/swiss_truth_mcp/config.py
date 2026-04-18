@@ -30,6 +30,15 @@ class Settings(BaseSettings):
     # Auth — JWT Secret Key (in Produktion unbedingt in .env setzen!)
     secret_key: str = "dev-secret-key-change-in-production-please"
 
+    # HMAC-Secret für ausgehende Webhook-Signaturen (SEC-04)
+    # Standard: leer → fällt auf secret_key zurück (zero-config für bestehende Deployments)
+    webhook_secret: str = ""
+
+    @property
+    def effective_webhook_secret(self) -> str:
+        """Gibt webhook_secret zurück, oder secret_key als Fallback."""
+        return self.webhook_secret or self.secret_key
+
     # Öffentliche Basis-URL (ngrok lokal ODER PUBLIC_BASE_URL in Produktion)
     ngrok_public_url: str = ""
     public_base_url_env: str = Field(default="", validation_alias="PUBLIC_BASE_URL")
