@@ -460,7 +460,7 @@ async def verify_response(
     Returns:
         Dict mit hallucination_risk (low/medium/high), Statistiken und Details pro Statement
     """
-    from swiss_truth_mcp.validation.pre_screen import _get_client
+    from swiss_truth_mcp.validation.pre_screen import _get_sdk_client as _get_client
 
     # Schritt 1: Atomisierung via Claude Haiku
     atomic_claims: list[str] = []
