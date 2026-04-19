@@ -15,7 +15,6 @@ Verwendung:
 """
 from __future__ import annotations
 
-import asyncio
 import logging
 
 from swiss_truth_mcp.config import settings
@@ -39,7 +38,6 @@ class DailySpendCap:
 
     def __init__(self) -> None:
         self._spend: float = 0.0
-        self._lock = asyncio.Lock()
         self._alert_fired: bool = False  # verhindert mehrfache Alerts pro Tag
 
     @property
