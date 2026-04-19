@@ -47,6 +47,30 @@ def test_get_sdk_client_uses_timeout():
         assert all_kwargs["timeout"] == 30
 
 
+def test_get_http_client_uses_timeout():
+    """_get_http_client() muss httpx.AsyncClient mit timeout=float(settings.anthropic_timeout_seconds) erstellen."""
+    import swiss_truth_mcp.validation.pre_screen as ps
+    import httpx as _httpx
+    from unittest.mock import patch, MagicMock
+
+    # Reset cached singleton so the factory runs fresh
+    ps._http_client = None
+
+    fake_client = MagicMock()
+    with patch("swiss_truth_mcp.validation.pre_screen.httpx.AsyncClient", return_value=fake_client) as mock_cls:
+        ps._get_http_client()
+        assert mock_cls.called, "_get_http_client() did not call httpx.AsyncClient"
+        call_kwargs = mock_cls.call_args[1] if mock_cls.call_args[1] else {}
+        timeout_arg = call_kwargs.get("timeout")
+        assert timeout_arg is not None, "httpx.AsyncClient was called without a timeout keyword argument"
+        # httpx.Timeout stores the connect/read/write/pool values; default is the first arg
+        assert timeout_arg.read == float(ps.settings.anthropic_timeout_seconds), (
+            f"Expected read timeout {float(ps.settings.anthropic_timeout_seconds)}, got {timeout_arg.read}"
+        )
+    # Restore global
+    ps._http_client = None
+
+
 # ---------------------------------------------------------------------------
 # SEC-02: Expired Claims Filter (Task 2)
 # ---------------------------------------------------------------------------

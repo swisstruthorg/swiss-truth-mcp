@@ -39,7 +39,7 @@ def _get_http_client() -> httpx.AsyncClient:
     if _http_client is None:
         _http_client = httpx.AsyncClient(
             headers={"user-agent": "curl/8.4.0"},
-            timeout=httpx.Timeout(300.0),
+            timeout=httpx.Timeout(float(settings.anthropic_timeout_seconds)),
         )
     return _http_client
 
