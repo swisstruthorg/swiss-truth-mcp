@@ -8,8 +8,8 @@
 #   ./deploy/update.sh --no-restart       # Nur Dateien übertragen
 set -euo pipefail
 
-SERVER_USER="ubuntu"
-SERVER_HOST="83.228.245.153"
+SERVER_USER="${SERVER_USER:-swisstruth}"
+SERVER_HOST="${SERVER_HOST:-}"   # Hostinger-IP setzen: export SERVER_HOST=147.x.x.x
 DEPLOY_DIR="/opt/swiss-truth"
 LOCAL_SRC="$(dirname "$0")/../src/swiss_truth_mcp"
 
@@ -17,6 +17,12 @@ NO_RESTART=false
 REBUILD=false
 [[ "${1:-}" == "--no-restart" ]] && NO_RESTART=true
 [[ "${1:-}" == "--rebuild"    ]] && REBUILD=true
+
+if [ -z "$SERVER_HOST" ]; then
+  echo "FEHLER: SERVER_HOST nicht gesetzt."
+  echo "  Beispiel: SERVER_HOST=147.x.x.x bash deploy/update.sh"
+  exit 1
+fi
 
 echo "🚀  Swiss Truth — Quick Update"
 echo "Server: ${SERVER_USER}@${SERVER_HOST}"
@@ -60,18 +66,18 @@ if [ "$REBUILD" = true ]; then
 
   echo "→ Docker Image neu bauen (das dauert 2–4 Minuten) ..."
   ssh "${SERVER_USER}@${SERVER_HOST}" \
-    "cd ${DEPLOY_DIR} && sudo docker build -t swiss-truth-api:latest . 2>&1 | tail -5"
+    "cd ${DEPLOY_DIR} && docker build -t swiss-truth-api:latest . 2>&1 | tail -5"
 
   echo "→ Container mit neuem Image neu erstellen ..."
   ssh "${SERVER_USER}@${SERVER_HOST}" \
-    "cd ${DEPLOY_DIR} && sudo docker compose -f docker-compose.prod.yml up -d --force-recreate api"
+    "cd ${DEPLOY_DIR} && docker compose -f docker-compose.prod.yml up -d --force-recreate api"
   sleep 12
 
   HTTP=$(curl -s -o /dev/null -w "%{http_code}" https://swisstruth.org/health 2>/dev/null || echo "000")
   if [ "$HTTP" = "200" ]; then
     echo "   ✅  API erreichbar nach Rebuild (HTTP 200)"
   else
-    echo "   ⚠   HTTP ${HTTP} — Logs: ssh ${SERVER_USER}@${SERVER_HOST} 'sudo docker logs swiss-truth-api --tail 30'"
+    echo "   ⚠   HTTP ${HTTP} — Logs: ssh ${SERVER_USER}@${SERVER_HOST} 'docker logs swiss-truth-api --tail 30'"
   fi
   echo ""
   echo "─────────────────────────────────────"
@@ -84,11 +90,11 @@ if [ "$NO_RESTART" = false ]; then
   echo ""
   echo "→ Pycache löschen ..."
   ssh "${SERVER_USER}@${SERVER_HOST}" \
-    "sudo docker exec swiss-truth-api sh -c \"find /app/src -name '*.pyc' -delete && find /app/src -type d -name '__pycache__' -exec rm -rf {} + 2>/dev/null; echo done\" 2>/dev/null || true"
+    "docker exec swiss-truth-api sh -c \"find /app/src -name '*.pyc' -delete && find /app/src -type d -name '__pycache__' -exec rm -rf {} + 2>/dev/null; echo done\" 2>/dev/null || true"
 
   echo "→ API neu starten ..."
   ssh "${SERVER_USER}@${SERVER_HOST}" \
-    "sudo docker restart swiss-truth-api"
+    "docker restart swiss-truth-api"
   sleep 8
 
   # Health-Check
@@ -97,7 +103,7 @@ if [ "$NO_RESTART" = false ]; then
     echo "   ✅  API erreichbar (HTTP 200)"
   else
     echo "   ⚠   API antwortet mit HTTP ${HTTP} — Logs prüfen:"
-    echo "       ssh ${SERVER_USER}@${SERVER_HOST} 'sudo docker logs swiss-truth-api --tail 20'"
+    echo "       ssh ${SERVER_USER}@${SERVER_HOST} 'docker logs swiss-truth-api --tail 20'"
   fi
 fi
 

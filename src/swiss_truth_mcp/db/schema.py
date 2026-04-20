@@ -9,12 +9,14 @@ from neo4j import AsyncSession
 from swiss_truth_mcp.db.neo4j_client import get_session, close_driver
 
 CONSTRAINTS = [
-    "CREATE CONSTRAINT claim_id    IF NOT EXISTS FOR (c:Claim)               REQUIRE c.id IS UNIQUE",
-    "CREATE CONSTRAINT expert_id   IF NOT EXISTS FOR (e:Expert)              REQUIRE e.id IS UNIQUE",
-    "CREATE CONSTRAINT domain_id   IF NOT EXISTS FOR (d:Domain)              REQUIRE d.id IS UNIQUE",
-    "CREATE CONSTRAINT source_id   IF NOT EXISTS FOR (s:Source)              REQUIRE s.id IS UNIQUE",
-    "CREATE CONSTRAINT webhook_id  IF NOT EXISTS FOR (w:WebhookSubscription) REQUIRE w.id IS UNIQUE",
-    "CREATE CONSTRAINT anchor_id   IF NOT EXISTS FOR (a:AnchorRecord)        REQUIRE a.id IS UNIQUE",
+    "CREATE CONSTRAINT claim_id         IF NOT EXISTS FOR (c:Claim)               REQUIRE c.id IS UNIQUE",
+    "CREATE CONSTRAINT expert_id        IF NOT EXISTS FOR (e:Expert)              REQUIRE e.id IS UNIQUE",
+    "CREATE CONSTRAINT domain_id        IF NOT EXISTS FOR (d:Domain)              REQUIRE d.id IS UNIQUE",
+    "CREATE CONSTRAINT source_id        IF NOT EXISTS FOR (s:Source)              REQUIRE s.id IS UNIQUE",
+    "CREATE CONSTRAINT webhook_id       IF NOT EXISTS FOR (w:WebhookSubscription) REQUIRE w.id IS UNIQUE",
+    "CREATE CONSTRAINT anchor_id        IF NOT EXISTS FOR (a:AnchorRecord)        REQUIRE a.id IS UNIQUE",
+    "CREATE CONSTRAINT kanban_task_id   IF NOT EXISTS FOR (k:KanbanTask)          REQUIRE k.id IS UNIQUE",
+    "CREATE CONSTRAINT kanban_comment_id IF NOT EXISTS FOR (c:TaskComment)        REQUIRE c.id IS UNIQUE",
 ]
 
 FULLTEXT_INDEX = """

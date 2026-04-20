@@ -1,0 +1,23 @@
+services:
+
+  # ─── Kanban API (intern, direkt auf Port 8080) ────────────────────────────
+  api:
+    image: kanban-api:latest
+    container_name: kanban-api
+    restart: unless-stopped
+    ports:
+      - "9000:8080"
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      DB_PATH: /data/kanban.db
+    volumes:
+      - kanban_data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  kanban_data:

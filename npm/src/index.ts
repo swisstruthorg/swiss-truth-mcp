@@ -15,16 +15,15 @@
  *   SWISS_TRUTH_API_KEY  — API key (only needed for write operations)
  */
 
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { Client } from "@modelcontextprotocol/sdk/client/index";
+import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse";
+import { Server } from "@modelcontextprotocol/sdk/server/index";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
-  Tool,
   CallToolResult,
-} from "@modelcontextprotocol/sdk/types.js";
+} from "@modelcontextprotocol/sdk/types";
 
 const UPSTREAM_URL = process.env.SWISS_TRUTH_URL ?? "https://swisstruth.org/mcp";
 const API_KEY      = process.env.SWISS_TRUTH_API_KEY ?? "";

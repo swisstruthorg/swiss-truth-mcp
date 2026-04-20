@@ -1,0 +1,38 @@
+# Swiss Truth Kanban — Caddy Reverse Proxy
+# Hostinger KVM 4
+# Zugriff über IP direkt oder Domain (z.B. kanban.swisstruth.org)
+
+# Option A: Über IP direkt erreichbar (kein HTTPS, nur intern)
+:80 {
+    reverse_proxy api:8080
+    encode gzip
+
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options SAMEORIGIN
+    }
+
+    # SSE: kein Buffering
+    handle /kanban/stream {
+        reverse_proxy api:8080 {
+            flush_interval -1
+        }
+    }
+}
+
+# Option B: Mit Domain + automatischem HTTPS (Kommentar entfernen wenn Domain gesetzt)
+# kanban.swisstruth.org {
+#     reverse_proxy api:8080
+#     encode gzip
+#
+#     handle /kanban/stream {
+#         reverse_proxy api:8080 {
+#             flush_interval -1
+#         }
+#     }
+#
+#     header {
+#         X-Content-Type-Options nosniff
+#         Strict-Transport-Security "max-age=31536000"
+#     }
+# }

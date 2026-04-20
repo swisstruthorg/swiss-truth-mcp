@@ -172,6 +172,33 @@ async def list_domains(session: AsyncSession) -> list[dict[str, Any]]:
     return [{**row["domain"], "certified_claims": row["certified_count"]} for row in rows]
 
 
+async def get_certified_claims_by_domain(
+    session: AsyncSession, domain_id: str
+) -> list[dict[str, Any]]:
+    """Return all certified claims for a given domain (for compliance reporting)."""
+    result = await session.run(
+        """
+        MATCH (c:Claim {status: 'certified', domain_id: $domain_id})
+        OPTIONAL MATCH (e:Expert)-[:VALIDATES]->(c)
+        OPTIONAL MATCH (c)-[:REFERENCES]->(s:Source)
+        WITH c,
+             collect(DISTINCT {name: e.name, institution: e.institution}) AS validators,
+             collect(DISTINCT s.url) AS sources
+        RETURN c {
+            .id, .text, .question, .domain_id, .confidence_score, .status,
+            .language, .hash_sha256, .created_at, .last_reviewed, .expires_at
+        } AS claim, validators, sources
+        ORDER BY c.confidence_score DESC
+        """,
+        {"domain_id": domain_id},
+    )
+    rows = await result.data()
+    return [
+        _with_decay({**row["claim"], "validated_by": row["validators"], "source_references": row["sources"]})
+        for row in rows
+    ]
+
+
 # ---------------------------------------------------------------------------
 # Conflict detection helper
 # ---------------------------------------------------------------------------

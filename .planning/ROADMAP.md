@@ -43,9 +43,9 @@
 
 ---
 
-## Phase 2: Growth & Integrations 🔲
+## Phase 2: Growth & Integrations ✅
 
-**Goal:** Expand reach — npm package, Smithery listing, LangChain integration, OpenAI function-calling compatibility.
+**Goal:** Expand reach — npm package, Smithery listing, LangChain integration, OpenAI function-calling compatibility, EU AI Act compliance.
 
 **Research completed:** Stack, Architecture, Features, Pitfalls (via GSD agents)
 
@@ -54,10 +54,20 @@
 - [x] Smithery configuration (smithery.yaml)
 - [x] OpenAI tools endpoint (/openai-tools.json)
 - [x] MCP auto-discovery (/.well-known/mcp.json)
-- [ ] LangChain integration package (integrations/langchain-pkg/)
-- [ ] EU AI Act compliance endpoint improvements
+- [x] LangChain integration package (integrations/langchain-pkg/)
+  - 9 tools matching MCP server (search, verify, submit, list_domains, get_claim_status, batch_verify, verify_response, find_contradictions, compliance)
+  - SwissTruthRetriever for RAG pipelines (LangChain BaseRetriever)
+  - SwissTruthToolkit with read_only mode
+  - Proper package structure (swiss-truth-langchain v0.2.0)
+- [x] EU AI Act compliance endpoint improvements
+  - Refactored into dedicated compliance router (api/routes/compliance.py)
+  - Single claim attestation (GET /api/compliance/eu-ai-act/{claim_id})
+  - Batch attestation (POST /api/compliance/eu-ai-act/batch) — up to 50 claims
+  - Domain-level compliance summary (GET /api/compliance/eu-ai-act/domain/{domain_id})
+  - System-wide compliance report (GET /api/compliance/eu-ai-act/report)
+  - Attestation version bumped to 1.1
 
-**Status:** In Progress
+**Status:** Complete
 
 ---
 

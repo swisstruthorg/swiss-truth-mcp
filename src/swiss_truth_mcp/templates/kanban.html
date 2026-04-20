@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board — Swiss Truth</title>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f0f5;
+      color: #1d1d1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #d2d2d7;
+      padding: 0 20px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      flex-shrink: 0;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 15px;
+      color: #1d1d1f;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-icon {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background: #d00;
+      border-radius: 6px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      background: #fff;
+      width: 12px;
+      height: 4px;
+      top: 9px;
+      left: 5px;
+    }
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      background: #fff;
+      width: 4px;
+      height: 12px;
+      top: 5px;
+      left: 9px;
+    }
+    header nav { margin-left: auto; display: flex; gap: 4px; align-items: center; }
+    header nav a {
+      font-size: 13px;
+      color: #6e6e73;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+    header nav a:hover, header nav a.active {
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+    #sse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      display: inline-block;
+      transition: background 0.3s;
+      margin-left: 4px;
+    }
+    #sse-dot.live { background: #34c759; }
+
+    /* ── CEO-Button ── */
+    .btn-ceo {
+      background: #1d1d1f;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-ceo:hover { background: #333; }
+    .btn-ceo:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Board Layout ── */
+    .board-wrap {
+      flex: 1;
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .board {
+      display: flex;
+      gap: 12px;
+      min-width: 900px;
+      align-items: flex-start;
+    }
+
+    /* ── Column ── */
+    .column {
+      background: #e8e8ed;
+      border-radius: 14px;
+      padding: 12px;
+      flex: 1;
+      min-width: 200px;
+      max-width: 280px;
+    }
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 0 2px;
+    }
+    .column-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1d1d1f;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .column-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .col-backlog .column-dot     { background: #8e8e93; }
+    .col-approved .column-dot   { background: #007aff; }
+    .col-in_progress .column-dot { background: #ff9f0a; }
+    .col-review .column-dot     { background: #bf5af2; }
+    .col-done .column-dot       { background: #34c759; }
+
+    .col-count {
+      font-size: 11px;
+      font-weight: 700;
+      background: #d1d1d6;
+      color: #3a3a3c;
+      padding: 1px 7px;
+      border-radius: 20px;
+    }
+    .col-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 80px;
+    }
+    .col-tasks.drag-over { background: rgba(0,122,255,0.06); border-radius: 10px; }
+
+    /* ── Task Card ── */
+    .task-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      user-select: none;
+    }
+    .task-card:hover {
+      border-color: #007aff44;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .task-card.sortable-ghost { opacity: 0.4; }
+    .task-card.sortable-chosen { box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .card-role { font-size: 18px; line-height: 1; }
+    .card-priority { display: flex; gap: 1px; }
+    .star { color: #ff9f0a; font-size: 10px; }
+    .star.empty { color: #d1d1d6; }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+      word-break: break-word;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #8e8e93;
+    }
+    .card-assignee {
+      background: #f5f5f7;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-weight: 600;
+      color: #3a3a3c;
+    }
+    .card-date { font-size: 10px; }
+
+    /* ── Add Task Button ── */
+    .btn-add-task {
+      width: 100%;
+      background: transparent;
+      border: 1.5px dashed #c7c7cc;
+      border-radius: 10px;
+      padding: 8px;
+      font-size: 12px;
+      color: #8e8e93;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.15s;
+    }
+    .btn-add-task:hover { border-color: #007aff; color: #007aff; background: #f0f6ff; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #f2f2f7;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .modal-role-icon { font-size: 32px; flex-shrink: 0; }
+    .modal-title-wrap { flex: 1; }
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #1d1d1f;
+      margin-bottom: 6px;
+      word-break: break-word;
+    }
+    .modal-status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .status-chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-backlog     { background: #e5e5ea; color: #3a3a3c; }
+    .status-approved    { background: #dbeafe; color: #1e40af; }
+    .status-in_progress { background: #fff3cd; color: #7d5c00; }
+    .status-review      { background: #f3e8ff; color: #6b21a8; }
+    .status-done        { background: #d4edda; color: #1a5e2a; }
+
+    .assignee-chip {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #f5f5f7;
+      color: #3a3a3c;
+      font-weight: 600;
+    }
+    .modal-close {
+      background: #f2f2f7;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #6e6e73;
+    }
+    .modal-close:hover { background: #e5e5ea; }
+
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-description {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #3a3a3c;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Result/Feedback sections */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #8e8e93;
+      margin-bottom: 6px;
+    }
+    .result-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #166534;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .feedback-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #9a3412;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Comments */
+    .comments-section { }
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .comment {
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .comment.human { background: #f0f6ff; border: 1px solid #bfdbfe; }
+    .comment.agent  { background: #f9f9f9; border: 1px solid #e5e5ea; }
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #8e8e93;
+      margin-bottom: 4px;
+    }
+    .comment-author { font-weight: 700; color: #3a3a3c; }
+    .comment-type-badge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .type-question { background: #e0e7ff; color: #3730a3; }
+    .type-answer   { background: #d4edda; color: #1a5e2a; }
+    .type-feedback { background: #fff3cd; color: #7d5c00; }
+    .type-note     { background: #f5f5f7; color: #6e6e73; }
+    .comment-content { color: #1d1d1f; white-space: pre-wrap; word-break: break-word; }
+
+    /* Comment form */
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .comment-form textarea {
+      width: 100%;
+      border: 1px solid #d2d2d7;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 72px;
+      background: #fff;
+    }
+    .comment-form textarea:focus {
+      outline: none;
+      border-color: #007aff;
+      box-shadow: 0 0 0 3px rgba(0,122,255,0.12);
+    }
+    .comment-form-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .comment-form select {
+      border: 1px solid #d2d2d7;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: inherit;
+      background: #fff;
+      color: #1d1d1f;
+    }
+    .comment-form select:focus {
+      outline: none;
+      border-color: #007aff;
+    }
+
+    /* Modal action buttons */
+    .modal-actions {
+      padding: 16px 24px;
+      border-top: 1px solid #f2f2f7;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-primary   { background: #007aff; color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: #0062cc; }
+    .btn-success   { background: #34c759; color: #fff; }
+    .btn-success:hover:not(:disabled) { background: #2aa64b; }
+    .btn-warning   { background: #ff9f0a; color: #fff; }
+    .btn-warning:hover:not(:disabled) { background: #e08b00; }
+    .btn-danger    { background: #ff3b30; color: #fff; }
+    .btn-danger:hover:not(:disabled) { background: #d63329; }
+    .btn-ghost     { background: #f2f2f7; color: #1d1d1f; border: 1px solid #e5e5ea; }
+    .btn-ghost:hover:not(:disabled) { background: #e5e5ea; }
+    .btn-dark      { background: #1d1d1f; color: #fff; }
+    .btn-dark:hover:not(:disabled) { background: #333; }
+
+    /* Agent trigger panel */
+    .agent-panel {
+      background: #f9f9f9;
+      border: 1px solid #e5e5ea;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .agent-panel-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #8e8e93;
+    }
+    .agent-panel-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .agent-panel select {
+      border: 1px solid #d2d2d7;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: inherit;
+      background: #fff;
+    }
+
+    /* Create Task Modal */
+    .create-modal .modal { max-width: 520px; }
+    .form-row { margin-bottom: 14px; }
+    .form-row label { font-size: 12px; font-weight: 700; color: #6e6e73; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-row input, .form-row textarea, .form-row select {
+      width: 100%;
+      border: 1px solid #d2d2d7;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: #fff;
+    }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+      outline: none;
+      border-color: #007aff;
+      box-shadow: 0 0 0 3px rgba(0,122,255,0.12);
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1d1d1f;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 9999;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .board { min-width: 600px; }
+      .column { min-width: 160px; max-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <a class="logo" href="/trust">
+    <span class="logo-icon"></span>Swiss Truth
+  </a>
+  <span style="font-size:13px;color:#8e8e93;padding:0 4px;">|</span>
+  <span style="font-size:14px;font-weight:700;color:#1d1d1f;">Kanban</span>
+  <nav>
+    <a href="/trust">Trust</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/kanban" class="active">Kanban</a>
+    <span id="sse-dot" title="Live-Verbindung"></span>
+  </nav>
+  <div style="margin-left:12px;padding-left:12px;border-left:1px solid #d2d2d7;display:flex;gap:8px;">
+    <button class="btn-ceo" id="btn-ceo" onclick="triggerCEO()">
+      👔 CEO-Auftrag
+    </button>
+    <button class="btn" style="background:#007aff;color:#fff;font-size:13px;padding:7px 14px;border-radius:10px;" onclick="openCreateModal('backlog')">
+      + Task
+    </button>
+  </div>
+</header>
+
+<!-- ── Board ── -->
+<div class="board-wrap">
+  <div class="board" id="board">
+
+    {% set columns = [
+      ('backlog',     'Backlog',     '⬜'),
+      ('approved',    'Approved',    '🔵'),
+      ('in_progress', 'In Progress', '🟡'),
+      ('review',      'Review',      '🟣'),
+      ('done',        'Done',        '🟢'),
+    ] %}
+
+    {% for col_id, col_label, col_icon in columns %}
+    <div class="column col-{{ col_id }}" id="col-{{ col_id }}">
+      <div class="column-header">
+        <div class="column-title">
+          <span class="column-dot"></span>
+          {{ col_label }}
+        </div>
+        <span class="col-count" id="count-{{ col_id }}">
+          {{ tasks | selectattr('status', 'equalto', col_id) | list | length }}
+        </span>
+      </div>
+      <div class="col-tasks" id="tasks-{{ col_id }}" data-status="{{ col_id }}">
+        {% for task in tasks if task.status == col_id %}
+        <div class="task-card"
+             data-id="{{ task.id }}"
+             data-task="{{ task | tojson | e }}"
+             onclick="openTaskModal(this.dataset.task)">
+          <div class="card-top">
+            <span class="card-role">{{ {
+              'ceo':'👔','cto':'🔧','cfo':'💰','scientist':'🔬',
+              'researcher':'📊','blockchain':'⛓️','growth':'📈',
+              'legal':'⚖️','bizdev':'🤝','sales':'💼','human':'👤'
+            }.get(task.assigned_to, '📋') }}</span>
+            <div class="card-priority">
+              {% for i in range(5) %}
+              <span class="star {% if i >= task.priority %}empty{% endif %}">★</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card-title">{{ task.title }}</div>
+          <div class="card-meta">
+            {% if task.assigned_to %}
+            <span class="card-assignee">{{ task.assigned_to | upper }}</span>
+            {% else %}
+            <span class="card-assignee">—</span>
+            {% endif %}
+            <span class="card-date">{{ task.created_at[:10] if task.created_at else '' }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn-add-task" onclick="openCreateModal('{{ col_id }}')">+ Hinzufügen</button>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<!-- ── Task Detail Modal ── -->
+<div class="modal-overlay hidden" id="task-modal-overlay" onclick="closeTaskModal(event)">
+  <div class="modal" id="task-modal">
+    <div class="modal-header">
+      <span class="modal-role-icon" id="modal-role-icon">📋</span>
+      <div class="modal-title-wrap">
+        <div class="modal-title" id="modal-title">Titel</div>
+        <div class="modal-status-row">
+          <span class="status-chip" id="modal-status-chip">—</span>
+          <span class="assignee-chip" id="modal-assignee-chip">—</span>
+          <span style="font-size:11px;color:#8e8e93;" id="modal-priority-stars"></span>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeTaskModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <!-- Description -->
+      <div>
+        <div class="section-label">Aufgabe</div>
+        <div class="modal-description" id="modal-description"></div>
+      </div>
+
+      <!-- Result Summary (nur wenn vorhanden) -->
+      <div id="modal-result-wrap" style="display:none">
+        <div class="section-label">Ergebnis des Agenten</div>
+        <div class="result-box" id="modal-result"></div>
+      </div>
+
+      <!-- Feedback (nur wenn vorhanden) -->
+      <div id="modal-feedback-wrap" style="display:none">
+        <div class="section-label">Feedback vom Eigentümer</div>
+        <div class="feedback-box" id="modal-feedback"></div>
+      </div>
+
+      <!-- Comments -->
+      <div class="comments-section">
+        <div class="section-label">Kommentare & Q&A</div>
+        <div class="comment-list" id="modal-comments"></div>
+
+        <!-- Kommentar eingeben -->
+        <div class="comment-form">
+          <textarea id="comment-input" placeholder="Frage stellen, Feedback geben oder Notiz hinzufügen…"></textarea>
+          <div class="comment-form-row">
+            <select id="comment-type">
+              <option value="question">❓ Frage</option>
+              <option value="feedback">⚠️ Feedback</option>
+              <option value="note" selected>📝 Notiz</option>
+            </select>
+            <select id="comment-addressed-to">
+              <option value="">An alle</option>
+              <option value="ceo">👔 CEO</option>
+              <option value="cto">🔧 CTO</option>
+              <option value="cfo">💰 CFO</option>
+              <option value="scientist">🔬 Scientist</option>
+              <option value="researcher">📊 Researcher</option>
+              <option value="blockchain">⛓️ Blockchain</option>
+              <option value="growth">📈 Growth</option>
+              <option value="legal">⚖️ Legal</option>
+              <option value="bizdev">🤝 BizDev</option>
+              <option value="sales">💼 Sales</option>
+            </select>
+            <button class="btn btn-primary" style="margin-left:auto" onclick="submitComment()">Senden</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent-Trigger (Q&A) -->
+      <div class="agent-panel" id="agent-qa-panel">
+        <div class="agent-panel-label">Agent um Antwort bitten</div>
+        <div class="agent-panel-row">
+          <select id="qa-role">
+            <option value="ceo">👔 CEO</option>
+            <option value="cto">🔧 CTO</option>
+            <option value="cfo">💰 CFO</option>
+            <option value="scientist">🔬 Scientist</option>
+            <option value="researcher">📊 Researcher</option>
+            <option value="blockchain">⛓️ Blockchain</option>
+            <option value="growth">📈 Growth</option>
+            <option value="legal">⚖️ Legal</option>
+            <option value="bizdev">🤝 BizDev</option>
+            <option value="sales">💼 Sales</option>
+          </select>
+          <button class="btn btn-dark" onclick="triggerAgentQA()">
+            Antwort anfragen
+          </button>
+        </div>
+      </div>
+
+      <!-- Agent-Trigger (Task bearbeiten) -->
+      <div class="agent-panel" id="agent-process-panel" style="display:none">
+        <div class="agent-panel-label">Agent triggern (Task bearbeiten → Review)</div>
+        <div class="agent-panel-row">
+          <button class="btn btn-warning" id="btn-process-agent" onclick="triggerAgentProcess()">
+            ⚡ Agent starten
+          </button>
+          <span style="font-size:12px;color:#8e8e93;">Task wird vollständig bearbeitet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Actions -->
+    <div class="modal-actions" id="modal-actions">
+      <!-- dynamisch via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── Create Task Modal ── -->
+<div class="modal-overlay hidden create-modal" id="create-modal-overlay" onclick="closeCreateModal(event)">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <div class="modal-title">Neuer Task</div>
+      </div>
+      <button class="modal-close" onclick="closeCreateModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <label>Titel *</label>
+        <input type="text" id="new-title" placeholder="Was soll erledigt werden?">
+      </div>
+      <div class="form-row">
+        <label>Beschreibung</label>
+        <textarea id="new-description" rows="4" placeholder="Details, Definition of Done, Kontext…"></textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-row">
+          <label>Status</label>
+          <select id="new-status">
+            <option value="backlog">Backlog</option>
+            <option value="approved">Approved</option>
+            <option value="in_progress">In Progress</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Priorität (1–5)</label>
+          <input type="number" id="new-priority" min="1" max="5" value="3">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-row">
+          <label>Zuständig</label>
+          <select id="new-assignee">
+            <option value="">— offen —</option>
+            <option value="ceo">👔 CEO</option>
+            <option value="cto">🔧 CTO</option>
+            <option value="cfo">💰 CFO</option>
+            <option value="scientist">🔬 Scientist</option>
+            <option value="researcher">📊 Researcher</option>
+            <option value="blockchain">⛓️ Blockchain</option>
+            <option value="growth">📈 Growth</option>
+            <option value="legal">⚖️ Legal</option>
+            <option value="bizdev">🤝 BizDev</option>
+            <option value="sales">💼 Sales</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Erstellt von</label>
+          <select id="new-created-by">
+            <option value="human">👤 Martin</option>
+            <option value="ceo">👔 CEO</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="createTask()">Task erstellen</button>
+      <button class="btn btn-ghost" onclick="closeCreateModal()">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div id="toast"></div>
+
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+const ROLES = {
+  ceo:'👔', cto:'🔧', cfo:'💰', scientist:'🔬', researcher:'📊',
+  blockchain:'⛓️', growth:'📈', legal:'⚖️', bizdev:'🤝', sales:'💼', human:'👤'
+};
+const ROLE_LABELS = {
+  ceo:'CEO', cto:'CTO', cfo:'CFO', scientist:'Scientist', researcher:'Researcher',
+  blockchain:'Blockchain', growth:'Growth', legal:'Legal', bizdev:'BizDev', sales:'Sales', human:'Martin'
+};
+const STATUS_ORDER = ['backlog','approved','in_progress','review','done'];
+const VALID_TRANSITIONS = {
+  backlog:     ['approved'],
+  approved:    ['in_progress','backlog'],
+  in_progress: ['review'],
+  review:      ['done','in_progress'],
+  done:        []
+};
+
+let currentTask = null;
+let currentTaskId = null;
+
+// ─── SSE Setup ────────────────────────────────────────────────────────────────
+function connectSSE() {
+  const es = new EventSource('/kanban/stream');
+  const dot = document.getElementById('sse-dot');
+  es.onopen = () => dot.classList.add('live');
+  es.onerror = () => { dot.classList.remove('live'); setTimeout(connectSSE, 5000); es.close(); };
+  es.onmessage = (e) => {
+    try {
+      const evt = JSON.parse(e.data);
+      if (evt.type === 'task_created') upsertCard(evt.task);
+      if (evt.type === 'task_updated') upsertCard(evt.task);
+      if (evt.type === 'task_deleted') removeCard(evt.task_id);
+      if (evt.type === 'comment_created' && currentTaskId === evt.task_id) loadComments(currentTaskId);
+    } catch(_) {}
+  };
+}
+connectSSE();
+
+// ─── Card Rendering ───────────────────────────────────────────────────────────
+function makeStars(p) {
+  return Array.from({length:5}, (_,i) =>
+    `<span class="star ${i >= p ? 'empty':''}">★</span>`
+  ).join('');
+}
+
+function renderCard(task) {
+  const icon = ROLES[task.assigned_to] || '📋';
+  const dateStr = task.created_at ? task.created_at.slice(0,10) : '';
+  const div = document.createElement('div');
+  div.className = 'task-card';
+  div.dataset.id = task.id;
+  div.dataset.task = JSON.stringify(task);
+  div.onclick = () => openTaskModal(JSON.stringify(task));
+  div.innerHTML = `
+    <div class="card-top">
+      <span class="card-role">${icon}</span>
+      <div class="card-priority">${makeStars(task.priority||3)}</div>
+    </div>
+    <div class="card-title">${escHtml(task.title)}</div>
+    <div class="card-meta">
+      <span class="card-assignee">${task.assigned_to ? task.assigned_to.toUpperCase() : '—'}</span>
+      <span class="card-date">${dateStr}</span>
+    </div>`;
+  return div;
+}
+
+function upsertCard(task) {
+  // Remove from any column
+  document.querySelectorAll(`.task-card[data-id="${task.id}"]`).forEach(el => el.remove());
+  // Add to correct column
+  const col = document.getElementById(`tasks-${task.status}`);
+  if (col) {
+    const card = renderCard(task);
+    col.prepend(card);
+    setupSortable(); // Re-attach sortable if needed
+  }
+  updateCounts();
+  // Update open modal if it's for this task
+  if (currentTaskId === task.id) {
+    currentTask = task;
+    renderModalContent(task);
+  }
+}
+
+function removeCard(taskId) {
+  document.querySelectorAll(`.task-card[data-id="${taskId}"]`).forEach(el => el.remove());
+  updateCounts();
+  if (currentTaskId === taskId) closeTaskModal();
+}
+
+function updateCounts() {
+  STATUS_ORDER.forEach(s => {
+    const col = document.getElementById(`tasks-${s}`);
+    const cnt = document.getElementById(`count-${s}`);
+    if (col && cnt) cnt.textContent = col.querySelectorAll('.task-card').length;
+  });
+}
+
+// ─── Sortable Drag & Drop ─────────────────────────────────────────────────────
+function setupSortable() {
+  STATUS_ORDER.forEach(status => {
+    const el = document.getElementById(`tasks-${status}`);
+    if (!el || el._sortable) return;
+    el._sortable = Sortable.create(el, {
+      group: 'kanban',
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      chosenClass: 'sortable-chosen',
+      onEnd(evt) {
+        const taskId = evt.item.dataset.id;
+        const newStatus = evt.to.dataset.status;
+        const oldStatus = evt.from.dataset.status;
+        if (newStatus === oldStatus) return;
+        // Attempt status transition
+        fetch(`/kanban/tasks/${taskId}`, {
+          method: 'PATCH',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({status: newStatus})
+        }).then(r => {
+          if (!r.ok) {
+            return r.json().then(e => {
+              showToast('❌ ' + (e.detail || 'Übergang nicht erlaubt'), true);
+              // Move card back
+              evt.from.insertBefore(evt.item, evt.from.children[evt.oldIndex] || null);
+              updateCounts();
+            });
+          }
+          return r.json().then(task => {
+            evt.item.dataset.task = JSON.stringify(task);
+            updateCounts();
+            showToast(`✓ Status: ${newStatus.replace('_',' ')}`);
+          });
+        });
+      }
+    });
+  });
+}
+setupSortable();
+
+// ─── Task Modal ───────────────────────────────────────────────────────────────
+function openTaskModal(taskJson) {
+  const task = typeof taskJson === 'string' ? JSON.parse(taskJson) : taskJson;
+  currentTask = task;
+  currentTaskId = task.id;
+  document.getElementById('task-modal-overlay').classList.remove('hidden');
+  renderModalContent(task);
+  loadComments(task.id);
+}
+
+function renderModalContent(task) {
+  // Header
+  document.getElementById('modal-role-icon').textContent = ROLES[task.assigned_to] || '📋';
+  document.getElementById('modal-title').textContent = task.title;
+  const sc = document.getElementById('modal-status-chip');
+  sc.textContent = task.status.replace('_',' ').toUpperCase();
+  sc.className = `status-chip status-${task.status}`;
+  document.getElementById('modal-assignee-chip').textContent =
+    ROLE_LABELS[task.assigned_to] || task.assigned_to || '—';
+  document.getElementById('modal-priority-stars').innerHTML = makeStars(task.priority||3);
+
+  // Body
+  document.getElementById('modal-description').textContent = task.description || '';
+
+  // Result
+  const rw = document.getElementById('modal-result-wrap');
+  const rb = document.getElementById('modal-result');
+  if (task.result_summary) {
+    rw.style.display = '';
+    rb.textContent = task.result_summary;
+  } else {
+    rw.style.display = 'none';
+  }
+
+  // Feedback
+  const fw = document.getElementById('modal-feedback-wrap');
+  const fb = document.getElementById('modal-feedback');
+  if (task.feedback) {
+    fw.style.display = '';
+    fb.textContent = task.feedback;
+  } else {
+    fw.style.display = 'none';
+  }
+
+  // Agent panels
+  const processPanel = document.getElementById('agent-process-panel');
+  processPanel.style.display = task.status === 'in_progress' ? '' : 'none';
+  if (task.status === 'in_progress' && task.assigned_to) {
+    document.getElementById('qa-role').value = task.assigned_to;
+  }
+
+  // Actions
+  renderModalActions(task);
+}
+
+function renderModalActions(task) {
+  const container = document.getElementById('modal-actions');
+  container.innerHTML = '';
+  const transitions = VALID_TRANSITIONS[task.status] || [];
+  const labels = {
+    approved: '✅ Genehmigen',
+    in_progress: task.status === 'review' ? '↩️ Zurück zu In Progress' : '▶️ In Progress',
+    backlog: '↩️ Zurück zu Backlog',
+    review: '📤 Auf Review',
+    done: '✅ Done'
+  };
+  const styles = {
+    approved: 'btn-primary',
+    in_progress: task.status === 'review' ? 'btn-warning' : 'btn-warning',
+    backlog: 'btn-ghost',
+    review: 'btn-primary',
+    done: 'btn-success'
+  };
+
+  transitions.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = `btn ${styles[s] || 'btn-ghost'}`;
+    btn.textContent = labels[s] || s;
+    btn.onclick = () => moveTask(task.id, s);
+    container.appendChild(btn);
+  });
+
+  // Feedback button (nur bei Review)
+  if (task.status === 'review') {
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-ghost';
+    btn.textContent = '💬 Feedback geben';
+    btn.onclick = () => {
+      document.getElementById('comment-type').value = 'feedback';
+      document.getElementById('comment-input').focus();
+      document.getElementById('comment-input').placeholder = 'Feedback eingeben — Task geht zurück zu In Progress…';
+    };
+    container.appendChild(btn);
+  }
+
+  // Delete button
+  const del = document.createElement('button');
+  del.className = 'btn btn-danger';
+  del.style.marginLeft = 'auto';
+  del.textContent = '🗑 Löschen';
+  del.onclick = () => deleteTask(task.id);
+  container.appendChild(del);
+}
+
+function closeTaskModal(evt) {
+  if (evt && evt.target !== document.getElementById('task-modal-overlay')) return;
+  document.getElementById('task-modal-overlay').classList.add('hidden');
+  currentTask = null;
+  currentTaskId = null;
+}
+
+// ─── Comments ─────────────────────────────────────────────────────────────────
+async function loadComments(taskId) {
+  const list = document.getElementById('modal-comments');
+  if (!list) return;
+  try {
+    const r = await fetch(`/kanban/tasks/${taskId}/comments`);
+    const comments = await r.json();
+    list.innerHTML = '';
+    comments.forEach(c => {
+      const div = document.createElement('div');
+      div.className = `comment ${c.author_role === 'human' ? 'human' : 'agent'}`;
+      div.innerHTML = `
+        <div class="comment-meta">
+          <span class="comment-author">${escHtml(ROLES[c.author_role] || '')} ${escHtml(ROLE_LABELS[c.author_role] || c.author)}</span>
+          <span class="comment-type-badge type-${c.comment_type}">${c.comment_type}</span>
+          ${c.addressed_to ? `<span style="color:#8e8e93">→ ${escHtml(ROLE_LABELS[c.addressed_to]||c.addressed_to)}</span>` : ''}
+          <span style="margin-left:auto">${c.created_at ? c.created_at.slice(0,16).replace('T',' ') : ''}</span>
+        </div>
+        <div class="comment-content">${escHtml(c.content)}</div>`;
+      list.appendChild(div);
+    });
+    list.scrollTop = list.scrollHeight;
+  } catch(e) { console.error(e); }
+}
+
+async function submitComment() {
+  const content = document.getElementById('comment-input').value.trim();
+  if (!content || !currentTaskId) return;
+  const type = document.getElementById('comment-type').value;
+  const addressed_to = document.getElementById('comment-addressed-to').value;
+
+  const body = {
+    content,
+    author: 'Martin',
+    author_role: 'human',
+    comment_type: type,
+    addressed_to
+  };
+
+  // If feedback, also set it on the task
+  if (type === 'feedback') {
+    await fetch(`/kanban/tasks/${currentTaskId}`, {
+      method: 'PATCH',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({feedback: content})
+    });
+  }
+
+  const r = await fetch(`/kanban/tasks/${currentTaskId}/comments`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if (r.ok) {
+    document.getElementById('comment-input').value = '';
+    document.getElementById('comment-input').placeholder = 'Frage stellen, Feedback geben oder Notiz hinzufügen…';
+    await loadComments(currentTaskId);
+    showToast('Kommentar gesendet');
+  } else {
+    showToast('Fehler beim Senden', true);
+  }
+}
+
+// ─── Agent Triggers ───────────────────────────────────────────────────────────
+async function triggerAgentQA() {
+  if (!currentTaskId) return;
+  const role = document.getElementById('qa-role').value;
+  const question = document.getElementById('comment-input').value.trim();
+
+  if (!question) {
+    showToast('Frage eingeben, dann Agent triggern', true);
+    document.getElementById('comment-input').focus();
+    return;
+  }
+
+  // Post the question as a comment first
+  await fetch(`/kanban/tasks/${currentTaskId}/comments`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      content: question,
+      author: 'Martin',
+      author_role: 'human',
+      comment_type: 'question',
+      addressed_to: role
+    })
+  });
+  document.getElementById('comment-input').value = '';
+  await loadComments(currentTaskId);
+
+  showToast(`⏳ ${ROLE_LABELS[role]} wird befragt…`);
+  const r = await fetch(`/kanban/tasks/${currentTaskId}/trigger`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({role, question})
+  });
+  if (r.ok) {
+    await loadComments(currentTaskId);
+    showToast(`${ROLES[role]} ${ROLE_LABELS[role]} hat geantwortet`);
+  } else {
+    const e = await r.json().catch(()=>({}));
+    showToast('Agent-Fehler: ' + (e.detail || 'unbekannt'), true);
+  }
+}
+
+async function triggerAgentProcess() {
+  if (!currentTask || currentTask.status !== 'in_progress') return;
+  const role = currentTask.assigned_to;
+  if (!role || role === 'human') {
+    showToast('Bitte zuerst einen Agenten zuweisen', true);
+    return;
+  }
+  const btn = document.getElementById('btn-process-agent');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Agent arbeitet…';
+  showToast(`⏳ ${ROLE_LABELS[role]} bearbeitet den Task…`);
+
+  const r = await fetch(`/kanban/tasks/${currentTaskId}/trigger`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({role})
+  });
+  btn.disabled = false;
+  btn.innerHTML = '⚡ Agent starten';
+
+  if (r.ok) {
+    const data = await r.json();
+    currentTask = data.task;
+    renderModalContent(data.task);
+    await loadComments(currentTaskId);
+    showToast(`✓ ${ROLE_LABELS[role]} hat Task auf Review verschoben`);
+  } else {
+    const e = await r.json().catch(()=>({}));
+    showToast('Agent-Fehler: ' + (e.detail || 'unbekannt'), true);
+  }
+}
+
+async function triggerCEO() {
+  const btn = document.getElementById('btn-ceo');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner" style="border-top-color:#fff"></span> CEO denkt…';
+  showToast('⏳ CEO analysiert und erstellt Backlog-Eintrag…');
+
+  const r = await fetch('/kanban/agent/ceo', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({context: ''})
+  });
+  btn.disabled = false;
+  btn.innerHTML = '👔 CEO-Auftrag';
+
+  if (r.ok) {
+    const task = await r.json();
+    showToast(`✓ CEO: "${task.title.slice(0,40)}…"`);
+  } else {
+    const e = await r.json().catch(()=>({}));
+    showToast('CEO-Fehler: ' + (e.detail || 'unbekannt'), true);
+  }
+}
+
+// ─── Task Actions ─────────────────────────────────────────────────────────────
+async function moveTask(taskId, newStatus) {
+  const r = await fetch(`/kanban/tasks/${taskId}`, {
+    method: 'PATCH',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({status: newStatus})
+  });
+  if (r.ok) {
+    const task = await r.json();
+    currentTask = task;
+    renderModalContent(task);
+    showToast(`→ ${newStatus.replace('_',' ')}`);
+  } else {
+    const e = await r.json().catch(()=>({}));
+    showToast('Fehler: ' + (e.detail || 'Übergang nicht möglich'), true);
+  }
+}
+
+async function deleteTask(taskId) {
+  if (!confirm('Task wirklich löschen?')) return;
+  const r = await fetch(`/kanban/tasks/${taskId}`, {method:'DELETE'});
+  if (r.ok || r.status === 204) {
+    closeTaskModal();
+    showToast('Task gelöscht');
+  }
+}
+
+// ─── Create Task Modal ────────────────────────────────────────────────────────
+function openCreateModal(status) {
+  document.getElementById('new-status').value = status || 'backlog';
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-description').value = '';
+  document.getElementById('new-priority').value = '3';
+  document.getElementById('new-assignee').value = '';
+  document.getElementById('create-modal-overlay').classList.remove('hidden');
+  setTimeout(() => document.getElementById('new-title').focus(), 100);
+}
+function closeCreateModal(evt) {
+  if (evt && !evt.target.classList.contains('modal-overlay')) return;
+  document.getElementById('create-modal-overlay').classList.add('hidden');
+}
+
+async function createTask() {
+  const title = document.getElementById('new-title').value.trim();
+  if (!title) { showToast('Titel ist Pflichtfeld', true); return; }
+  const body = {
+    title,
+    description: document.getElementById('new-description').value.trim(),
+    status: document.getElementById('new-status').value,
+    assigned_to: document.getElementById('new-assignee').value,
+    priority: parseInt(document.getElementById('new-priority').value) || 3,
+    created_by: document.getElementById('new-created-by').value
+  };
+  const r = await fetch('/kanban/tasks', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if (r.ok) {
+    closeCreateModal();
+    showToast('Task erstellt');
+  } else {
+    showToast('Fehler beim Erstellen', true);
+  }
+}
+
+// ─── Utilities ────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+let toastTimer;
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = isError ? '#ff3b30' : '#1d1d1f';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── Keyboard Shortcuts ───────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeTaskModal();
+    closeCreateModal();
+  }
+});
+</script>
+</body>
+</html>

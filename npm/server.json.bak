@@ -1,0 +1,75 @@
+{
+  "$schema": "https://registry.modelcontextprotocol.io/server-schema.json",
+  "name": "io.github.swisstruthorg/swiss-truth-mcp",
+  "description": "Verified knowledge base for AI agents. Stop hallucinations with source-backed, expert-reviewed facts across 22+ domains including Swiss law, EU regulation, health, finance, AI/ML, cybersecurity, and global science. 5-stage validation pipeline with SHA256 integrity.",
+  "version": "0.1.3",
+  "homepage": "https://swisstruth.org",
+  "license": "MIT",
+  "author": {
+    "name": "Swiss Truth",
+    "email": "hello@swisstruth.org",
+    "url": "https://swisstruth.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swisstruthorg/swiss-truth-mcp"
+  },
+  "runtime": {
+    "type": "http",
+    "url": "https://swisstruth.org/mcp"
+  },
+  "packages": [
+    {
+      "registry": "npm",
+      "name": "swiss-truth-mcp",
+      "version": "0.1.3",
+      "installCommand": "npx -y swiss-truth-mcp"
+    },
+    {
+      "registry": "pypi",
+      "name": "swiss-truth-mcp",
+      "version": "0.1.2",
+      "installCommand": "pip install swiss-truth-mcp"
+    }
+  ],
+  "tools": [
+    {
+      "name": "search_knowledge",
+      "description": "Semantic search over 1600+ certified claims in DE/EN/FR/IT across 22+ domains. Returns confidence score, source references, and SHA256 hash."
+    },
+    {
+      "name": "verify_claim",
+      "description": "Fact-check a statement. Returns verdict: supported | contradicted | unknown with evidence."
+    },
+    {
+      "name": "verify_claims_batch",
+      "description": "Verify up to 20 claims in parallel. Returns per-claim verdicts and a summary."
+    },
+    {
+      "name": "verify_response",
+      "description": "Check a full AI response paragraph for hallucination risk (low/medium/high)."
+    },
+    {
+      "name": "find_contradictions",
+      "description": "Find certified claims that contradict a given statement."
+    },
+    {
+      "name": "submit_claim",
+      "description": "Submit a new factual claim for expert review through the 5-stage validation pipeline."
+    },
+    {
+      "name": "get_claim",
+      "description": "Retrieve a single claim with full provenance: validator, institution, review date, SHA256."
+    },
+    {
+      "name": "get_claim_status",
+      "description": "Track the validation status of a submitted claim: draft → peer_review → certified."
+    },
+    {
+      "name": "list_domains",
+      "description": "List all 22+ knowledge domains with certified claim counts."
+    }
+  ],
+  "categories": ["knowledge", "fact-checking", "research", "verification"],
+  "keywords": ["mcp", "fact-checking", "hallucination", "knowledge-base", "rag", "swiss-law", "eu-law", "verified-facts"]
+}
