@@ -2,7 +2,6 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 import uvicorn
-from pathlib import Path
 
 from fastapi import APIRouter, FastAPI
 from fastapi.requests import Request
@@ -558,7 +557,7 @@ async def eu_ai_act_compliance(claim_id: str):
             "is_compliant": True,
             "risk_level": "minimal",
             "data_quality": "high" if effective_conf >= 0.90 else "medium" if effective_conf >= 0.75 else "low",
-            "freshness": "current" if claim.get("expires_at", "") > now[:10] else "renewal_recommended",
+            "freshness": "current" if (claim.get("expires_at") is None or claim.get("expires_at", "") > now[:10]) else "renewal_recommended",
         },
 
         "verification_url": f"https://swisstruth.org/api/claims/{claim_id}",

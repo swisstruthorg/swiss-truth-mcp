@@ -134,9 +134,11 @@ async def pre_screen_claim(
         )
         content = content.strip()
         if content.startswith("```"):
-            content = content.split("```")[1]
+            parts = content.split("```")
+            content = parts[1] if len(parts) >= 3 else parts[-1]
             if content.startswith("json"):
                 content = content[4:]
+            content = content.strip()
         result = json.loads(content.strip())
         return result
     except Exception as e:
@@ -176,9 +178,11 @@ async def verify_source_supports_claim(claim_text: str, page_content: str) -> di
         )
         raw = raw.strip()
         if raw.startswith("```"):
-            raw = raw.split("```")[1]
+            parts = raw.split("```")
+            raw = parts[1] if len(parts) >= 3 else parts[-1]
             if raw.startswith("json"):
                 raw = raw[4:]
+            raw = raw.strip()
         return json.loads(raw.strip())
     except Exception:
         return {"supports": True, "confidence": 0.5, "reason": "Prüfung fehlgeschlagen"}
@@ -214,9 +218,11 @@ async def compare_claims(submitted: str, certified: str) -> dict:
         raw = raw.strip()
         # Strip markdown code fences if present
         if raw.startswith("```"):
-            raw = raw.split("```")[1]
+            parts = raw.split("```")
+            raw = parts[1] if len(parts) >= 3 else parts[-1]
             if raw.startswith("json"):
                 raw = raw[4:]
+            raw = raw.strip()
         return json.loads(raw.strip())
     except Exception as e:
         return {"relation": "unrelated", "confidence": 0.5, "explanation": f"Vergleich fehlgeschlagen: {e}"}

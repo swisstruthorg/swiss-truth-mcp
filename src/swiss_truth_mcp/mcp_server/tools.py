@@ -474,9 +474,11 @@ async def verify_response(
         )
         raw = msg.content[0].text.strip()
         if raw.startswith("```"):
-            raw = raw.split("```")[1]
+            parts = raw.split("```")
+            raw = parts[1] if len(parts) >= 3 else parts[-1]
             if raw.startswith("json"):
                 raw = raw[4:]
+            raw = raw.strip()
         atomic_claims = json.loads(raw.strip())
         if not isinstance(atomic_claims, list):
             atomic_claims = []
@@ -550,7 +552,7 @@ async def get_claim_status(claim_id: str) -> dict[str, Any]:
         Status, Konfidenz und nächste Schritte
     """
     async with get_session() as session:
-        claim = await queries.get_claim_by_id(session, claim_id, only_live=True)
+        claim = await queries.get_claim_by_id(session, claim_id, only_live=False)
 
     if claim is None:
         return {"error": f"Claim '{claim_id}' nicht gefunden"}
@@ -559,6 +561,7 @@ async def get_claim_status(claim_id: str) -> dict[str, Any]:
         "draft": "Entwurf — noch nicht für Peer-Review freigegeben",
         "peer_review": "In Peer-Review — wartet auf Expertenvalidierung",
         "certified": "Zertifiziert — von Experten validiert und freigegeben",
+        "needs_renewal": "Abgelaufen — Erneuerung durch Experten erforderlich",
     }
 
     return {
