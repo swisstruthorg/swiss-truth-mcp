@@ -152,3 +152,132 @@
 - ✅ All new endpoints wired into FastAPI app
 
 **Status:** Complete
+
+---
+
+## Phase 5: Production Hardening & Developer Experience 🔄
+
+**Goal:** Make the platform production-grade — CI/CD, integration tests, developer portal with self-service API keys, Redis caching for horizontal scaling, and knowledge graph visualization.
+
+**Plans:**
+
+### 05-01: CI/CD Pipeline & Integration Tests
+- [ ] GitHub Actions workflow: lint (ruff), type-check (mypy), unit tests (pytest)
+- [ ] Integration test suite against real Neo4j (Docker Compose test profile)
+- [ ] Test coverage for all API routes (minimum 80%)
+- [ ] Auto-deploy to Hostinger on `main` push (via SSH + `deploy/update.sh`)
+- [ ] Pre-commit hooks: ruff format + ruff check
+
+**Files:** `.github/workflows/ci.yml`, `tests/test_integration.py`, `tests/docker-compose.test.yml`, `.pre-commit-config.yaml`
+
+### 05-02: Redis Cache Layer (Multi-Instance Ready)
+- [ ] Replace in-memory caches (SLA ring-buffer, rate limiter key cache) with Redis
+- [ ] Redis-backed rate limiting (sliding window per API key)
+- [ ] Redis pub/sub for SSE broadcast across multiple API instances
+- [ ] Configurable: fallback to in-memory if `REDIS_URL` not set
+- [ ] Health check includes Redis connectivity
+
+**Files:** `cache/redis_client.py`, `middleware/rate_limiter.py` (update), `monitoring/sla.py` (update), `config.py` (update)
+
+### 05-03: Developer Portal & Self-Service API Keys
+- [ ] Public registration page: email + password → tenant + free-tier API key
+- [ ] Dashboard: usage stats, key management, upgrade to pro/enterprise
+- [ ] Interactive API explorer (Swagger UI with pre-filled API key)
+- [ ] Webhook management UI: register/test/delete webhook endpoints
+- [ ] Email verification flow (SMTP or SendGrid)
+
+**Files:** `api/routes/portal.py`, `templates/portal/`, `auth/registration.py`, `auth/email_verify.py`
+
+### 05-04: Claim Clustering & Knowledge Graph Visualization
+- [ ] Semantic clustering: group similar claims using embedding cosine similarity
+- [ ] `ClusterOf` Neo4j relationship between related claims
+- [ ] `GET /api/clusters/{domain_id}` — clustered claims per domain
+- [ ] Interactive graph visualization (D3.js or Cytoscape.js) at `/graph`
+- [ ] Filter by domain, confidence, certification status
+
+**Files:** `validation/clustering.py`, `api/routes/graph.py`, `templates/graph.html`, `static/js/graph.js`
+
+### 05-05: Source Quality Scoring & Automated Fact-Check Pipeline
+- [ ] Source reputation scoring: domain age, citation count, known-reliable list
+- [ ] `SourceScore` Neo4j node linked to Source nodes
+- [ ] Weighted confidence: source quality feeds into claim confidence calculation
+- [ ] Fully automated fact-check pipeline: submit → pre-screen → AI verify → human review queue
+- [ ] `POST /api/pipeline/auto-verify` — trigger automated pipeline for a claim
+- [ ] Human-in-the-loop only when AI confidence < 0.7
+
+**Files:** `validation/source_scoring.py`, `validation/auto_pipeline.py`, `api/routes/pipeline.py`, `db/queries.py` (update)
+
+### 05-06: Additional Agent Framework Integrations
+- [ ] CrewAI integration package (`integrations/crewai-pkg/`)
+- [ ] AutoGen integration package (`integrations/autogen-pkg/`)
+- [ ] Shared base client extracted from LangChain package
+- [ ] Integration test matrix: LangChain + CrewAI + AutoGen against live API
+
+**Files:** `integrations/crewai-pkg/`, `integrations/autogen-pkg/`, `integrations/shared/base_client.py`
+
+**Success Criteria:**
+- [ ] CI pipeline green on every PR, auto-deploy on merge to main
+- [ ] Integration tests pass against real Neo4j (Docker)
+- [ ] Redis cache operational, API stateless and horizontally scalable
+- [ ] Developer portal live with self-service registration
+- [ ] Knowledge graph visualization accessible at /graph
+- [ ] Source quality scoring integrated into confidence calculation
+- [ ] At least 2 additional agent framework integrations published
+
+**Status:** ✅ Complete
+
+---
+
+## Phase 6: AI Agent First 🔄
+
+**Goal:** Make Swiss Truth the indispensable knowledge infrastructure for AI agents — not just fact-checking, but a full agent toolkit. Agents tell us what they need, we build it.
+
+**Plans:**
+
+### 06-A: Agent Feedback Loop
+- [x] `agent/feedback.py` — AgentFeedback Neo4j node, CRUD operations, demand-signal aggregation
+- [x] `api/routes/agent.py` — 5 endpoints:
+  - `POST /api/agent/feedback` — agents report what's missing
+  - `GET /api/agent/feedback` — list feedback (admin)
+  - `GET /api/agent/feedback/stats` — aggregated demand signals
+  - `PATCH /api/agent/feedback/{id}` — update status
+  - `GET /api/agent/capabilities` — full capability manifest for agents
+
+### 06-01: get_knowledge_brief MCP Tool
+- [x] Returns structured, citable knowledge summary with key facts, sources, confidence
+- [x] Optimized for RAG pipelines and agent response enrichment
+
+### 06-02: get_citations MCP Tool
+- [x] Solves #1 agent problem: inability to cite sources
+- [x] Returns inline + APA citations with verified source URLs
+
+### 06-03: check_freshness MCP Tool
+- [x] Checks if a fact is still current vs. changed/outdated
+- [x] Detects when agent training data may be stale
+
+### 06-04: check_regulatory_compliance MCP Tool
+- [x] Swiss/EU compliance check for agent-generated text
+- [x] Domains: swiss-finance (FINMA), swiss-health (BAG), swiss-law, eu-law (GDPR/AI Act)
+
+### 06-05: report_agent_need MCP Tool
+- [x] Agents can report missing domains, claims, features directly via MCP
+- [x] Creates demand-signal loop: agents → feedback → platform roadmap
+
+### 06-06: Integration Updates
+- [x] `integrations/shared/base_client.py` — 6 new methods for Phase 6 tools
+- [x] `integrations/crewai-pkg/` — 4 new CrewAI tools (KnowledgeBrief, Citations, Freshness, ReportNeed)
+- [x] `integrations/autogen-pkg/` — 4 new AutoGen functions + registered in function_map
+
+**New files created (Phase 6):**
+- `agent/__init__.py` + `agent/feedback.py` — feedback loop module
+- `agent/knowledge_tools.py` — 5 new MCP tool implementations
+- `api/routes/agent.py` — agent-focused REST endpoints
+
+**Modified files:**
+- `mcp_server/server.py` — 5 new tools registered (14 total)
+- `api/main.py` — agent router wired
+- `integrations/shared/base_client.py` — 6 new methods
+- `integrations/crewai-pkg/tools.py` — 4 new tools
+- `integrations/autogen-pkg/functions.py` — 4 new functions
+
+**Status:** ✅ Complete

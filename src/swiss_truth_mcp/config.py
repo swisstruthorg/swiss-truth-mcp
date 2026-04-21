@@ -51,6 +51,16 @@ class Settings(BaseSettings):
     sla_p95_latency_ms: int = 500            # Target p95 latency in ms
     sla_alert_webhook_url: str = ""           # Optional webhook for SLA alerts
 
+    # Redis Cache (Phase 5 — Plan 05-02)
+    redis_url: str = ""  # e.g. redis://localhost:6379/0
+
+    # Portal SMTP (Phase 5 — Plan 05-03)
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from_email: str = "noreply@swisstruth.org"
+
     # Blockchain-Anchoring (Ethereum / Polygon / Base ...)
     eth_rpc_url: str = ""            # z.B. https://polygon-rpc.com
     eth_private_key: str = ""        # 0x... Wallet Private Key

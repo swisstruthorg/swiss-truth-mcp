@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "swiss-truth-autogen"
+version = "0.1.0"
+description = "Swiss Truth integration for AutoGen — verified facts for multi-agent conversations"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Swiss Truth", email = "hello@swisstruth.org" }]
+keywords = ["autogen", "ai-agents", "fact-checking", "swiss-truth", "mcp"]
+requires-python = ">=3.9"
+dependencies = [
+    "pyautogen>=0.2.0",
+    "requests>=2.28.0",
+]
+
+[project.urls]
+Homepage = "https://swisstruth.org"
+Repository = "https://github.com/swisstruthorg/swiss-truth-mcp"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/swiss_truth_autogen"]

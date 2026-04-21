@@ -28,6 +28,12 @@ from swiss_truth_mcp.api.routes.api_keys import router as api_keys_router
 from swiss_truth_mcp.api.routes.monitoring import router as monitoring_router
 from swiss_truth_mcp.api.routes.audit import router as audit_router
 from swiss_truth_mcp.api.routes.tenants import router as tenants_router
+# Phase 5: Production Hardening & Developer Experience routers
+from swiss_truth_mcp.api.routes.portal import router as portal_router
+from swiss_truth_mcp.api.routes.graph import router as graph_router
+from swiss_truth_mcp.api.routes.pipeline import router as pipeline_router
+# Phase 6: AI Agent First routers
+from swiss_truth_mcp.api.routes.agent import router as agent_router
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -145,6 +151,12 @@ _api_app.include_router(api_keys_router)
 _api_app.include_router(monitoring_router)
 _api_app.include_router(audit_router)
 _api_app.include_router(tenants_router)
+# Phase 5: Production Hardening & Developer Experience routers
+_api_app.include_router(portal_router)
+_api_app.include_router(graph_router)
+_api_app.include_router(pipeline_router)
+# Phase 6: AI Agent First routers
+_api_app.include_router(agent_router)
 
 _TEMPLATES = Jinja2Templates(
     directory=str(Path(__file__).parent.parent / "templates")
@@ -166,7 +178,14 @@ async def factcheck_page(request: Request):
 
 @meta_router.get("/health")
 async def health():
-    return {"status": "ok", "version": "0.1.0"}
+    """Health check with cache and SLA status."""
+    result = {"status": "ok", "version": "0.1.0"}
+    try:
+        from swiss_truth_mcp.cache.redis_client import cache
+        result["cache"] = await cache.health_check()
+    except Exception:
+        result["cache"] = {"backend": "unknown", "status": "error"}
+    return result
 
 
 @meta_router.get("/.well-known/mcp.json", include_in_schema=False)

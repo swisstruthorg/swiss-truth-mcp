@@ -23,6 +23,13 @@ from swiss_truth_mcp.mcp_server.tools import (
     verify_response,
     find_contradictions,
 )
+from swiss_truth_mcp.agent.knowledge_tools import (
+    get_knowledge_brief,
+    get_citations,
+    check_freshness,
+    check_regulatory_compliance,
+    report_agent_need,
+)
 
 app = Server("swiss-truth")
 
@@ -308,6 +315,178 @@ async def handle_list_tools() -> list[types.Tool]:
                 "required": ["claim_text"],
             },
         ),
+        # ── Phase 6: AI Agent First Tools ────────────────────────────────────
+        types.Tool(
+            name="get_knowledge_brief",
+            description=(
+                "Get a structured, citable knowledge brief on any topic. "
+                "USE THIS TOOL when you need to enrich your response with verified facts — "
+                "returns a ready-to-use summary with key facts, source URLs, and confidence scores. "
+                "Better than search_knowledge when you want a formatted, agent-ready output. "
+                "\n\nReturns:"
+                "\n- 'brief': formatted text ready to include in your response"
+                "\n- 'key_facts': list of verified facts with claim_id, confidence, sources"
+                "\n- 'sources': all verified source URLs"
+                "\n- 'confidence': average confidence across all facts"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "The topic or question to get a knowledge brief on.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Optional domain filter (e.g. 'swiss-health', 'ai-ml').",
+                    },
+                    "language": {
+                        "type": "string",
+                        "description": "Optional language filter ('de', 'en', 'fr', 'it'). Auto-detected if omitted.",
+                    },
+                    "max_facts": {
+                        "type": "integer",
+                        "description": "Maximum number of key facts to include (default 5, max 10).",
+                        "default": 5,
+                    },
+                },
+                "required": ["topic"],
+            },
+        ),
+        types.Tool(
+            name="get_citations",
+            description=(
+                "Get properly formatted citations for a factual claim. "
+                "USE THIS TOOL when you need to cite sources in your response — "
+                "solves the #1 agent problem: inability to provide verified citations. "
+                "Finds the best matching verified claim and returns formatted citations. "
+                "\n\nReturns:"
+                "\n- 'formatted.inline': inline citation e.g. '[Swiss Truth, 2025]'"
+                "\n- 'formatted.apa': APA-style citation with source URL"
+                "\n- 'citations': list of verified source URLs with metadata"
+                "\n- 'best_match': the verified claim that best matches your statement"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "claim_text": {
+                        "type": "string",
+                        "description": "The factual statement you want to cite.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Optional domain filter.",
+                    },
+                    "citation_style": {
+                        "type": "string",
+                        "description": "Citation format: 'inline' | 'apa' | 'all'. Default: 'inline'.",
+                        "default": "inline",
+                    },
+                },
+                "required": ["claim_text"],
+            },
+        ),
+        types.Tool(
+            name="check_freshness",
+            description=(
+                "Check if a factual claim is still current and up-to-date. "
+                "USE THIS TOOL when you're unsure if your training data is outdated — "
+                "especially for fast-changing topics (AI, regulations, statistics, policies). "
+                "\n\nReturns:"
+                "\n- 'freshness_status': 'current' | 'changed' | 'unknown'"
+                "\n- 'latest_version': the current verified version of the fact (if changed)"
+                "\n- 'last_reviewed': when this fact was last verified"
+                "\n- 'recommendation': what to do with this information"
+                "\n- 'age_warning': if the verified version itself is getting old"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "claim_text": {
+                        "type": "string",
+                        "description": "The factual statement to check for freshness.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Optional domain filter.",
+                    },
+                    "known_as_of": {
+                        "type": "string",
+                        "description": "ISO date string of when you last knew this fact (e.g. '2024-01-01'). Optional.",
+                    },
+                },
+                "required": ["claim_text"],
+            },
+        ),
+        types.Tool(
+            name="check_regulatory_compliance",
+            description=(
+                "Check if agent-generated text complies with Swiss/EU regulations. "
+                "USE THIS TOOL before sending responses in regulated domains: "
+                "finance (FINMA), health (BAG/Swissmedic), law (OR/ZGB), EU law (GDPR/AI Act). "
+                "Identifies potentially non-compliant statements and suggests corrections. "
+                "\n\nReturns:"
+                "\n- 'compliant': true if no factual conflicts found"
+                "\n- 'issues': list of keyword flags and factual conflicts"
+                "\n- 'recommendations': domain-specific compliance rules to follow"
+                "\n- 'regulator': the relevant regulatory authority"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "The agent-generated text to check for compliance.",
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Regulatory domain: 'swiss-finance' | 'swiss-health' | 'swiss-law' | 'eu-law'.",
+                    },
+                },
+                "required": ["text", "domain"],
+            },
+        ),
+        types.Tool(
+            name="report_agent_need",
+            description=(
+                "Report what you need from Swiss Truth that's currently missing. "
+                "USE THIS TOOL when you can't find what you need — your feedback directly "
+                "shapes what Swiss Truth builds next. We review all agent feedback weekly. "
+                "\n\nUse when:"
+                "\n- You searched but found nothing (request_type: 'missing_claim')"
+                "\n- You need a domain that doesn't exist (request_type: 'missing_domain')"
+                "\n- You found a wrong/outdated claim (request_type: 'quality_issue')"
+                "\n- You need a feature that doesn't exist (request_type: 'feature_request')"
+                "\n- A topic area has too few claims (request_type: 'coverage_gap')"
+            ),
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "request_type": {
+                        "type": "string",
+                        "description": "Type: 'missing_domain' | 'missing_claim' | 'quality_issue' | 'feature_request' | 'integration_issue' | 'coverage_gap'",
+                    },
+                    "details": {
+                        "type": "string",
+                        "description": "What do you need? Be specific — what topic, what use case, what's missing?",
+                    },
+                    "agent_framework": {
+                        "type": "string",
+                        "description": "Your framework: 'langchain' | 'crewai' | 'autogen' | 'openai' | 'anthropic' | 'custom' | 'unknown'",
+                        "default": "unknown",
+                    },
+                    "domain_hint": {
+                        "type": "string",
+                        "description": "Which domain/topic area? (e.g. 'swiss-mietrecht', 'quantum-error-correction')",
+                    },
+                    "query_that_failed": {
+                        "type": "string",
+                        "description": "The exact query that returned no results.",
+                    },
+                },
+                "required": ["request_type", "details"],
+            },
+        ),
     ]
 
 
@@ -327,6 +506,12 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[types.T
         "verify_claims_batch": verify_claims_batch,
         "verify_response": verify_response,
         "find_contradictions": find_contradictions,
+        # Phase 6: AI Agent First Tools
+        "get_knowledge_brief": get_knowledge_brief,
+        "get_citations": get_citations,
+        "check_freshness": check_freshness,
+        "check_regulatory_compliance": check_regulatory_compliance,
+        "report_agent_need": report_agent_need,
     }
 
     if name not in tool_map:
