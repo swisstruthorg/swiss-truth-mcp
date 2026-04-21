@@ -1,7 +1,7 @@
 # Project State: Swiss Truth MCP
 
 **Current Milestone:** v1.0
-**Current Phase:** Phase 3 — Scale & Quality
+**Current Phase:** Phase 4 — Enterprise & Compliance
 **Status:** Not Started
 **Last Activity:** 2026-04-20
 
@@ -12,10 +12,35 @@
 | 0 | Agent Instrumentation | ✅ Complete |
 | 1 | Critical Fixes | ✅ Complete |
 | 2 | Growth & Integrations | ✅ Complete |
-| 3 | Scale & Quality | 🔲 Not Started |
+| 3 | Scale & Quality | ✅ Complete |
 | 4 | Enterprise & Compliance | 🔲 Not Started |
 
 ## Accumulated Context
+
+### Phase 3 Completion Notes (2026-04-20)
+
+**Automated renewal pipeline (Plan 03-01):**
+- `renewal/worker.py` — daily batch re-verification of expiring claims via Claude Haiku
+- Respects daily cost cap (SEC-05), processes up to 20 claims/batch
+- APScheduler cron at 03:00 UTC + manual trigger `POST /admin/renewal`
+
+**Blockchain anchoring weekly cron (Plan 03-02):**
+- APScheduler job every Sunday 02:00 UTC (auto dry-run if no ETH keys)
+- Wired existing `run_anchor_job()` into lifespan scheduler
+
+**Multi-language claim generation (Plan 03-03):**
+- `seed/multilang.py` — translates certified claims to FR/IT/ES/ZH via Claude
+- CLI: `python -m swiss_truth_mcp.seed.multilang --domain swiss-health --lang fr`
+
+**Coverage analysis (Plan 03-04):**
+- `validation/coverage.py` — keyword-based topic coverage per domain
+- Endpoints: `GET /api/coverage/{domain_id}`, `GET /api/coverage`
+
+**Advanced conflict detection (Plan 03-05):**
+- Enhanced `conflict_detect.py` with AI explanations via `compare_claims()`
+- `CONFLICTS_WITH` Neo4j relationship, `GET /api/conflicts`
+
+**New API routes:** `api/routes/quality.py` — coverage, conflicts, renewal admin
 
 ### Phase 2 Completion Notes (2026-04-20)
 
@@ -60,3 +85,4 @@ None currently.
 | 2026-04-20 | hungry-babbage-aa6eb1 | Phase 0+1 execution (GSD full pipeline) |
 | 2026-04-20 | session-2 | Phase 1 post-merge bug fixes + .planning/ reconstruction |
 | 2026-04-20 | session-3 | Phase 2 completion: LangChain pkg + EU AI Act compliance endpoints |
+| 2026-04-20 | session-4 | Phase 3 completion: renewal pipeline, anchor cron, multilang, coverage, conflicts |

@@ -23,6 +23,7 @@ from swiss_truth_mcp.api.routes.feed import router as feed_router
 from swiss_truth_mcp.api.routes.anchor import router as anchor_router
 from swiss_truth_mcp.api.routes.kanban import router as kanban_router
 from swiss_truth_mcp.api.routes.compliance import router as compliance_router
+from swiss_truth_mcp.api.routes.quality import router as quality_router
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -30,6 +31,7 @@ from swiss_truth_mcp.db.neo4j_client import close_driver, get_session
 from swiss_truth_mcp.db import queries, schema
 from swiss_truth_mcp.mcp_server.http_server import mcp_session_manager, handle_mcp_request
 from swiss_truth_mcp.middleware.rate_limiter import RateLimitMiddleware
+from swiss_truth_mcp.config import settings
 from swiss_truth_mcp.renewal.cost_cap import daily_cap
 
 
@@ -52,6 +54,55 @@ async def lifespan(api_app: FastAPI):
         id="daily_cap_reset",
         replace_existing=True,
     )
+
+    # Wöchentlicher Blockchain-Anchor: Sonntag 02:00 UTC (Plan 03-02)
+    async def _weekly_anchor() -> None:
+        """Berechnet Merkle-Root und verankert auf Chain (wenn konfiguriert)."""
+        from swiss_truth_mcp.blockchain.anchor import run_anchor_job
+        import logging
+        _log = logging.getLogger("swiss_truth_mcp.anchor_cron")
+        try:
+            async with get_session() as session:
+                record = await run_anchor_job(
+                    session=session,
+                    rpc_url=settings.eth_rpc_url,
+                    private_key=settings.eth_private_key,
+                    chain_id=settings.eth_chain_id,
+                    chain_name=settings.eth_chain_name,
+                    dry_run=not (settings.eth_rpc_url and settings.eth_private_key),
+                )
+            _log.info("Weekly anchor complete: %s claims, root=%s, status=%s",
+                       record.get("claim_count"), record.get("merkle_root", "")[:16], record.get("status"))
+        except Exception as e:
+            _log.error("Weekly anchor failed: %s", e)
+
+    scheduler.add_job(
+        _weekly_anchor,
+        trigger=CronTrigger(day_of_week="sun", hour=2, minute=0, timezone="UTC"),
+        id="weekly_anchor",
+        replace_existing=True,
+    )
+
+    # Täglicher Renewal-Worker: 03:00 UTC (Plan 03-01)
+    async def _daily_renewal() -> None:
+        """Erneuert ablaufende Claims via AI re-verification."""
+        from swiss_truth_mcp.renewal.worker import run_renewal_batch
+        import logging
+        _log = logging.getLogger("swiss_truth_mcp.renewal_cron")
+        try:
+            result = await run_renewal_batch()
+            _log.info("Daily renewal: %d renewed, %d skipped, %d failed",
+                       result.get("renewed", 0), result.get("skipped", 0), result.get("failed", 0))
+        except Exception as e:
+            _log.error("Daily renewal failed: %s", e)
+
+    scheduler.add_job(
+        _daily_renewal,
+        trigger=CronTrigger(hour=3, minute=0, timezone="UTC"),
+        id="daily_renewal",
+        replace_existing=True,
+    )
+
     scheduler.start()
 
     # MCP Session Manager starten (stateless, SSE streaming)
@@ -84,6 +135,7 @@ _api_app.include_router(feed_router)
 _api_app.include_router(anchor_router)
 _api_app.include_router(kanban_router)
 _api_app.include_router(compliance_router)
+_api_app.include_router(quality_router)
 
 _TEMPLATES = Jinja2Templates(
     directory=str(Path(__file__).parent.parent / "templates")

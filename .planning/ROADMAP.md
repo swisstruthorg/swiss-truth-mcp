@@ -71,18 +71,34 @@
 
 ---
 
-## Phase 3: Scale & Quality 🔲
+## Phase 3: Scale & Quality ✅
 
 **Goal:** Improve claim quality, add multi-language seed data, automated renewal pipeline, blockchain anchoring.
 
 **Plans:**
-- [ ] Automated renewal pipeline with cost-capped AI re-verification
-- [ ] Blockchain anchoring (Polygon/Base) for certified claim hashes
-- [ ] Multi-language claim generation (FR, IT, ES, ZH)
-- [ ] Coverage analysis per domain (gap detection)
-- [ ] Advanced conflict detection with explanation
+- [x] 03-01: Automated renewal pipeline with cost-capped AI re-verification
+  - `renewal/worker.py` — daily batch job re-verifies expiring claims via Claude Haiku
+  - Respects daily cost cap (SEC-05), processes up to 20 claims/batch
+  - APScheduler job at 03:00 UTC + manual trigger via `POST /admin/renewal`
+  - Status endpoint: `GET /admin/renewal/status`
+- [x] 03-02: Blockchain anchoring weekly cron
+  - APScheduler job every Sunday 02:00 UTC (auto dry-run if no ETH keys configured)
+  - Existing anchor infrastructure fully wired (Merkle root, Polygon/Base, audit trail)
+- [x] 03-03: Multi-language claim generation (FR, IT, ES, ZH)
+  - `seed/multilang.py` — translates certified claims via Claude Haiku
+  - CLI: `python -m swiss_truth_mcp.seed.multilang --domain swiss-health --lang fr`
+  - Preserves source URLs, adjusts confidence by -0.01
+- [x] 03-04: Coverage analysis per domain (gap detection)
+  - `validation/coverage.py` — keyword-based topic coverage analysis
+  - `GET /api/coverage/{domain_id}` — per-domain coverage report
+  - `GET /api/coverage` — all-domains overview with gap counts
+- [x] 03-05: Advanced conflict detection with explanation
+  - Enhanced `conflict_detect.py` with AI-powered explanations via `compare_claims()`
+  - `CONFLICTS_WITH` Neo4j relationship for persistent conflict tracking
+  - `GET /api/conflicts` — list all known conflicts
+  - `record_conflict()` for storing detected conflicts
 
-**Status:** Not Started
+**Status:** Complete
 
 ---
 
