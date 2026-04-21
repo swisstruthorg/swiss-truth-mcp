@@ -46,6 +46,11 @@ class Settings(BaseSettings):
     ngrok_public_url: str = ""
     public_base_url_env: str = Field(default="", validation_alias="PUBLIC_BASE_URL")
 
+    # SLA Monitoring (Phase 4)
+    sla_uptime_target: float = 99.5          # Target uptime percentage
+    sla_p95_latency_ms: int = 500            # Target p95 latency in ms
+    sla_alert_webhook_url: str = ""           # Optional webhook for SLA alerts
+
     # Blockchain-Anchoring (Ethereum / Polygon / Base ...)
     eth_rpc_url: str = ""            # z.B. https://polygon-rpc.com
     eth_private_key: str = ""        # 0x... Wallet Private Key

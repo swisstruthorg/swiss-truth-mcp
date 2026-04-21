@@ -17,6 +17,10 @@ CONSTRAINTS = [
     "CREATE CONSTRAINT anchor_id        IF NOT EXISTS FOR (a:AnchorRecord)        REQUIRE a.id IS UNIQUE",
     "CREATE CONSTRAINT kanban_task_id   IF NOT EXISTS FOR (k:KanbanTask)          REQUIRE k.id IS UNIQUE",
     "CREATE CONSTRAINT kanban_comment_id IF NOT EXISTS FOR (c:TaskComment)        REQUIRE c.id IS UNIQUE",
+    # Phase 4: Enterprise & Compliance
+    "CREATE CONSTRAINT apikey_id        IF NOT EXISTS FOR (k:ApiKey)              REQUIRE k.id IS UNIQUE",
+    "CREATE CONSTRAINT tenant_id        IF NOT EXISTS FOR (t:Tenant)              REQUIRE t.id IS UNIQUE",
+    "CREATE CONSTRAINT tenant_slug      IF NOT EXISTS FOR (t:Tenant)              REQUIRE t.slug IS UNIQUE",
 ]
 
 FULLTEXT_INDEX = """

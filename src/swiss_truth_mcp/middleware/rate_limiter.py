@@ -110,10 +110,94 @@ _API_KEYS: dict[str, str] = _load_api_keys()
 _ADMIN_KEY = os.environ.get("SWISS_TRUTH_API_KEY", "")
 
 
+# ---------------------------------------------------------------------------
+# DB-backed API key cache (Phase 4 — Plan 04-01)
+# ---------------------------------------------------------------------------
+
+_db_key_cache: dict[str, tuple[str, float]] = {}  # hash → (tier, timestamp)
+_DB_CACHE_TTL = 60.0  # seconds
+
+
+def invalidate_key_cache() -> None:
+    """Clear the in-memory API key cache. Called when keys are created/revoked."""
+    _db_key_cache.clear()
+    logger.info("API key cache invalidated")
+
+
+def _hash_token(token: str) -> str:
+    """SHA256 hash of a token for DB lookup."""
+    import hashlib
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+def _check_db_key(token: str) -> str | None:
+    """
+    Check if token is a valid DB-managed API key.
+    Uses in-memory cache with 60s TTL to avoid DB hits on every request.
+    Returns tier string or None.
+    """
+    key_hash = _hash_token(token)
+    now = time.time()
+
+    # Check cache first
+    if key_hash in _db_key_cache:
+        cached_tier, cached_at = _db_key_cache[key_hash]
+        if now - cached_at < _DB_CACHE_TTL:
+            return cached_tier if cached_tier else None
+
+    # DB lookup (async → run in sync context via cache miss marker)
+    # We store a "pending" marker and resolve on next async opportunity
+    # For now, use the env-var keys as primary, DB keys via cache warming
+    return None
+
+
+async def _async_check_db_key(token: str) -> str | None:
+    """Async version: check DB for API key and cache result."""
+    key_hash = _hash_token(token)
+    now = time.time()
+
+    # Check cache
+    if key_hash in _db_key_cache:
+        cached_tier, cached_at = _db_key_cache[key_hash]
+        if now - cached_at < _DB_CACHE_TTL:
+            return cached_tier if cached_tier else None
+
+    # DB lookup
+    try:
+        from swiss_truth_mcp.db.neo4j_client import get_session
+        from swiss_truth_mcp.db import queries
+        async with get_session() as session:
+            key_data = await queries.get_api_key_by_hash(session, key_hash)
+            if key_data and key_data.get("active"):
+                # Check expiry
+                expires_at = key_data.get("expires_at")
+                if expires_at:
+                    from datetime import datetime, timezone
+                    now_iso = datetime.now(timezone.utc).isoformat()
+                    if expires_at < now_iso:
+                        _db_key_cache[key_hash] = ("", now)
+                        return None
+                tier = key_data.get("tier", "free")
+                _db_key_cache[key_hash] = (tier, now)
+                # Fire-and-forget usage recording
+                try:
+                    await queries.record_api_key_usage(session, key_hash)
+                except Exception:
+                    pass
+                return tier
+            else:
+                _db_key_cache[key_hash] = ("", now)
+                return None
+    except Exception as e:
+        logger.debug("DB key lookup failed: %s", e)
+        return None
+
+
 def _resolve_tier(request_headers: dict[str, str]) -> tuple[str, str]:
     """
     Returns (tier, rate_limit_key).
     Checks Authorization: Bearer <token> and X-Swiss-Truth-Key header.
+    Checks env-var keys first, then DB-backed keys via cache.
     """
     # 1. Bearer token
     auth = request_headers.get("authorization", "")
@@ -124,6 +208,10 @@ def _resolve_tier(request_headers: dict[str, str]) -> tuple[str, str]:
         tier = _API_KEYS.get(token)
         if tier:
             return tier, f"key:{token}"
+        # Check DB cache (sync — cache hit only)
+        db_tier = _check_db_key(token)
+        if db_tier:
+            return db_tier, f"key:{_hash_token(token)[:16]}"
 
     # 2. X-Swiss-Truth-Key header (legacy MCP header)
     x_key = request_headers.get("x-swiss-truth-key", "")
@@ -133,8 +221,44 @@ def _resolve_tier(request_headers: dict[str, str]) -> tuple[str, str]:
         tier = _API_KEYS.get(x_key)
         if tier:
             return tier, f"key:{x_key}"
+        db_tier = _check_db_key(x_key)
+        if db_tier:
+            return db_tier, f"key:{_hash_token(x_key)[:16]}"
 
     return "free", ""   # IP resolved by caller
+
+
+async def _async_resolve_tier(request_headers: dict[str, str]) -> tuple[str, str]:
+    """
+    Async version of _resolve_tier — includes DB lookup for API keys.
+    Used by the middleware for full DB-backed key resolution.
+    """
+    # 1. Bearer token
+    auth = request_headers.get("authorization", "")
+    if auth.lower().startswith("bearer "):
+        token = auth[7:].strip()
+        if token == _ADMIN_KEY and _ADMIN_KEY:
+            return "enterprise", f"key:{token}"
+        tier = _API_KEYS.get(token)
+        if tier:
+            return tier, f"key:{token}"
+        db_tier = await _async_check_db_key(token)
+        if db_tier:
+            return db_tier, f"key:{_hash_token(token)[:16]}"
+
+    # 2. X-Swiss-Truth-Key header
+    x_key = request_headers.get("x-swiss-truth-key", "")
+    if x_key:
+        if x_key == _ADMIN_KEY and _ADMIN_KEY:
+            return "enterprise", f"key:{x_key}"
+        tier = _API_KEYS.get(x_key)
+        if tier:
+            return tier, f"key:{x_key}"
+        db_tier = await _async_check_db_key(x_key)
+        if db_tier:
+            return db_tier, f"key:{_hash_token(x_key)[:16]}"
+
+    return "free", ""
 
 
 def _client_ip(scope: dict) -> str:

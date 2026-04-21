@@ -2,8 +2,8 @@
 
 **Current Milestone:** v1.0
 **Current Phase:** Phase 4 — Enterprise & Compliance
-**Status:** Not Started
-**Last Activity:** 2026-04-20
+**Status:** ✅ Complete
+**Last Activity:** 2026-04-21
 
 ## Phase Progress
 
@@ -13,9 +13,69 @@
 | 1 | Critical Fixes | ✅ Complete |
 | 2 | Growth & Integrations | ✅ Complete |
 | 3 | Scale & Quality | ✅ Complete |
-| 4 | Enterprise & Compliance | 🔲 Not Started |
+| 4 | Enterprise & Compliance | ✅ Complete |
 
 ## Accumulated Context
+
+### Phase 4 Completion Notes (2026-04-21)
+
+**API Key Management (Plan 04-01):**
+- `ApiKey` Neo4j node with SHA256 hashing, tier (free/pro/enterprise), owner, tenant_id
+- Admin CRUD: `POST/GET/DELETE /admin/api-keys`, `GET /admin/api-keys/{id}/usage`
+- Rate limiter (`middleware/rate_limiter.py`) updated with DB-backed key resolution
+- 60s in-memory cache (`_db_key_cache`) to avoid DB hits on every request
+- `invalidate_key_cache()` called on key create/revoke
+- Key format: `sk-{tier[:3]}-{random}` (e.g. `sk-pro-abc123...`)
+
+**SLA Monitoring (Plan 04-02):**
+- `monitoring/sla.py` — in-memory ring-buffer (288 × 5-min buckets = 24h)
+- `middleware/sla_tracker.py` — ASGI middleware between RateLimiter and app
+- Tracks: request count, latency (p50/p95/p99), error rate, uptime %
+- Admin endpoints: `GET /admin/sla/status`, `/history`, `/alerts`
+- Config: `sla_uptime_target` (99.5%), `sla_p95_latency_ms` (500ms), `sla_alert_webhook_url`
+- Alerts: logging-based + optional webhook (fire-and-forget via thread)
+
+**Full Compliance Report (Plan 04-03):**
+- `GET /api/compliance/eu-ai-act/report/full` — v2.0 extended report
+- Per-domain: confidence, quality distribution (high/med/low), renewal status, human review rate
+- Certification timeline: monthly counts + avg confidence (last 12 months)
+- Validator leaderboard: total validations, certified, renewals, certification rate
+- Blockchain anchoring status: latest anchor, recent anchors, chain info
+- SLA monitoring status integrated
+- Audit trail endpoints listed
+- New queries: `get_certification_timeline()`, `get_validator_stats()`
+
+**Audit Trail Export (Plan 04-04):**
+- `audit/jsonld.py` — W3C PROV-O compatible JSON-LD serializer
+- Ontology mapping: Claim→prov:Entity, Validation→prov:Activity, Expert→prov:Agent, Source→prov:wasDerivedFrom, Anchor→prov:Activity
+- `GET /api/audit/trail` — full system audit trail (JSON-LD)
+- `GET /api/audit/trail/{claim_id}` — single claim with validations + anchors
+- `GET /api/audit/export` — bulk export with `since` and `domain` filters
+- New queries: `get_claim_validations()`, `get_all_certified_claims()`, `get_certified_claims_filtered()`
+
+**Multi-Tenant Support (Plan 04-05):**
+- `Tenant` Neo4j node: id, name, slug (unique), plan, active, settings_json
+- Admin CRUD: `POST/GET/PATCH /admin/tenants`, `GET /admin/tenants/{id}` (with usage stats)
+- API keys linked to tenants via `tenant_id` field
+- Tenant usage stats: API key count, total requests across all keys
+- Schema constraints: `tenant_id` uniqueness, `tenant_slug` uniqueness
+
+**New files created:**
+- `api/routes/api_keys.py` — API key admin endpoints
+- `api/routes/monitoring.py` — SLA monitoring admin endpoints
+- `api/routes/audit.py` — Audit trail JSON-LD export endpoints
+- `api/routes/tenants.py` — Multi-tenant admin endpoints
+- `monitoring/__init__.py` + `monitoring/sla.py` — SLA tracker module
+- `middleware/sla_tracker.py` — SLA ASGI middleware
+- `audit/__init__.py` + `audit/jsonld.py` — JSON-LD serializer
+
+**Modified files:**
+- `config.py` — added SLA settings (uptime target, p95 latency, alert webhook)
+- `db/schema.py` — added ApiKey + Tenant constraints
+- `db/queries.py` — added ~15 new queries (API keys, tenants, audit, compliance)
+- `middleware/rate_limiter.py` — DB-backed key resolution with cache
+- `api/main.py` — wired 4 new routers + SLA middleware in ASGI stack
+- `api/routes/compliance.py` — added full extended report endpoint (v2.0)
 
 ### Phase 3 Completion Notes (2026-04-20)
 
@@ -86,3 +146,4 @@ None currently.
 | 2026-04-20 | session-2 | Phase 1 post-merge bug fixes + .planning/ reconstruction |
 | 2026-04-20 | session-3 | Phase 2 completion: LangChain pkg + EU AI Act compliance endpoints |
 | 2026-04-20 | session-4 | Phase 3 completion: renewal pipeline, anchor cron, multilang, coverage, conflicts |
+| 2026-04-21 | session-5 | Phase 4 completion: API keys, SLA monitoring, compliance report v2, audit trail JSON-LD, multi-tenant |

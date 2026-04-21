@@ -959,3 +959,393 @@ async def get_latest_anchor(session: AsyncSession) -> Optional[dict[str, Any]]:
     )
     row = await result.single()
     return row["anchor"] if row else None
+
+
+# ---------------------------------------------------------------------------
+# API Key Management (Phase 4 — Plan 04-01)
+# ---------------------------------------------------------------------------
+
+async def create_api_key(session: AsyncSession, key_data: dict) -> None:
+    """Create a new API key node in Neo4j."""
+    import json as _json
+    await session.run(
+        """
+        CREATE (k:ApiKey {
+            id:            $id,
+            key_hash:      $key_hash,
+            key_prefix:    $key_prefix,
+            tier:          $tier,
+            owner_name:    $owner_name,
+            owner_email:   $owner_email,
+            tenant_id:     $tenant_id,
+            active:        $active,
+            created_at:    $created_at,
+            expires_at:    $expires_at,
+            request_count: $request_count,
+            last_used_at:  $last_used_at
+        })
+        """,
+        key_data,
+    )
+
+
+async def get_api_key_by_hash(session: AsyncSession, key_hash: str) -> Optional[dict]:
+    """Look up an API key by its SHA256 hash."""
+    result = await session.run(
+        """
+        MATCH (k:ApiKey {key_hash: $hash, active: true})
+        RETURN k {
+            .id, .key_hash, .key_prefix, .tier, .owner_name, .owner_email,
+            .tenant_id, .active, .created_at, .expires_at,
+            .request_count, .last_used_at
+        } AS key
+        """,
+        {"hash": key_hash},
+    )
+    row = await result.single()
+    return row["key"] if row else None
+
+
+async def get_api_key_by_id(session: AsyncSession, key_id: str) -> Optional[dict]:
+    """Look up an API key by its ID."""
+    result = await session.run(
+        """
+        MATCH (k:ApiKey {id: $id})
+        RETURN k {
+            .id, .key_hash, .key_prefix, .tier, .owner_name, .owner_email,
+            .tenant_id, .active, .created_at, .expires_at,
+            .request_count, .last_used_at
+        } AS key
+        """,
+        {"id": key_id},
+    )
+    row = await result.single()
+    return row["key"] if row else None
+
+
+async def list_api_keys(session: AsyncSession) -> list[dict]:
+    """List all API keys (without key_hash for security)."""
+    result = await session.run(
+        """
+        MATCH (k:ApiKey)
+        RETURN k {
+            .id, .key_prefix, .tier, .owner_name, .owner_email,
+            .tenant_id, .active, .created_at, .expires_at,
+            .request_count, .last_used_at
+        } AS key
+        ORDER BY k.created_at DESC
+        """
+    )
+    rows = await result.data()
+    return [row["key"] for row in rows]
+
+
+async def revoke_api_key(session: AsyncSession, key_id: str) -> bool:
+    """Revoke an API key by setting active=false."""
+    result = await session.run(
+        """
+        MATCH (k:ApiKey {id: $id})
+        SET k.active = false
+        RETURN count(k) AS n
+        """,
+        {"id": key_id},
+    )
+    row = await result.single()
+    return bool(row and row["n"] > 0)
+
+
+async def record_api_key_usage(session: AsyncSession, key_hash: str) -> None:
+    """Increment request_count and update last_used_at for an API key."""
+    from swiss_truth_mcp.validation.trust import now_iso
+    await session.run(
+        """
+        MATCH (k:ApiKey {key_hash: $hash})
+        SET k.request_count = coalesce(k.request_count, 0) + 1,
+            k.last_used_at  = $now
+        """,
+        {"hash": key_hash, "now": now_iso()},
+    )
+
+
+# ---------------------------------------------------------------------------
+# Tenant Management (Phase 4 — Plan 04-05)
+# ---------------------------------------------------------------------------
+
+async def create_tenant(session: AsyncSession, tenant_data: dict) -> None:
+    """Create a new Tenant node."""
+    import json as _json
+    settings_str = _json.dumps(tenant_data.get("settings_json", {}))
+    await session.run(
+        """
+        CREATE (t:Tenant {
+            id:            $id,
+            name:          $name,
+            slug:          $slug,
+            plan:          $plan,
+            active:        $active,
+            created_at:    $created_at,
+            settings_json: $settings_json
+        })
+        """,
+        {**tenant_data, "settings_json": settings_str},
+    )
+
+
+async def get_tenant_by_id(session: AsyncSession, tenant_id: str) -> Optional[dict]:
+    """Get a tenant by ID."""
+    import json as _json
+    result = await session.run(
+        """
+        MATCH (t:Tenant {id: $id})
+        RETURN t {.id, .name, .slug, .plan, .active, .created_at, .settings_json} AS tenant
+        """,
+        {"id": tenant_id},
+    )
+    row = await result.single()
+    if not row:
+        return None
+    t = row["tenant"]
+    try:
+        t["settings_json"] = _json.loads(t.get("settings_json", "{}"))
+    except Exception:
+        t["settings_json"] = {}
+    return t
+
+
+async def get_tenant_by_slug(session: AsyncSession, slug: str) -> Optional[dict]:
+    """Get a tenant by slug."""
+    import json as _json
+    result = await session.run(
+        """
+        MATCH (t:Tenant {slug: $slug})
+        RETURN t {.id, .name, .slug, .plan, .active, .created_at, .settings_json} AS tenant
+        """,
+        {"slug": slug},
+    )
+    row = await result.single()
+    if not row:
+        return None
+    t = row["tenant"]
+    try:
+        t["settings_json"] = _json.loads(t.get("settings_json", "{}"))
+    except Exception:
+        t["settings_json"] = {}
+    return t
+
+
+async def list_tenants(session: AsyncSession) -> list[dict]:
+    """List all tenants."""
+    import json as _json
+    result = await session.run(
+        """
+        MATCH (t:Tenant)
+        RETURN t {.id, .name, .slug, .plan, .active, .created_at, .settings_json} AS tenant
+        ORDER BY t.created_at DESC
+        """
+    )
+    rows = await result.data()
+    tenants = []
+    for row in rows:
+        t = row["tenant"]
+        try:
+            t["settings_json"] = _json.loads(t.get("settings_json", "{}"))
+        except Exception:
+            t["settings_json"] = {}
+        tenants.append(t)
+    return tenants
+
+
+async def update_tenant(session: AsyncSession, tenant_id: str, updates: dict) -> None:
+    """Update tenant properties."""
+    import json as _json
+    set_clauses = []
+    params: dict[str, Any] = {"id": tenant_id}
+    for key, value in updates.items():
+        if key == "settings_json":
+            value = _json.dumps(value)
+        params[key] = value
+        set_clauses.append(f"t.{key} = ${key}")
+
+    if not set_clauses:
+        return
+
+    cypher = f"MATCH (t:Tenant {{id: $id}}) SET {', '.join(set_clauses)}"
+    await session.run(cypher, params)
+
+
+async def get_tenant_usage_stats(session: AsyncSession, tenant_id: str) -> dict:
+    """Get usage statistics for a tenant."""
+    # Count API keys
+    r = await session.run(
+        "MATCH (k:ApiKey {tenant_id: $tid}) RETURN count(k) AS n, sum(coalesce(k.request_count, 0)) AS reqs",
+        {"tid": tenant_id},
+    )
+    row = await r.single()
+    api_key_count = row["n"] if row else 0
+    total_requests = int(row["reqs"] or 0) if row else 0
+
+    return {
+        "api_key_count": api_key_count,
+        "total_requests": total_requests,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Audit Trail Queries (Phase 4 — Plan 04-04)
+# ---------------------------------------------------------------------------
+
+async def get_claim_validations(
+    session: AsyncSession, claim_id: str
+) -> list[dict[str, Any]]:
+    """Get all validation events for a claim (for audit trail)."""
+    result = await session.run(
+        """
+        MATCH (e:Expert)-[v:VALIDATES]->(c:Claim {id: $id})
+        RETURN e.name AS expert_name,
+               e.institution AS expert_institution,
+               v.timestamp AS timestamp,
+               v.verdict AS verdict
+        ORDER BY v.timestamp ASC
+        """,
+        {"id": claim_id},
+    )
+    return await result.data()
+
+
+async def get_all_certified_claims(
+    session: AsyncSession, limit: int = 500
+) -> list[dict[str, Any]]:
+    """Get all certified claims with full provenance (for audit trail export)."""
+    result = await session.run(
+        """
+        MATCH (c:Claim {status: 'certified'})
+        OPTIONAL MATCH (e:Expert)-[:VALIDATES]->(c)
+        OPTIONAL MATCH (c)-[:REFERENCES]->(s:Source)
+        WITH c,
+             collect(DISTINCT {name: e.name, institution: e.institution}) AS validators,
+             collect(DISTINCT s.url) AS sources
+        RETURN c {
+            .id, .text, .question, .domain_id, .confidence_score, .status,
+            .language, .hash_sha256, .created_at, .last_reviewed, .expires_at
+        } AS claim, validators, sources
+        ORDER BY c.last_reviewed DESC
+        LIMIT $limit
+        """,
+        {"limit": limit},
+    )
+    rows = await result.data()
+    return [
+        _with_decay({**row["claim"], "validated_by": row["validators"], "source_references": row["sources"]})
+        for row in rows
+    ]
+
+
+async def get_certified_claims_filtered(
+    session: AsyncSession,
+    since: Optional[str] = None,
+    domain_id: Optional[str] = None,
+    limit: int = 1000,
+) -> list[dict[str, Any]]:
+    """Get certified claims with optional time and domain filters (for audit export)."""
+    where_clauses = ["c.status = 'certified'"]
+    params: dict[str, Any] = {"limit": limit}
+
+    if since:
+        where_clauses.append("c.last_reviewed >= $since")
+        params["since"] = since
+    if domain_id:
+        where_clauses.append("c.domain_id = $domain_id")
+        params["domain_id"] = domain_id
+
+    where = " AND ".join(where_clauses)
+
+    result = await session.run(
+        f"""
+        MATCH (c:Claim)
+        WHERE {where}
+        OPTIONAL MATCH (e:Expert)-[:VALIDATES]->(c)
+        OPTIONAL MATCH (c)-[:REFERENCES]->(s:Source)
+        WITH c,
+             collect(DISTINCT {{name: e.name, institution: e.institution}}) AS validators,
+             collect(DISTINCT s.url) AS sources
+        RETURN c {{
+            .id, .text, .question, .domain_id, .confidence_score, .status,
+            .language, .hash_sha256, .created_at, .last_reviewed, .expires_at
+        }} AS claim, validators, sources
+        ORDER BY c.last_reviewed DESC
+        LIMIT $limit
+        """,
+        params,
+    )
+    rows = await result.data()
+    return [
+        _with_decay({**row["claim"], "validated_by": row["validators"], "source_references": row["sources"]})
+        for row in rows
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Extended Compliance Queries (Phase 4 — Plan 04-03)
+# ---------------------------------------------------------------------------
+
+async def get_certification_timeline(
+    session: AsyncSession, months: int = 12
+) -> list[dict[str, Any]]:
+    """Get monthly certification counts for the last N months."""
+    result = await session.run(
+        """
+        MATCH (c:Claim {status: 'certified'})
+        WHERE c.last_reviewed IS NOT NULL
+        WITH c,
+             substring(c.last_reviewed, 0, 7) AS month
+        RETURN month,
+               count(c) AS certified_count,
+               avg(c.confidence_score) AS avg_confidence
+        ORDER BY month DESC
+        LIMIT $months
+        """,
+        {"months": months},
+    )
+    rows = await result.data()
+    return [
+        {
+            "month": row["month"],
+            "certified_count": row["certified_count"],
+            "avg_confidence": round(row["avg_confidence"] or 0.0, 4),
+        }
+        for row in rows
+    ]
+
+
+async def get_validator_stats(session: AsyncSession) -> list[dict[str, Any]]:
+    """Get detailed validator statistics for compliance reporting."""
+    result = await session.run(
+        """
+        MATCH (e:Expert)-[v:VALIDATES]->(c:Claim)
+        WHERE e.name IS NOT NULL
+        RETURN e.name AS name,
+               e.institution AS institution,
+               count(c) AS total_validations,
+               sum(CASE WHEN c.status = 'certified' THEN 1 ELSE 0 END) AS certified,
+               sum(CASE WHEN v.verdict = 'renewed' THEN 1 ELSE 0 END) AS renewals,
+               avg(c.confidence_score) AS avg_confidence,
+               max(v.timestamp) AS last_validation
+        ORDER BY certified DESC, total_validations DESC
+        """
+    )
+    rows = await result.data()
+    return [
+        {
+            "name": row["name"],
+            "institution": row["institution"],
+            "total_validations": row["total_validations"],
+            "certified": row["certified"],
+            "renewals": row["renewals"],
+            "avg_confidence": round(row["avg_confidence"] or 0.0, 4),
+            "last_validation": row["last_validation"],
+            "certification_rate": round(
+                row["certified"] / row["total_validations"], 4
+            ) if row["total_validations"] > 0 else 0.0,
+        }
+        for row in rows
+    ]

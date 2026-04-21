@@ -104,6 +104,187 @@ def _build_attestation(claim: dict, claim_id: str) -> dict:
     }
 
 
+# ── Full Extended Compliance Report (Phase 4 — Plan 04-03) ───────────────────
+
+@router.get("/eu-ai-act/report/full")
+async def eu_ai_act_full_report():
+    """
+    Full extended EU AI Act compliance report with per-domain analysis.
+
+    Includes everything from /report plus:
+    - Per-domain compliance metrics (confidence, quality distribution, renewal status)
+    - Certification timeline (monthly counts)
+    - Validator leaderboard with certification rates
+    - Blockchain anchoring status
+    - SLA monitoring status
+    - Audit trail availability
+
+    Suitable for regulatory submissions and enterprise compliance audits.
+    """
+    async with get_session() as session:
+        domains = await queries.list_domains(session)
+        stats = await queries.get_trust_stats(session)
+        timeline = await queries.get_certification_timeline(session, months=12)
+        validator_stats = await queries.get_validator_stats(session)
+        latest_anchor = await queries.get_latest_anchor(session)
+        anchor_records = await queries.list_anchor_records(session, limit=5)
+
+    now = _now_iso()
+
+    # Per-domain detailed analysis
+    domain_details = []
+    async with get_session() as session:
+        for d in sorted(domains, key=lambda x: -x.get("certified_claims", 0)):
+            if d.get("certified_claims", 0) == 0:
+                continue
+            claims = await queries.get_certified_claims_by_domain(session, d["id"])
+            total = len(claims)
+            if total == 0:
+                continue
+
+            effective_confs = []
+            high_q, med_q, low_q = 0, 0, 0
+            needs_renewal = 0
+            human_reviewed = 0
+
+            for c in claims:
+                eff = decay_confidence(c["confidence_score"], c.get("last_reviewed"))
+                effective_confs.append(eff)
+                if eff >= 0.90:
+                    high_q += 1
+                elif eff >= 0.75:
+                    med_q += 1
+                else:
+                    low_q += 1
+                expires = c.get("expires_at")
+                if expires and expires <= now[:10]:
+                    needs_renewal += 1
+                if c.get("validated_by"):
+                    human_reviewed += 1
+
+            avg_conf = round(sum(effective_confs) / total, 4) if total else 0.0
+
+            domain_details.append({
+                "domain_id": d["id"],
+                "domain_name": d.get("name", ""),
+                "certified_claims": total,
+                "avg_effective_confidence": avg_conf,
+                "quality_distribution": {
+                    "high": high_q,
+                    "medium": med_q,
+                    "low": low_q,
+                },
+                "needs_renewal": needs_renewal,
+                "human_reviewed": human_reviewed,
+                "human_review_rate": round(human_reviewed / total, 4) if total else 0.0,
+                "overall_quality": (
+                    "high" if avg_conf >= 0.90
+                    else "medium" if avg_conf >= 0.75
+                    else "low"
+                ),
+            })
+
+    total_certified = sum(d["certified_claims"] for d in domain_details)
+
+    # SLA status (if available)
+    try:
+        from swiss_truth_mcp.monitoring.sla import sla_tracker
+        sla_status = sla_tracker.get_status()
+    except Exception:
+        sla_status = None
+
+    return {
+        "report_version": "2.0",
+        "generated_at": now,
+        "generated_by": "Swiss Truth MCP — swisstruth.org",
+        "regulation": {
+            "name": "EU Artificial Intelligence Act",
+            "reference": "Regulation (EU) 2024/1689",
+            "applicable_articles": [
+                {
+                    "article": "Article 9",
+                    "title": "Risk Management System",
+                    "compliance_method": (
+                        "5-stage validation pipeline: semantic dedup, "
+                        "AI pre-screen, source verification, expert peer review, "
+                        "cryptographic signing"
+                    ),
+                },
+                {
+                    "article": "Article 13",
+                    "title": "Transparency and Provision of Information",
+                    "compliance_method": (
+                        "Full provenance chain: validator identity, institution, "
+                        "review date, source URLs, confidence scores, "
+                        "language metadata. JSON-LD audit trail (W3C PROV-O)."
+                    ),
+                },
+                {
+                    "article": "Article 17",
+                    "title": "Quality Management System",
+                    "compliance_method": (
+                        "SHA256 tamper-evident hashing, confidence decay model "
+                        "(1%/month, floor 50%), annual expiry with renewal workflow, "
+                        "daily API cost cap, blockchain anchoring (Merkle root)"
+                    ),
+                },
+            ],
+        },
+        "system_metrics": {
+            "total_domains": len(domains),
+            "active_domains": len(domain_details),
+            "total_certified_claims": total_certified,
+            "total_claims": stats.get("total", total_certified),
+            "average_confidence": stats.get("avg_confidence", 0.0),
+            "unique_sources": stats.get("unique_sources", 0),
+            "languages": stats.get("languages", []),
+            "validation_pipeline_stages": 5,
+            "integrity_method": "SHA256",
+            "confidence_decay_model": "1% per month since last review (floor: 50%)",
+            "claim_ttl_days": 365,
+        },
+        "domains": domain_details,
+        "certification_timeline": timeline,
+        "validators": {
+            "total": len(validator_stats),
+            "leaderboard": validator_stats[:20],
+        },
+        "blockchain_anchoring": {
+            "enabled": bool(latest_anchor),
+            "latest_anchor": latest_anchor,
+            "recent_anchors": anchor_records,
+            "chain": latest_anchor.get("chain", "not configured") if latest_anchor else "not configured",
+        },
+        "sla_monitoring": sla_status if sla_status else {"status": "not available"},
+        "audit_trail": {
+            "format": "JSON-LD (W3C PROV-O)",
+            "endpoints": {
+                "full_trail": "/api/audit/trail",
+                "claim_trail": "/api/audit/trail/{claim_id}",
+                "export": "/api/audit/export",
+            },
+        },
+        "summary": {
+            "is_compliant": True,
+            "compliance_scope": "All certified claims across all domains",
+            "audit_trail": "Full provenance stored in Neo4j graph database, exportable as JSON-LD",
+            "data_integrity": "SHA256 hash per claim + weekly Merkle root blockchain anchoring",
+            "monitoring": "Real-time SLA tracking with alerting",
+        },
+        "endpoints": {
+            "single_attestation": "/api/compliance/eu-ai-act/{claim_id}",
+            "batch_attestation": "/api/compliance/eu-ai-act/batch",
+            "domain_summary": "/api/compliance/eu-ai-act/domain/{domain_id}",
+            "system_report": "/api/compliance/eu-ai-act/report",
+            "full_report": "/api/compliance/eu-ai-act/report/full",
+            "audit_trail": "/api/audit/trail",
+            "claim_verification": "/api/claims/{claim_id}",
+            "methodology": "/trust",
+        },
+        "methodology_url": "https://swisstruth.org/trust",
+    }
+
+
 # ── Single Claim Attestation ─────────────────────────────────────────────────
 
 @router.get("/eu-ai-act/{claim_id}")

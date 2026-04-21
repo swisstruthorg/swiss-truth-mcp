@@ -24,6 +24,10 @@ from swiss_truth_mcp.api.routes.anchor import router as anchor_router
 from swiss_truth_mcp.api.routes.kanban import router as kanban_router
 from swiss_truth_mcp.api.routes.compliance import router as compliance_router
 from swiss_truth_mcp.api.routes.quality import router as quality_router
+from swiss_truth_mcp.api.routes.api_keys import router as api_keys_router
+from swiss_truth_mcp.api.routes.monitoring import router as monitoring_router
+from swiss_truth_mcp.api.routes.audit import router as audit_router
+from swiss_truth_mcp.api.routes.tenants import router as tenants_router
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -136,6 +140,11 @@ _api_app.include_router(anchor_router)
 _api_app.include_router(kanban_router)
 _api_app.include_router(compliance_router)
 _api_app.include_router(quality_router)
+# Phase 4: Enterprise & Compliance routers
+_api_app.include_router(api_keys_router)
+_api_app.include_router(monitoring_router)
+_api_app.include_router(audit_router)
+_api_app.include_router(tenants_router)
 
 _TEMPLATES = Jinja2Templates(
     directory=str(Path(__file__).parent.parent / "templates")
@@ -544,8 +553,12 @@ class _SwissTruthASGI:
 
 
 # `app` ist der uvicorn-Einstiegspunkt ("swiss_truth_mcp.api.main:app")
-# RateLimitMiddleware ist die äusserste Schicht — prüft jeden Request vor MCP und FastAPI.
-app = RateLimitMiddleware(_SwissTruthASGI())
+# Middleware stack (outermost → innermost):
+#   1. RateLimitMiddleware — rate limiting per IP/key
+#   2. SLATrackerMiddleware — latency + error tracking (Phase 4)
+#   3. _SwissTruthASGI — MCP + FastAPI routing
+from swiss_truth_mcp.middleware.sla_tracker import SLATrackerMiddleware
+app = RateLimitMiddleware(SLATrackerMiddleware(_SwissTruthASGI()))
 
 
 def main():

@@ -1,7 +1,7 @@
 # Roadmap: Swiss Truth MCP
 
 *Reconstructed from GSD session `hungry-babbage-aa6eb1` + git history*
-*Last updated: 2026-04-20*
+*Last updated: 2026-04-21*
 
 ---
 
@@ -102,15 +102,53 @@
 
 ---
 
-## Phase 4: Enterprise & Compliance 🔲
+## Phase 4: Enterprise & Compliance ✅
 
-**Goal:** Enterprise features — API keys, usage tiers, SLA monitoring, full EU AI Act compliance attestation.
+**Goal:** Enterprise features — API keys, usage tiers, SLA monitoring, full EU AI Act compliance attestation, audit trail export, multi-tenant support.
 
 **Plans:**
-- [ ] API key management with usage tiers
-- [ ] SLA monitoring and alerting
-- [ ] Full EU AI Act compliance report generation
-- [ ] Audit trail export (JSON-LD)
-- [ ] Multi-tenant support
+- [x] 04-01: API Key Management with Usage Tiers (admin-only, backend infrastructure)
+  - `ApiKey` Neo4j node with SHA256 hashing, tier, owner, tenant_id
+  - Admin CRUD: `POST/GET/DELETE /admin/api-keys`, `GET /admin/api-keys/{id}/usage`
+  - Rate limiter updated with DB-backed key resolution (60s in-memory cache)
+  - Key generation with prefixed format: `sk-{tier}-{random}`
+  - Cache invalidation on key create/revoke
+- [x] 04-02: SLA Monitoring and Alerting
+  - `monitoring/sla.py` — in-memory ring-buffer tracker (288 × 5-min buckets = 24h)
+  - `middleware/sla_tracker.py` — ASGI middleware capturing latency + status codes
+  - Admin endpoints: `GET /admin/sla/status`, `/history`, `/alerts`
+  - Configurable targets: `sla_uptime_target` (99.5%), `sla_p95_latency_ms` (500ms)
+  - Optional webhook alerting via `SLA_ALERT_WEBHOOK_URL`
+- [x] 04-03: Full EU AI Act Compliance Report Generation
+  - Extended report: `GET /api/compliance/eu-ai-act/report/full` (v2.0)
+  - Per-domain compliance metrics (confidence, quality distribution, renewal status)
+  - Certification timeline (monthly counts, last 12 months)
+  - Validator leaderboard with certification rates
+  - Blockchain anchoring status integration
+  - SLA monitoring status integration
+  - New DB queries: `get_certification_timeline()`, `get_validator_stats()`
+- [x] 04-04: Audit Trail Export (JSON-LD)
+  - `audit/jsonld.py` — W3C PROV-O compatible JSON-LD serializer
+  - Ontology: Claim→prov:Entity, Validation→prov:Activity, Expert→prov:Agent
+  - `GET /api/audit/trail` — full system audit trail
+  - `GET /api/audit/trail/{claim_id}` — single claim audit trail
+  - `GET /api/audit/export` — bulk export with time/domain filters
+  - New DB queries: `get_claim_validations()`, `get_all_certified_claims()`, `get_certified_claims_filtered()`
+- [x] 04-05: Multi-Tenant Support
+  - `Tenant` Neo4j node with slug, plan, settings_json
+  - Admin CRUD: `POST/GET/PATCH /admin/tenants`, `GET /admin/tenants/{id}` (with usage stats)
+  - API keys linked to tenants via `tenant_id`
+  - Tenant usage stats: API key count, total requests
+  - Schema constraints for Tenant id + slug uniqueness
 
-**Status:** Not Started
+**Success Criteria:**
+- ✅ API keys with SHA256 hashing, 3 tiers (free/pro/enterprise), admin CRUD
+- ✅ Rate limiter supports DB-backed keys with 60s cache
+- ✅ SLA monitoring with p50/p95/p99 latency, uptime %, error rate
+- ✅ SLA alerts via logging + optional webhook
+- ✅ Full compliance report v2.0 with per-domain analysis, timeline, validators
+- ✅ JSON-LD audit trail export (W3C PROV-O compatible)
+- ✅ Multi-tenant infrastructure with plan-based isolation
+- ✅ All new endpoints wired into FastAPI app
+
+**Status:** Complete
