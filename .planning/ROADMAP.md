@@ -228,6 +228,49 @@
 
 ---
 
+## Phase 7: Agent Outreach & Discovery 🔄
+
+**Goal:** Collect and structure all data relevant for reaching AI agent developers — who builds agents, where they are, what they need, and how to get Swiss Truth in front of them.
+
+**Plans:**
+
+### 07-01: Agent Ecosystem Database
+- [x] `data/agent_ecosystem.json` — 10 frameworks, 7 platforms, 7 MCP directories, 11 communities, 4 registries, 5 awesome lists
+- Frameworks: LangChain, CrewAI, AutoGen, LlamaIndex, Haystack, DSPy, smolagents, Pydantic AI, Agno, OpenAI Agents SDK
+- Platforms: Claude, Cursor, Windsurf, OpenAI GPT Store, n8n, Flowise, Dify
+- MCP Directories: Smithery (✅ listed), modelcontextprotocol/servers, Glama, mcp.run, PulseMCP, mcpservers.org, awesome-mcp-servers
+
+### 07-02: Outreach Tracker
+- [x] `data/outreach_tracker.json` — 27 channels tracked, 1 done (Smithery), 26 todo
+- Priority this week: modelcontextprotocol/servers PR, awesome-mcp-servers PR, LangChain Discord, CrewAI Discord, Glama listing
+- Includes: draft messages for all Discord/Reddit posts, PR text for awesome lists, package optimization actions
+
+### 07-03: Agent Persona Profiles
+- [x] `data/agent_personas.json` — 8 agent personas with pain points, Swiss Truth value, and key messages
+- Personas: Research Agent, Legal Compliance Agent, Health Advisory Agent, Financial Agent, RAG Pipeline, Content Generation Agent, Multi-Agent Orchestrator, Developer Building Agents
+
+### 07-04: Competitive Intelligence
+- [x] `data/competitors.json` — 8 competitors analyzed (Google Fact Check, ClaimBuster, Wolfram, Perplexity, Exa, Tavily, Wikipedia, other MCP servers)
+- Positioning: Swiss Truth is the only MCP server with 5-stage human+AI validation + Swiss/EU regulatory focus + SHA256 hashes + EU AI Act compliance
+- Highest threat: Perplexity (medium) — differentiated by human validation vs. AI synthesis
+
+### 07-05: Discovery Checklist
+- [x] `data/discovery_checklist.md` — 30+ action items across P0/P1/P2 priority
+- P0: Official MCP server list PR, awesome-mcp-servers PR, Glama listing, LangChain/CrewAI Discord posts, package metadata optimization
+- P1: Technical improvements (ai-plugin.json, llms.txt, GitHub topics), more directory listings, community posts
+- P2: Content marketing (Dev.to, HuggingFace Space, TDS article), new integrations (LlamaIndex, Haystack, smolagents)
+
+**New files created (Phase 7):**
+- `data/agent_ecosystem.json` — AI agent ecosystem database (10 frameworks, 7 platforms, 7 MCP dirs, 11 communities)
+- `data/outreach_tracker.json` — Outreach channel tracker with draft messages
+- `data/agent_personas.json` — 8 agent persona profiles with pain points and messaging
+- `data/competitors.json` — Competitive analysis with positioning and battlecards
+- `data/discovery_checklist.md` — Prioritized action checklist (P0/P1/P2)
+
+**Status:** ✅ Complete
+
+---
+
 ## Phase 6: AI Agent First 🔄
 
 **Goal:** Make Swiss Truth the indispensable knowledge infrastructure for AI agents — not just fact-checking, but a full agent toolkit. Agents tell us what they need, we build it.

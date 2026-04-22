@@ -1,7 +1,7 @@
 # Project State: Swiss Truth MCP
 
-**Current Milestone:** v1.2
-**Current Phase:** Phase 6 — AI Agent First
+**Current Milestone:** v1.3
+**Current Phase:** Phase 7 — Agent Outreach & Discovery
 **Status:** ✅ Complete
 **Last Activity:** 2026-04-21
 
@@ -16,6 +16,60 @@
 | 4 | Enterprise & Compliance | ✅ Complete |
 | 5 | Production Hardening & Developer Experience | ✅ Complete |
 | 6 | AI Agent First | ✅ Complete |
+| 7 | Agent Outreach & Discovery | ✅ Complete |
+
+## Phase 7 Plan Overview
+
+| Plan | Name | Status | Priority |
+|------|------|--------|----------|
+| 07-01 | Agent Ecosystem Database | ✅ Complete | P0 — Market Intelligence |
+| 07-02 | Outreach Tracker | ✅ Complete | P0 — Execution |
+| 07-03 | Agent Persona Profiles | ✅ Complete | P0 — Messaging |
+| 07-04 | Competitive Intelligence | ✅ Complete | P1 — Positioning |
+| 07-05 | Discovery Checklist | ✅ Complete | P0 — Action Plan |
+
+### Phase 7 Completion Notes (2026-04-21)
+
+**Agent Ecosystem Database (Plan 07-01):**
+- `data/agent_ecosystem.json` — comprehensive database of the AI agent ecosystem
+- 10 frameworks: LangChain (✅ integrated), CrewAI (✅), AutoGen (✅), LlamaIndex, Haystack, DSPy, smolagents, Pydantic AI, Agno, OpenAI Agents SDK
+- 7 platforms: Claude, Cursor, Windsurf, OpenAI GPT Store, n8n, Flowise, Dify
+- 7 MCP directories: Smithery (✅ listed), modelcontextprotocol/servers, Glama, mcp.run, PulseMCP, mcpservers.org, awesome-mcp-servers
+- 11 communities: LangChain Discord, CrewAI Discord, AutoGen Discord, HN, Reddit, Dev.to, TDS, HuggingFace, AI Engineer Foundation
+- 4 package registries: PyPI (3 packages), npm (1 package), LlamaHub (planned), Haystack Hub (planned)
+- 5 awesome lists: awesome-mcp-servers, awesome-langchain, awesome-llm-apps, awesome-ai-agents, modelcontextprotocol/servers
+
+**Outreach Tracker (Plan 07-02):**
+- `data/outreach_tracker.json` — 27 channels tracked, 1 done (Smithery), 26 todo
+- Priority this week: modelcontextprotocol/servers PR, awesome-mcp-servers PR, LangChain Discord, CrewAI Discord, Glama listing
+- Draft messages ready for all Discord/Reddit posts
+- PR text ready for all awesome list submissions
+- Package optimization actions listed for all 4 packages
+
+**Agent Persona Profiles (Plan 07-03):**
+- `data/agent_personas.json` — 8 agent personas with full profiles
+- Each persona: description, frameworks, use cases, pain points, Swiss Truth value, key message, before/after examples
+- Personas: Research Agent, Legal Compliance Agent, Health Advisory Agent, Financial Agent, RAG Pipeline, Content Generation Agent, Multi-Agent Orchestrator, Developer Building Agents
+
+**Competitive Intelligence (Plan 07-04):**
+- `data/competitors.json` — 8 competitors analyzed
+- Competitors: Google Fact Check, ClaimBuster, Wolfram Alpha, Perplexity, Exa AI, Tavily, Wikipedia, other MCP servers
+- Highest threat: Perplexity (medium) — differentiated by human validation vs. AI synthesis
+- Positioning statement: Swiss Truth is the only MCP server with 5-stage human+AI validation + Swiss/EU regulatory focus + SHA256 hashes + EU AI Act compliance
+- Battlecards for top 4 competitors
+
+**Discovery Checklist (Plan 07-05):**
+- `data/discovery_checklist.md` — 30+ action items across P0/P1/P2 priority
+- P0 (this week): Official MCP server list PR, awesome-mcp-servers PR, Glama listing, LangChain/CrewAI Discord posts, package metadata optimization
+- P1 (next week): ai-plugin.json, llms.txt, GitHub topics, more directory listings, community posts
+- P2 (2-4 weeks): Dev.to tutorial, HuggingFace Space demo, TDS article, LlamaIndex/Haystack/smolagents integrations, GPT Action, n8n template
+
+**New files created (Phase 7):**
+- `data/agent_ecosystem.json` — AI agent ecosystem database
+- `data/outreach_tracker.json` — Outreach channel tracker with draft messages
+- `data/agent_personas.json` — 8 agent persona profiles
+- `data/competitors.json` — Competitive analysis with positioning and battlecards
+- `data/discovery_checklist.md` — Prioritized action checklist (P0/P1/P2)
 
 ## Phase 6 Plan Overview
 
@@ -313,3 +367,20 @@ None currently.
 | 2026-04-21 | session-6 | Phase 5 roadmap planning: CI/CD, Redis, Developer Portal, Graph Viz, Source Scoring, Agent Integrations |
 | 2026-04-21 | session-7 | Phase 5 implementation: all 6 plans (CI/CD, Redis, Portal, Clustering, Source Scoring, CrewAI+AutoGen) |
 | 2026-04-21 | session-8 | Phase 6 implementation: AI Agent First — Feedback Loop, 5 new MCP tools, integration updates |
+| 2026-04-21 | session-9 | Phase 7 implementation: Agent Outreach & Discovery — ecosystem DB, outreach tracker, personas, competitive analysis, discovery checklist |
+
+## 2026-04-22 — Session 10: Phase 7 Outreach Execution
+
+### PRs submitted
+- PR #4007 modelcontextprotocol/servers: https://github.com/modelcontextprotocol/servers/pull/4007
+- PR #5230 punkpeye/awesome-mcp-servers: https://github.com/punkpeye/awesome-mcp-servers/pull/5230
+
+### Claims generator (local run)
+- manage_claims.py --domain eu-law: OK (1898 total certified, 7/38 green)
+- manage_claims.py --domain ai-safety: OK
+- manage_claims.py --domain swiss-health: OK
+
+### Pending manual actions
+- Glama listing: https://glama.ai/mcp/servers/submit
+- LangChain Discord #tools-and-integrations: draft in outreach_tracker.json
+- CrewAI Discord #tools: draft in outreach_tracker.json

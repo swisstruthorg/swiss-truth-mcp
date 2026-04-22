@@ -19,14 +19,14 @@ import httpx
 from swiss_truth_mcp.config import settings
 
 # Modell-Mapping: Anthropic SDK-Namen → open-claude.com-Namen
-# open-claude.com unterstützt nur claude-haiku-4-5-20251001
+# open-claude.com unterstützt nur claude-haiku-4-5
 _PROVIDER_MODEL_MAP: dict[str, str] = {
-    "claude-haiku-4-5-20251001":   "claude-haiku-4-5-20251001",
-    "claude-haiku-4-5":            "claude-haiku-4-5-20251001",
-    "claude-sonnet-4-5":           "claude-haiku-4-5-20251001",
-    "claude-sonnet-4-5-20251022":  "claude-haiku-4-5-20251001",
-    "claude-sonnet-4.6":           "claude-haiku-4-5-20251001",
-    "claude-opus-4-6":             "claude-haiku-4-5-20251001",
+    "claude-haiku-4-5":   "claude-haiku-4-5",
+    "claude-haiku-4-5":            "claude-haiku-4-5",
+    "claude-sonnet-4-5":           "claude-haiku-4-5",
+    "claude-sonnet-4-5-20251022":  "claude-haiku-4-5",
+    "claude-sonnet-4.6":           "claude-haiku-4-5",
+    "claude-opus-4-6":             "claude-haiku-4-5",
 }
 
 _http_client: Optional[httpx.AsyncClient] = None
@@ -123,7 +123,7 @@ async def pre_screen_claim(
 
     try:
         content = await _call_api(
-            model="claude-haiku-4-5-20251001",
+            model="claude-haiku-4-5",
             max_tokens=512,
             system=SYSTEM_PROMPT,
             user_content=USER_TEMPLATE.format(
@@ -168,7 +168,7 @@ async def verify_source_supports_claim(claim_text: str, page_content: str) -> di
 
     try:
         raw = await _call_api(
-            model="claude-haiku-4-5-20251001",
+            model="claude-haiku-4-5",
             max_tokens=256,
             system=VERIFY_SYSTEM_PROMPT,
             user_content=(
@@ -207,7 +207,7 @@ async def compare_claims(submitted: str, certified: str) -> dict:
 
     try:
         raw = await _call_api(
-            model="claude-haiku-4-5-20251001",
+            model="claude-haiku-4-5",
             max_tokens=200,
             system=COMPARE_SYSTEM_PROMPT,
             user_content=(

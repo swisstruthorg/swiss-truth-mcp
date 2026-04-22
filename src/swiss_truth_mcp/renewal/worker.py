@@ -62,7 +62,7 @@ async def _reverify_claim(claim: dict) -> dict[str, Any]:
     )
 
     msg = await client.messages.create(
-        model="claude-haiku-4-5-20251001",
+        model="claude-haiku-4-5",
         max_tokens=256,
         system=_REVERIFY_SYSTEM,
         messages=[{"role": "user", "content": user_msg}],
