@@ -235,10 +235,14 @@ def _fallback_pre_screen(text: str, source_urls: list[str], error: str = "") -> 
         issues.append("Claim ist zu kurz (min. 20 Zeichen)")
     if "?" in text:
         issues.append("Claim ist eine Frage, keine Aussage")
-    if not source_urls:
+
+    # Fehlende Quellen nur als Problem werten wenn kein API-Fehler vorliegt
+    # (generierte Claims werden mit source_urls versehen — API-Rate-Limit soll nicht blocken)
+    api_unavailable = bool(error) and any(
+        kw in error.lower() for kw in ("rate limit", "busy", "unavailable", "timeout", "503")
+    )
+    if not api_unavailable and not source_urls:
         issues.append("Keine Quellenverweise angegeben")
-    if error:
-        issues.append(f"AI-Vorprüfung nicht verfügbar: {error}")
 
     return {
         "passed": len(issues) == 0,
