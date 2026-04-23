@@ -114,13 +114,14 @@ class _HttpxClient:
                 msg = data["error"].get("message", str(data["error"]))
                 code = data["error"].get("code", 0)
                 is_retryable = (
-                    code == 503
+                    code in (429, 503)
                     or "busy" in msg.lower()
                     or "rate limit" in msg.lower()
+                    or "too many requests" in msg.lower()
                     or "overloaded" in msg.lower()
                 )
                 if is_retryable and attempt < 3:
-                    wait = 35 if "rate limit" in msg.lower() else 3 * (attempt + 1)
+                    wait = 35 if ("rate limit" in msg.lower() or "too many requests" in msg.lower()) else 3 * (attempt + 1)
                     time.sleep(wait)
                     continue
                 raise RuntimeError(msg)
