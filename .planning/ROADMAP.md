@@ -228,6 +228,38 @@
 
 ---
 
+## Phase 9: AI Agent Discovery & Findability ✅
+
+**Goal:** Make Swiss Truth discoverable by AI agents, crawlers, and agent frameworks — so agents find us automatically and understand how to use us.
+
+**Milestone:** *"Agents find us, not the other way around."*
+
+**Plans:**
+- [x] 09-01: `/.well-known/ai-plugin.json` — OpenAI Plugin Discovery (GPTs, Assistants API, ChatGPT Plugins)
+- [x] 09-02: `/llms.txt` — LLM Crawler Discovery (llmstxt.org standard)
+- [x] 09-03: `/.well-known/mcp.json` — Extended with 14 tools, keywords, categories, agent_frameworks, example_queries, capabilities, integrations
+- [x] 09-04: `/agents.json` — Agent Capability Manifest (problems_solved, tools, domains, quick_start, agent_personas)
+- [x] 09-05: `README.md` — Agent-First Rewrite (14 tools, 30 domains, badges, agent personas, discovery endpoints table)
+- [x] 09-06: `/openai-tools.json` — Extended with 5 Phase-6 tools (get_knowledge_brief, get_citations, check_freshness, check_regulatory_compliance, report_agent_need)
+
+**New endpoints:**
+- `/.well-known/ai-plugin.json` — OpenAI/GPT auto-discovery
+- `/.well-known/mcp.json` — MCP auto-discovery (extended: 14 tools, keywords, examples)
+- `/agents.json` — Machine-readable agent capability manifest
+- `/llms.txt` — LLM crawler discovery (llmstxt.org)
+- `/openai-tools.json` — 14 OpenAI function-calling tool definitions
+
+**Discovery coverage:**
+- MCP clients (Claude Desktop, Cursor, Windsurf): `/.well-known/mcp.json`
+- OpenAI GPTs / Assistants API: `/.well-known/ai-plugin.json`
+- LLM crawlers (Perplexity, SearchGPT, etc.): `/llms.txt`
+- Agent frameworks (LangChain, CrewAI, AutoGen): `/agents.json`
+- Direct function-calling: `/openai-tools.json`
+
+**Status:** ✅ Complete
+
+---
+
 ## Phase 7: Agent Outreach & Discovery 🔄
 
 **Goal:** Collect and structure all data relevant for reaching AI agent developers — who builds agents, where they are, what they need, and how to get Swiss Truth in front of them.

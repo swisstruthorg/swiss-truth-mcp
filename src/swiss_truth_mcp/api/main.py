@@ -200,11 +200,19 @@ async def mcp_discovery():
         "description": (
             "Verified knowledge base for AI agents. "
             "Certified facts with source references, confidence scores, "
-            "and SHA256 integrity hashes. Covers Swiss law, health, finance, "
-            "education, energy, politics, climate, AI/ML, and world science."
+            "and SHA256 integrity hashes. Covers 30 domains: Swiss law, health, finance, "
+            "education, energy, politics, EU law, AI/ML, climate, biotech, quantum computing, "
+            "cybersecurity, space science, economics, international law, and more."
         ),
-        "version": "0.1.0",
+        "version": "1.3.0",
         "homepage": "https://swisstruth.org",
+        "keywords": [
+            "mcp", "fact-checking", "hallucination-prevention", "knowledge-base",
+            "ai-agents", "swiss-law", "eu-ai-act", "rag", "verified-facts",
+            "citations", "compliance", "regulatory"
+        ],
+        "categories": ["knowledge", "fact-checking", "compliance", "research"],
+        "agent_frameworks": ["langchain", "crewai", "autogen", "openai", "anthropic", "llamaindex"],
         "transport": {
             "type": "streamable-http",
             "url": "https://swisstruth.org/mcp",
@@ -212,44 +220,104 @@ async def mcp_discovery():
         "tools": [
             {
                 "name": "search_knowledge",
-                "description": "Search verified claims by natural language query. Auto-detects language (DE/EN/FR/IT/ES/ZH/AR and more). Returns confidence score, source references, and SHA256 hash.",
+                "description": "Semantic search over 2000+ certified facts across 30 domains. Auto-detects language (DE/EN/FR/IT/ES/ZH/AR). Returns confidence score, source references, SHA256 hash.",
+                "use_when": "Need reliable, source-backed information before answering factual questions.",
             },
             {
                 "name": "get_claim",
-                "description": "Retrieve a single claim with full provenance (validator, institution, review date).",
+                "description": "Retrieve a single claim with full provenance (validator, institution, review date, SHA256).",
+                "use_when": "Need complete citation details for a specific claim.",
             },
             {
                 "name": "list_domains",
-                "description": "List all available knowledge domains with certified claim counts.",
+                "description": "List all 30 knowledge domains with certified claim counts.",
+                "use_when": "Start of session or unsure which domain to search.",
             },
             {
                 "name": "submit_claim",
                 "description": "Submit a new claim for expert review. Triggers AI pre-screening and URL verification.",
+                "use_when": "Identified a knowledge gap — fact that should be in the base but isn't.",
             },
             {
                 "name": "verify_claim",
-                "description": "Fact-check a statement against the knowledge base. Returns verdict: supported / contradicted / unknown, with confidence score and source evidence.",
+                "description": "Fact-check a statement. Returns verdict: supported / contradicted / unknown, with confidence and source evidence.",
+                "use_when": "ReAct loops — verify whether a statement is true, false, or unknown.",
             },
             {
                 "name": "get_claim_status",
-                "description": "Check the validation status of a submitted claim (draft → peer_review → certified).",
+                "description": "Check validation status: draft → peer_review → certified.",
+                "use_when": "After submit_claim to track review progress.",
             },
             {
                 "name": "verify_claims_batch",
-                "description": "Verify multiple claims in parallel. Returns verdict, confidence, and evidence per claim plus a summary.",
+                "description": "Verify up to 20 claims in parallel. Returns verdict, confidence, evidence per claim plus summary.",
+                "use_when": "Fact-check several statements at once before sending a multi-assertion response.",
             },
             {
                 "name": "verify_response",
-                "description": "Check a full AI response paragraph for hallucination risk (low/medium/high). Atomizes text and verifies each statement.",
+                "description": "Check a full AI response for hallucination risk (low/medium/high). Atomizes text, verifies each statement.",
+                "use_when": "Before sending a multi-sentence response to a user.",
             },
             {
                 "name": "find_contradictions",
-                "description": "Find certified claims that contradict a given statement. Safety check before publishing facts.",
+                "description": "Find ALL certified claims that contradict a given statement with explanations.",
+                "use_when": "Safety check before publishing facts — surface all known conflicts.",
+            },
+            {
+                "name": "get_knowledge_brief",
+                "description": "Structured, citable knowledge brief with key facts, sources, and confidence scores. Optimized for RAG pipelines.",
+                "use_when": "Enrich response with verified facts — better than search_knowledge for agent-ready output.",
+            },
+            {
+                "name": "get_citations",
+                "description": "Properly formatted citations (inline, APA) for any factual claim with verified source URLs.",
+                "use_when": "Need to cite sources in a response — solves the #1 agent problem: unverifiable citations.",
+            },
+            {
+                "name": "check_freshness",
+                "description": "Check if a fact is still current. Detects stale training data for fast-changing topics.",
+                "use_when": "Unsure if training data is outdated — especially for AI, regulations, statistics.",
+            },
+            {
+                "name": "check_regulatory_compliance",
+                "description": "Check agent-generated text for Swiss/EU regulatory compliance (FINMA, BAG, GDPR, EU AI Act).",
+                "use_when": "Before sending responses in regulated domains: finance, health, law.",
+            },
+            {
+                "name": "report_agent_need",
+                "description": "Report missing domains, claims, or features. Feedback directly shapes the roadmap.",
+                "use_when": "Can't find what you need — search returned nothing or domain is missing.",
             },
         ],
+        "example_queries": [
+            "How does Swiss mandatory health insurance work?",
+            "What does the EU AI Act require for high-risk AI systems?",
+            "How does RAG reduce LLM hallucinations?",
+            "What are the FINMA regulations for crypto assets?",
+            "Is health insurance mandatory in Switzerland?",
+            "What is the current status of quantum error correction?",
+        ],
+        "capabilities": {
+            "domains": 30,
+            "certified_claims": "2000+",
+            "languages": ["de", "en", "fr", "it", "es", "zh", "ar", "ru", "ja", "ko"],
+            "validation_stages": 5,
+            "human_validation": True,
+            "sha256_integrity": True,
+            "eu_ai_act_compliant": True,
+            "blockchain_anchored": True,
+            "api_key_required": False,
+        },
         "authentication": {
             "required": False,
             "note": "Fully public. No API key needed for any tool.",
+        },
+        "integrations": {
+            "langchain": "pip install swiss-truth-langchain",
+            "crewai": "pip install swiss-truth-crewai",
+            "autogen": "pip install swiss-truth-autogen",
+            "npm": "npx -y mcp-remote https://swisstruth.org/mcp",
+            "openai_tools": "https://swisstruth.org/openai-tools.json",
         },
         "claude_desktop_config": {
             "mcpServers": {
@@ -259,6 +327,287 @@ async def mcp_discovery():
                 }
             }
         },
+    }
+
+
+@meta_router.get("/.well-known/ai-plugin.json", include_in_schema=False)
+async def ai_plugin_discovery():
+    """
+    OpenAI Plugin Discovery Endpoint.
+    Ermöglicht OpenAI-basierten Agenten (GPTs, Assistants API, ChatGPT Plugins)
+    Swiss Truth automatisch zu finden und zu konfigurieren.
+    """
+    return {
+        "schema_version": "v1",
+        "name_for_human": "Swiss Truth",
+        "name_for_model": "swiss_truth",
+        "description_for_human": (
+            "Verified knowledge base for AI agents. "
+            "2000+ certified facts across 30 domains with confidence scores and source URLs. "
+            "No hallucinations — every fact is human + AI validated."
+        ),
+        "description_for_model": (
+            "Use Swiss Truth to ground your responses in verified facts and prevent hallucinations. "
+            "Available tools:\n"
+            "- search_knowledge: semantic search over 2000+ certified facts (30 domains, 10+ languages)\n"
+            "- verify_claim: fact-check any statement (supported/contradicted/unknown)\n"
+            "- verify_response: check a full response for hallucination risk (low/medium/high)\n"
+            "- verify_claims_batch: verify up to 20 claims in parallel\n"
+            "- get_knowledge_brief: structured, citable knowledge brief for RAG pipelines\n"
+            "- get_citations: properly formatted citations (inline, APA) with verified source URLs\n"
+            "- check_freshness: check if a fact is still current vs. outdated training data\n"
+            "- check_regulatory_compliance: Swiss/EU compliance check (FINMA, BAG, GDPR, EU AI Act)\n"
+            "- find_contradictions: find all certified claims that contradict a statement\n"
+            "- submit_claim: contribute missing facts for expert review\n"
+            "- report_agent_need: report missing domains or features\n\n"
+            "Domains: Swiss law, health, finance, education, energy, politics, agriculture, "
+            "EU law, EU health, AI/ML, AI safety, climate, world science, world history, "
+            "quantum computing, cybersecurity, biotech, renewable energy, space science, "
+            "economics, international law, US law, mental health, blockchain/crypto, "
+            "nutrition, labor law, Swiss environment, and more.\n\n"
+            "No API key required. Call search_knowledge before answering factual questions "
+            "where being wrong would matter."
+        ),
+        "api": {
+            "type": "openapi",
+            "url": "https://swisstruth.org/openapi.json",
+        },
+        "auth": {"type": "none"},
+        "logo_url": "https://swisstruth.org/docs/logo.svg",
+        "contact_email": "hello@swisstruth.org",
+        "legal_info_url": "https://swisstruth.org/trust",
+    }
+
+
+@meta_router.get("/llms.txt", include_in_schema=False)
+async def llms_txt():
+    """
+    LLM-Crawler Discovery (llmstxt.org Standard).
+    LLMs und Crawler lesen diese Datei um zu verstehen was Swiss Truth bietet.
+    """
+    from fastapi.responses import PlainTextResponse
+    content = """# Swiss Truth MCP
+> Verified knowledge base for AI agents — certified facts, not hallucinations.
+
+Swiss Truth provides 2000+ certified facts across 30 domains with confidence scores,
+verified source URLs, and SHA256 integrity hashes. Every fact passes a 5-stage
+human + AI validation pipeline. EU AI Act compliant. No API key required.
+
+## Why agents use Swiss Truth
+
+- **Prevent hallucinations**: Ground responses in verified facts before answering
+- **Cite sources**: Get properly formatted citations (inline, APA) with verified URLs
+- **Check compliance**: Swiss/EU regulatory compliance (FINMA, BAG, GDPR, EU AI Act)
+- **Detect stale data**: Check if your training data is still current
+- **Batch verification**: Verify up to 20 claims in parallel
+
+## Quick Setup
+
+MCP (Claude Desktop, Cursor, Windsurf):
+```json
+{"mcpServers": {"swiss-truth": {"command": "npx", "args": ["-y", "mcp-remote", "https://swisstruth.org/mcp"]}}}
+```
+
+LangChain: pip install swiss-truth-langchain
+CrewAI:    pip install swiss-truth-crewai
+AutoGen:   pip install swiss-truth-autogen
+
+## MCP Tools (14 total)
+
+- search_knowledge — semantic search, 10+ languages, auto-detected
+- verify_claim — fact-check: supported / contradicted / unknown
+- verify_response — hallucination risk score for full response text
+- verify_claims_batch — verify up to 20 claims in parallel
+- find_contradictions — find all certified contradictions
+- get_knowledge_brief — structured, citable knowledge brief for RAG
+- get_citations — inline + APA citations with verified source URLs
+- check_freshness — detect stale training data
+- check_regulatory_compliance — Swiss/EU compliance check
+- report_agent_need — report missing domains or features
+- get_claim — full provenance for a single claim
+- list_domains — browse all 30 knowledge domains
+- submit_claim — contribute missing facts for expert review
+- get_claim_status — track review pipeline: draft → peer_review → certified
+
+## Domains (30)
+
+Swiss: swiss-health, swiss-law, swiss-finance, swiss-education, swiss-energy,
+       swiss-transport, swiss-politics, swiss-agriculture, swiss-digital,
+       swiss-environment, labor-employment
+
+EU & Global: eu-law, eu-health, global-science, international-law, economics,
+             us-law
+
+Science & Tech: ai-ml, ai-safety, quantum-computing, cybersecurity, biotech,
+                renewable-energy, space-science, blockchain-crypto
+
+General: climate, world-science, world-history, mental-health, nutrition-food
+
+## API Endpoints
+
+- MCP:           https://swisstruth.org/mcp
+- REST API:      https://swisstruth.org/api
+- OpenAI tools:  https://swisstruth.org/openai-tools.json
+- Discovery:     https://swisstruth.org/.well-known/mcp.json
+- AI Plugin:     https://swisstruth.org/.well-known/ai-plugin.json
+- Agent Manifest:https://swisstruth.org/agents.json
+- Trust & Stats: https://swisstruth.org/trust
+
+## Authentication
+
+None required. Fully public. Connect in 30 seconds.
+"""
+    return PlainTextResponse(content=content, media_type="text/plain")
+
+
+@meta_router.get("/agents.json", include_in_schema=False)
+async def agents_manifest():
+    """
+    Agent Capability Manifest — maschinenlesbar für Agent-Frameworks.
+    Erklärt was Swiss Truth für Agenten tut, wie man es nutzt, und welche Probleme es löst.
+    """
+    return {
+        "schema_version": "1",
+        "name": "Swiss Truth",
+        "tagline": "Verified knowledge infrastructure for AI agents",
+        "url": "https://swisstruth.org",
+        "mcp_endpoint": "https://swisstruth.org/mcp",
+        "api_key_required": False,
+        "problems_solved": [
+            {
+                "problem": "LLM hallucination on factual questions",
+                "solution": "search_knowledge — semantic search over 2000+ certified facts",
+                "impact": "high",
+            },
+            {
+                "problem": "Cannot cite sources or verify citations",
+                "solution": "get_citations — returns inline + APA citations with verified source URLs",
+                "impact": "high",
+            },
+            {
+                "problem": "Stale training data on fast-changing topics",
+                "solution": "check_freshness — detects outdated facts and returns current version",
+                "impact": "high",
+            },
+            {
+                "problem": "Non-compliant responses in regulated domains",
+                "solution": "check_regulatory_compliance — Swiss/EU compliance check before responding",
+                "impact": "high",
+            },
+            {
+                "problem": "Verifying multiple claims in a response",
+                "solution": "verify_claims_batch — verify up to 20 claims in parallel",
+                "impact": "medium",
+            },
+            {
+                "problem": "Full response hallucination risk",
+                "solution": "verify_response — atomizes text and returns hallucination_risk: low/medium/high",
+                "impact": "high",
+            },
+        ],
+        "tools": [
+            {"name": "search_knowledge", "category": "retrieval", "languages": 10, "domains": 30},
+            {"name": "verify_claim", "category": "verification", "returns": "supported|contradicted|unknown"},
+            {"name": "verify_response", "category": "verification", "returns": "low|medium|high risk"},
+            {"name": "verify_claims_batch", "category": "verification", "max_claims": 20},
+            {"name": "find_contradictions", "category": "verification"},
+            {"name": "get_knowledge_brief", "category": "retrieval", "optimized_for": "rag"},
+            {"name": "get_citations", "category": "citation", "formats": ["inline", "apa"]},
+            {"name": "check_freshness", "category": "quality"},
+            {"name": "check_regulatory_compliance", "category": "compliance", "regulators": ["FINMA", "BAG", "GDPR", "EU AI Act"]},
+            {"name": "report_agent_need", "category": "feedback"},
+            {"name": "get_claim", "category": "retrieval"},
+            {"name": "list_domains", "category": "discovery"},
+            {"name": "submit_claim", "category": "contribution"},
+            {"name": "get_claim_status", "category": "tracking"},
+        ],
+        "domains": {
+            "total": 30,
+            "swiss": ["swiss-health", "swiss-law", "swiss-finance", "swiss-education", "swiss-energy",
+                      "swiss-transport", "swiss-politics", "swiss-agriculture", "swiss-digital",
+                      "swiss-environment", "labor-employment"],
+            "eu_global": ["eu-law", "eu-health", "global-science", "international-law", "economics", "us-law"],
+            "science_tech": ["ai-ml", "ai-safety", "quantum-computing", "cybersecurity", "biotech",
+                             "renewable-energy", "space-science", "blockchain-crypto"],
+            "general": ["climate", "world-science", "world-history", "mental-health", "nutrition-food"],
+        },
+        "quick_start": {
+            "mcp_claude_desktop": {
+                "config": {
+                    "mcpServers": {
+                        "swiss-truth": {
+                            "command": "npx",
+                            "args": ["-y", "mcp-remote", "https://swisstruth.org/mcp"],
+                        }
+                    }
+                }
+            },
+            "langchain": {
+                "install": "pip install swiss-truth-langchain",
+                "example": "from swiss_truth_langchain import SwissTruthToolkit\ntoolkit = SwissTruthToolkit()\ntools = toolkit.get_tools()",
+            },
+            "crewai": {
+                "install": "pip install swiss-truth-crewai",
+                "example": "from swiss_truth_crewai import SwissTruthSearchTool\ntool = SwissTruthSearchTool()\nagent = Agent(tools=[tool])",
+            },
+            "autogen": {
+                "install": "pip install swiss-truth-autogen",
+                "example": "from swiss_truth_autogen import register_swiss_truth_functions\nregister_swiss_truth_functions(assistant, user_proxy)",
+            },
+            "openai_functions": {
+                "url": "https://swisstruth.org/openai-tools.json",
+                "example": "import requests\ntools = requests.get('https://swisstruth.org/openai-tools.json').json()",
+            },
+            "direct_mcp": {
+                "url": "https://swisstruth.org/mcp",
+                "protocol": "MCP StreamableHTTP",
+            },
+        },
+        "knowledge_stats": {
+            "certified_claims": "2000+",
+            "domains": 30,
+            "languages": 10,
+            "validation_pipeline_stages": 5,
+            "human_validated": True,
+            "sha256_integrity": True,
+            "eu_ai_act_compliant": True,
+            "blockchain_anchored": True,
+        },
+        "agent_personas": [
+            {
+                "type": "Research Agent",
+                "primary_tools": ["search_knowledge", "get_knowledge_brief", "get_citations"],
+                "use_case": "Ground research in verified facts with proper citations",
+            },
+            {
+                "type": "Legal Compliance Agent",
+                "primary_tools": ["search_knowledge", "check_regulatory_compliance", "verify_claim"],
+                "use_case": "Swiss/EU regulatory compliance (FINMA, BAG, GDPR, EU AI Act)",
+                "domains": ["swiss-law", "swiss-finance", "swiss-health", "eu-law"],
+            },
+            {
+                "type": "RAG Pipeline",
+                "primary_tools": ["get_knowledge_brief", "search_knowledge", "get_citations"],
+                "use_case": "Enrich retrieval with human-validated facts",
+            },
+            {
+                "type": "Fact-Checking Agent",
+                "primary_tools": ["verify_claim", "verify_claims_batch", "verify_response", "find_contradictions"],
+                "use_case": "Prevent hallucinations in AI-generated content",
+            },
+            {
+                "type": "Health Advisory Agent",
+                "primary_tools": ["search_knowledge", "check_regulatory_compliance", "check_freshness"],
+                "use_case": "Accurate Swiss health information (KVG, Krankenkasse, Swissmedic)",
+                "domains": ["swiss-health", "eu-health", "mental-health", "nutrition-food"],
+            },
+            {
+                "type": "Financial Agent",
+                "primary_tools": ["search_knowledge", "check_regulatory_compliance", "verify_claim"],
+                "use_case": "FINMA-compliant financial information",
+                "domains": ["swiss-finance", "economics", "blockchain-crypto"],
+            },
+        ],
     }
 
 

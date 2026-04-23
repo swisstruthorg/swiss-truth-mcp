@@ -113,8 +113,15 @@ class _HttpxClient:
             if "error" in data:
                 msg = data["error"].get("message", str(data["error"]))
                 code = data["error"].get("code", 0)
-                if (code == 503 or "busy" in msg.lower()) and attempt < 3:
-                    time.sleep(3 * (attempt + 1))
+                is_retryable = (
+                    code == 503
+                    or "busy" in msg.lower()
+                    or "rate limit" in msg.lower()
+                    or "overloaded" in msg.lower()
+                )
+                if is_retryable and attempt < 3:
+                    wait = 35 if "rate limit" in msg.lower() else 3 * (attempt + 1)
+                    time.sleep(wait)
                     continue
                 raise RuntimeError(msg)
             # Leerer content → Retry
@@ -370,6 +377,47 @@ DOMAIN_PRIMARY_SOURCES = {
         "ncsc.admin.ch (Nationales Zentrum für Cybersicherheit)",
         "bakom.admin.ch (Bundesamt für Kommunikation)",
         "swisscom.com/reports (Swisscom Nachhaltigkeitsberichte)",
+    ],
+    # ── Neue Domains (Phase 8) ────────────────────────────────────────────────
+    "swiss-environment": [
+        "bafu.admin.ch (Bundesamt für Umwelt — Berichte, Statistiken)",
+        "meteoswiss.admin.ch (MeteoSchweiz — Klimadaten Schweiz)",
+        "bfs.admin.ch (Bundesamt für Statistik — Umweltindikatoren)",
+        "are.admin.ch (Bundesamt für Raumentwicklung)",
+        "fedlex.admin.ch (USG, GSchG, LWG — Umweltgesetze)",
+        "pronatura.ch (Pro Natura — Naturschutz Schweiz)",
+    ],
+    "mental-health": [
+        "who.int/mental-health (WHO Mental Health — global data and guidelines)",
+        "nimh.nih.gov (National Institute of Mental Health)",
+        "psychiatrie.ch (Schweizerische Gesellschaft für Psychiatrie)",
+        "obsan.admin.ch (Schweizerisches Gesundheitsobservatorium)",
+        "thelancet.com/psychiatry (The Lancet Psychiatry)",
+        "apa.org (American Psychological Association)",
+    ],
+    "blockchain-crypto": [
+        "finma.ch (FINMA — Krypto-Regulierung und ICO-Wegleitung Schweiz)",
+        "bis.org/publ (BIS — CBDC und Krypto-Berichte)",
+        "esma.europa.eu (ESMA — MiCA Regulierung EU)",
+        "sec.gov (SEC — US Krypto-Enforcement-Aktionen)",
+        "fatf-gafi.org (FATF — AML/CFT Empfehlungen für Krypto)",
+        "ethereum.org/en/developers/docs (Ethereum Foundation Dokumentation)",
+    ],
+    "nutrition-food": [
+        "who.int/nutrition (WHO Nutrition — globale Ernährungsrichtlinien)",
+        "efsa.europa.eu (EFSA — European Food Safety Authority)",
+        "fao.org/nutrition (FAO — Welternährungsorganisation)",
+        "blv.admin.ch (Bundesamt für Lebensmittelsicherheit und Veterinärwesen)",
+        "hsph.harvard.edu/nutritionsource (Harvard T.H. Chan School of Public Health)",
+        "ncbi.nlm.nih.gov/pubmed (PubMed — Ernährungsforschung)",
+    ],
+    "labor-employment": [
+        "ilo.org/statistics (ILO — International Labour Organization)",
+        "oecd.org/employment (OECD Employment Outlook)",
+        "seco.admin.ch (SECO — Staatssekretariat für Wirtschaft Schweiz)",
+        "bfs.admin.ch (Bundesamt für Statistik — Arbeitsmarktdaten)",
+        "fedlex.admin.ch (OR Art. 319ff — Schweizer Arbeitsrecht)",
+        "dol.gov (US Department of Labor — FLSA, OSHA)",
     ],
 }
 
@@ -859,6 +907,115 @@ DOMAINS = {
         ],
         "wiki_topics": ["E-Government", "Digitale Schweiz"],
         "wiki_lang": "de",
+    },
+    # ── Neue Domains (Phase 8) ────────────────────────────────────────────────
+    "swiss-environment": {
+        "name": "Schweizer Umwelt & Naturschutz",
+        "description": "Umweltschutz, Biodiversität, Gewässerschutz und Naturschutzpolitik der Schweiz",
+        "topics": [
+            "Umweltschutzgesetz (USG) — Grundsätze und Vollzug",
+            "Biodiversitätsstrategie Schweiz",
+            "Gewässerschutz und Wasserqualität (GSchG)",
+            "Luftreinhalteverordnung (LRV) und Grenzwerte",
+            "Lärmschutzverordnung (LSV)",
+            "Waldgesetz und Walderhaltung",
+            "Raumplanung und Bauen ausserhalb Bauzonen",
+            "Klimaziele Schweiz — CO₂-Gesetz und Netto-Null 2050",
+            "Artenschutz und Rote Listen Schweiz",
+            "Abfallrecht und Kreislaufwirtschaft",
+        ],
+        "faq_urls": [
+            "https://www.bafu.admin.ch/bafu/de/home/themen/biodiversitaet.html",
+            "https://www.bafu.admin.ch/bafu/de/home/themen/klima/fachinformationen/klimapolitik.html",
+        ],
+        "wiki_topics": ["Umweltschutz in der Schweiz", "Biodiversität"],
+        "wiki_lang": "de",
+    },
+    "mental-health": {
+        "name": "Psychische Gesundheit",
+        "description": "Psychische Erkrankungen, Behandlungsansätze, WHO-Daten und globale Epidemiologie",
+        "topics": [
+            "Depression — Prävalenz, Diagnose und Behandlung (WHO-Daten)",
+            "Angststörungen — Typen und evidenzbasierte Therapien",
+            "Schizophrenie — Symptome, Verlauf und Behandlung",
+            "Suizidprävention — WHO-Strategien und Risikofaktoren",
+            "Burnout — ICD-11 Klassifikation und Abgrenzung",
+            "Psychotherapie-Methoden — CBT, DBT, EMDR",
+            "Psychopharmaka — Antidepressiva, Antipsychotika, Wirkweise",
+            "Kinder- und Jugendpsychiatrie — häufige Störungsbilder",
+            "Psychische Gesundheit am Arbeitsplatz — Schweizer Daten",
+            "Stigma psychischer Erkrankungen — Forschungsstand",
+        ],
+        "faq_urls": [
+            "https://www.who.int/news-room/fact-sheets/detail/mental-disorders",
+        ],
+        "wiki_topics": ["Mental disorder", "Depression (mood)", "Anxiety disorder"],
+        "wiki_lang": "en",
+    },
+    "blockchain-crypto": {
+        "name": "Blockchain & Kryptowährungen",
+        "description": "Blockchain-Technologie, Kryptowährungen, DeFi, NFTs und regulatorische Rahmenbedingungen",
+        "topics": [
+            "Bitcoin — Proof-of-Work, Halving und maximale Menge",
+            "Ethereum — Proof-of-Stake und Smart Contracts",
+            "FINMA Krypto-Regulierung — ICO-Wegleitung und DLT-Gesetz Schweiz",
+            "MiCA (Markets in Crypto-Assets) — EU-Regulierung",
+            "DeFi (Decentralized Finance) — Grundprinzipien und Risiken",
+            "NFTs (Non-Fungible Tokens) — Technik und Rechtsfragen",
+            "CBDC (Central Bank Digital Currency) — BIS-Forschungsstand",
+            "Krypto-Steuern Schweiz — ESTV-Praxis",
+            "AML/KYC-Anforderungen für Krypto-Dienstleister (FATF)",
+            "Blockchain-Konsensus-Mechanismen — PoW vs. PoS vs. PoA",
+        ],
+        "faq_urls": [
+            "https://www.finma.ch/de/dokumentation/dossier/dossier-fintech/",
+        ],
+        "wiki_topics": ["Bitcoin", "Ethereum", "Blockchain"],
+        "wiki_lang": "en",
+    },
+    "nutrition-food": {
+        "name": "Ernährung & Lebensmittel",
+        "description": "Ernährungswissenschaft, WHO-Richtlinien, Lebensmittelsicherheit und globale Ernährungsdaten",
+        "topics": [
+            "WHO-Ernährungsempfehlungen — Zucker, Salz, Fett",
+            "Makronährstoffe — Proteine, Kohlenhydrate, Fette",
+            "Mikronährstoffe — Vitamine und Mineralstoffe (Mangelzustände)",
+            "Lebensmittelsicherheit — EFSA-Standards und Rückstandshöchstmengen",
+            "Übergewicht und Adipositas — globale WHO-Daten",
+            "Vegetarische und vegane Ernährung — Nährstoffversorgung",
+            "Lebensmittelkennzeichnung — EU-Verordnung 1169/2011",
+            "Schweizer Lebensmittelrecht — LMG und LGV",
+            "Nahrungsergänzungsmittel — Regulierung und Evidenz",
+            "Ernährung und chronische Krankheiten — Forschungsstand",
+        ],
+        "faq_urls": [
+            "https://www.blv.admin.ch/blv/de/home/lebensmittel-und-ernaehrung/ernaehrung.html",
+            "https://www.who.int/news-room/fact-sheets/detail/healthy-diet",
+        ],
+        "wiki_topics": ["Nutrition", "Food safety", "Dietary supplement"],
+        "wiki_lang": "en",
+    },
+    "labor-employment": {
+        "name": "Arbeitsrecht & Beschäftigung",
+        "description": "Arbeitsrecht, ILO-Standards, Schweizer Arbeitsmarkt und globale Beschäftigungsdaten",
+        "topics": [
+            "Schweizer Arbeitsrecht — OR Art. 319ff Kündigungsschutz",
+            "Arbeitszeit und Überstunden — ArG Schweiz",
+            "Mindestlohn — Schweizer Kantone und internationale Vergleiche",
+            "ILO-Kernarbeitsnormen — 8 fundamentale Konventionen",
+            "Arbeitslosenversicherung (ALV) Schweiz — Anspruch und Leistungen",
+            "Mutterschafts- und Vaterschaftsurlaub Schweiz",
+            "Diskriminierungsschutz am Arbeitsplatz — GlG Schweiz",
+            "Homeoffice-Regelungen — Schweizer Rechtslage",
+            "Kollektivarbeitsverträge (GAV) in der Schweiz",
+            "Globale Beschäftigungsstatistiken — ILO World Employment Report",
+        ],
+        "faq_urls": [
+            "https://www.seco.admin.ch/seco/de/home/Arbeit/Arbeitsbedingungen.html",
+            "https://www.ilo.org/global/statistics-and-databases/lang--en/index.htm",
+        ],
+        "wiki_topics": ["Labour law", "International Labour Organization", "Unemployment"],
+        "wiki_lang": "en",
     },
 }
 

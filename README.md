@@ -1,24 +1,39 @@
 # Swiss Truth MCP
 
-**Stop your AI agent from hallucinating facts.** Swiss Truth is a verified, source-backed knowledge base accessible via MCP — certified claims with confidence scores, primary source URLs, and SHA256 integrity hashes.
+> **Verified knowledge infrastructure for AI agents — certified facts, not hallucinations.**
 
-No API key. No setup. Connect in 30 seconds.
+[![MCP](https://img.shields.io/badge/MCP-StreamableHTTP-blue)](https://swisstruth.org/mcp)
+[![Domains](https://img.shields.io/badge/domains-30-green)](https://swisstruth.org/.well-known/mcp.json)
+[![Claims](https://img.shields.io/badge/certified_facts-2000%2B-brightgreen)](https://swisstruth.org/trust)
+[![Languages](https://img.shields.io/badge/languages-10-blue)](https://swisstruth.org/mcp)
+[![EU AI Act](https://img.shields.io/badge/EU_AI_Act-compliant-blue)](https://swisstruth.org/trust)
+[![Auth](https://img.shields.io/badge/API_key-not_required-success)](https://swisstruth.org/mcp)
+[![LangChain](https://img.shields.io/badge/LangChain-swiss--truth--langchain-orange)](https://pypi.org/project/swiss-truth-langchain)
+[![CrewAI](https://img.shields.io/badge/CrewAI-swiss--truth--crewai-red)](https://pypi.org/project/swiss-truth-crewai)
+[![AutoGen](https://img.shields.io/badge/AutoGen-swiss--truth--autogen-purple)](https://pypi.org/project/swiss-truth-autogen)
+
+Swiss Truth is a **human + AI validated knowledge base** purpose-built for AI agents.
+Every fact passes a 5-stage validation pipeline, carries a confidence score, verified source URLs, and a SHA256 integrity hash.
+Connect in 30 seconds. No API key required.
 
 ---
 
-## Why agents need this
+## Why agents use Swiss Truth
 
-LLMs hallucinate facts, especially for **country-specific, regulatory, and scientific** topics. Swiss Truth gives your agent a **ground-truth layer** it can query before answering — returning only claims that have passed a 5-stage human + AI validation pipeline.
-
-| Without Swiss Truth | With Swiss Truth |
-|---------------------|-----------------|
-| "Health insurance in Switzerland is optional, I think..." | "Health insurance is mandatory (KVG Art. 3) — confidence 0.99, source: bag.admin.ch" |
-| Unknown answer on Swiss VAT rates | Certified claim with current rate + legal source |
-| Unverified AI/ML definition | Peer-reviewed explanation with academic citation |
+| Problem | Swiss Truth Tool |
+|---|---|
+| 🧠 **LLM hallucination** on factual questions | `search_knowledge` — 2000+ certified facts, 30 domains |
+| 📎 **Cannot cite sources** or verify citations | `get_citations` — inline + APA with verified URLs |
+| ⏰ **Stale training data** on fast-changing topics | `check_freshness` — detect outdated facts |
+| ⚖️ **Non-compliant responses** in regulated domains | `check_regulatory_compliance` — FINMA, BAG, GDPR, EU AI Act |
+| ✅ **Verify multiple claims** before sending a response | `verify_claims_batch` — up to 20 claims in parallel |
+| 🔍 **Full response hallucination risk** | `verify_response` — low / medium / high risk score |
 
 ---
 
-## Quick Setup — Claude Desktop
+## Quick Setup
+
+### MCP (Claude Desktop, Cursor, Windsurf, any MCP client)
 
 ```json
 {
@@ -31,158 +46,188 @@ LLMs hallucinate facts, especially for **country-specific, regulatory, and scien
 }
 ```
 
-**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`  
-**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
-
-Restart Claude Desktop — done.
-
----
-
-## 6 MCP Tools
-
-### `search_knowledge` — Semantic search over certified facts
-
-```
-search_knowledge("How does health insurance work in Switzerland?")
-search_knowledge("Was ist RAG in der KI?")          # DE auto-detected
-search_knowledge("三权分立原则")                       # ZH auto-detected
-```
-
-**Returns:** ranked list of certified claims, each with:
-- `confidence_score` (0.0 – 1.0)
-- `source_urls` (gov, academic, institutional — no Wikipedia)
-- `hash` (SHA256 for tamper detection)
-- `language`, `domain`, `last_reviewed`
-
-Supports: **DE · EN · FR · IT · ES · ZH · AR · RU · JA · KO**
-
----
-
-### `verify_claim` — Fact-check any statement
-
-```
-verify_claim("Die Krankenversicherung in der Schweiz ist freiwillig.")
-```
-
+Or directly via HTTP:
 ```json
 {
-  "verdict": "contradicted",
-  "confidence": 0.879,
-  "explanation": "Swiss law (KVG Art. 3) mandates health insurance for all residents.",
-  "evidence": [...],
-  "sources": ["https://www.bag.admin.ch/..."]
+  "mcpServers": {
+    "swiss-truth": {
+      "type": "http",
+      "url": "https://swisstruth.org/mcp"
+    }
+  }
 }
 ```
 
-Returns: `supported` · `contradicted` · `unknown`
-
----
-
-### `get_claim` — Full provenance for a single claim
-
-```
-get_claim("sha256:d21321db714d...")
-```
-
-Returns: claim text, domain, language, confidence, validator, institution, review date, all source URLs, SHA256 hash.
-
----
-
-### `list_domains` — Browse the knowledge base
-
-```
-list_domains()
-```
-
-Returns all 12 domains with certified claim counts. Use to understand coverage before querying.
-
----
-
-### `submit_claim` — Contribute to the knowledge base
-
-Submit a claim for expert review. Automatically triggers the full validation pipeline (dedup → AI pre-screen → source verification → human review → signing).
-
----
-
-### `get_claim_status` — Track validation progress
-
-Check where your submitted claim is: `draft` → `peer_review` → `certified`
-
----
-
-## Knowledge Domains
-
-| Domain | ID | Focus |
-|--------|----|-------|
-| Swiss Health | `swiss-health` | KVG, mandatory insurance, Krankenkasse |
-| Swiss Law | `swiss-law` | Federal law, cantonal rules, civil code |
-| Swiss Finance | `swiss-finance` | AHV, 3-pillar system, taxes, banking |
-| Swiss Politics | `swiss-politics` | Federal Council, direct democracy, elections |
-| Swiss Education | `swiss-education` | University system, apprenticeships, Bologna |
-| Swiss Energy | `swiss-energy` | Nuclear, renewables, energy strategy 2050 |
-| Swiss Transport | `swiss-transport` | SBB, highways, LSVA |
-| Swiss Agriculture | `swiss-agriculture` | Direct payments, organic, food sovereignty |
-| Climate Science | `climate` | IPCC findings, temperature data, emissions |
-| AI / ML | `ai-ml` | RAG, transformers, LLM concepts, benchmarks |
-| Natural Sciences | `world-science` | Physics, chemistry, biology fundamentals |
-| World History | `world-history` | Verified historical facts and dates |
-
----
-
-## Agent Use Cases
-
-**RAG grounding** — Before answering a user question, call `search_knowledge` to retrieve certified context. Pass it as system context to prevent hallucination.
-
-**Fact-checking pipeline** — Use `verify_claim` as a post-processing step to validate claims in generated text before showing them to users.
-
-**Compliance checks** — For Swiss regulatory topics (insurance, taxes, legal obligations), retrieve ground truth with source references your users can verify.
-
-**Multi-language support** — One agent, 10+ languages. The query language is auto-detected — no need to specify it.
-
----
-
-## Trust & Methodology
-
-Every claim passes a **5-stage validation pipeline**:
-
-1. **Semantic dedup** — vector similarity ≥ 95% blocks redundant submissions
-2. **AI pre-screen** — Claude Haiku checks atomicity, factuality, source presence
-3. **Source verification** — each URL fetched and verified to support the claim
-4. **Expert peer review** — human validation with confidence score assignment
-5. **SHA256 signing + annual expiry** — confidence decays 1%/month until renewed
-
-Full transparency: [swisstruth.org/trust](https://swisstruth.org/trust)
-
----
-
-## Endpoints
-
-| | |
-|--|--|
-| MCP endpoint | `https://swisstruth.org/mcp` |
-| MCP discovery | `https://swisstruth.org/.well-known/mcp.json` |
-| Trust & stats | `https://swisstruth.org/trust` |
-| REST API docs | `https://swisstruth.org/docs` |
-| RSS feed | `https://swisstruth.org/feed.rss` |
-| Webhook subscriptions | `POST https://swisstruth.org/webhooks` |
-
----
-
-## Subscribe to new certified claims
-
-**RSS** — poll or subscribe in any feed reader:
-```
-https://swisstruth.org/feed.rss
-https://swisstruth.org/feed.rss?domain=swiss-health
-```
-
-**Webhook** — get notified on every certification:
+### LangChain
 ```bash
-curl -X POST https://swisstruth.org/webhooks \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://your-agent.example.com/hook", "domain": "swiss-health"}'
+pip install swiss-truth-langchain
+```
+```python
+from swiss_truth_langchain import SwissTruthToolkit
+
+toolkit = SwissTruthToolkit()
+tools = toolkit.get_tools()  # search, verify, batch verify, citations, freshness, compliance
+```
+
+### CrewAI
+```bash
+pip install swiss-truth-crewai
+```
+```python
+from swiss_truth_crewai import SwissTruthSearchTool, SwissTruthVerifyTool
+from crewai import Agent
+
+researcher = Agent(
+    role="Research Agent",
+    tools=[SwissTruthSearchTool(), SwissTruthVerifyTool()]
+)
+```
+
+### AutoGen
+```bash
+pip install swiss-truth-autogen
+```
+```python
+from swiss_truth_autogen import register_swiss_truth_functions
+
+register_swiss_truth_functions(assistant, user_proxy)
+# Adds: search_knowledge, verify_claim, verify_claims_batch, get_knowledge_brief
+```
+
+### OpenAI function-calling
+```python
+import requests
+
+tools = requests.get("https://swisstruth.org/openai-tools.json").json()
+# Ready-to-use tool definitions for OpenAI API, LlamaIndex, etc.
 ```
 
 ---
 
-Built with [FastAPI](https://fastapi.tiangolo.com) · [Neo4j](https://neo4j.com) · [MCP](https://modelcontextprotocol.io) · [Claude](https://anthropic.com)
+## 14 MCP Tools
+
+### 🔍 Retrieval
+| Tool | Description |
+|---|---|
+| `search_knowledge` | Semantic search over 2000+ certified facts. Auto-detects language (DE/EN/FR/IT/ES/ZH/AR/RU/JA/KO). Returns confidence score, source URLs, SHA256 hash. |
+| `get_claim` | Full provenance for a single claim: validator, institution, review date, SHA256. |
+| `get_knowledge_brief` | Structured, citable knowledge brief optimized for RAG pipelines. |
+| `list_domains` | Browse all 30 knowledge domains with certified claim counts. |
+
+### ✅ Verification
+| Tool | Description |
+|---|---|
+| `verify_claim` | Fact-check a statement: `supported` / `contradicted` / `unknown` with confidence + evidence. |
+| `verify_claims_batch` | Verify up to 20 claims in parallel. Returns per-claim verdict + summary. |
+| `verify_response` | Check a full AI response for hallucination risk: `low` / `medium` / `high`. |
+| `find_contradictions` | Find all certified claims that contradict a statement. |
+
+### 📎 Citation & Quality
+| Tool | Description |
+|---|---|
+| `get_citations` | Properly formatted inline + APA citations with verified source URLs. |
+| `check_freshness` | Detect stale training data. Returns `current` / `changed` / `unknown`. |
+| `check_regulatory_compliance` | Swiss/EU compliance check (FINMA, BAG, GDPR, EU AI Act). |
+
+### 📥 Contribution & Feedback
+| Tool | Description |
+|---|---|
+| `submit_claim` | Submit a missing fact for expert review. Triggers AI pre-screening + URL verification. |
+| `get_claim_status` | Track review pipeline: `draft` → `peer_review` → `certified`. |
+| `report_agent_need` | Report missing domains or features — feedback shapes the roadmap. |
+
+---
+
+## 30 Knowledge Domains
+
+**🇨🇭 Swiss (11):** `swiss-health` · `swiss-law` · `swiss-finance` · `swiss-education` · `swiss-energy` · `swiss-transport` · `swiss-politics` · `swiss-agriculture` · `swiss-digital` · `swiss-environment` · `labor-employment`
+
+**🇪🇺 EU & Global (6):** `eu-law` · `eu-health` · `global-science` · `international-law` · `economics` · `us-law`
+
+**🔬 Science & Tech (8):** `ai-ml` · `ai-safety` · `quantum-computing` · `cybersecurity` · `biotech` · `renewable-energy` · `space-science` · `blockchain-crypto`
+
+**🌍 General (5):** `climate` · `world-science` · `world-history` · `mental-health` · `nutrition-food`
+
+---
+
+## Agent Personas
+
+| Agent Type | Primary Tools | Use Case |
+|---|---|---|
+| **Research Agent** | `search_knowledge`, `get_knowledge_brief`, `get_citations` | Ground research in verified facts |
+| **Legal Compliance** | `search_knowledge`, `check_regulatory_compliance`, `verify_claim` | FINMA, BAG, GDPR, EU AI Act |
+| **RAG Pipeline** | `get_knowledge_brief`, `search_knowledge`, `get_citations` | Enrich retrieval with validated facts |
+| **Fact-Checking** | `verify_claim`, `verify_claims_batch`, `verify_response` | Prevent hallucinations |
+| **Health Advisory** | `search_knowledge`, `check_regulatory_compliance`, `check_freshness` | KVG, Krankenkasse, Swissmedic |
+| **Financial Agent** | `search_knowledge`, `check_regulatory_compliance`, `verify_claim` | FINMA-compliant information |
+
+---
+
+## Discovery Endpoints
+
+Swiss Truth is discoverable by agents and crawlers via standard endpoints:
+
+| Endpoint | Standard | Purpose |
+|---|---|---|
+| `/.well-known/mcp.json` | RFC 8615 | MCP auto-discovery |
+| `/.well-known/ai-plugin.json` | OpenAI | GPT / Assistants API integration |
+| `/agents.json` | Swiss Truth | Agent capability manifest |
+| `/llms.txt` | llmstxt.org | LLM crawler discovery |
+| `/openai-tools.json` | OpenAI | Function-calling tool definitions |
+
+---
+
+## Validation Pipeline
+
+Every claim passes a 5-stage pipeline before certification:
+
+```
+Submit → AI Pre-Screen → URL Verification → Expert Review → Peer Review → Certified ✓
+```
+
+- **SHA256 integrity hash** — detect tampering
+- **Blockchain anchoring** — weekly Merkle root on-chain
+- **Confidence scoring** — multi-dimensional quality score
+- **Auto-renewal** — expired claims re-verified daily
+- **EU AI Act compliant** — full audit trail
+
+---
+
+## Knowledge Stats
+
+| Metric | Value |
+|---|---|
+| Certified claims | 2000+ |
+| Domains | 30 |
+| Languages | 10 |
+| Validation stages | 5 |
+| Human validated | ✓ |
+| SHA256 integrity | ✓ |
+| Blockchain anchored | ✓ |
+| EU AI Act compliant | ✓ |
+| API key required | ✗ |
+
+---
+
+## Example Queries
+
+```
+"Is health insurance mandatory in Switzerland?"
+"What does the EU AI Act require for high-risk AI systems?"
+"How does RAG reduce LLM hallucinations?"
+"What are the FINMA regulations for crypto assets?"
+"What is the current status of quantum error correction?"
+"How does Swiss mandatory health insurance work?"
+```
+
+---
+
+## Links
+
+- 🌐 **Website:** [swisstruth.org](https://swisstruth.org)
+- 📊 **Trust & Stats:** [swisstruth.org/trust](https://swisstruth.org/trust)
+- 🔌 **MCP Endpoint:** `https://swisstruth.org/mcp`
+- 📦 **npm package:** `npx -y mcp-remote https://swisstruth.org/mcp`
+- 🐍 **PyPI LangChain:** `pip install swiss-truth-langchain`
+- 🐍 **PyPI CrewAI:** `pip install swiss-truth-crewai`
+- 🐍 **PyPI AutoGen:** `pip install swiss-truth-autogen`

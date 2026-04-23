@@ -71,6 +71,12 @@ SEED_DOMAINS = [
     {"id": "renewable-energy",   "name": "Renewable Energy",          "description": "Solar, wind, hydro, IEA statistics, IRENA data, and global energy transition facts", "language": "en"},
     {"id": "us-law",             "name": "US Law & Regulation",       "description": "US federal law, Supreme Court rulings, FTC/SEC regulations, and constitutional principles", "language": "en"},
     {"id": "swiss-digital",      "name": "Schweizer Digitalisierung", "description": "E-Government, digitale Identität, Open Data, und Digitalisierungsstrategie der Schweiz", "language": "de"},
+    # ── Neue Domains (Phase 8) ────────────────────────────────────────────────
+    {"id": "swiss-environment",  "name": "Schweizer Umwelt & Naturschutz", "description": "Umweltschutz, Biodiversität, Gewässerschutz und Naturschutzpolitik der Schweiz", "language": "de"},
+    {"id": "mental-health",      "name": "Psychische Gesundheit",          "description": "Psychische Erkrankungen, Behandlungsansätze, WHO-Daten und globale Epidemiologie", "language": "en"},
+    {"id": "blockchain-crypto",  "name": "Blockchain & Kryptowährungen",   "description": "Blockchain-Technologie, Kryptowährungen, DeFi, NFTs und regulatorische Rahmenbedingungen", "language": "de"},
+    {"id": "nutrition-food",     "name": "Ernährung & Lebensmittel",       "description": "Ernährungswissenschaft, WHO-Richtlinien, Lebensmittelsicherheit und globale Ernährungsdaten", "language": "en"},
+    {"id": "labor-employment",   "name": "Arbeitsrecht & Beschäftigung",   "description": "Arbeitsrecht, ILO-Standards, Schweizer Arbeitsmarkt und globale Beschäftigungsdaten", "language": "de"},
 ]
 
 
