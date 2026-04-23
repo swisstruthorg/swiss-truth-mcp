@@ -21,3 +21,5 @@ build/
 .DS_Store
 npm/node_modules/
 data/
+npm/.mcpregistry_github_token
+npm/.mcpregistry_registry_token
