@@ -1,0 +1,115 @@
+
+╔══════════════════════════════════════════════════════════════╗
+║       Swiss Truth MCP — Phase 10: Content Foundation        ║
+║       Milestone: Erst das Regal füllen, dann öffnen         ║
+╚══════════════════════════════════════════════════════════════╝
+
+[2026-04-23 12:03:16] ℹ️  API Base:  https://swisstruth.org
+[2026-04-23 12:03:16] ℹ️  Dry Run:   false
+[2026-04-23 12:03:16] ℹ️  Only Step: 10-01
+[2026-04-23 12:03:16] ℹ️  Log File:  phase10_20260423_120316.log
+
+[2026-04-23 12:03:16] ℹ️  Checking API connectivity...
+[2026-04-23 12:03:18] ✅ API reachable ✓
+
+
+════════════════════════════════════════════════════════════
+  10-01: Coverage-Audit aller 30 Domains
+════════════════════════════════════════════════════════════
+[2026-04-23 12:03:18] ℹ️  Fetching domain stats from https://swisstruth.org...
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+─────────────────────────────────────────────────────────────────
+  Swiss Truth — Domain Status  [2026-04-23 12:03]
+─────────────────────────────────────────────────────────────────
+  🔴 ai-safety-en             ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 labor-employment         ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 blockchain-crypto        ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 climate-en               ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 data-protection          ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 eu-ai-act-en             ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 nutrition-food           ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 fintech                  ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 global-health            ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 mental-health            ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 swiss-crypto             ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 swiss-taxation           ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 swiss-environment        ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 swiss-insurance          ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 swiss-innovation         ░░░░░░░░░░░░░░░░░░░░    0/100
+  🔴 eu-law-en                ░░░░░░░░░░░░░░░░░░░░    1/100
+  🔴 ai-ml-en                 ░░░░░░░░░░░░░░░░░░░░    3/100
+  🔴 swiss-real-estate        █░░░░░░░░░░░░░░░░░░░    5/100
+  ✅ economics                ████████████████████  101/100
+  ✅ swiss-education          ████████████████████  102/100
+  ✅ swiss-energy             ████████████████████  102/100
+  ✅ climate                  ████████████████████  104/100
+  ✅ renewable-energy         ████████████████████  104/100
+  ✅ eu-law                   ████████████████████  105/100
+  ✅ swiss-digital            ████████████████████  105/100
+  ✅ international-law        ████████████████████  106/100
+  ✅ swiss-finance            ████████████████████  107/100
+  ✅ swiss-health             ████████████████████  107/100
+  ✅ ai-safety                ████████████████████  108/100
+  ✅ biotech                  ████████████████████  108/100
+  ✅ world-science            ████████████████████  108/100
+  ✅ swiss-politics           ████████████████████  108/100
+  ✅ us-law                   ████████████████████  108/100
+  ✅ swiss-agriculture        ████████████████████  110/100
+  ✅ swiss-law                ████████████████████  110/100
+  ✅ eu-health                ████████████████████  112/100
+  ✅ quantum-computing        ████████████████████  112/100
+  ✅ space-science            ████████████████████  112/100
+  ✅ world-history            ████████████████████  114/100
+  ✅ cybersecurity            ████████████████████  115/100
+  ✅ swiss-transport          ████████████████████  116/100
+  ✅ ai-ml                    ████████████████████  119/100
+  ✅ global-science           ████████████████████  121/100
+─────────────────────────────────────────────────────────────────
+  Total certified claims: 2733  |  Green domains: 25/43
+─────────────────────────────────────────────────────────────────
+
+
+Coverage Report:
+  Total domains: 30
+  Domains with 0 claims: 5
+  ✅ [T1] ai-ml                      ████████████████████  119/50
+  ✅ [T1] ai-safety                  ████████████████████  108/50
+  ✅ [T2] biotech                    ████████████████████  117/30
+  🔴 [T3] blockchain-crypto          ░░░░░░░░░░░░░░░░░░░░    0/15
+  ✅ [T2] climate                    ████████████████████  104/30
+  ✅ [T2] cybersecurity              ████████████████████  115/30
+  ✅ [T2] economics                  ████████████████████  112/30
+  ✅ [T2] eu-health                  ████████████████████  112/30
+  ✅ [T1] eu-law                     ████████████████████  105/50
+  ✅ [T2] global-science             ████████████████████  121/30
+  ✅ [T3] international-law          ████████████████████  131/15
+  🔴 [T3] labor-employment           ░░░░░░░░░░░░░░░░░░░░    0/15
+  🔴 [T3] mental-health              ░░░░░░░░░░░░░░░░░░░░    0/15
+  🔴 [T3] nutrition-food             ░░░░░░░░░░░░░░░░░░░░    0/15
+  ✅ [T3] quantum-computing          ████████████████████  135/15
+  ✅ [T3] renewable-energy           ████████████████████  104/15
+  ✅ [T3] space-science              ████████████████████  112/15
+  ✅ [T3] swiss-agriculture          ████████████████████  110/15
+  ✅ [T3] swiss-digital              ████████████████████  105/15
+  ✅ [T3] swiss-education            ████████████████████  104/15
+  ✅ [T3] swiss-energy               ████████████████████  106/15
+  🔴 [T3] swiss-environment          ░░░░░░░░░░░░░░░░░░░░    0/15
+  ✅ [T1] swiss-finance              ████████████████████  111/50
+  ✅ [T1] swiss-health               ████████████████████  110/50
+  ✅ [T1] swiss-law                  ████████████████████  110/50
+  ✅ [T3] swiss-politics             ████████████████████  108/15
+  ✅ [T3] swiss-transport            ████████████████████  117/15
+  ✅ [T2] us-law                     ████████████████████  115/30
+  ✅ [T3] world-history              ████████████████████  114/15
+  ✅ [T2] world-science              ████████████████████  119/30
+[2026-04-23 12:03:20] ✅ 10-01 Coverage-Audit complete. Log: phase10_20260423_120316.log
+
+╔══════════════════════════════════════════════════════════════╗
+║  Phase 10 Complete!  Elapsed: 2s
+║  Target: 3000+ certified claims across 30 domains
+║  Next: Phase 11 — Agent Acquisition Blitz
+╚══════════════════════════════════════════════════════════════╝
+
+[2026-04-23 12:03:20] ✅ Phase 10 done. Log: phase10_20260423_120316.log

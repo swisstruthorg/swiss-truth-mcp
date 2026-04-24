@@ -74,10 +74,17 @@ async def coverage(request: Request, user=Depends(require_user)):
 
 @router.get("/analytics", response_class=HTMLResponse)
 async def analytics(request: Request, user=Depends(require_user)):
+    from swiss_truth_mcp.agent.feedback import get_feedback_stats
+    from swiss_truth_mcp.monitoring.sla import sla_tracker
+
     async with get_session() as session:
         data = await queries.get_query_analytics(session)
+        feedback = await get_feedback_stats(session)
+
+    sla = sla_tracker.get_status()
+
     return templates.TemplateResponse(
         request, "analytics.html",
         {"request": request, "active": "analytics", "current_user": user,
-         "renewal_count": 0, "a": data},
+         "renewal_count": 0, "a": data, "fb": feedback, "sla": sla},
     )

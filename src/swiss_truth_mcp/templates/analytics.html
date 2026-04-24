@@ -55,14 +55,58 @@
   .domain-bar-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 6px; }
   .domain-count { font-size: 0.78rem; color: #6b7280; width: 3rem; text-align: right; }
 
-  @media (max-width: 700px) { .an-grid { grid-template-columns: 1fr; } }
+  /* Agent sections */
+  .section-title {
+    font-size: 1rem; font-weight: 700; color: #111;
+    margin: 1.6rem 0 0.8rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-title .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #6366f1; display: inline-block;
+  }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+  .stat-card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+    padding: 1rem 1.2rem;
+  }
+  .stat-card .val { font-size: 1.6rem; font-weight: 700; color: #111; line-height: 1; }
+  .stat-card .lbl { font-size: 0.72rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; }
+  .stat-card .sub { font-size: 0.75rem; color: #6b7280; margin-top: 0.4rem; }
+  .uptime-ok { color: #16a34a; }
+  .uptime-warn { color: #f59e0b; }
+
+  .fb-type-row {
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;
+  }
+  .fb-type-label { font-size: 0.8rem; color: #374151; flex: 1; }
+  .fb-type-bar-wrap { width: 8rem; height: 12px; background: #f3f4f6; border-radius: 4px; overflow: hidden; }
+  .fb-type-bar-fill { height: 100%; background: linear-gradient(90deg, #f97316, #fbbf24); border-radius: 4px; }
+  .fb-count { font-size: 0.78rem; color: #6b7280; width: 2rem; text-align: right; }
+
+  .framework-pill {
+    display: inline-block; font-size: 0.72rem; font-weight: 600;
+    background: #f3f4f6; color: #374151; border-radius: 99px;
+    padding: 0.2rem 0.7rem; margin: 0.2rem 0.2rem 0.2rem 0;
+  }
+
+  .sla-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1rem; }
+  .sla-card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+    padding: 0.9rem 1rem;
+  }
+  .sla-card .val { font-size: 1.4rem; font-weight: 700; color: #111; }
+  .sla-card .lbl { font-size: 0.7rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.2rem; }
+
+  @media (max-width: 700px) {
+    .an-grid, .three-col, .sla-grid { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div style="margin-bottom:1.2rem; display:flex; align-items:baseline; gap:1rem;">
-  <h1 style="font-size:1.4rem;font-weight:700;color:#111;margin:0;letter-spacing:-0.02em;">Query Analytics</h1>
-  <span style="font-size:0.85rem;color:#9ca3af;">MCP-Anfragen von KI-Agenten</span>
+  <h1 style="font-size:1.4rem;font-weight:700;color:#111;margin:0;letter-spacing:-0.02em;">Analytics</h1>
+  <span style="font-size:0.85rem;color:#9ca3af;">MCP-Anfragen &amp; KI-Agenten-Tracking</span>
 </div>
 
+<!-- ── Summary Bar ──────────────────────────────────────── -->
 <div class="summary-bar">
   <div class="summary-item">
     <div class="summary-value">{{ a.total_queries }}</div>
@@ -80,8 +124,27 @@
     <div class="summary-value">{{ a.domain_usage | length }}</div>
     <div class="summary-label">Aktive Domains</div>
   </div>
+  <div class="summary-item">
+    <div class="summary-value">{{ fb.total }}</div>
+    <div class="summary-label">Agent-Feedbacks</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-value {% if sla.uptime_met %}uptime-ok{% else %}uptime-warn{% endif %}">
+      {{ sla.uptime_percentage }}%
+    </div>
+    <div class="summary-label">MCP Uptime</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-value">{{ sla.requests_24h }}</div>
+    <div class="summary-label">Requests 24h</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-value">{{ fb.frameworks_seen | length }}</div>
+    <div class="summary-label">Frameworks</div>
+  </div>
 </div>
 
+<!-- ── Claim Queries (bestehend) ────────────────────────── -->
 <div class="an-grid">
 
   <!-- Top-Claims -->
@@ -143,4 +206,123 @@
   </div>
 
 </div>
+
+<!-- ── MCP Performance (SLA) ───────────────────────────── -->
+<div class="section-title"><span class="dot"></span> MCP Performance</div>
+<div class="sla-grid">
+  <div class="sla-card">
+    <div class="val {% if sla.uptime_met %}uptime-ok{% else %}uptime-warn{% endif %}">{{ sla.uptime_percentage }}%</div>
+    <div class="lbl">Uptime (24h)</div>
+  </div>
+  <div class="sla-card">
+    <div class="val">{{ sla.latency.p50_ms }} ms</div>
+    <div class="lbl">Latenz p50</div>
+  </div>
+  <div class="sla-card">
+    <div class="val {% if sla.latency.p95_met %}uptime-ok{% else %}uptime-warn{% endif %}">{{ sla.latency.p95_ms }} ms</div>
+    <div class="lbl">Latenz p95</div>
+  </div>
+  <div class="sla-card">
+    <div class="val">{{ sla.error_rate_percentage }}%</div>
+    <div class="lbl">Error Rate</div>
+  </div>
+  <div class="sla-card">
+    <div class="val">{{ sla.requests_24h }}</div>
+    <div class="lbl">Requests 24h</div>
+  </div>
+  <div class="sla-card">
+    <div class="val">{{ sla.errors_24h }}</div>
+    <div class="lbl">Errors 24h</div>
+  </div>
+  <div class="sla-card">
+    <div class="val">{{ sla.latency.p99_ms }} ms</div>
+    <div class="lbl">Latenz p99</div>
+  </div>
+  <div class="sla-card">
+    <div class="val">{{ sla.active_alerts }}</div>
+    <div class="lbl">Aktive Alerts</div>
+  </div>
+</div>
+
+<!-- ── KI-Agenten Feedback ─────────────────────────────── -->
+<div class="section-title"><span class="dot" style="background:#f97316;"></span> KI-Agenten Feedback</div>
+
+<div class="three-col">
+  <div class="stat-card">
+    <div class="val">{{ fb.total }}</div>
+    <div class="lbl">Gesamt Feedbacks</div>
+    <div class="sub">{{ fb.open_count }} offen · {{ fb.resolved_count }} gelöst</div>
+  </div>
+  <div class="stat-card">
+    <div class="val">{{ fb.frameworks_seen | length }}</div>
+    <div class="lbl">Bekannte Frameworks</div>
+    <div class="sub">
+      {% for fw in fb.frameworks_seen[:6] %}
+        <span class="framework-pill">{{ fw }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="val">{{ fb.top_missing_domains | length }}</div>
+    <div class="lbl">Fehlende Domains (Top)</div>
+    <div class="sub">
+      {% if fb.top_missing_domains %}
+        {{ fb.top_missing_domains[0].domain }} ({{ fb.top_missing_domains[0].count }}×)
+      {% else %}
+        Keine Anfragen
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="an-grid">
+  <!-- Feedback nach Typ -->
+  <div class="an-panel">
+    <h3>Feedback nach Typ</h3>
+    {% if fb.by_type %}
+      {% set max_fb = fb.by_type | map(attribute='count') | max | default(1) %}
+      {% for t in fb.by_type %}
+      <div class="fb-type-row">
+        <span class="fb-type-label">{{ t.type | replace('_', ' ') }}</span>
+        <div class="fb-type-bar-wrap">
+          <div class="fb-type-bar-fill" style="width:{{ (t.count / max_fb * 100)|round }}%"></div>
+        </div>
+        <span class="fb-count">{{ t.count }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p style="color:#9ca3af;font-size:0.85rem;text-align:center;padding:1rem 0;">
+        Noch kein Feedback von KI-Agenten.
+      </p>
+    {% endif %}
+  </div>
+
+  <!-- Top fehlende Domains/Topics -->
+  <div class="an-panel">
+    <h3>Meistgewünschte Domains / Topics</h3>
+    {% if fb.top_missing_domains %}
+      {% set max_md = fb.top_missing_domains | map(attribute='count') | max | default(1) %}
+      {% for d in fb.top_missing_domains %}
+      <div class="domain-row">
+        <span class="domain-label" title="{{ d.domain }}">{{ d.domain }}</span>
+        <div class="domain-bar-wrap">
+          <div class="domain-bar-fill" style="width:{{ (d.count / max_md * 100)|round }}%; background:linear-gradient(90deg,#f97316,#fbbf24);"></div>
+        </div>
+        <span class="domain-count">{{ d.count }}</span>
+      </div>
+      {% endfor %}
+      <div style="margin-top:1rem;padding-top:0.8rem;border-top:1px solid #f3f4f6;">
+        <a href="/api/agent/feedback" style="font-size:0.78rem;color:#6366f1;text-decoration:none;">→ Alle Feedbacks ansehen (JSON)</a>
+      </div>
+    {% else %}
+      <p style="color:#9ca3af;font-size:0.85rem;text-align:center;padding:1rem 0;">
+        Keine Domain-Anfragen bisher.
+      </p>
+      <p style="font-size:0.78rem;color:#9ca3af;margin-top:0.5rem;text-align:center;">
+        KI-Agenten können über <code>report_agent_need</code> fehlende Domains melden.
+      </p>
+    {% endif %}
+  </div>
+</div>
+
 {% endblock %}

@@ -4,36 +4,87 @@
 
 ---
 
-## Current Phase: Phase 9 ✅ — AI Agent Discovery & Findability
+## Current Phase: Phase 11 🔄 — Agent Acquisition Blitz
 
-**Milestone:** *"Agents find us, not the other way around."*
+**Milestone:** *"Agenten finden uns überall."*
 
-**Status:** Complete
+**Status:** In Progress — Start April 2026
+
+**Ziel:** Von 1 Listing (Smithery) → 8+ Listings, Community-Posts, Package-Optimierung.
+
+### Phase 11 Steps
+
+| Step | Beschreibung | Status |
+|------|-------------|--------|
+| 11-01 | Package Metadata Optimierung (CrewAI, AutoGen pyproject.toml + npm) | ✅ Done |
+| 11-02 | MCP Directory Listings (mcp.run, PulseMCP, mcpservers.org) | ⬜ Manual |
+| 11-03 | Awesome List PRs (awesome-langchain, awesome-llm-apps, awesome-ai-agents) | ⬜ Manual |
+| 11-04 | Community Posts (HN, Reddit, GitHub Discussions) | ⬜ Manual |
+| 11-05 | Tracker & State Update | ✅ Done |
+
+### Phase 11 Outreach Materials
+
+```
+data/outreach/
+├── pr_mcp_run.md                      # mcp.run listing text
+├── pr_pulsemcp.md                     # PulseMCP listing text
+├── pr_mcpservers.md                   # mcpservers.org PR
+├── pr_awesome_langchain.md            # awesome-langchain PR
+├── pr_awesome_llm_apps.md             # awesome-llm-apps PR
+├── pr_awesome_ai_agents.md            # awesome-ai-agents PR
+├── post_hackernews.md                 # Show HN post
+├── post_reddit_langchain.md           # r/LangChain post
+├── post_reddit_ml.md                  # r/MachineLearning post
+├── post_github_discussions_langchain.md
+└── post_github_discussions_crewai.md
+```
+
+### Phase 11 Run Script
+
+```bash
+./phase11_run.sh             # Full status check
+./phase11_run.sh --step 11-01  # Package metadata check
+./phase11_run.sh --step 11-05  # Outreach tracker status
+```
+
+### KPIs Phase 11
+
+| Metrik | Aktuell | Ziel |
+|--------|---------|------|
+| MCP Directory Listings | 3 (Smithery, Glama, mcp/servers PR) | 8+ |
+| Awesome List PRs | 1 (awesome-mcp-servers PR) | 5+ |
+| PyPI Downloads/Monat | ? | 500+ |
+| npm Downloads/Monat | ? | 200+ |
+| Community Posts | 0 | 5+ |
+
+**Danach:** Phase 12 — Agent Stickiness & Lock-In
+
+📄 Vollständige Growth-Roadmap: `.planning/ROADMAP_GROWTH.md`
 
 ---
 
-## What was just built (Phase 9)
+## Previous Phase: Phase 10 ✅ — Content Foundation
 
-### New Discovery Endpoints
+**Milestone:** *"Erst das Regal füllen, dann den Laden öffnen."*
 
-| Endpoint | Standard | Purpose |
-|---|---|---|
-| `/.well-known/mcp.json` | RFC 8615 | MCP auto-discovery — extended with 14 tools, keywords, categories, agent_frameworks, example_queries, capabilities, integrations |
-| `/.well-known/ai-plugin.json` | OpenAI | GPT / Assistants API / ChatGPT Plugin auto-discovery |
-| `/agents.json` | Swiss Truth | Machine-readable agent capability manifest (problems_solved, tools, domains, quick_start, agent_personas) |
-| `/llms.txt` | llmstxt.org | LLM crawler discovery (Perplexity, SearchGPT, etc.) |
-| `/openai-tools.json` | OpenAI | 14 OpenAI function-calling tool definitions (was 9, now 14) |
+**Status:** Complete (Steps 10-01 bis 10-05 abgeschlossen, 10-06–10-08 laufend/remote)
 
-### README.md — Agent-First Rewrite
-- Badges: MCP, Domains, Claims, Languages, EU AI Act, Auth, LangChain, CrewAI, AutoGen
-- "Why agents use Swiss Truth" table (6 problems → 6 tools)
-- Quick Setup for all 5 integration paths
-- 14 MCP Tools table (4 categories: Retrieval, Verification, Citation & Quality, Contribution)
-- 30 Knowledge Domains (4 groups)
-- Agent Personas table (6 types)
-- Discovery Endpoints table
-- Validation Pipeline diagram
-- Knowledge Stats table
+| Step | Beschreibung | Status |
+|------|-------------|--------|
+| 10-01 | Coverage-Audit: 18 Domains unter 100 Claims identifiziert | ✅ Done |
+| 10-02 | Rate-Limit-Bug in generator.py gefunden und gefixt | ✅ Done |
+| 10-03 | Fix committed (cdde4d7) + deployed via SCP + Docker restart | ✅ Done |
+| 10-04 | Bulk Generation Tier 2 (8 neue Domains) | ✅ Done |
+| 10-05 | 8 neue Domains in generator.py definiert + committed (a57ebe4) | ✅ Done |
+| 10-06 | Multi-Language Expansion (FR + IT für Schweizer Kerndomains) | 🔄 Running remote |
+| 10-07 | Quality Assurance (Conflict Detection, Renewal, Re-Check) | 🔄 Pending |
+| 10-08 | Agent-Attraktivitäts-Benchmark (8 Personas × 5 Queries) | 🔄 Pending |
+
+---
+
+## Previous Phase: Phase 9 ✅ — AI Agent Discovery & Findability
+
+**Status:** Complete
 
 ---
 
@@ -50,6 +101,7 @@
 | 6 | AI Agent First (14 MCP tools) | ✅ Complete |
 | 7 | Agent Outreach & Discovery Data | ✅ Complete |
 | 9 | AI Agent Discovery & Findability | ✅ Complete |
+| 10 | Content Foundation | ✅ Complete (core steps) |
 
 ---
 
@@ -61,7 +113,7 @@
 - Auth: None required
 
 ### Knowledge Base
-- **2000+ certified claims** across **30 domains**
+- **3000+ certified claims** across **38 domains**
 - **10 languages** (DE, EN, FR, IT, ES, ZH, AR, RU, JA, KO)
 - 5-stage validation pipeline
 - SHA256 integrity hashes
@@ -69,10 +121,10 @@
 - Daily auto-renewal (Claude Haiku)
 
 ### Integrations
-- `swiss-truth-langchain` — PyPI, 9 tools + SwissTruthRetriever + SwissTruthToolkit
-- `swiss-truth-crewai` — PyPI, 8 tools
-- `swiss-truth-autogen` — PyPI, 8 functions
-- `swiss-truth-mcp` — npm, `npx -y mcp-remote https://swisstruth.org/mcp`
+- `swiss-truth-langchain` v0.2.0 — PyPI
+- `swiss-truth-crewai` v0.1.1 — PyPI (metadata optimiert)
+- `swiss-truth-autogen` v0.1.1 — PyPI (metadata optimiert)
+- `swiss-truth-mcp` v0.1.4 — npm (keywords optimiert)
 - Smithery — listed
 
 ### Discovery Coverage
@@ -82,30 +134,15 @@
 - Agent frameworks: `/agents.json` ✅
 - Direct function-calling: `/openai-tools.json` ✅ (14 tools)
 - Smithery directory: ✅ listed
-- modelcontextprotocol/servers: 🔄 PR pending
-- awesome-mcp-servers: 🔄 PR pending
-- Glama: 🔄 pending
-- LangChain/CrewAI Discord: 🔄 pending
-
----
-
-## Next Actions (Phase 10 candidates)
-
-### Outreach (from Phase 7 checklist)
-1. **PR: modelcontextprotocol/servers** — official MCP server list (highest impact)
-2. **PR: awesome-mcp-servers** — most-starred MCP directory
-3. **Glama listing** — `https://glama.ai/mcp/servers/submit`
-4. **LangChain Discord** — `#tools-and-integrations` channel
-5. **CrewAI Discord** — `#tools` channel
-6. **Reddit r/LocalLLaMA** — "I built a verified knowledge base MCP server"
-7. **HuggingFace Space** — interactive demo
-
-### Technical
-- LlamaIndex integration package (`swiss-truth-llamaindex`)
-- Haystack integration package (`swiss-truth-haystack`)
-- smolagents integration
-- GitHub repository topics: `mcp`, `fact-checking`, `ai-agents`, `hallucination-prevention`, `swiss-law`, `rag`, `langchain`, `crewai`, `autogen`
-- Smithery listing optimization (description, tags, examples)
+- Glama: ✅ submitted 2026-04-22
+- modelcontextprotocol/servers: 🔄 PR #4007 pending
+- awesome-mcp-servers: 🔄 PR #5230 pending
+- mcp.run: ⬜ TODO → data/outreach/pr_mcp_run.md
+- PulseMCP: ⬜ TODO → data/outreach/pr_pulsemcp.md
+- mcpservers.org: ⬜ TODO → data/outreach/pr_mcpservers.md
+- awesome-langchain: ⬜ TODO → data/outreach/pr_awesome_langchain.md
+- awesome-llm-apps: ⬜ TODO → data/outreach/pr_awesome_llm_apps.md
+- awesome-ai-agents: ⬜ TODO → data/outreach/pr_awesome_ai_agents.md
 
 ---
 
