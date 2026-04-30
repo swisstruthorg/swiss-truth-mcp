@@ -1,12 +1,16 @@
 #!/bin/bash
+# Konservativer Modus: 1 Domain pro Stunde, kleine Batches, lange Pausen
+# Verhindert Rate-Limit-Probleme bei open-claude.com
 export SWISS_TRUTH_API_KEY=xLUQPyk2Lubht
 export SWISS_TRUTH_API_BASE=https://swisstruth.org
 export SWISS_TRUTH_TARGET=200
-export SWISS_TRUTH_BATCH=30
-export SWISS_TRUTH_MAX_ROUNDS=50
-export SWISS_TRUTH_SLEEP=5
-export SWISS_TRUTH_MAX_RUNTIME=14400
-export SWISS_TRUTH_MAX_STALE=3
+export SWISS_TRUTH_BATCH=5
+export SWISS_TRUTH_MAX_ROUNDS=3
+export SWISS_TRUTH_SLEEP=120
+export SWISS_TRUTH_MAX_RUNTIME=3300
+export SWISS_TRUTH_MAX_STALE=2
+export SWISS_TRUTH_RETRY_COUNT=3
+export SWISS_TRUTH_RETRY_DELAY=15
 
 LOG=/opt/swiss-truth/logs/orchestrator.log
 mkdir -p /opt/swiss-truth/logs
