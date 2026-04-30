@@ -3,7 +3,7 @@
 Swiss Truth MCP — Continuous Claim Orchestrator
 ================================================
 Läuft als Cronjob alle 30 Minuten auf dem Server.
-Ziel: alle Domains auf ≥ 100 certified Claims bringen, dann neue Domains befüllen.
+Ziel: alle Domains auf ≥ 200 certified Claims bringen, dann neue Domains befüllen.
 
 Verwendung:
     python3 /opt/swiss-truth/manage_claims.py
@@ -29,7 +29,34 @@ LOCK_FILE = "/tmp/swiss-truth-orchestrator.lock"
 
 
 def acquire_lock() -> "IO | None":
-    """Returns lock file handle if acquired, None if another instance is running."""
+    """Returns lock file handle if acquired, None if another instance is running.
+    Handles stale lock files (process no longer alive).
+    """
+    # Check for stale lock file first
+    if os.path.exists(LOCK_FILE):
+        try:
+            with open(LOCK_FILE, "r") as f:
+                pid_str = f.read().strip()
+            if pid_str:
+                pid = int(pid_str)
+                # Check if the process is still alive
+                try:
+                    os.kill(pid, 0)  # signal 0 = just check existence
+                    # Process is alive → another instance is running
+                except ProcessLookupError:
+                    # Process is dead → stale lock, remove it
+                    log.warning(f"Removing stale lock file (PID {pid} no longer running)")
+                    os.unlink(LOCK_FILE)
+                except PermissionError:
+                    # Process exists but we can't signal it → treat as alive
+                    pass
+        except (ValueError, OSError):
+            # Corrupt lock file → remove it
+            try:
+                os.unlink(LOCK_FILE)
+            except OSError:
+                pass
+
     try:
         f = open(LOCK_FILE, "w")
         fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -45,7 +72,7 @@ API_BASE = os.environ.get("SWISS_TRUTH_API_BASE", "https://swisstruth.org")
 API_KEY  = os.environ.get("SWISS_TRUTH_API_KEY", "dev-key-change-in-prod")
 
 # Minimum certified claims per domain — below this we keep generating
-TARGET = int(os.environ.get("SWISS_TRUTH_TARGET", "100"))
+TARGET = int(os.environ.get("SWISS_TRUTH_TARGET", "200"))
 
 # Claims requested per generate call
 BATCH_SIZE = int(os.environ.get("SWISS_TRUTH_BATCH", "30"))
@@ -53,11 +80,23 @@ BATCH_SIZE = int(os.environ.get("SWISS_TRUTH_BATCH", "30"))
 # Domains to skip (if broken or intentionally paused)
 SKIP_DOMAINS: set[str] = set(os.environ.get("SWISS_TRUTH_SKIP", "").split(",")) - {""}
 
-# Maximum rounds per orchestrator run (safety limit)
-MAX_ROUNDS = int(os.environ.get("SWISS_TRUTH_MAX_ROUNDS", "5"))
+# Maximum rounds per orchestrator run (safety limit — high enough to fill all domains)
+MAX_ROUNDS = int(os.environ.get("SWISS_TRUTH_MAX_ROUNDS", "50"))
 
 # Sleep between API calls (seconds)
 SLEEP_BETWEEN = int(os.environ.get("SWISS_TRUTH_SLEEP", "5"))
+
+# Global wall-clock timeout in seconds (default 4 hours = 14400s)
+# Prevents the cron job from running forever and blocking the next scheduled run
+MAX_RUNTIME_SECONDS = int(os.environ.get("SWISS_TRUTH_MAX_RUNTIME", "14400"))
+
+# How many consecutive rounds without ANY progress before giving up
+# (allows temporary API errors to be tolerated)
+MAX_STALE_ROUNDS = int(os.environ.get("SWISS_TRUTH_MAX_STALE", "3"))
+
+# Retry config for API calls
+API_RETRY_COUNT = int(os.environ.get("SWISS_TRUTH_RETRY_COUNT", "3"))
+API_RETRY_DELAY = int(os.environ.get("SWISS_TRUTH_RETRY_DELAY", "10"))
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
 
@@ -78,33 +117,51 @@ def _headers() -> dict:
     }
 
 
-def get_domain_stats() -> dict[str, int]:
-    """Returns {domain_id: certified_count} for all domains."""
-    try:
-        r = requests.get(f"{API_BASE}/domains", headers=_headers(), timeout=30)
-        r.raise_for_status()
-        domains = r.json()
-        return {d["id"]: d.get("certified_claims", d.get("certified_count", 0)) for d in domains}
-    except Exception as e:
-        log.error(f"Could not fetch domain stats: {e}")
-        return {}
+def get_domain_stats(retries: int = API_RETRY_COUNT) -> dict[str, int]:
+    """Returns {domain_id: certified_count} for all domains. Retries on failure."""
+    for attempt in range(1, retries + 1):
+        try:
+            r = requests.get(f"{API_BASE}/domains", headers=_headers(), timeout=30)
+            r.raise_for_status()
+            domains = r.json()
+            return {d["id"]: d.get("certified_claims", d.get("certified_count", 0)) for d in domains}
+        except Exception as e:
+            log.warning(f"Could not fetch domain stats (attempt {attempt}/{retries}): {e}")
+            if attempt < retries:
+                time.sleep(API_RETRY_DELAY)
+    log.error(f"Failed to fetch domain stats after {retries} attempts.")
+    return {}
 
 
-def generate_claims(domain_id: str, count: int = BATCH_SIZE) -> dict:
-    """Triggers claim generation for a domain. Returns result dict."""
-    try:
-        r = requests.post(
-            f"{API_BASE}/admin/generate",
-            headers=_headers(),
-            json={"domain_id": domain_id, "count": count},
-            timeout=600,  # generation can take up to 10 min
-        )
-        r.raise_for_status()
-        return r.json()
-    except requests.exceptions.Timeout:
-        return {"error": "timeout", "certified": 0}
-    except Exception as e:
-        return {"error": str(e), "certified": 0}
+def generate_claims(domain_id: str, count: int = BATCH_SIZE, retries: int = API_RETRY_COUNT) -> dict:
+    """Triggers claim generation for a domain. Returns result dict. Retries on transient errors."""
+    for attempt in range(1, retries + 1):
+        try:
+            r = requests.post(
+                f"{API_BASE}/admin/generate",
+                headers=_headers(),
+                json={"domain_id": domain_id, "count": count},
+                timeout=600,  # generation can take up to 10 min
+            )
+            # Permanent errors (auth, bad request) — don't retry
+            if r.status_code in (401, 403, 422):
+                log.error(f"Permanent error {r.status_code} for domain '{domain_id}': {r.text[:200]}")
+                return {"error": f"http_{r.status_code}", "certified": 0, "permanent": True}
+            r.raise_for_status()
+            return r.json()
+        except requests.exceptions.Timeout:
+            log.warning(f"Timeout generating claims for '{domain_id}' (attempt {attempt}/{retries})")
+            if attempt < retries:
+                time.sleep(API_RETRY_DELAY)
+            else:
+                return {"error": "timeout", "certified": 0}
+        except Exception as e:
+            log.warning(f"Error generating claims for '{domain_id}' (attempt {attempt}/{retries}): {e}")
+            if attempt < retries:
+                time.sleep(API_RETRY_DELAY)
+            else:
+                return {"error": str(e), "certified": 0}
+    return {"error": "max_retries_exceeded", "certified": 0}
 
 
 def run_schema_setup() -> bool:
@@ -157,7 +214,10 @@ def select_domains_to_fill(stats: dict[str, int]) -> list[tuple[str, int]]:
 # ─── Core Logic ──────────────────────────────────────────────────────────────
 
 def orchestrate(force_domain: str | None = None) -> None:
+    start_time = time.monotonic()
     log.info("=== Swiss Truth Claim Orchestrator starting ===")
+    log.info(f"Config: TARGET={TARGET}, BATCH_SIZE={BATCH_SIZE}, MAX_ROUNDS={MAX_ROUNDS}, "
+             f"MAX_RUNTIME={MAX_RUNTIME_SECONDS}s, MAX_STALE_ROUNDS={MAX_STALE_ROUNDS}")
 
     # Ensure new domains exist in DB
     run_schema_setup()
@@ -181,13 +241,24 @@ def orchestrate(force_domain: str | None = None) -> None:
     log.info(f"Domains to fill: {[d for d, _ in targets]}")
 
     rounds = 0
+    stale_rounds = 0  # consecutive rounds without any certified claims
+
     while rounds < MAX_ROUNDS:
+        # Check global wall-clock timeout
+        elapsed = time.monotonic() - start_time
+        if elapsed >= MAX_RUNTIME_SECONDS:
+            log.warning(f"⏱  Global runtime limit reached ({elapsed:.0f}s / {MAX_RUNTIME_SECONDS}s) — stopping.")
+            break
+
         rounds += 1
-        made_progress = False
+        round_certified = 0  # total certified claims this round
 
         # Refresh stats each round
         if rounds > 1:
             stats = get_domain_stats()
+            if not stats:
+                log.warning("Could not refresh domain stats — using cached values.")
+                # Don't abort, use last known stats
             if force_domain:
                 targets = [(force_domain, stats.get(force_domain, 0))]
             else:
@@ -197,9 +268,16 @@ def orchestrate(force_domain: str | None = None) -> None:
             log.info("🎉 All domains reached target — stopping early.")
             break
 
-        log.info(f"--- Round {rounds}/{MAX_ROUNDS} — {len(targets)} domain(s) below {TARGET} ---")
+        remaining_time = MAX_RUNTIME_SECONDS - (time.monotonic() - start_time)
+        log.info(f"--- Round {rounds}/{MAX_ROUNDS} — {len(targets)} domain(s) below {TARGET} "
+                 f"— {remaining_time:.0f}s remaining ---")
 
         for domain_id, current_count in targets:
+            # Per-domain time check
+            if time.monotonic() - start_time >= MAX_RUNTIME_SECONDS:
+                log.warning("⏱  Runtime limit reached mid-round — stopping.")
+                break
+
             current = stats.get(domain_id, current_count)
             needed = TARGET - current
             if needed <= 0:
@@ -213,24 +291,38 @@ def orchestrate(force_domain: str | None = None) -> None:
 
             if "error" in result:
                 log.warning(f"  ⚠️  {domain_id}: generation error — {result['error']}")
+                # Permanent errors (auth/bad request): skip this domain for the rest of the run
+                if result.get("permanent"):
+                    log.error(f"  ❌ {domain_id}: permanent error, adding to skip list for this run.")
+                    SKIP_DOMAINS.add(domain_id)
             else:
                 certified = result.get("certified", result.get("certified_count", 0))
                 generated = result.get("generated", result.get("total_generated", 0))
                 log.info(f"  ✓  {domain_id}: generated={generated}, certified={certified}")
-                if certified > 0:
-                    made_progress = True
+                round_certified += certified
 
             time.sleep(SLEEP_BETWEEN)
 
-        if not made_progress and rounds > 1:
-            log.warning("No progress this round — stopping to avoid infinite loop.")
-            break
+        # Stale round detection — only count rounds where we actually tried to generate
+        if round_certified == 0:
+            stale_rounds += 1
+            log.warning(f"  No certified claims this round ({stale_rounds}/{MAX_STALE_ROUNDS} stale rounds).")
+            if stale_rounds >= MAX_STALE_ROUNDS:
+                log.warning(f"⛔ {MAX_STALE_ROUNDS} consecutive rounds without progress — stopping to avoid infinite loop.")
+                break
+        else:
+            stale_rounds = 0  # reset on any progress
 
     # Final status
     final_stats = get_domain_stats()
-    print_status(final_stats)
-    green = sum(1 for c in final_stats.values() if c >= TARGET)
-    log.info(f"=== Done: {green}/{len(final_stats)} domains at ≥{TARGET} certified claims ===")
+    if final_stats:
+        print_status(final_stats)
+        green = sum(1 for c in final_stats.values() if c >= TARGET)
+        elapsed = time.monotonic() - start_time
+        log.info(f"=== Done: {green}/{len(final_stats)} domains at ≥{TARGET} certified claims "
+                 f"(runtime: {elapsed:.0f}s, rounds: {rounds}) ===")
+    else:
+        log.warning("Could not fetch final stats.")
 
 
 # ─── Entry Point ─────────────────────────────────────────────────────────────
@@ -239,18 +331,21 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Swiss Truth Claim Orchestrator")
     parser.add_argument("--status", action="store_true", help="Show domain status and exit")
     parser.add_argument("--domain", type=str, default=None, help="Only process this domain")
-    parser.add_argument("--target", type=int, default=None, help="Override TARGET (default 100)")
+    parser.add_argument("--target", type=int, default=None, help="Override TARGET (default 200)")
     parser.add_argument("--batch", type=int, default=None, help="Override BATCH_SIZE (default 30)")
-    parser.add_argument("--rounds", type=int, default=None, help="Override MAX_ROUNDS (default 5)")
+    parser.add_argument("--rounds", type=int, default=None, help="Override MAX_ROUNDS (default 50)")
+    parser.add_argument("--max-runtime", type=int, default=None, help="Override MAX_RUNTIME_SECONDS (default 14400)")
     args = parser.parse_args()
 
-    global TARGET, BATCH_SIZE, MAX_ROUNDS
+    global TARGET, BATCH_SIZE, MAX_ROUNDS, MAX_RUNTIME_SECONDS
     if args.target:
         TARGET = args.target
     if args.batch:
         BATCH_SIZE = args.batch
     if args.rounds:
         MAX_ROUNDS = args.rounds
+    if args.max_runtime:
+        MAX_RUNTIME_SECONDS = args.max_runtime
 
     if args.status:
         stats = get_domain_stats()
